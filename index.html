@@ -653,7 +653,7 @@
 
   <!-- 模态框 1：新增/编辑会议纪要 (彻底去除记录人，确保保存100%生效) -->
   
-  <!-- 弹窗 7：云端多人实时协同配置 -->
+  <!-- 弹窗 7：云端多人实时协同配置 (支持 GitHub 仓库终身免费数据库直连) -->
   <div id="modal-cloud-config" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 hidden items-center justify-center p-4" onclick="if(event.target === this) closeCloudConfigModal()">
     <div class="bg-white rounded-xl max-w-lg w-full p-6 shadow-xl border border-slate-200 space-y-4 max-h-[92vh] overflow-y-auto custom-scrollbar">
       <div class="flex justify-between items-center border-b pb-3">
@@ -661,41 +661,74 @@
           <span class="text-xl">☁️</span>
           <div>
             <h3 class="text-base font-bold text-slate-800">云端多人实时协同配置</h3>
-            <p class="text-xs text-slate-500">配置免费云数据库接口，全员改动自动毫秒级保存与互通</p>
+            <p class="text-xs text-slate-500">微软 GitHub 仓库直连 · 100% 永久 0 费用 · 全员秒级自动同步</p>
           </div>
         </div>
         <button onclick="closeCloudConfigModal()" class="text-slate-400 hover:text-slate-600 p-1 text-lg leading-none">✕</button>
       </div>
 
-      <div class="space-y-3 text-xs text-slate-700">
-        <div>
-          <label class="block font-bold text-slate-700 mb-1">云端同步接口 URL (API Endpoint):</label>
-          <input type="url" id="cloud-api-url-input" placeholder="例如：https://xxxxxx.laf.run/sync" class="w-full border border-slate-300 rounded p-2 text-xs font-mono focus:ring-1 focus:ring-blue-500">
-          <p class="text-[11px] text-slate-400 mt-1">支持国内免费 Laf 云开发接口，配置后全员改动将在云端毫秒级自动保存并互通。</p>
-        </div>
-
-        <div class="bg-blue-50 border border-blue-200 rounded-lg p-3 text-xs text-blue-900 space-y-1.5">
-          <div class="font-bold flex items-center space-x-1">
-            <span>💡</span>
-            <span>如何获取您的专属免费云端接口？</span>
+      <div class="space-y-4 text-xs text-slate-700">
+        <!-- 核心推荐：GitHub 终身免费数据库模式 -->
+        <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="font-bold text-slate-900 flex items-center space-x-1.5">
+              <span>🐙</span>
+              <span>GitHub 个人访问令牌 (Token)</span>
+            </span>
+            <span class="text-[10px] bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded-full">终身永久 0 费用</span>
           </div>
-          <ol class="list-decimal list-inside space-y-1 text-[11px] text-blue-800 leading-relaxed">
-            <li>访问国内免费平台 <b>laf.run</b> 并微信扫码登录；</li>
-            <li>新建免费应用，在左侧「函数」中新建名为 <b>sync</b> 的函数；</li>
-            <li>粘贴提供的现成同步代码并点击「发布」；</li>
-            <li>复制页面上的专属链接填入上方输入框，点击下方「保存并测试连接」即可！</li>
-          </ol>
+
+          <div>
+            <label class="block font-medium text-slate-600 mb-1">粘贴您的 GitHub Token (以 ghp_ 开头):</label>
+            <input type="password" id="gh-token-input" placeholder="例如：ghp_xxxxxxxxxxxxxxxxxxxx" class="w-full border border-slate-300 rounded p-2 text-xs font-mono focus:ring-2 focus:ring-blue-500 bg-white">
+          </div>
+
+          <div>
+            <label class="block font-medium text-slate-600 mb-1">目标仓库 (默认已填):</label>
+            <input type="text" id="gh-repo-input" value="Joi-bot7/zhiheng-portal" class="w-full border border-slate-300 rounded p-2 text-xs font-mono bg-slate-100 text-slate-600 focus:outline-none">
+          </div>
+
+          <div class="bg-amber-50 border border-amber-200 rounded-lg p-2.5 text-[11px] text-amber-900 space-y-1">
+            <div class="font-bold">🔑 如何 1 分钟获取免费 Token？</div>
+            <div>登录 GitHub 访问：<b>github.com/settings/tokens/new</b></div>
+            <div>Note 填 <code>zhiheng</code>，Expiration 选 <b>No expiration</b>，勾选第 1 个 <b>repo</b> 权限，点击页面底部绿色按钮生成并复制即可！</div>
+          </div>
         </div>
 
+        <!-- 邀请分所协同卡片 (连接成功后展示) -->
+        <div id="gh-invite-card" class="hidden bg-emerald-50 border border-emerald-200 rounded-xl p-3.5 space-y-2">
+          <div class="flex items-center justify-between">
+            <div class="font-bold text-emerald-900 flex items-center space-x-1.5">
+              <span>🔗</span>
+              <span>分所主任协同免配链接</span>
+            </div>
+            <span class="text-[10px] text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded font-bold">微信直接打开</span>
+          </div>
+          <p class="text-[11px] text-emerald-800 leading-relaxed">复制此专属链接发送到微信群，分所主任手机点开即自动连上云端，完全不需要主任们做任何配置！</p>
+          <button onclick="copyInviteLink()" class="w-full py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-lg text-xs shadow-sm flex items-center justify-center space-x-1">
+            <span>📋 一键复制主任填报协同链接</span>
+          </button>
+        </div>
+
+        <!-- 测试结果提示 -->
         <div id="cloud-test-result" class="hidden p-2.5 rounded text-xs font-medium"></div>
+
+        <!-- 高级折叠：自定义 API 接口 -->
+        <details class="text-slate-500 text-[11px]">
+          <summary class="cursor-pointer hover:text-slate-700 font-medium">高级选项：使用自定义 HTTP API 接口</summary>
+          <div class="mt-2 space-y-1 pt-2 border-t border-slate-100">
+            <label class="block text-slate-600">云端 API URL:</label>
+            <input type="url" id="cloud-api-url-input" placeholder="https://..." class="w-full border border-slate-300 rounded p-1.5 text-xs font-mono bg-white">
+          </div>
+        </details>
       </div>
 
       <div class="flex justify-between items-center pt-3 border-t">
-        <button onclick="clearCloudConfig()" class="text-xs text-rose-600 hover:underline">断开云端并恢复单机模式</button>
+        <button onclick="clearCloudConfig()" class="text-xs text-rose-600 hover:underline">断开云端并恢复单机</button>
         <div class="flex space-x-2">
           <button onclick="closeCloudConfigModal()" class="px-3 py-1.5 border border-slate-300 rounded text-xs text-slate-600 hover:bg-slate-50">关闭</button>
           <button onclick="saveAndTestCloudConfig()" class="px-4 py-1.5 bg-[#0F172A] text-white rounded text-xs font-medium hover:bg-blue-800 shadow-sm flex items-center space-x-1">
-            <span>💾 保存并测试连接</span>
+            <span>💾 连接并保存</span>
           </button>
         </div>
       </div>
@@ -2604,24 +2637,52 @@ ${m.todosText || '无'}`;
     // 启动初始化
     
         // =============================================================
-    // 模块 6：云端多人协同与全自动保存同步引擎
+    // 模块 6：云端多人协同与全自动保存同步引擎 (支持 GitHub 仓库直连 & 自定义 API)
     // =============================================================
     const CLOUD_URL_KEY = 'zhiheng_cloud_sync_url';
-    const DEFAULT_CLOUD_URL = 'https://r040z4s7j1.sealosbja.site/sync';
+    const GITHUB_TOKEN_KEY = 'zhiheng_gh_token';
+    const GITHUB_REPO_KEY = 'zhiheng_gh_repo';
+    const DEFAULT_GH_REPO = 'Joi-bot7/zhiheng-portal';
+    const GITHUB_FILE_PATH = 'data.json';
+
     let isCloudSyncing = false;
     let hasPendingCloudSync = false;
     let cloudPollingTimer = null;
+    let githubFileSha = null;
 
-    // 获取当前配置的云端 URL (默认直接加载用户的 Sealos 云端接口)
+    function getGitHubToken() {
+      try {
+        const t = localStorage.getItem(GITHUB_TOKEN_KEY);
+        if (t) return t.trim();
+      } catch(e){}
+      return '';
+    }
+
+    function getGitHubRepo() {
+      try {
+        const r = localStorage.getItem(GITHUB_REPO_KEY);
+        if (r) return r.trim();
+      } catch(e){}
+      return DEFAULT_GH_REPO;
+    }
+
     function getCloudUrl() {
       try {
         const saved = localStorage.getItem(CLOUD_URL_KEY);
         if (saved) return saved.trim();
       } catch (e) {}
-      return DEFAULT_CLOUD_URL;
+      return '';
     }
 
-    // 更新顶部云端状态角标 (无论手机或电脑，单按钮稳固显示)
+    // UTF-8 与 Base64 编码解码安全转换
+    function utf8ToBase64(str) {
+      return window.btoa(unescape(encodeURIComponent(str)));
+    }
+    function base64ToUtf8(str) {
+      return decodeURIComponent(escape(window.atob(str.replace(/\s/g, ''))));
+    }
+
+    // 更新顶部云端状态角标
     function updateCloudBadge(state, text) {
       const btn = document.getElementById('cloud-status-btn');
       const dot = document.getElementById('cloud-status-dot');
@@ -2647,11 +2708,119 @@ ${m.todosText || '无'}`;
       }
     }
 
+    // GitHub API: 获取云端数据
+    async function fetchGitHubData(token, repo) {
+      repo = repo || getGitHubRepo();
+      const url = `https://api.github.com/repos/${repo}/contents/${GITHUB_FILE_PATH}`;
+      const res = await fetch(url, {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Accept': 'application/vnd.github.v3+json'
+        },
+        cache: 'no-store'
+      });
+      if (res.status === 404) {
+        return null;
+      }
+      if (!res.ok) {
+        throw new Error(`GitHub 访问失败 (${res.status})`);
+      }
+      const data = await res.json();
+      githubFileSha = data.sha;
+      const jsonStr = base64ToUtf8(data.content);
+      return JSON.parse(jsonStr);
+    }
+
+    // GitHub API: 保存数据到云端
+    async function saveGitHubData(dataToSave, token, repo) {
+      repo = repo || getGitHubRepo();
+      const url = `https://api.github.com/repos/${repo}/contents/${GITHUB_FILE_PATH}`;
+      const jsonStr = JSON.stringify(dataToSave, null, 2);
+      const b64 = utf8ToBase64(jsonStr);
+      const body = {
+        message: '知恒协同工作台数据自动同步',
+        content: b64
+      };
+      if (githubFileSha) {
+        body.sha = githubFileSha;
+      } else {
+        try {
+          const checkRes = await fetch(url, {
+            headers: {
+              'Authorization': `Bearer ${token}`,
+              'Accept': 'application/vnd.github.v3+json'
+            },
+            cache: 'no-store'
+          });
+          if (checkRes.ok) {
+            const existing = await checkRes.json();
+            githubFileSha = existing.sha;
+            body.sha = existing.sha;
+          }
+        } catch(e){}
+      }
+
+      const res = await fetch(url, {
+        method: 'PUT',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Accept': 'application/vnd.github.v3+json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body)
+      });
+
+      if (res.status === 409) {
+        // 版本冲突重试机制
+        const getRes = await fetch(url, {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Accept': 'application/vnd.github.v3+json'
+          },
+          cache: 'no-store'
+        });
+        if (getRes.ok) {
+          const latest = await getRes.json();
+          githubFileSha = latest.sha;
+          body.sha = latest.sha;
+          const retryRes = await fetch(url, {
+            method: 'PUT',
+            headers: {
+              'Authorization': `Bearer ${token}`,
+              'Accept': 'application/vnd.github.v3+json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(body)
+          });
+          if (!retryRes.ok) throw new Error(`重试保存失败 (${retryRes.status})`);
+          const retryJson = await retryRes.json();
+          githubFileSha = retryJson.content ? retryJson.content.sha : null;
+          return;
+        }
+      }
+
+      if (!res.ok) {
+        throw new Error(`保存失败 (${res.status})`);
+      }
+      const resJson = await res.json();
+      githubFileSha = resJson.content ? resJson.content.sha : null;
+    }
+
     // 弹窗控制
     function openCloudConfigModal() {
       const modal = document.getElementById('modal-cloud-config');
       if (!modal) return;
+      document.getElementById('gh-token-input').value = getGitHubToken();
+      document.getElementById('gh-repo-input').value = getGitHubRepo();
       document.getElementById('cloud-api-url-input').value = getCloudUrl();
+
+      const inviteCard = document.getElementById('gh-invite-card');
+      if (getGitHubToken()) {
+        inviteCard.classList.remove('hidden');
+      } else {
+        inviteCard.classList.add('hidden');
+      }
+
       const resEl = document.getElementById('cloud-test-result');
       resEl.className = 'hidden p-2.5 rounded text-xs font-medium';
       resEl.innerText = '';
@@ -2668,44 +2837,83 @@ ${m.todosText || '无'}`;
 
     // 保存并测试云端连接
     async function saveAndTestCloudConfig() {
-      const input = document.getElementById('cloud-api-url-input');
+      const ghToken = document.getElementById('gh-token-input').value.trim();
+      const ghRepo = document.getElementById('gh-repo-input').value.trim() || DEFAULT_GH_REPO;
+      const customUrl = document.getElementById('cloud-api-url-input').value.trim();
       const resEl = document.getElementById('cloud-test-result');
-      const url = input.value.trim();
+      const inviteCard = document.getElementById('gh-invite-card');
 
-      if (!url) {
+      if (!ghToken && !customUrl) {
         resEl.className = 'p-2.5 rounded text-xs font-medium bg-amber-100 text-amber-800';
-        resEl.innerText = '⚠️ 请先输入云端同步接口 URL';
+        resEl.innerText = '⚠️ 请先输入 GitHub Token 或云端 API 接口 URL';
+        resEl.classList.remove('hidden');
         return;
       }
 
       resEl.className = 'p-2.5 rounded text-xs font-medium bg-blue-100 text-blue-800';
-      resEl.innerText = '🔄 正在连接并测试云端接口通讯...';
+      resEl.innerText = '🔄 正在建立连接并验证云端通信...';
+      resEl.classList.remove('hidden');
 
       try {
-        // 先测试 POST 写入当前本地数据
-        const postRes = await fetch(url, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(appData)
-        });
-
-        if (!postRes.ok) throw new Error('HTTP 状态码: ' + postRes.status);
-
-        // 再测试 GET 读取
-        const getRes = await fetch(url, { cache: 'no-store' });
-        if (!getRes.ok) throw new Error('GET 读取失败: ' + getRes.status);
-
-        // 保存到本地配置
-        localStorage.setItem(CLOUD_URL_KEY, url);
-        resEl.className = 'p-2.5 rounded text-xs font-medium bg-emerald-100 text-emerald-800';
-        resEl.innerText = '✅ 测试通过！已成功建立云端双向通信，全员实时协同已生效！';
-        updateCloudBadge('connected', '云端协同已连接');
-        startCloudPolling();
-        showToast('✅ 云端多人协同已成功激活！');
+        if (ghToken) {
+          // 尝试读取或初始化 GitHub data.json
+          const remote = await fetchGitHubData(ghToken, ghRepo);
+          if (remote && remote.reports) {
+            appData = remote;
+            try { localStorage.setItem(STORAGE_KEY, JSON.stringify(appData)); } catch(e){}
+            refreshCurrentTab();
+          } else {
+            // 初始化创建远程 data.json
+            await saveGitHubData(appData, ghToken, ghRepo);
+          }
+          localStorage.setItem(GITHUB_TOKEN_KEY, ghToken);
+          localStorage.setItem(GITHUB_REPO_KEY, ghRepo);
+          inviteCard.classList.remove('hidden');
+          resEl.className = 'p-2.5 rounded text-xs font-medium bg-emerald-100 text-emerald-800';
+          resEl.innerText = '✅ GitHub 仓库云端数据库连接成功！全员实时协同已激活！';
+          updateCloudBadge('connected', '云端协同已连接');
+          startCloudPolling();
+          showToast('✅ GitHub 云端数据库已成功连通！');
+        } else if (customUrl) {
+          const postRes = await fetch(customUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(appData)
+          });
+          if (!postRes.ok) throw new Error('HTTP 状态码: ' + postRes.status);
+          const getRes = await fetch(customUrl, { cache: 'no-store' });
+          if (!getRes.ok) throw new Error('GET 读取失败: ' + getRes.status);
+          localStorage.setItem(CLOUD_URL_KEY, customUrl);
+          resEl.className = 'p-2.5 rounded text-xs font-medium bg-emerald-100 text-emerald-800';
+          resEl.innerText = '✅ 自定义接口连接成功！全员实时协同已生效！';
+          updateCloudBadge('connected', '云端协同已连接');
+          startCloudPolling();
+          showToast('✅ 云端多人协同已成功激活！');
+        }
       } catch (err) {
         resEl.className = 'p-2.5 rounded text-xs font-medium bg-rose-100 text-rose-800';
-        resEl.innerText = '❌ 连接失败: ' + err.message + '。请检查 URL 是否正确且已在云端发布。';
+        resEl.innerText = '❌ 连接失败: ' + err.message + '。请检查 Token 权限或网络。';
         updateCloudBadge('error', '云端无法连接');
+      }
+    }
+
+    // 复制免配主任邀请链接
+    function copyInviteLink() {
+      const token = getGitHubToken();
+      if (!token) {
+        showToast('请先配置并连接 GitHub Token', 'warn');
+        return;
+      }
+      const enc = btoa(token);
+      const inviteUrl = window.location.origin + window.location.pathname + '#sync=' + enc;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(inviteUrl).then(() => {
+          showToast('✅ 已复制免配协同链接！发给分所主任即可一键直连！');
+        }).catch(() => {
+          prompt('请复制此链接发给分所主任：', inviteUrl);
+        });
+      } else {
+        prompt('请复制此链接发给分所主任：', inviteUrl);
       }
     }
 
@@ -2713,8 +2921,11 @@ ${m.todosText || '无'}`;
     function clearCloudConfig() {
       if (confirm('确定断开云端连接并恢复单机离线模式吗？')) {
         localStorage.removeItem(CLOUD_URL_KEY);
+        localStorage.removeItem(GITHUB_TOKEN_KEY);
         if (cloudPollingTimer) clearInterval(cloudPollingTimer);
+        document.getElementById('gh-token-input').value = '';
         document.getElementById('cloud-api-url-input').value = '';
+        document.getElementById('gh-invite-card').classList.add('hidden');
         const resEl = document.getElementById('cloud-test-result');
         resEl.className = 'p-2.5 rounded text-xs font-medium bg-slate-100 text-slate-700';
         resEl.innerText = '已恢复单机模式，数据将仅保存在本机浏览器中。';
@@ -2725,8 +2936,10 @@ ${m.todosText || '无'}`;
 
     // 云端静默推送保存
     async function syncToCloud() {
-      const url = getCloudUrl();
-      if (!url) return;
+      const ghToken = getGitHubToken();
+      const customUrl = getCloudUrl();
+
+      if (!ghToken && !customUrl) return;
 
       if (isCloudSyncing) {
         hasPendingCloudSync = true;
@@ -2737,15 +2950,17 @@ ${m.todosText || '无'}`;
       updateCloudBadge('syncing', '正在自动保存至云端...');
 
       try {
-        const res = await fetch(url, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(appData)
-        });
-        if (res.ok) {
+        if (ghToken) {
+          await saveGitHubData(appData, ghToken);
           updateCloudBadge('connected', '云端已实时保存');
-        } else {
-          updateCloudBadge('error', '云端保存失败(' + res.status + ')');
+        } else if (customUrl) {
+          const res = await fetch(customUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(appData)
+          });
+          if (res.ok) updateCloudBadge('connected', '云端已实时保存');
+          else updateCloudBadge('error', '云端保存失败(' + res.status + ')');
         }
       } catch (e) {
         updateCloudBadge('offline', '离线(已存本地)');
@@ -2761,30 +2976,36 @@ ${m.todosText || '无'}`;
     // 云端后台静默轮询更新 (自动拉取其他人填报的最新数据)
     function startCloudPolling() {
       if (cloudPollingTimer) clearInterval(cloudPollingTimer);
-      const url = getCloudUrl();
-      if (!url) return;
+      const ghToken = getGitHubToken();
+      const customUrl = getCloudUrl();
+      if (!ghToken && !customUrl) return;
 
       cloudPollingTimer = setInterval(async () => {
-        // 如果当前页面有表单正在获得焦点输入，或者正在保存，暂时跳过轮询避免打扰输入
         const activeTag = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
         if (activeTag === 'input' || activeTag === 'textarea' || isCloudSyncing) return;
 
-        const syncUrl = getCloudUrl();
-        if (!syncUrl) return;
-
         try {
-          const res = await fetch(syncUrl, { cache: 'no-store' });
-          if (res.ok) {
-            const remote = await res.json();
+          if (getGitHubToken()) {
+            const remote = await fetchGitHubData(getGitHubToken());
             if (remote && remote.reports && JSON.stringify(remote) !== JSON.stringify(appData)) {
-              console.log("检测到其他协作者的最新改动，已自动静默同步");
+              console.log("检测到其他协作者改动，已自动静默同步");
               appData = remote;
               try { localStorage.setItem(STORAGE_KEY, JSON.stringify(appData)); } catch(e){}
               refreshCurrentTab();
             }
+          } else if (getCloudUrl()) {
+            const res = await fetch(getCloudUrl(), { cache: 'no-store' });
+            if (res.ok) {
+              const remote = await res.json();
+              if (remote && remote.reports && JSON.stringify(remote) !== JSON.stringify(appData)) {
+                appData = remote;
+                try { localStorage.setItem(STORAGE_KEY, JSON.stringify(appData)); } catch(e){}
+                refreshCurrentTab();
+              }
+            }
           }
         } catch(e) {}
-      }, 5000);
+      }, 10000);
     }
 
     // 页面刷新当前所在 Tab 的视图
@@ -2799,32 +3020,65 @@ ${m.todosText || '无'}`;
       }
     }
 
+    // 检查 URL 中是否有免配 Token (#sync=...)
+    function checkUrlHashSyncToken() {
+      try {
+        const hash = window.location.hash;
+        if (hash && hash.includes('sync=')) {
+          const match = hash.match(/sync=([^&]+)/);
+          if (match && match[1]) {
+            let token = match[1];
+            try {
+              const decoded = atob(token);
+              if (decoded.startsWith('ghp_') || decoded.startsWith('github_pat_')) token = decoded;
+            } catch(e){}
+            if (token.startsWith('ghp_') || token.startsWith('github_pat_')) {
+              localStorage.setItem(GITHUB_TOKEN_KEY, token);
+              try { history.replaceState(null, '', window.location.pathname); } catch(e){}
+              showToast('✅ 已自动连接知恒大区云端协同数据库！');
+            }
+          }
+        }
+      } catch (e) {}
+    }
+
     // 初始化云端协同
     async function initCloudSync() {
-      const url = getCloudUrl();
-      if (!url) {
+      checkUrlHashSyncToken(); // 自动检查并导入分享链接中的密钥
+      const ghToken = getGitHubToken();
+      const customUrl = getCloudUrl();
+
+      if (!ghToken && !customUrl) {
         updateCloudBadge('unconfigured', '单机模式 (点击配置)');
         return;
       }
 
       updateCloudBadge('syncing', '正在连接云端...');
       try {
-        const res = await fetch(url, { cache: 'no-store' });
-        if (res.ok) {
-          const remote = await res.json();
+        if (ghToken) {
+          const remote = await fetchGitHubData(ghToken);
           if (remote && remote.reports) {
             appData = remote;
             try { localStorage.setItem(STORAGE_KEY, JSON.stringify(appData)); } catch(e){}
             refreshCurrentTab();
-            updateCloudBadge('connected', '云端已连接');
-            startCloudPolling();
-            return;
+          } else {
+            await saveGitHubData(appData, ghToken);
           }
+          updateCloudBadge('connected', '云端已连接');
+          startCloudPolling();
+        } else if (customUrl) {
+          const res = await fetch(customUrl, { cache: 'no-store' });
+          if (res.ok) {
+            const remote = await res.json();
+            if (remote && remote.reports) {
+              appData = remote;
+              try { localStorage.setItem(STORAGE_KEY, JSON.stringify(appData)); } catch(e){}
+              refreshCurrentTab();
+            }
+          }
+          updateCloudBadge('connected', '云端已连接');
+          startCloudPolling();
         }
-        // 若云端尚为空，则将本地数据首次推送到云端
-        await syncToCloud();
-        updateCloudBadge('connected', '云端已连接');
-        startCloudPolling();
       } catch (e) {
         updateCloudBadge('offline', '离线模式 (已使用本地数据)');
       }
