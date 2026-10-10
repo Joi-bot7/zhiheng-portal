@@ -1,0 +1,2842 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>知恒 · 中部与西南大区 周报与周例会协同系统</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* 高阶行政商务视觉规范 (Executive Luxury Legal Palette) */
+    * { box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      background-color: #F8FAFC;
+      color: #0F172A;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.5;
+    }
+
+    /* 顶部顶级商务暗黑渐变导航栏 */
+    .header-premium {
+      background: linear-gradient(135deg, #09192F 0%, #172A45 50%, #0F233D 100%);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 4px 24px -2px rgba(9, 25, 47, 0.35);
+    }
+
+    /* 云端连接药丸状态 */
+    .cloud-badge-connected {
+      background: rgba(16, 185, 129, 0.12) !important;
+      border: 1px solid rgba(16, 185, 129, 0.35) !important;
+      color: #34D399 !important;
+      box-shadow: 0 0 12px rgba(16, 185, 129, 0.15);
+    }
+    .cloud-badge-syncing {
+      background: rgba(245, 158, 11, 0.15) !important;
+      border: 1px solid rgba(245, 158, 11, 0.4) !important;
+      color: #FBBF24 !important;
+    }
+    .cloud-badge-error {
+      background: rgba(244, 63, 94, 0.15) !important;
+      border: 1px solid rgba(244, 63, 94, 0.4) !important;
+      color: #FDA4AF !important;
+    }
+    .cloud-badge-offline {
+      background: rgba(255, 255, 255, 0.1) !important;
+      border: 1px solid rgba(255, 255, 255, 0.2) !important;
+      color: #CBD5E1 !important;
+    }
+
+    /* 滚动条美化 */
+    .custom-scrollbar::-webkit-scrollbar { width: 5px; height: 5px; }
+    .custom-scrollbar::-webkit-scrollbar-track { background: #F1F5F9; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 4px; }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #94A3B8; }
+
+    /* Toast 浮层动画 */
+    #toast-notification {
+      transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* 布局定位基础工具类 */
+    .flex { display: flex; }
+    .flex-col { flex-direction: column; }
+    .items-center { align-items: center; }
+    .items-start { align-items: flex-start; }
+    .items-end { align-items: flex-end; }
+    .justify-between { justify-content: space-between; }
+    .justify-center { justify-content: center; }
+    .justify-end { justify-content: flex-end; }
+    .flex-1 { flex: 1 1 0%; }
+    .flex-shrink-0 { flex-shrink: 0; }
+    .flex-wrap { flex-wrap: wrap; }
+    .grid { display: grid; }
+    .w-full { width: 100%; }
+    .h-full { height: 100%; }
+    .block { display: block; }
+    .relative { position: relative; }
+    .absolute { position: absolute; }
+    .fixed { position: fixed; }
+    .sticky { position: sticky; }
+    .top-0 { top: 0; }
+    .inset-0 { top: 0; right: 0; bottom: 0; left: 0; }
+    .z-30 { z-index: 30; }
+    .z-50 { z-index: 50; }
+    .overflow-y-auto { overflow-y: auto; }
+    .overflow-x-auto { overflow-x: auto; }
+    .overflow-hidden { overflow: hidden; }
+    .whitespace-nowrap { white-space: nowrap; }
+    .whitespace-pre-line { white-space: pre-line; }
+    .cursor-pointer { cursor: pointer; }
+    .transition { transition: all 0.15s ease-in-out; }
+    .transition-all { transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
+
+    /* 常用容器与最大宽度 */
+    .max-w-7xl { max-width: 80rem; }
+    .max-w-3xl { max-width: 48rem; }
+    .max-w-2xl { max-width: 42rem; }
+    .max-w-lg { max-width: 32rem; }
+    .max-w-md { max-width: 28rem; }
+    .max-w-sm { max-width: 24rem; }
+    .mx-auto { margin-left: auto; margin-right: auto; }
+
+    /* 网格与列布局 */
+    .grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+    .grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .gap-2 { gap: 0.5rem; }
+    .gap-3 { gap: 0.75rem; }
+    .gap-4 { gap: 1rem; }
+    .gap-6 { gap: 1.5rem; }
+
+    /* 背景色彩 (高级雅致配色体系) */
+    .bg-white { background-color: #ffffff; }
+    .bg-\[\#0F172A\] { background-color: #0F172A; }
+    .bg-white\/10 { background-color: rgba(255, 255, 255, 0.1); }
+    .bg-white\/15 { background-color: rgba(255, 255, 255, 0.15); }
+    .bg-white\/20 { background-color: rgba(255, 255, 255, 0.2); }
+    .bg-slate-50 { background-color: #F8FAFC; }
+    .bg-slate-100 { background-color: #F1F5F9; }
+    .bg-slate-200 { background-color: #E2E8F0; }
+    .bg-slate-800 { background-color: #1E293B; }
+    .bg-slate-900 { background-color: #0F172A; }
+    .bg-slate-900\/40 { background-color: rgba(15, 23, 42, 0.45); }
+    .backdrop-blur-sm { backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+
+    .bg-blue-50 { background-color: #EFF6FF; }
+    .bg-blue-100 { background-color: #DBEAFE; }
+    .bg-blue-600 { background-color: #1E3E62; }
+    .bg-blue-700 { background-color: #0F2744; }
+    .bg-emerald-50 { background-color: #ECFDF5; }
+    .bg-emerald-100 { background-color: #D1FAE5; }
+    .bg-emerald-600 { background-color: #059669; }
+    .bg-amber-50 { background-color: #FFFDF5; }
+    .bg-amber-100 { background-color: #FEF3C7; }
+    .bg-amber-200 { background-color: #FDE68A; }
+    .bg-amber-400 { background-color: #FBBF24; }
+    .bg-amber-500 { background-color: #D97706; }
+    .bg-amber-600 { background-color: #B45309; }
+    .bg-rose-50 { background-color: #FFF1F2; }
+    .bg-rose-100 { background-color: #FFE4E6; }
+    .bg-rose-600 { background-color: #E11D48; }
+
+    /* 文字色彩 */
+    .text-white { color: #ffffff; }
+    .text-\[\#0F172A\] { color: #0F172A; }
+    .text-slate-400 { color: #94A3B8; }
+    .text-slate-500 { color: #64748B; }
+    .text-slate-600 { color: #475569; }
+    .text-slate-700 { color: #334155; }
+    .text-slate-800 { color: #1E293B; }
+    .text-slate-900 { color: #0F172A; }
+    .text-blue-100 { color: #DBEAFE; }
+    .text-blue-200 { color: #BFDBFE; }
+    .text-blue-600 { color: #2563EB; }
+    .text-blue-700 { color: #1D4ED8; }
+    .text-blue-800 { color: #1E40AF; }
+    .text-blue-900 { color: #0F2744; }
+    .text-emerald-600 { color: #059669; }
+    .text-emerald-700 { color: #047857; }
+    .text-emerald-800 { color: #065F46; }
+    .text-amber-300 { color: #FCD34D; }
+    .text-amber-600 { color: #D97706; }
+    .text-amber-700 { color: #B45309; }
+    .text-amber-800 { color: #92400E; }
+    .text-amber-900 { color: #78350F; }
+    .text-amber-950 { color: #451A03; }
+    .text-rose-600 { color: #E11D48; }
+    .text-rose-700 { color: #BE123C; }
+
+    /* 字体尺寸与粗细 */
+    .text-\[10px\] { font-size: 10px; line-height: 14px; }
+    .text-\[11px\] { font-size: 11px; line-height: 15px; }
+    .text-xs { font-size: 0.75rem; line-height: 1rem; }
+    .text-sm { font-size: 0.875rem; line-height: 1.25rem; }
+    .text-base { font-size: 1rem; line-height: 1.5rem; }
+    .text-lg { font-size: 1.125rem; line-height: 1.75rem; }
+    .text-xl { font-size: 1.25rem; line-height: 1.75rem; }
+    .text-2xl { font-size: 1.5rem; line-height: 2rem; }
+    .font-normal { font-weight: 400; }
+    .font-medium { font-weight: 500; }
+    .font-semibold { font-weight: 600; }
+    .font-bold { font-weight: 700; }
+    .font-mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; }
+    .leading-relaxed { line-height: 1.625; }
+
+    /* 间距工具类 */
+    .p-1 { padding: 0.25rem; }
+    .p-1\.5 { padding: 0.375rem; }
+    .p-2 { padding: 0.5rem; }
+    .p-2\.5 { padding: 0.625rem; }
+    .p-3 { padding: 0.75rem; }
+    .p-3\.5 { padding: 0.875rem; }
+    .p-4 { padding: 1rem; }
+    .p-5 { padding: 1.25rem; }
+    .p-6 { padding: 1.5rem; }
+    .px-1\.5 { padding-left: 0.375rem; padding-right: 0.375rem; }
+    .px-2 { padding-left: 0.5rem; padding-right: 0.5rem; }
+    .px-2\.5 { padding-left: 0.625rem; padding-right: 0.625rem; }
+    .px-3 { padding-left: 0.75rem; padding-right: 0.75rem; }
+    .px-4 { padding-left: 1rem; padding-right: 1rem; }
+    .py-0\.5 { padding-top: 0.125rem; padding-bottom: 0.125rem; }
+    .py-1 { padding-top: 0.25rem; padding-bottom: 0.25rem; }
+    .py-1\.5 { padding-top: 0.375rem; padding-bottom: 0.375rem; }
+    .py-2 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
+    .py-2\.5 { padding-top: 0.625rem; padding-bottom: 0.625rem; }
+    .pb-2 { padding-bottom: 0.5rem; }
+    .pb-3 { padding-bottom: 0.75rem; }
+    .pt-2 { padding-top: 0.5rem; }
+    .pt-3 { padding-top: 0.75rem; }
+    .mb-1 { margin-bottom: 0.25rem; }
+    .mb-1\.5 { margin-bottom: 0.375rem; }
+    .mb-2 { margin-bottom: 0.5rem; }
+    .mt-1 { margin-top: 0.25rem; }
+    .mt-2 { margin-top: 0.5rem; }
+    .mt-4 { margin-top: 1rem; }
+    .space-x-1 > :not([hidden]) ~ :not([hidden]) { margin-left: 0.25rem; }
+    .space-x-1\.5 > :not([hidden]) ~ :not([hidden]) { margin-left: 0.375rem; }
+    .space-x-2 > :not([hidden]) ~ :not([hidden]) { margin-left: 0.5rem; }
+    .space-x-3 > :not([hidden]) ~ :not([hidden]) { margin-left: 0.75rem; }
+    .space-y-1 > :not([hidden]) ~ :not([hidden]) { margin-top: 0.25rem; }
+    .space-y-1\.5 > :not([hidden]) ~ :not([hidden]) { margin-top: 0.375rem; }
+    .space-y-2 > :not([hidden]) ~ :not([hidden]) { margin-top: 0.5rem; }
+    .space-y-3 > :not([hidden]) ~ :not([hidden]) { margin-top: 0.75rem; }
+    .space-y-4 > :not([hidden]) ~ :not([hidden]) { margin-top: 1rem; }
+    .space-y-6 > :not([hidden]) ~ :not([hidden]) { margin-top: 1.5rem; }
+
+    /* 边框与精致圆角 */
+    .border { border: 1px solid #E2E8F0; }
+    .border-b { border-bottom: 1px solid #E2E8F0; }
+    .border-t { border-top: 1px solid #E2E8F0; }
+    .border-r { border-right: 1px solid #E2E8F0; }
+    .border-l-4 { border-left-width: 4px; }
+    .border-slate-100 { border-color: #F1F5F9; }
+    .border-slate-200 { border-color: #E2E8F0; }
+    .border-slate-300 { border-color: #CBD5E1; }
+    .border-slate-700 { border-color: #334155; }
+    .border-blue-100 { border-color: #DBEAFE; }
+    .border-blue-200 { border-color: #BFDBFE; }
+    .border-emerald-200 { border-color: #A7F3D0; }
+    .border-amber-200 { border-color: #FDE68A; }
+    .border-amber-400 { border-color: #FBBF24; }
+    .border-amber-500 { border-color: #D97706; }
+    .border-rose-200 { border-color: #FECDD3; }
+    .border-white\/10 { border-color: rgba(255, 255, 255, 0.1); }
+    .border-white\/20 { border-color: rgba(255, 255, 255, 0.2); }
+    .rounded { border-radius: 0.375rem; }
+    .rounded-md { border-radius: 0.5rem; }
+    .rounded-lg { border-radius: 0.625rem; }
+    .rounded-xl { border-radius: 0.875rem; }
+    .rounded-2xl { border-radius: 1.125rem; }
+    .rounded-full { border-radius: 9999px; }
+
+    /* 现代微光柔和投影体系 */
+    .shadow-2xs { box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03); }
+    .shadow-xs { box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04); }
+    .shadow-sm { box-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.03), 0 4px 12px 0 rgba(15, 23, 42, 0.03); }
+    .shadow-md { box-shadow: 0 4px 6px -1px rgba(15, 23, 42, 0.06), 0 2px 4px -2px rgba(15, 23, 42, 0.04); }
+    .shadow-xl { box-shadow: 0 20px 25px -5px rgba(15, 23, 42, 0.1), 0 8px 10px -6px rgba(15, 23, 42, 0.06); }
+
+    /* 表单控件优化 */
+    input, textarea, select {
+      font-family: inherit;
+      color: inherit;
+      background-color: #fff;
+      transition: all 0.15s ease-in-out;
+    }
+    textarea { resize: vertical; }
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: #2563EB;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+    }
+
+    /* 手机端响应式适配 */
+    @media (max-width: 640px) {
+      .sm\:hidden { display: flex !important; }
+      .hidden.sm\:block { display: none !important; }
+      .hidden.sm\:flex { display: none !important; }
+      main { padding-left: 0.5rem !important; padding-right: 0.5rem !important; padding-top: 0.75rem !important; }
+      .md\:grid-cols-2 { grid-template-columns: repeat(1, minmax(0, 1fr)) !important; }
+      .lg\:grid-cols-12 { display: flex !important; flex-direction: column !important; }
+      .lg\:col-span-5, .lg\:col-span-7 { width: 100% !important; }
+      .max-w-3xl, .max-w-2xl, .max-w-lg, .max-w-md, .max-w-sm {
+        max-width: 95vw !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        padding: 1rem !important;
+      }
+      table { min-width: 600px; }
+      .overflow-x-auto { -webkit-overflow-scrolling: touch; }
+    }
+
+    @media (min-width: 641px) {
+      .sm\:hidden { display: none !important; }
+      .sm\:flex { display: flex !important; }
+      .sm\:block { display: block !important; }
+      .md\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .lg\:grid-cols-12 { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+      .lg\:col-span-5 { grid-column: span 5 / span 5; }
+      .lg\:col-span-7 { grid-column: span 7 / span 7; }
+    }
+
+    /* 最高优先级隐藏 */
+    .hidden {
+      display: none !important;
+    }
+
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+  <!-- 全局 Toast 提示容器 -->
+  <div id="toast-notification" class="fixed top-5 right-5 z-50 transform -translate-y-12 opacity-0 pointer-events-none transition-all duration-300">
+    <div id="toast-box" class="flex items-center space-x-2 bg-slate-900 text-white px-4 py-2.5 rounded-lg shadow-xl border border-slate-700 text-xs font-medium">
+      <span id="toast-icon">✅</span>
+      <span id="toast-message">操作已成功</span>
+    </div>
+  </div>
+
+  <!-- 1. 顶部全局导航栏 (已精简，去除非必要按钮) -->
+  <header class="header-premium sticky top-0 z-30 text-white">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between py-2.5 sm:py-0 sm:h-16 gap-2">
+        <!-- 左侧品牌与系统名称 (高奢金标 + 深邃商务质感) -->
+        <div class="flex items-center space-x-3">
+          <div class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl flex items-center justify-center font-bold text-base sm:text-lg tracking-wider text-amber-300 shadow-sm" style="background: linear-gradient(135deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.04) 100%); border: 1px solid rgba(251,191,36,0.35); box-shadow: 0 2px 10px rgba(0,0,0,0.25);">
+            知
+          </div>
+          <div>
+            <div class="flex items-center space-x-2">
+              <h1 class="text-sm sm:text-lg font-bold tracking-tight text-white">知恒 · 中部与西南大区协同工作台</h1>
+              <span class="text-[10px] font-semibold px-1.5 py-0.5 rounded text-amber-300 bg-amber-400/10 border border-amber-400/20 hidden sm:inline-block">协同管理系统</span>
+            </div>
+            <p class="text-[11px] text-slate-300 hidden sm:block mt-0.5">区域负责人：王亚哲 (区域执行主任/部长) · 6家分所周报与周例会督办</p>
+          </div>
+        </div>
+
+        <!-- 右侧导航与常显云端协同按钮 (高级药丸圆角，平滑交互) -->
+        <div class="flex items-center space-x-1.5 sm:space-x-2 overflow-x-auto custom-scrollbar pb-1 sm:pb-0">
+          <nav class="flex space-x-1 sm:space-x-1.5 whitespace-nowrap bg-white/10 p-1 rounded-xl border border-white/10 backdrop-blur-md">
+            <button onclick="switchTab('dashboard')" id="nav-dashboard" class="nav-btn px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition-all bg-white text-[#0F172A] shadow-sm flex-shrink-0">
+              📊 例会看板
+            </button>
+            <button onclick="switchTab('reports')" id="nav-reports" class="nav-btn px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition-all text-slate-200 hover:text-white hover:bg-white/10 flex-shrink-0">
+              📋 分所周报填报
+            </button>
+            <button onclick="switchTab('minutes')" id="nav-minutes" class="nav-btn px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition-all text-slate-200 hover:text-white hover:bg-white/10 relative flex-shrink-0">
+              📝 会议纪要库
+            </button>
+            <button onclick="switchTab('todos')" id="nav-todos" class="nav-btn px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition-all text-slate-200 hover:text-white hover:bg-white/10 flex-shrink-0">
+              📌 待办事项追踪
+            </button>
+          </nav>
+
+          <!-- 云端状态协同按钮：微光翡翠绿高科技胶囊 -->
+          <button onclick="openCloudConfigModal()" id="cloud-status-btn" class="flex items-center space-x-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold transition-all flex-shrink-0 ml-1 cursor-pointer cloud-badge-connected" title="点击配置或查看云端实时协同状态">
+            <span id="cloud-status-dot" class="w-2 h-2 rounded-full bg-emerald-400"></span>
+            <span id="cloud-status-text">🟢 云端协同</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- 主体工作区 -->
+  <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6">
+
+    <!-- ========================================================================= -->
+    <!-- TAB 1: 📊 例会看板 (去除非必要细节，聚焦例会纪要决议与诉求图表) -->
+    <!-- ========================================================================= -->
+    <section id="tab-dashboard" class="tab-pane space-y-6">
+      <!-- 核心指标卡 (聚焦例会协调核心) -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between">
+          <span class="text-xs font-medium text-slate-500">管辖分所总数</span>
+          <div class="flex items-baseline justify-between mt-2">
+            <span class="text-2xl font-bold text-slate-900">6 <span class="text-xs font-normal text-slate-500">所</span></span>
+            <span class="text-xs text-blue-700 bg-blue-50 px-2 py-0.5 rounded font-medium">中部2所 / 西南4所</span>
+          </div>
+          <span class="text-[11px] text-slate-400 mt-2">武汉·长沙·成都·重庆·昆明·贵阳</span>
+        </div>
+
+        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between">
+          <span class="text-xs font-medium text-slate-500">本周周报提交状态</span>
+          <div class="flex items-baseline justify-between mt-2">
+            <span class="text-2xl font-bold text-emerald-600">6 / 6 所</span>
+            <span class="text-xs text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded font-medium">全员已提交</span>
+          </div>
+          <span class="text-[11px] text-slate-400 mt-2">各分所主任已完成周报填报</span>
+        </div>
+
+        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between border-l-4 border-l-amber-500">
+          <span class="text-xs font-medium text-amber-800 font-semibold">🔑 需亚哲主任协调</span>
+          <div class="flex items-baseline justify-between mt-2">
+            <span class="text-2xl font-bold text-amber-900" id="dash-yazhe-count">0 <span class="text-xs font-normal text-slate-500">项</span></span>
+            <span class="text-xs text-purple-700 bg-purple-50 px-2 py-0.5 rounded font-medium">例会定调事项</span>
+          </div>
+          <span class="text-[11px] text-slate-400 mt-2">大团队引进/战略把关/论坛</span>
+        </div>
+
+        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between border-l-4 border-l-blue-600">
+          <span class="text-xs font-medium text-blue-900 font-semibold">🏛️ 需总部职能协同</span>
+          <div class="flex items-baseline justify-between mt-2">
+            <span class="text-2xl font-bold text-blue-900" id="dash-hq-count">0 <span class="text-xs font-normal text-slate-500">项</span></span>
+            <span class="text-xs text-sky-700 bg-sky-50 px-2 py-0.5 rounded font-medium">跨部门职能支持</span>
+          </div>
+          <span class="text-[11px] text-slate-400 mt-2">合规/财务开票/招聘/物料支持</span>
+        </div>
+      </div>
+
+      <!-- 核心板块：左侧最新会议纪要速览 + 右侧两大智能图表 -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <!-- 左侧：最新例会纪要决议速报卡 (彻底去除记录人，内容动态绑定最新纪要) -->
+        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm lg:col-span-5 flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+              <div class="flex items-center space-x-2">
+                <span class="w-2.5 h-2.5 bg-blue-600 rounded-full"></span>
+                <h3 class="text-sm font-bold text-slate-900">📝 最新周例会纪要速览</h3>
+              </div>
+              <span class="text-xs font-semibold px-2 py-0.5 bg-blue-50 text-blue-700 rounded" id="dash-latest-m-date">加载中...</span>
+            </div>
+
+            <div class="mt-3 space-y-3">
+              <div>
+                <h4 class="text-xs font-bold text-slate-800 line-clamp-1" id="dash-latest-m-title">【会议纪要】加载中...</h4>
+                <p class="text-[11px] text-slate-500 mt-0.5" id="dash-latest-m-host">主持人：王亚哲 (区域主任/部长)</p>
+              </div>
+
+              <div class="bg-slate-50 p-3 rounded-lg border border-slate-100 space-y-2 text-xs">
+                <span class="font-bold text-slate-700 block">📌 本次会议核心定调与决议：</span>
+                <div id="dash-latest-m-resolutions" class="space-y-1.5 text-slate-600 text-[11px] leading-relaxed max-h-48 overflow-y-auto custom-scrollbar whitespace-pre-line">
+                  <!-- 由 JavaScript 动态读取最新纪要填充，绝不写死静态文本 -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
+            <span class="text-xs text-slate-500">产生的待办事项：<strong class="text-blue-900" id="dash-latest-m-todos-count">0 项</strong></span>
+            <button onclick="switchTab('minutes')" class="text-xs px-3 py-1.5 bg-[#0F172A] text-white rounded-lg hover:bg-blue-800 transition font-medium shadow-xs">
+              查阅完整纪要全文 ➔
+            </button>
+          </div>
+        </div>
+
+        <!-- 右侧：图表可视化 (各分所诉求对比柱状图 + 待办闭环推进状态) -->
+        <div class="space-y-6 lg:col-span-7 flex flex-col justify-between">
+          
+          <!-- 图表1：各分所提出协调事项对比柱状图 -->
+          <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm space-y-3">
+            <div class="flex items-center justify-between">
+              <div>
+                <h4 class="text-xs font-bold text-slate-900 flex items-center">
+                  📊 本周各分所提交协调事项统计
+                </h4>
+                <p class="text-[11px] text-slate-400 mt-0.5">区分王亚哲老师亲自协调与总部各职能部门配合</p>
+              </div>
+              <div class="flex items-center space-x-3 text-xs">
+                <span class="flex items-center text-slate-600"><span class="w-2.5 h-2.5 bg-amber-500 rounded-sm mr-1"></span>需亚哲协调</span>
+                <span class="flex items-center text-slate-600"><span class="w-2.5 h-2.5 bg-blue-600 rounded-sm mr-1"></span>需总部协调</span>
+              </div>
+            </div>
+
+            <!-- 条形图容器 (动态渲染) -->
+            <div id="dash-chart-bars" class="h-32 pt-4 flex items-end justify-between gap-2 border-b border-slate-100 pb-2">
+              <!-- JavaScript 动态渲染各分所柱状条 -->
+            </div>
+          </div>
+
+          <!-- 图表2：环形图 (待办闭环推进状态) -->
+          <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex items-center justify-between">
+            <div class="flex items-center space-x-4">
+              <div class="relative w-24 h-24 flex items-center justify-center">
+                <svg class="w-24 h-24 transform -rotate-90" viewBox="0 0 36 36">
+                  <path class="text-slate-100" stroke-width="4.5" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                  <path id="donut-done" class="text-emerald-500" stroke-width="4.5" stroke-dasharray="0, 100" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                  <path id="donut-progress" class="text-amber-500" stroke-width="4.5" stroke-dasharray="0, 100" stroke-dashoffset="0" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                  <path id="donut-notyet" class="text-rose-400" stroke-width="4.5" stroke-dasharray="0, 100" stroke-dashoffset="0" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                </svg>
+                <div class="absolute text-center">
+                  <span class="text-lg font-bold text-slate-800" id="dash-todo-total">0</span>
+                  <span class="text-[9px] block text-slate-400 -mt-1">项待办</span>
+                </div>
+              </div>
+
+              <div class="space-y-1 text-xs">
+                <div class="font-bold text-slate-800">🍩 例会重点待办执行闭环率</div>
+                <div class="text-[11px] text-slate-500 flex items-center space-x-3">
+                  <span class="flex items-center"><span class="w-2 h-2 bg-emerald-500 rounded-full mr-1"></span>已完成: <strong class="text-emerald-600 ml-1" id="dash-cnt-done">0项</strong></span>
+                  <span class="flex items-center"><span class="w-2 h-2 bg-amber-500 rounded-full mr-1"></span>进行中: <strong class="text-amber-600 ml-1" id="dash-cnt-progress">0项</strong></span>
+                  <span class="flex items-center"><span class="w-2 h-2 bg-rose-400 rounded-full mr-1"></span>未开始: <strong class="text-rose-600 ml-1" id="dash-cnt-notyet">0项</strong></span>
+                </div>
+              </div>
+            </div>
+
+            <button onclick="switchTab('todos')" class="text-xs px-2.5 py-1 text-blue-700 bg-blue-50 border border-blue-200 rounded hover:bg-blue-100 transition font-medium">
+              管理待办 ➔
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 2: 📋 分所周报填报 (支持添加新周次、删除周次、一键清空全部内容、即时保存) -->
+    <!-- ========================================================================= -->
+    <section id="tab-reports" class="tab-pane hidden space-y-4">
+      <!-- 周期管理工具栏 -->
+      <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-wrap items-center justify-between gap-3">
+        <div class="flex items-center space-x-2">
+          <label class="text-xs font-bold text-slate-700">当前周次：</label>
+          <select id="report-week-select" onchange="changeReportWeek(this.value)" class="text-sm font-semibold text-blue-900 bg-blue-50 border border-blue-200 rounded-lg px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <!-- 动态渲染周次列表 -->
+          </select>
+          <button onclick="openAddWeekModal()" class="text-xs px-2.5 py-1.5 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition font-medium flex items-center">
+            ➕ 添加新周次
+          </button>
+          <button onclick="deleteCurrentWeek()" class="text-xs px-2.5 py-1.5 text-rose-600 bg-rose-50 border border-rose-200 rounded-lg hover:bg-rose-100 transition font-medium">
+            🗑️ 删除当前周
+          </button>
+        </div>
+
+        <div class="text-xs text-amber-800 bg-amber-50 border border-amber-200 px-3 py-1.5 rounded-lg flex items-center">
+          💡 各位主任在本人分所卡片填写后4项即可，没有协调事项填“无”。支持点击【保存修改】或【一键清空】。
+        </div>
+      </div>
+
+      <!-- 6个分所卡片列表容器 -->
+      <div id="branch-reports-container" class="space-y-4">
+        <!-- 由 JavaScript 动态渲染 -->
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 3: 📝 周例会纪要库 (带侧边栏查看、文本一键智能导入、编辑/删除、彻底去除记录人) -->
+    <!-- ========================================================================= -->
+    <section id="tab-minutes" class="tab-pane hidden">
+      <!-- 左右两栏布局 -->
+      <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden flex flex-col lg:flex-row min-h-[640px]">
+        
+        <!-- 左侧：日期与期次侧边栏 -->
+        <aside class="w-full lg:w-72 bg-slate-50 border-r border-slate-200 flex flex-col flex-shrink-0">
+          <div class="p-3.5 border-b border-slate-200 bg-slate-100 flex items-center justify-between">
+            <span class="text-xs font-bold text-slate-700 flex items-center">
+              📅 历史例会档案
+            </span>
+            <div class="flex items-center space-x-1.5">
+              <button onclick="openSmartImportMinuteModal()" class="text-xs bg-emerald-600 text-white px-2 py-1 rounded hover:bg-emerald-700 transition flex items-center font-medium shadow-xs" title="复制粘贴全文，系统自动识别匹配创建新纪要">
+                ⚡ 智能导入
+              </button>
+              <button onclick="openNewMinuteModal()" class="text-xs bg-[#0F172A] text-white px-2 py-1 rounded hover:bg-blue-800 transition flex items-center font-medium shadow-xs" title="手动录入新纪要">
+                + 新建
+              </button>
+            </div>
+          </div>
+
+          <!-- 搜索框 -->
+          <div class="p-2.5 border-b border-slate-200">
+            <input type="text" id="minute-search" oninput="filterMinuteList()" placeholder="按日期/主题快速搜索..." class="w-full text-xs px-2.5 py-1.5 rounded border border-slate-300 focus:outline-none focus:ring-1 focus:ring-blue-500 bg-white">
+          </div>
+
+          <!-- 会议按日期列表 -->
+          <div id="minute-list-sidebar" class="flex-1 overflow-y-auto custom-scrollbar p-2 space-y-1.5">
+            <!-- 列表项通过 JavaScript 动态渲染 -->
+          </div>
+
+          <div class="p-2.5 border-t border-slate-200 text-[11px] text-slate-400 text-center">
+            已归档 <span id="minute-total-count" class="font-bold text-slate-700">0</span> 场会议
+          </div>
+        </aside>
+
+        <!-- 右侧：会议纪要详情与编辑视窗 -->
+        <main class="flex-1 p-5 sm:p-7 overflow-y-auto custom-scrollbar flex flex-col justify-between">
+          <div id="minute-content-display" class="space-y-6">
+            <!-- 由 JavaScript 渲染 -->
+          </div>
+        </main>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 4: 📌 待办事项追踪 (支持防重复提取、已录入待办全量编辑、纯净无自动填充进展说明) -->
+    <!-- ========================================================================= -->
+    <section id="tab-todos" class="tab-pane hidden space-y-4">
+      <!-- 快捷状态筛选栏与顶部操作栏 -->
+      <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-wrap items-center justify-between gap-3">
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="text-xs font-bold text-slate-600">进展状态：</span>
+          <div class="flex items-center space-x-1" id="todo-status-tabs">
+            <button onclick="setTodoStatusFilter('all')" id="btn-st-all" class="px-2.5 py-1 rounded-md text-xs font-bold bg-blue-100 text-blue-900 border border-blue-200">全部 (<span id="cnt-all">0</span>)</button>
+            <button onclick="setTodoStatusFilter('进行中')" id="btn-st-progress" class="px-2.5 py-1 rounded-md text-xs font-medium bg-amber-50 text-amber-800 border border-amber-200 hover:bg-amber-100">🟡 进行中 (<span id="cnt-progress">0</span>)</button>
+            <button onclick="setTodoStatusFilter('已完成')" id="btn-st-done" class="px-2.5 py-1 rounded-md text-xs font-medium bg-emerald-50 text-emerald-800 border border-emerald-200 hover:bg-emerald-100">🟢 已完成 (<span id="cnt-done">0</span>)</button>
+            <button onclick="setTodoStatusFilter('未开始')" id="btn-st-notyet" class="px-2.5 py-1 rounded-md text-xs font-medium bg-rose-50 text-rose-800 border border-rose-200 hover:bg-rose-100">🔴 未开始 (<span id="cnt-notyet">0</span>)</button>
+          </div>
+
+          <span class="text-xs font-bold text-slate-600 ml-3">责任人：</span>
+          <select id="todo-owner-filter" onchange="renderTodos()" class="text-xs border border-slate-300 rounded px-2 py-1 bg-white focus:outline-none">
+            <option value="all">全部责任人</option>
+            <option value="王亚哲">王亚哲</option>
+            <option value="夏晓飞">夏晓飞 (武汉)</option>
+            <option value="陈赛男">陈赛男 (长沙)</option>
+            <option value="朱敏">朱敏 (成都)</option>
+            <option value="邱月">邱月 (重庆)</option>
+            <option value="杜易">杜易 (昆明)</option>
+            <option value="张晶">张晶 (贵阳)</option>
+            <option value="全体主任">全体主任</option>
+          </select>
+        </div>
+
+        <div class="flex items-center space-x-2">
+          <!-- 核心功能：防重复提取纪要待办 -->
+          <button onclick="openExtractTodosModal()" class="text-xs bg-emerald-700 hover:bg-emerald-800 text-white px-3 py-1.5 rounded-lg transition flex items-center font-medium shadow-xs" title="选择一篇或全部会议纪要，智能防重复提取待办事项入库">
+            ⚡ 从会议纪要提取待办
+          </button>
+          <button onclick="openNewTodoModal()" class="text-xs bg-[#0F172A] text-white px-3 py-1.5 rounded-lg hover:bg-blue-800 transition flex items-center font-medium shadow-xs">
+            + 手动添加待办
+          </button>
+        </div>
+      </div>
+
+      <!-- 待办任务表格卡片 -->
+      <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="bg-slate-50 border-b border-slate-200 text-[11px] font-bold text-slate-600">
+                <th class="p-3 w-10 text-center">销项</th>
+                <th class="p-3 w-28">责任人</th>
+                <th class="p-3">具体行动事项与交付目标</th>
+                <th class="p-3 w-24">所属组织</th>
+                <th class="p-3 w-28 text-center">要求截止时间</th>
+                <th class="p-3 w-32">当前进展状态</th>
+                <th class="p-3 w-64">最新进展说明 (无自动填充)</th>
+                <th class="p-3 w-24 text-center">操作</th>
+              </tr>
+            </thead>
+            <tbody id="todos-table-body" class="divide-y divide-slate-100 text-xs">
+              <!-- 由 JavaScript 动态渲染 -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========================================================================= -->
+  <!-- 模态框合集 -->
+  <!-- ========================================================================= -->
+
+  <!-- 模态框 1：新增/编辑会议纪要 (彻底去除记录人，确保保存100%生效) -->
+  
+  <!-- 弹窗 7：云端多人实时协同配置 -->
+  <div id="modal-cloud-config" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 hidden items-center justify-center p-4" onclick="if(event.target === this) closeCloudConfigModal()">
+    <div class="bg-white rounded-xl max-w-lg w-full p-6 shadow-xl border border-slate-200 space-y-4 max-h-[92vh] overflow-y-auto custom-scrollbar">
+      <div class="flex justify-between items-center border-b pb-3">
+        <div class="flex items-center space-x-2">
+          <span class="text-xl">☁️</span>
+          <div>
+            <h3 class="text-base font-bold text-slate-800">云端多人实时协同配置</h3>
+            <p class="text-xs text-slate-500">配置免费云数据库接口，全员改动自动毫秒级保存与互通</p>
+          </div>
+        </div>
+        <button onclick="closeCloudConfigModal()" class="text-slate-400 hover:text-slate-600 p-1 text-lg leading-none">✕</button>
+      </div>
+
+      <div class="space-y-3 text-xs text-slate-700">
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">云端同步接口 URL (API Endpoint):</label>
+          <input type="url" id="cloud-api-url-input" placeholder="例如：https://xxxxxx.laf.run/sync" class="w-full border border-slate-300 rounded p-2 text-xs font-mono focus:ring-1 focus:ring-blue-500">
+          <p class="text-[11px] text-slate-400 mt-1">支持国内免费 Laf 云开发接口，配置后全员改动将在云端毫秒级自动保存并互通。</p>
+        </div>
+
+        <div class="bg-blue-50 border border-blue-200 rounded-lg p-3 text-xs text-blue-900 space-y-1.5">
+          <div class="font-bold flex items-center space-x-1">
+            <span>💡</span>
+            <span>如何获取您的专属免费云端接口？</span>
+          </div>
+          <ol class="list-decimal list-inside space-y-1 text-[11px] text-blue-800 leading-relaxed">
+            <li>访问国内免费平台 <b>laf.run</b> 并微信扫码登录；</li>
+            <li>新建免费应用，在左侧「函数」中新建名为 <b>sync</b> 的函数；</li>
+            <li>粘贴提供的现成同步代码并点击「发布」；</li>
+            <li>复制页面上的专属链接填入上方输入框，点击下方「保存并测试连接」即可！</li>
+          </ol>
+        </div>
+
+        <div id="cloud-test-result" class="hidden p-2.5 rounded text-xs font-medium"></div>
+      </div>
+
+      <div class="flex justify-between items-center pt-3 border-t">
+        <button onclick="clearCloudConfig()" class="text-xs text-rose-600 hover:underline">断开云端并恢复单机模式</button>
+        <div class="flex space-x-2">
+          <button onclick="closeCloudConfigModal()" class="px-3 py-1.5 border border-slate-300 rounded text-xs text-slate-600 hover:bg-slate-50">关闭</button>
+          <button onclick="saveAndTestCloudConfig()" class="px-4 py-1.5 bg-[#0F172A] text-white rounded text-xs font-medium hover:bg-blue-800 shadow-sm flex items-center space-x-1">
+            <span>💾 保存并测试连接</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="modal-minute" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 hidden items-center justify-center p-4" onclick="if(event.target === this) closeMinuteModal()">
+    <div class="bg-white rounded-xl max-w-2xl w-full p-6 shadow-xl border border-slate-200 space-y-4 max-h-[90vh] overflow-y-auto custom-scrollbar">
+      <div class="flex justify-between items-center border-b pb-3">
+        <h3 class="text-base font-bold text-slate-800" id="modal-minute-title-label">➕ 登记新周例会纪要</h3>
+        <button onclick="closeMinuteModal()" class="text-slate-400 hover:text-slate-600">✕</button>
+      </div>
+      <input type="hidden" id="edit-minute-id">
+      <div class="space-y-3 text-xs">
+        <div>
+          <label class="block font-medium text-slate-700 mb-1">会议名称/期次：</label>
+          <input type="text" id="m-form-title" placeholder="如：#0918 西南&中部大区执行主任九月会议" class="w-full p-2 border rounded focus:ring-1 focus:ring-blue-500">
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div>
+            <label class="block font-medium text-slate-700 mb-1">会议日期：</label>
+            <input type="date" id="m-form-date" class="w-full p-2 border rounded focus:ring-1 focus:ring-blue-500">
+          </div>
+          <div>
+            <label class="block font-medium text-slate-700 mb-1">会议时间：</label>
+            <input type="text" id="m-form-time" value="09:30 - 11:30" class="w-full p-2 border rounded focus:ring-1 focus:ring-blue-500">
+          </div>
+          <div>
+            <label class="block font-medium text-slate-700 mb-1">主持人：</label>
+            <input type="text" id="m-form-host" value="王亚哲" class="w-full p-2 border rounded focus:ring-1 focus:ring-blue-500">
+          </div>
+        </div>
+        <div>
+          <label class="block font-medium text-slate-700 mb-1">参会人员：</label>
+          <input type="text" id="m-form-attendees" value="王亚哲(区域执行主任/部长)、夏晓飞(武汉)、陈赛男(长沙)、朱敏(成都)、邱月(重庆)、杜易(昆明)、张晶(贵阳)" class="w-full p-2 border rounded focus:ring-1 focus:ring-blue-500">
+        </div>
+        <div>
+          <label class="block font-medium text-slate-700 mb-1">会议主要议题与决议内容 (支持分段整理)：</label>
+          <textarea id="m-form-content" rows="7" placeholder="请记录本次例会讨论的重点内容与决策备忘..." class="w-full p-2 border rounded focus:ring-1 focus:ring-blue-500 font-mono text-xs leading-relaxed"></textarea>
+        </div>
+        <div>
+          <label class="block font-medium text-slate-700 mb-1">本次会议督办待办清单（每行一条，可带@责任人）：</label>
+          <textarea id="m-form-todos" rows="3" placeholder="1. 策划重庆人才活动 @王亚哲 @邱月&#10;2. 完成部门签约 @全体主任" class="w-full p-2 border rounded focus:ring-1 focus:ring-blue-500 font-mono text-xs"></textarea>
+        </div>
+      </div>
+      <div class="flex justify-end space-x-2 pt-3 border-t">
+        <button onclick="closeMinuteModal()" class="px-4 py-1.5 border rounded text-xs text-slate-600 hover:bg-slate-50">取消</button>
+        <button onclick="saveMinuteForm()" class="px-4 py-1.5 bg-[#0F172A] text-white rounded text-xs font-medium hover:bg-blue-800">保存归档</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 模态框 2：复制粘贴全文智能导入新建纪要 -->
+  <div id="modal-smart-import-minute" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 hidden items-center justify-center p-4" onclick="if(event.target === this) closeSmartImportMinuteModal()">
+    <div class="bg-white rounded-xl max-w-3xl w-full p-6 shadow-xl border border-slate-200 space-y-4 max-h-[92vh] overflow-y-auto custom-scrollbar">
+      <div class="flex justify-between items-center border-b pb-3">
+        <div>
+          <h3 class="text-base font-bold text-slate-900 flex items-center">
+            ⚡ 粘贴全文智能导入会议纪要
+          </h3>
+          <p class="text-xs text-slate-500 mt-0.5">将微信群、Word或钉钉中的会议纪要全文直接粘贴到下方，系统将自动识别结构并建档。</p>
+        </div>
+        <button onclick="closeSmartImportMinuteModal()" class="text-slate-400 hover:text-slate-600 text-lg">✕</button>
+      </div>
+
+      <!-- 粘贴大文本框 -->
+      <div>
+        <div class="flex items-center justify-between mb-1.5">
+          <label class="block text-xs font-bold text-slate-800">请直接粘贴会议纪要全文：</label>
+          <button onclick="triggerSmartParse()" class="text-xs font-semibold px-2.5 py-1 bg-blue-50 text-blue-700 hover:bg-blue-100 rounded border border-blue-200 transition">
+            🔍 重新解析识别
+          </button>
+        </div>
+        <textarea id="smart-import-raw-text" oninput="handleSmartImportTextInput()" rows="7" placeholder="请在此处直接粘贴会议纪要全文，例如：&#10;【会议纪要】#1015 西南&中部大区执行主任例会&#10;时间：2026-10-15 09:30 - 11:30&#10;主持人：王亚哲&#10;参会人员：王亚哲、夏晓飞、陈赛男、朱敏、邱月、杜易、张晶&#10;一、会议决议备忘：&#10;1. 加速人才引进进度...&#10;2. 落实专业部门签约责任状...&#10;二、待办事项：&#10;1. 策划重庆专场活动 @王亚哲 @邱月&#10;2. 完成部门签约协议 @全体主任" class="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 font-mono text-xs leading-relaxed custom-scrollbar bg-slate-50 focus:bg-white"></textarea>
+      </div>
+
+      <!-- 智能匹配结果预览及微调区域 -->
+      <div class="bg-blue-50/50 p-4 rounded-xl border border-blue-200 space-y-3">
+        <div class="flex items-center justify-between border-b border-blue-200/60 pb-2">
+          <span class="text-xs font-bold text-blue-900 flex items-center">
+            🤖 智能识别提取结果预览 (可直接在此确认或微调)
+          </span>
+          <span class="text-[11px] text-blue-700 bg-blue-100 px-2 py-0.5 rounded font-medium" id="smart-parse-status-badge">等待输入文本</span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+          <div>
+            <label class="block text-[11px] font-bold text-slate-700 mb-1">识别出的会议名称/期次：</label>
+            <input type="text" id="smart-preview-title" placeholder="如：【会议纪要】#1015 周例会" class="w-full p-2 border rounded bg-white font-medium">
+          </div>
+          <div class="grid grid-cols-2 gap-2">
+            <div>
+              <label class="block text-[11px] font-bold text-slate-700 mb-1">识别出的日期：</label>
+              <input type="date" id="smart-preview-date" class="w-full p-2 border rounded bg-white">
+            </div>
+            <div>
+              <label class="block text-[11px] font-bold text-slate-700 mb-1">识别出的时间：</label>
+              <input type="text" id="smart-preview-time" value="09:30 - 11:30" class="w-full p-2 border rounded bg-white">
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+          <div>
+            <label class="block text-[11px] font-bold text-slate-700 mb-1">识别出的主持人：</label>
+            <input type="text" id="smart-preview-host" value="王亚哲" class="w-full p-2 border rounded bg-white font-semibold text-blue-900">
+          </div>
+          <div class="sm:col-span-2">
+            <label class="block text-[11px] font-bold text-slate-700 mb-1">识别出的参会人员：</label>
+            <input type="text" id="smart-preview-attendees" placeholder="参会人员名单..." class="w-full p-2 border rounded bg-white">
+          </div>
+        </div>
+
+        <div class="text-xs">
+          <label class="block text-[11px] font-bold text-slate-700 mb-1">识别出的核心议题与决议内容：</label>
+          <textarea id="smart-preview-content" rows="4" placeholder="议题与决策备忘..." class="w-full p-2 border rounded bg-white font-mono text-xs leading-relaxed custom-scrollbar"></textarea>
+        </div>
+
+        <div class="text-xs">
+          <div class="flex items-center justify-between mb-1">
+            <label class="block text-[11px] font-bold text-amber-900">识别出的重点待办事项清单：</label>
+            <span class="text-[11px] text-amber-700" id="smart-preview-todos-count">0 项待办</span>
+          </div>
+          <textarea id="smart-preview-todos" rows="3" placeholder="每行一条待办事项，支持带@责任人..." class="w-full p-2 border border-amber-300 rounded bg-amber-50/40 font-mono text-xs leading-relaxed custom-scrollbar text-amber-950"></textarea>
+        </div>
+
+        <!-- 联动同步选项 -->
+        <div class="pt-2 flex items-center justify-between text-xs">
+          <label class="flex items-center space-x-2 text-slate-700 cursor-pointer select-none">
+            <input type="checkbox" id="smart-auto-sync-todos-checkbox" checked class="w-4 h-4 text-emerald-600 rounded focus:ring-emerald-500 cursor-pointer">
+            <span class="font-bold text-emerald-800">同步将识别到的待办事项拆解自动加入【📌 待办事项追踪】(自动防重)</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="flex justify-end space-x-2 pt-2 border-t">
+        <button onclick="closeSmartImportMinuteModal()" class="px-4 py-1.5 border rounded text-xs text-slate-600 hover:bg-slate-50">取消</button>
+        <button onclick="confirmSmartImportMinute()" class="px-4 py-1.5 bg-emerald-600 text-white rounded text-xs font-bold hover:bg-emerald-700 flex items-center shadow-xs">
+          ✅ 确认创建归档
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 模态框 3：从会议纪要库提取待办事项 (带自动防重复检查项，支持精确提取某篇或全部) -->
+  <div id="modal-extract-todos" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 hidden items-center justify-center p-4" onclick="if(event.target === this) closeExtractTodosModal()">
+    <div class="bg-white rounded-xl max-w-2xl w-full p-6 shadow-xl border border-slate-200 space-y-4 max-h-[90vh] overflow-y-auto custom-scrollbar">
+      <div class="flex justify-between items-center border-b pb-3">
+        <div>
+          <h3 class="text-base font-bold text-slate-900 flex items-center">
+            ⚡ 从会议纪要库提取并新增待办
+          </h3>
+          <p class="text-xs text-slate-500 mt-0.5">选择目标会议纪要，系统将自动进行防重复检查，智能提取未录入的待办事项。</p>
+        </div>
+        <button onclick="closeExtractTodosModal()" class="text-slate-400 hover:text-slate-600 text-lg">✕</button>
+      </div>
+
+      <!-- 选择来源纪要 + 自动去重过滤选项 (新增) -->
+      <div class="space-y-2 text-xs">
+        <div>
+          <label class="block font-bold text-slate-800 mb-1">选择要提取的会议纪要来源：</label>
+          <select id="extract-source-minute-select" onchange="renderExtractTodosPreview()" class="w-full p-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 font-semibold text-slate-800 bg-slate-50 focus:bg-white text-xs">
+            <!-- 动态渲染纪要列表与“全部纪要”选项 -->
+          </select>
+        </div>
+
+        <!-- 需求 3：防重复自动检查项开关 -->
+        <div class="flex items-center justify-between bg-blue-50/70 p-2.5 rounded-lg border border-blue-200">
+          <label class="flex items-center space-x-2 text-slate-800 font-medium cursor-pointer select-none">
+            <input type="checkbox" id="extract-auto-filter-duplicates" checked onchange="renderExtractTodosPreview()" class="w-4 h-4 text-emerald-600 rounded focus:ring-emerald-500 cursor-pointer">
+            <span class="font-bold text-blue-900">🛡️ 自动防重检查：过滤与当前待办库已存在的事项</span>
+          </label>
+          <span class="text-[11px] font-semibold text-blue-700 bg-blue-100 px-2 py-0.5 rounded" id="extract-duplicates-detected-badge">已开启自动排重</span>
+        </div>
+      </div>
+
+      <!-- 解析出的待办预览复选列表 -->
+      <div class="space-y-2">
+        <div class="flex items-center justify-between text-xs">
+          <div class="flex items-center space-x-2">
+            <span class="font-bold text-slate-800">待办解析列表</span>
+            <span class="text-slate-400">(共识别到 <strong id="extract-total-count" class="text-blue-900">0</strong> 项，可导入 <strong id="extract-new-count" class="text-emerald-700">0</strong> 项)</span>
+          </div>
+          <div class="space-x-2 text-[11px]">
+            <button onclick="toggleAllExtractCheckboxes(true)" class="text-blue-600 hover:underline">全选可导入项</button>
+            <span class="text-slate-300">|</span>
+            <button onclick="toggleAllExtractCheckboxes(false)" class="text-slate-500 hover:underline">取消全选</button>
+          </div>
+        </div>
+
+        <div id="extract-items-container" class="max-h-60 overflow-y-auto custom-scrollbar border border-slate-200 rounded-lg divide-y divide-slate-100 bg-slate-50/50 p-1 text-xs">
+          <!-- 动态生成待办勾选行 -->
+        </div>
+      </div>
+
+      <div class="flex justify-end space-x-2 pt-2 border-t">
+        <button onclick="closeExtractTodosModal()" class="px-4 py-1.5 border rounded text-xs text-slate-600 hover:bg-slate-50">取消</button>
+        <button onclick="confirmExtractTodos()" id="btn-confirm-extract" class="px-4 py-1.5 bg-emerald-700 text-white rounded text-xs font-bold hover:bg-emerald-800 flex items-center shadow-xs">
+          ✅ 确认导入所选待办
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 模态框 4：编辑已有待办事项 (新增需求 2：已录入待办全字段可编辑) -->
+  <div id="modal-edit-todo" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 hidden items-center justify-center p-4" onclick="if(event.target === this) closeEditTodoModal()">
+    <div class="bg-white rounded-xl max-w-md w-full p-5 shadow-xl border border-slate-200 space-y-4">
+      <div class="flex justify-between items-center border-b pb-2">
+        <h3 class="text-sm font-bold text-slate-800">✏️ 编辑待办事项</h3>
+        <button onclick="closeEditTodoModal()" class="text-slate-400 hover:text-slate-600">✕</button>
+      </div>
+      <input type="hidden" id="edit-todo-id">
+      <div class="space-y-3 text-xs">
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-medium text-slate-700 mb-1">责任人：</label>
+            <select id="edit-todo-owner" class="w-full p-2 border rounded focus:ring-1 focus:ring-blue-500 font-bold">
+              <option value="王亚哲">王亚哲</option>
+              <option value="夏晓飞">夏晓飞 (武汉)</option>
+              <option value="陈赛男">陈赛男 (长沙)</option>
+              <option value="朱敏">朱敏 (成都)</option>
+              <option value="邱月">邱月 (重庆)</option>
+              <option value="杜易">杜易 (昆明)</option>
+              <option value="张晶">张晶 (贵阳)</option>
+              <option value="全体主任">全体主任</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-medium text-slate-700 mb-1">所属分所/组织：</label>
+            <input type="text" id="edit-todo-org" class="w-full p-2 border rounded focus:ring-1 focus:ring-blue-500">
+          </div>
+        </div>
+        <div>
+          <label class="block font-medium text-slate-700 mb-1">具体事项及交付成果：</label>
+          <textarea id="edit-todo-task" rows="3" class="w-full p-2 border rounded focus:ring-1 focus:ring-blue-500 leading-relaxed"></textarea>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-medium text-slate-700 mb-1">要求截止日期：</label>
+            <input type="date" id="edit-todo-deadline" class="w-full p-2 border rounded focus:ring-1 focus:ring-blue-500">
+          </div>
+          <div>
+            <label class="block font-medium text-slate-700 mb-1">当前进展状态：</label>
+            <select id="edit-todo-status" class="w-full p-2 border rounded focus:ring-1 focus:ring-blue-500 font-bold">
+              <option value="进行中">🟡 进行中</option>
+              <option value="已完成">🟢 已完成</option>
+              <option value="未开始">🔴 未开始</option>
+            </select>
+          </div>
+        </div>
+        <div>
+          <label class="block font-medium text-slate-700 mb-1">最新进展说明：</label>
+          <input type="text" id="edit-todo-note" placeholder="点击输入最新进展说明（可留空）..." autocomplete="off" class="w-full p-2 border rounded focus:ring-1 focus:ring-blue-500">
+        </div>
+      </div>
+      <div class="flex justify-end space-x-2 pt-3 border-t">
+        <button onclick="closeEditTodoModal()" class="px-4 py-1.5 border rounded text-xs text-slate-600 hover:bg-slate-50">取消</button>
+        <button onclick="saveEditTodoForm()" class="px-4 py-1.5 bg-[#0F172A] text-white rounded text-xs font-medium hover:bg-blue-800">保存修改</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 模态框 5：添加新周次 -->
+  <div id="modal-add-week" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 hidden items-center justify-center p-4" onclick="if(event.target === this) closeAddWeekModal()">
+    <div class="bg-white rounded-xl max-w-sm w-full p-5 shadow-xl border border-slate-200 space-y-4">
+      <div class="flex justify-between items-center border-b pb-2">
+        <h3 class="text-sm font-bold text-slate-800">➕ 添加新周报填报周期</h3>
+        <button onclick="closeAddWeekModal()" class="text-slate-400 hover:text-slate-600">✕</button>
+      </div>
+      <div class="space-y-3 text-xs">
+        <div>
+          <label class="block font-medium text-slate-700 mb-1">周次编号（纯数字）：</label>
+          <input type="number" id="new-week-num" placeholder="如：44" class="w-full p-2 border rounded focus:ring-1 focus:ring-blue-500 font-bold">
+        </div>
+        <div>
+          <label class="block font-medium text-slate-700 mb-1">周次名称/周期区间：</label>
+          <input type="text" id="new-week-label" placeholder="如：第44周 (10.26 - 11.01)" class="w-full p-2 border rounded focus:ring-1 focus:ring-blue-500">
+        </div>
+        <p class="text-[11px] text-slate-400">💡 创建后，系统将自动排布 6 家分所标准卡片，由各位主任直接填写。</p>
+      </div>
+      <div class="flex justify-end space-x-2 pt-2 border-t">
+        <button onclick="closeAddWeekModal()" class="px-3 py-1.5 border rounded text-xs text-slate-600 hover:bg-slate-50">取消</button>
+        <button onclick="confirmAddWeek()" class="px-3 py-1.5 bg-emerald-600 text-white rounded text-xs font-medium hover:bg-emerald-700">确认添加</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 模态框 6：添加待办事项 (手动) -->
+  <div id="modal-new-todo" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 hidden items-center justify-center p-4" onclick="if(event.target === this) closeNewTodoModal()">
+    <div class="bg-white rounded-xl max-w-md w-full p-5 shadow-xl border border-slate-200 space-y-4">
+      <div class="flex justify-between items-center border-b pb-2">
+        <h3 class="text-sm font-bold text-slate-800">➕ 添加新待办事项</h3>
+        <button onclick="closeNewTodoModal()" class="text-slate-400 hover:text-slate-600">✕</button>
+      </div>
+      <div class="space-y-3 text-xs">
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-medium text-slate-700 mb-1">责任人：</label>
+            <select id="new-todo-owner" class="w-full p-2 border rounded focus:ring-1 focus:ring-blue-500 font-bold">
+              <option value="王亚哲">王亚哲</option>
+              <option value="夏晓飞">夏晓飞 (武汉)</option>
+              <option value="陈赛男">陈赛男 (长沙)</option>
+              <option value="朱敏">朱敏 (成都)</option>
+              <option value="邱月">邱月 (重庆)</option>
+              <option value="杜易">杜易 (昆明)</option>
+              <option value="张晶">张晶 (贵阳)</option>
+              <option value="全体主任">全体主任</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-medium text-slate-700 mb-1">所属分所/组织：</label>
+            <input type="text" id="new-todo-org" placeholder="如：重庆分所 / 大区" class="w-full p-2 border rounded focus:ring-1 focus:ring-blue-500">
+          </div>
+        </div>
+        <div>
+          <label class="block font-medium text-slate-700 mb-1">具体事项及交付成果：</label>
+          <textarea id="new-todo-task" rows="3" placeholder="清晰明确要做什么、达到什么验收标准..." class="w-full p-2 border rounded focus:ring-1 focus:ring-blue-500"></textarea>
+        </div>
+        <div>
+          <label class="block font-medium text-slate-700 mb-1">要求截止日期：</label>
+          <input type="date" id="new-todo-deadline" class="w-full p-2 border rounded focus:ring-1 focus:ring-blue-500">
+        </div>
+      </div>
+      <div class="flex justify-end space-x-2 pt-3 border-t">
+        <button onclick="closeNewTodoModal()" class="px-4 py-1.5 border rounded text-xs text-slate-600 hover:bg-slate-50">取消</button>
+        <button onclick="saveNewTodo()" class="px-4 py-1.5 bg-[#0F172A] text-white rounded text-xs font-medium hover:bg-blue-800">确认添加</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript 核心逻辑 -->
+  <script>
+    // 基础6家分所标准模板
+    const defaultBranchList = [
+      { region: "中部大区", branch: "武汉分所", lead: "夏晓飞 (管委会副主任/执行主任)" },
+      { region: "中部大区", branch: "长沙分所", lead: "陈赛男 (执行主任)" },
+      { region: "西南大区", branch: "成都分所", lead: "朱敏 (执行主任)" },
+      { region: "西南大区", branch: "重庆分所", lead: "邱月 (管委会委员/执行主任)" },
+      { region: "西南大区", branch: "昆明分所", lead: "杜易 (执行主任)" },
+      { region: "西南大区", branch: "贵阳分所", lead: "张晶 (执行主任)" }
+    ];
+
+    const initialData = {
+      // 周次映射字典
+      weekLabels: {
+        "41": "第41周 (10.05 - 10.11)",
+        "42": "第42周 (10.12 - 10.18)",
+        "43": "第43周 (10.19 - 10.25)"
+      },
+      currentWeek: "41",
+
+      // 会议纪要库
+      minutes: [
+        {
+          id: "m-0918",
+          date: "2026-10-08",
+          title: "【会议纪要】#0918 西南&中部大区执行主任九月会议",
+          time: "09:30 - 11:30",
+          host: "王亚哲",
+          attendees: "王亚哲(区域执行主任/部长)、夏晓飞(武汉)、陈赛男(长沙)、朱敏(成都)、邱月(重庆)、杜易(昆明)、张晶(贵阳)",
+          content: `本次会议主要围绕西南&中部大区各分所的人才引进进度、专业部门建设规划、租售比优化及IP中心项目等议题展开，重点内容备忘如下：
+
+1. 各办公室人才引进进度汇报
+● 重庆办公室：9月目标引进3位律师，已完成，在册律师67位，再加3位转入可达69位。存在问题：引进青年律师偏多，创收较低，重点引进大团队被卡住，希望亚哲主任协助谈判。亚哲主任建议国庆后在重庆举办活动扩大线索，同时关注管委会主任级别人才引进。
+● 武汉办公室：本月可转入2位律师，跟进两个盈科团队，杜金凤团队因降本方案有较大希望。面临恒都武汉、前程武汉新所竞争，但已与物业谈判将房租物业费下调20%。目前人员流失率较高，今年进15人走11人，到月底目标达80人。
+● 贵阳办公室：9月目标为1位权益合伙人、1位合伙人和6位专职律师，目前已完成1位合伙人和1位专职律师，另有1位在途。跟进盈科和大成两个团队。存在问题：办公成本高，政策不明朗，青年律师转入多，希望亚哲主任介绍优质团队并加快IP中心项目落地。
+● 成都办公室：在册76位律师，9月目标5位，已转入4位，另4位待转入，有望达80人。今年已走16位律师，经济环境导致创收下降。目前在跟进多个律师团队，希望亚哲主任多介绍线索支持引进。
+
+2. 人才引进策略与抓手
+● 知恒三大法宝：亚哲主任提出“知恒三大法宝”作为吸引大团队的差异化优势：一是构建全国最丰富的专业部门体系，可帮助团队设立部门并打通全国市场；二是搭建全国最确定的内部交易市场，内部交易系统将于两个月后上线，合作目标达到40%以上；三是实施全国最扎实的赋能计划（双百计划），为专业部门负责人提供闭门私董圈、法律服务产品研发、实务课程辅导、市场开拓辅导及业绩增长实战训练营等六大方面支撑。
+
+3. 专业部门建设规划与落地节点
+● 指引下发：专业部门设立指引已下发，涵盖申请条件、部门设置、支持与赋能及业务目标等。
+● 时间节点：9月底前完成部门组建，10月中旬前完成主任聘任和签约仪式。
+
+4. 租售比分析与降本措施
+● 租售比数据：王亚哲通报了各办公室租售比，贵阳超过1000%，成都310%，重庆203%，武汉185%，昆明124%，良性标准为62%。目前仅昆明合格，其他办公室需重点关注降本。
+● 降本建议：武汉已主动申请降租金，贵阳需评估换址可能性。各办公室需调研写字楼行情，争取降低租金。
+
+5. IP中心项目
+● 计划在西南和中部区域同时开启IP中心，初期投入1-2个剪辑人员，成本对价是帮助人才引进增量，计划于国庆后正式启动。`,
+          todosText: `1. 策划重庆活动: 国庆后在重庆组织人才引进活动，邀请熟悉人士扩大线索；邱月配合安排时间。@王亚哲 @邱月
+2. 完成部门签约: 各执行主任在9月底前完成专业部门目标责任书确认，并组织签约仪式；若时间紧可延至国庆后一周。@夏晓飞 @张晶 @朱敏 @杜易 @邱月
+3. 调研降本方案: 各办公室调研当地写字楼租金行情，争取降低租金；贵阳需评估换址可能性，做三年计划。@夏晓飞 @张晶 @朱敏 @杜易 @邱月
+4. 启动IP中心: 国庆后正式启动西南及中部区域IP中心项目，前期需投入剪辑人员，提前与各主任同步具体方案。@王亚哲
+5. 人才顾问签约：各办公室执行主任与人才引进顾问进行正式合同确认，9月底前同步签约进度。@夏晓飞 @张晶 @朱敏 @杜易 @邱月`
+        },
+        {
+          id: "m-0924",
+          date: "2026-09-24",
+          title: "【会议纪要】#0917 大区双百计划宣贯与跨区业务联动会",
+          time: "09:30 - 11:00",
+          host: "王亚哲",
+          attendees: "王亚哲、夏晓飞(武汉)、陈赛男(长沙)、朱敏(成都)、邱月(重庆)、杜易(昆明)、张晶(贵阳)",
+          content: `1. 推动双百赋能计划落地，各所确定首批参与全国法律产品研发骨干律师名单；
+2. 跨区分所业务协作与分润原则宣导，重大案件由大区统筹支持。`,
+          todosText: `1. 报送首期双百计划意向名单。@夏晓飞 @朱敏
+2. 梳理第四季度重大跨区域投标清单。@全体主任`
+        }
+      ],
+
+      // 周报数据 (按周存储)
+      reports: {
+        "41": [
+          {
+            region: "中部大区", branch: "武汉分所", lead: "夏晓飞 (管委会副主任/执行主任)",
+            work: `1. 跟进杜金凤团队降本方案；本月可转入2位律师，月底冲刺80人目标；
+2. 与写字楼物业谈判成功将房租和物业费下调20%；
+3. 梳理业务部门设立规划。`,
+            plan: `1. 锁定盈科大团队转入谈判；
+2. 落实专业部门主任责任书确认；
+3. 催收三季度未到款项。`,
+            yazhe: "希望亚哲主任下周协助跟进大团队引进商务谈判，切入高端法务合作。",
+            hq: "需要总部合规风控部协助加急审核国企合规项目的专项投标合同条款。"
+          },
+          {
+            region: "中部大区", branch: "长沙分所", lead: "陈赛男 (执行主任)",
+            work: `1. 梳理长沙分所四季度创收目标与存量案源；
+2. 接洽本地文创园区入驻企业8家；
+3. 开展青年律师业务合规自查。`,
+            plan: `1. 举办长沙Q4业绩冲刺启动会；
+2. 拜访2家意向战略合作金融机构；
+3. 推进重点争议案件前期论证。`,
+            yazhe: "针对长沙新办公场地租赁选址方案，请亚哲主任在预算及战略定位上予以把关指导。",
+            hq: "急需总部人事部门协助在长沙招聘1名资深商事诉讼骨干律师。"
+          },
+          {
+            region: "西南大区", branch: "成都分所", lead: "朱敏 (执行主任)",
+            work: `1. 在册76位律师，9月目标5位，已转入4位，另4位待转入，有望达80人；
+2. 文旅项目首期方案成功交付；回款到账65万元。`,
+            plan: `1. 全力推进文旅项目二期商务谈判；
+2. 组织开展专业部门责任书签约；
+3. 调研成都写字楼行情降本。`,
+            yazhe: "希望亚哲主任多介绍优质律师团队线索，支持成都所人才引进。",
+            hq: "需要总部财务部加急为文旅项目开具85万元增值税专票，以便客户月初打款。"
+          },
+          {
+            region: "西南大区", branch: "重庆分所", lead: "邱月 (管委会委员/执行主任)",
+            work: `1. 9月引进3位律师目标已完成，在册67位，即将达69位；
+2. 举办两江新区新能源企业风控讲座；跟进城投重整意向项目。`,
+            plan: `1. 配合亚哲主任策划国庆后重庆人才引进活动；
+2. 重点攻坚管委会主任级别人才与大团队引进；
+3. 推进专业部门确认签约。`,
+            yazhe: "重点引进大团队被卡住，希望亚哲主任亲自协助商务谈判；国庆后在重庆办活动。",
+            hq: "无"
+          },
+          {
+            region: "西南大区", branch: "昆明分所", lead: "杜易 (执行主任)",
+            work: `1. 租售比124%在大区内表现最好；拓展跨境贸易合规业务5家；
+2. 举办青年律师辩论赛；完成合规排查。`,
+            plan: `1. 推进跨境出海合规产品包落地推广；
+2. 锁定2家进出口企业常年顾问；
+3. 筹备出海合规高峰论坛。`,
+            yazhe: "计划于10月下旬联合商会举办出海合规论坛，邀请亚哲主任担任主旨演讲嘉宾。",
+            hq: "昆明所申请总部市场部下发一批出海业务定制宣传手册与展架。"
+          },
+          {
+            region: "西南大区", branch: "贵阳分所", lead: "张晶 (执行主任)",
+            work: `1. 9月已完成1位合伙人、1位专职律师转入，跟进盈科和大成两个团队；
+2. 对接大数据产业企业意向2家；回款40万元。`,
+            plan: `1. 评估贵阳办公场地换址可行性，做三年降租计划；
+2. 推进专业部门确认签约；
+3. 落实人才顾问协议签约。`,
+            yazhe: "办公成本高，希望亚哲主任介绍优质团队支持引进，并加快IP中心在贵阳落地。",
+            hq: "办案系统偶发网络延迟，需总部技术部排查服务器连接问题。"
+          }
+        ],
+        "42": defaultBranchList.map(b => ({ ...b, work: "", plan: "", yazhe: "无", hq: "无" })),
+        "43": defaultBranchList.map(b => ({ ...b, work: "", plan: "", yazhe: "无", hq: "无" }))
+      },
+
+      // 待办事项 (优化：移除默认自动填充的废弃说明，保持干净整洁)
+      todos: [
+        { id: 1, date: "2026-10-08", owner: "王亚哲", org: "大区/总办", task: "国庆后在重庆组织人才引进活动，扩大线索；邱月配合安排时间", deadline: "2026-10-18", status: "进行中", note: "" },
+        { id: 2, date: "2026-10-08", owner: "邱月", org: "重庆分所", task: "配合亚哲主任策划重庆人才活动，对接场地与意向大团队清单", deadline: "2026-10-18", status: "进行中", note: "" },
+        { id: 3, date: "2026-10-08", owner: "夏晓飞", org: "武汉分所", task: "9月底前完成专业部门目标责任书确认与签约；继续跟进杜金凤团队降本方案", deadline: "2026-10-15", status: "进行中", note: "" },
+        { id: 4, date: "2026-10-08", owner: "张晶", org: "贵阳分所", task: "调研当地写字楼行情，评估贵阳分所换址可能性，做三年降租计划", deadline: "2026-10-25", status: "未开始", note: "" },
+        { id: 5, date: "2026-10-08", owner: "朱敏", org: "成都分所", task: "完成专业部门责任书签约；收到85万专票后催缴文旅项目款项", deadline: "2026-10-15", status: "未开始", note: "" },
+        { id: 6, date: "2026-10-08", owner: "杜易", org: "昆明分所", task: "拟定出海合规论坛具体议程，报送亚哲主任主旨发言方案；保持租售比优势", deadline: "2026-10-20", status: "进行中", note: "" },
+        { id: 7, date: "2026-10-08", owner: "陈赛男", org: "长沙分所", task: "梳理新办公场地两套租赁备选方案租金与位置对比表，报亚哲主任定夺", deadline: "2026-10-12", status: "已完成", note: "" },
+        { id: 8, date: "2026-10-08", owner: "王亚哲", org: "大区/总办", task: "国庆后正式启动西南及中部区域IP中心项目，投入1-2个剪辑人员", deadline: "2026-10-20", status: "已完成", note: "" }
+      ]
+    };
+
+    // 存储管理
+    const STORAGE_KEY = 'zhiheng_collab_data_v3';
+    let appData = null;
+
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (raw) {
+        appData = JSON.parse(raw);
+      }
+    } catch (e) {
+      console.warn("读取 localStorage 失败:", e);
+    }
+
+    if (!appData || !appData.minutes || !appData.reports) {
+      appData = JSON.parse(JSON.stringify(initialData));
+    }
+
+    function saveData() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(appData));
+      } catch (e) {
+        console.warn("保存到 localStorage 失败:", e);
+      }
+      // 只要有任何数据改动，全自动静默推送到云端
+      syncToCloud();
+    }
+
+    // 优化的 Toast 提示
+    let toastTimer = null;
+    function showToast(msg, type = "success") {
+      const toastEl = document.getElementById('toast-notification');
+      const boxEl = document.getElementById('toast-box');
+      const iconEl = document.getElementById('toast-icon');
+      const msgEl = document.getElementById('toast-message');
+
+      if (!toastEl || !msgEl) return;
+
+      iconEl.innerText = type === "success" ? "✅" : (type === "warn" ? "⚠️" : "❌");
+      msgEl.innerText = msg;
+
+      if (type === "success") {
+        boxEl.className = "flex items-center space-x-2 bg-emerald-800 text-white px-4 py-2.5 rounded-lg shadow-xl border border-emerald-600 text-xs font-medium";
+      } else if (type === "warn") {
+        boxEl.className = "flex items-center space-x-2 bg-amber-800 text-white px-4 py-2.5 rounded-lg shadow-xl border border-amber-600 text-xs font-medium";
+      } else {
+        boxEl.className = "flex items-center space-x-2 bg-rose-800 text-white px-4 py-2.5 rounded-lg shadow-xl border border-rose-600 text-xs font-medium";
+      }
+
+      toastEl.classList.remove('opacity-0', '-translate-y-12', 'pointer-events-none');
+      toastEl.classList.add('opacity-100', 'translate-y-0');
+
+      if (toastTimer) clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        toastEl.classList.remove('opacity-100', 'translate-y-0');
+        toastEl.classList.add('opacity-0', '-translate-y-12', 'pointer-events-none');
+      }, 2000);
+    }
+
+    // Tab 切换逻辑
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-pane').forEach(el => el.classList.add('hidden'));
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.classList.remove('bg-white', 'text-[#0F172A]', 'shadow-sm', 'font-semibold');
+        btn.classList.add('text-slate-200', 'font-medium');
+      });
+
+      const activePane = document.getElementById('tab-' + tabId);
+      const activeBtn = document.getElementById('nav-' + tabId);
+      if (activePane) activePane.classList.remove('hidden');
+      if (activeBtn) {
+        activeBtn.classList.remove('text-slate-200', 'font-medium');
+        activeBtn.classList.add('bg-white', 'text-[#0F172A]', 'shadow-sm', 'font-semibold');
+      }
+
+      if (tabId === 'minutes') {
+        renderMinuteSidebar();
+      } else if (tabId === 'reports') {
+        renderWeekSelectDropdown();
+        renderWeeklyReports();
+      } else if (tabId === 'todos') {
+        renderTodos();
+      } else if (tabId === 'dashboard') {
+        updateDashboardMetrics();
+      }
+    }
+
+    // -------------------------------------------------------------
+    // 模块 1：例会看板 (Dashboard) 动态数据计算与联动渲染
+    // -------------------------------------------------------------
+    function updateDashboardMetrics() {
+      // 1. 动态更新最新会议纪要速览卡片
+      const latestM = appData.minutes && appData.minutes.length > 0 ? appData.minutes[0] : null;
+      const dateEl = document.getElementById('dash-latest-m-date');
+      const titleEl = document.getElementById('dash-latest-m-title');
+      const hostEl = document.getElementById('dash-latest-m-host');
+      const resContainer = document.getElementById('dash-latest-m-resolutions');
+      const todosCntEl = document.getElementById('dash-latest-m-todos-count');
+
+      if (latestM) {
+        if (dateEl) dateEl.innerText = latestM.date;
+        if (titleEl) titleEl.innerText = latestM.title;
+        if (hostEl) hostEl.innerText = `主持人：${latestM.host} · 参会人员全勤`;
+
+        if (resContainer) {
+          const lines = latestM.content ? latestM.content.split(/\r?\n/).filter(l => l.trim().length > 0) : [];
+          if (lines.length > 0) {
+            const displayLines = lines.slice(0, 5);
+            resContainer.innerHTML = displayLines.map(l => `<div class="leading-relaxed">• ${l}</div>`).join('');
+          } else {
+            resContainer.innerHTML = '<div class="text-slate-400">暂无核心决议内容，点击下方可编辑录入。</div>';
+          }
+        }
+
+        if (todosCntEl) {
+          const tLines = latestM.todosText ? latestM.todosText.split(/\r?\n/).filter(Boolean) : [];
+          todosCntEl.innerText = `${tLines.length} 项`;
+        }
+      } else {
+        if (dateEl) dateEl.innerText = "暂无归档";
+        if (titleEl) titleEl.innerText = "暂无会议纪要记录";
+        if (hostEl) hostEl.innerText = "";
+        if (resContainer) resContainer.innerHTML = '<div class="text-slate-400">暂无会议纪要记录，请在会议纪要库点击【+ 新建】。</div>';
+        if (todosCntEl) todosCntEl.innerText = "0 项";
+      }
+
+      // 2. 统计当前周次各分所协调诉求
+      const currentWeekKey = appData.currentWeek || Object.keys(appData.reports)[0] || "41";
+      const currentReports = appData.reports[currentWeekKey] || [];
+      
+      let yazheCount = 0;
+      let hqCount = 0;
+      const branchStats = [];
+
+      currentReports.forEach(item => {
+        const hasYazhe = item.yazhe && item.yazhe.trim() !== "无" && item.yazhe.trim() !== "";
+        const hasHq = item.hq && item.hq.trim() !== "无" && item.hq.trim() !== "";
+        if (hasYazhe) yazheCount++;
+        if (hasHq) hqCount++;
+        branchStats.push({
+          branch: item.branch.replace("分所", ""),
+          yazhe: hasYazhe ? 1 : 0,
+          hq: hasHq ? 1 : 0
+        });
+      });
+
+      const yCountEl = document.getElementById('dash-yazhe-count');
+      const hCountEl = document.getElementById('dash-hq-count');
+      if (yCountEl) yCountEl.innerHTML = `${yazheCount} <span class="text-xs font-normal text-slate-500">项</span>`;
+      if (hCountEl) hCountEl.innerHTML = `${hqCount} <span class="text-xs font-normal text-slate-500">项</span>`;
+
+      // 渲染条形图
+      const barContainer = document.getElementById('dash-chart-bars');
+      if (barContainer) {
+        barContainer.innerHTML = branchStats.map(bs => {
+          const yHeight = bs.yazhe > 0 ? "70%" : "6px";
+          const hHeight = bs.hq > 0 ? "70%" : "6px";
+          const yColor = bs.yazhe > 0 ? "bg-amber-500" : "bg-slate-200";
+          const hColor = bs.hq > 0 ? "bg-blue-600" : "bg-slate-200";
+          return `
+            <div class="flex-1 flex flex-col items-center h-full justify-end group">
+              <div class="w-full flex items-end justify-center space-x-1 sm:space-x-1.5 h-24">
+                <div class="w-3.5 sm:w-5 ${yColor} rounded-t-sm relative transition-all" style="height: ${yHeight};" title="需亚哲协调: ${bs.yazhe}">
+                  <span class="absolute -top-4 left-1/2 -translate-x-1/2 text-[10px] font-bold ${bs.yazhe > 0 ? 'text-amber-700' : 'text-slate-300'}">${bs.yazhe}</span>
+                </div>
+                <div class="w-3.5 sm:w-5 ${hColor} rounded-t-sm relative transition-all" style="height: ${hHeight};" title="需总部协调: ${bs.hq}">
+                  <span class="absolute -top-4 left-1/2 -translate-x-1/2 text-[10px] font-bold ${bs.hq > 0 ? 'text-blue-700' : 'text-slate-300'}">${bs.hq}</span>
+                </div>
+              </div>
+              <span class="mt-2 text-[11px] font-bold text-slate-700">${bs.branch}</span>
+            </div>
+          `;
+        }).join('');
+      }
+
+      // 3. 待办统计与环形图计算
+      const totalTodos = appData.todos.length;
+      const doneCount = appData.todos.filter(t => t.status === "已完成").length;
+      const progCount = appData.todos.filter(t => t.status === "进行中").length;
+      const notyetCount = appData.todos.filter(t => t.status === "未开始").length;
+
+      document.getElementById('dash-todo-total').innerText = totalTodos;
+      document.getElementById('dash-cnt-done').innerText = `${doneCount}项`;
+      document.getElementById('dash-cnt-progress').innerText = `${progCount}项`;
+      document.getElementById('dash-cnt-notyet').innerText = `${notyetCount}项`;
+
+      if (totalTodos > 0) {
+        const donePct = (doneCount / totalTodos) * 100;
+        const progPct = (progCount / totalTodos) * 100;
+        const notyetPct = (notyetCount / totalTodos) * 100;
+
+        const elDone = document.getElementById('donut-done');
+        const elProg = document.getElementById('donut-progress');
+        const elNotyet = document.getElementById('donut-notyet');
+
+        if (elDone) elDone.setAttribute('stroke-dasharray', `${donePct}, 100`);
+        if (elProg) {
+          elProg.setAttribute('stroke-dasharray', `${progPct}, 100`);
+          elProg.setAttribute('stroke-dashoffset', `-${donePct}`);
+        }
+        if (elNotyet) {
+          elNotyet.setAttribute('stroke-dasharray', `${notyetPct}, 100`);
+          elNotyet.setAttribute('stroke-dashoffset', `-${donePct + progPct}`);
+        }
+      }
+    }
+
+    // -------------------------------------------------------------
+    // 模块 2：分所周报填报 (添加新周次、删除周次、一键清空全部内容、即时保存)
+    // -------------------------------------------------------------
+    function renderWeekSelectDropdown() {
+      const select = document.getElementById('report-week-select');
+      if (!select) return;
+
+      select.innerHTML = "";
+      const weekKeys = Object.keys(appData.reports).sort((a, b) => parseInt(a) - parseInt(b));
+
+      weekKeys.forEach(w => {
+        const opt = document.createElement('option');
+        opt.value = w;
+        opt.innerText = appData.weekLabels[w] || `第${w}周`;
+        if (w === appData.currentWeek) opt.selected = true;
+        select.appendChild(opt);
+      });
+    }
+
+    function changeReportWeek(week) {
+      appData.currentWeek = week;
+      saveData();
+      renderWeeklyReports();
+      updateDashboardMetrics();
+    }
+
+    function renderWeeklyReports() {
+      const week = appData.currentWeek;
+      const container = document.getElementById('branch-reports-container');
+      if (!container) return;
+
+      const list = appData.reports[week] || [];
+      if (list.length === 0) {
+        container.innerHTML = `
+          <div class="bg-white p-8 rounded-xl border text-center text-slate-400">
+            该周次暂无填报卡片，点击上方【➕ 添加新周次】即可自动生成名单。
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = list.map((item, idx) => `
+        <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-4 sm:p-5 space-y-4 hover:border-blue-200 transition-all">
+          <div class="flex flex-wrap items-center justify-between border-b border-slate-100 pb-3 gap-2">
+            <div class="flex items-center space-x-2">
+              <span class="text-xs font-bold px-2 py-0.5 bg-slate-100 text-slate-700 rounded">${item.region}</span>
+              <span class="text-sm font-bold text-slate-900">${item.branch}</span>
+              <span class="text-xs text-blue-700 font-semibold bg-blue-50 px-2 py-0.5 rounded border border-blue-100">${item.lead}</span>
+            </div>
+            
+            <!-- 操作按钮：保存修改 + 一键清空全部内容 -->
+            <div class="flex items-center space-x-2">
+              <button onclick="saveReportRow('${week}', ${idx})" class="text-xs px-3 py-1 bg-emerald-600 text-white rounded font-medium hover:bg-emerald-700 transition flex items-center shadow-xs">
+                💾 保存修改
+              </button>
+              <button onclick="clearReportRow('${week}', ${idx})" class="text-xs px-2.5 py-1 text-slate-600 bg-slate-100 hover:bg-rose-50 hover:text-rose-600 border border-slate-200 rounded font-medium transition flex items-center shadow-xs" title="一键清空该分所本周填报的全部4项内容">
+                🧹 一键清空
+              </button>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">
+                1. 本周重点工作及进展 (量化成果/大部门建设/人才引进)：
+              </label>
+              <textarea id="rep-work-${idx}" onchange="autoSaveReportRow('${week}', ${idx})" rows="3" class="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-1 focus:ring-blue-500 text-slate-800 custom-scrollbar leading-relaxed" placeholder="请填写本周核心业务推进情况...">${item.work || ""}</textarea>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-slate-700 mb-1">
+                2. 下周核心工作计划 (下周重点抓什么)：
+              </label>
+              <textarea id="rep-plan-${idx}" onchange="autoSaveReportRow('${week}', ${idx})" rows="3" class="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-1 focus:ring-blue-500 text-slate-800 custom-scrollbar leading-relaxed" placeholder="请填写下周关键计划...">${item.plan || ""}</textarea>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2 border-t border-slate-100">
+            <div class="bg-purple-50/50 p-3 rounded-lg border border-purple-200">
+              <label class="block text-xs font-bold text-purple-900 mb-1">
+                🔴 3. 需要王亚哲老师协调的事 (具体诉求/出面定调，无则填“无”)：
+              </label>
+              <textarea id="rep-yazhe-${idx}" onchange="autoSaveReportRow('${week}', ${idx})" rows="2" class="w-full text-xs p-2 border border-purple-200 rounded bg-white text-slate-800 focus:ring-1 focus:ring-purple-500">${item.yazhe || "无"}</textarea>
+            </div>
+
+            <div class="bg-sky-50/50 p-3 rounded-lg border border-sky-200">
+              <label class="block text-xs font-bold text-sky-900 mb-1">
+                🔵 4. 需要总部协调的事 (需总部哪部门配合/审批/支持，无则填“无”)：
+              </label>
+              <textarea id="rep-hq-${idx}" onchange="autoSaveReportRow('${week}', ${idx})" rows="2" class="w-full text-xs p-2 border border-sky-200 rounded bg-white text-slate-800 focus:ring-1 focus:ring-sky-500">${item.hq || "无"}</textarea>
+            </div>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function autoSaveReportRow(week, idx) {
+      const work = document.getElementById(`rep-work-${idx}`).value.trim();
+      const plan = document.getElementById(`rep-plan-${idx}`).value.trim();
+      const yazhe = document.getElementById(`rep-yazhe-${idx}`).value.trim();
+      const hq = document.getElementById(`rep-hq-${idx}`).value.trim();
+
+      if (appData.reports[week] && appData.reports[week][idx]) {
+        appData.reports[week][idx].work = work;
+        appData.reports[week][idx].plan = plan;
+        appData.reports[week][idx].yazhe = yazhe || "无";
+        appData.reports[week][idx].hq = hq || "无";
+        saveData();
+        updateDashboardMetrics();
+      }
+    }
+
+    function saveReportRow(week, idx) {
+      autoSaveReportRow(week, idx);
+      showToast("✅ 周报已成功保存！");
+    }
+
+    // 一键清空该分所本周填报的全部内容
+    function clearReportRow(week, idx) {
+      const item = appData.reports[week] && appData.reports[week][idx];
+      if (!item) return;
+
+      const weekLabel = appData.weekLabels[week] || `第${week}周`;
+      if (confirm(`确定要一键清空【${item.branch}】在【${weekLabel}】的全部周报填报内容吗？`)) {
+        item.work = "";
+        item.plan = "";
+        item.yazhe = "无";
+        item.hq = "无";
+
+        const wEl = document.getElementById(`rep-work-${idx}`);
+        const pEl = document.getElementById(`rep-plan-${idx}`);
+        const yEl = document.getElementById(`rep-yazhe-${idx}`);
+        const hEl = document.getElementById(`rep-hq-${idx}`);
+        if (wEl) wEl.value = "";
+        if (pEl) pEl.value = "";
+        if (yEl) yEl.value = "无";
+        if (hEl) hEl.value = "无";
+
+        saveData();
+        updateDashboardMetrics();
+        showToast(`🧹 已一键清空【${item.branch}】周报内容！`);
+      }
+    }
+
+    // 添加新周次
+    function openAddWeekModal() {
+      const mAddWeek = document.getElementById('modal-add-week'); mAddWeek.classList.remove('hidden'); mAddWeek.classList.add('flex');
+      const currentKeys = Object.keys(appData.reports).map(k => parseInt(k)).filter(n => !isNaN(n));
+      const nextNum = (Math.max(...currentKeys) || 43) + 1;
+      document.getElementById('new-week-num').value = nextNum;
+      document.getElementById('new-week-label').value = `第${nextNum}周`;
+    }
+    function closeAddWeekModal() {
+      const mAddWeek = document.getElementById('modal-add-week'); mAddWeek.classList.add('hidden'); mAddWeek.classList.remove('flex');
+    }
+    function confirmAddWeek() {
+      const weekNum = document.getElementById('new-week-num').value.trim();
+      const weekLabel = document.getElementById('new-week-label').value.trim();
+
+      if (!weekNum) {
+        showToast("请输入周次编号！", "warn");
+        return;
+      }
+      if (appData.reports[weekNum]) {
+        showToast(`第${weekNum}周已经存在！无需重复添加。`, "warn");
+        return;
+      }
+
+      appData.reports[weekNum] = defaultBranchList.map(b => ({
+        ...b,
+        work: "",
+        plan: "",
+        yazhe: "无",
+        hq: "无"
+      }));
+      appData.weekLabels[weekNum] = weekLabel || `第${weekNum}周`;
+      appData.currentWeek = weekNum;
+
+      saveData();
+      closeAddWeekModal();
+      renderWeekSelectDropdown();
+      renderWeeklyReports();
+      updateDashboardMetrics();
+      showToast(`✅ 已创建【${weekLabel || '第' + weekNum + '周'}】，已排布6所空白卡片！`);
+    }
+
+    // 删除当前周次
+    function deleteCurrentWeek() {
+      const week = appData.currentWeek;
+      const label = appData.weekLabels[week] || `第${week}周`;
+
+      if (Object.keys(appData.reports).length <= 1) {
+        showToast("至少需保留一个填报周期，无法全部删除！", "warn");
+        return;
+      }
+
+      if (confirm(`确定要彻底删除【${label}】的填报数据吗？`)) {
+        delete appData.reports[week];
+        delete appData.weekLabels[week];
+
+        appData.currentWeek = Object.keys(appData.reports)[0];
+        saveData();
+        renderWeekSelectDropdown();
+        renderWeeklyReports();
+        updateDashboardMetrics();
+        showToast(`✅ 已删除【${label}】`);
+      }
+    }
+
+    // -------------------------------------------------------------
+    // 模块 3：周例会纪要库 (智能文本导入匹配、查看、编辑、删除)
+    // -------------------------------------------------------------
+    let currentSelectedMinuteId = "m-0918";
+
+    function renderMinuteSidebar(keyword = "") {
+      const container = document.getElementById('minute-list-sidebar');
+      const countEl = document.getElementById('minute-total-count');
+      if (!container) return;
+
+      container.innerHTML = "";
+      let list = appData.minutes || [];
+      if (keyword) {
+        list = list.filter(m => m.title.includes(keyword) || m.date.includes(keyword) || (m.content && m.content.includes(keyword)));
+      }
+
+      if (countEl) countEl.innerText = appData.minutes.length;
+
+      if (list.length === 0) {
+        container.innerHTML = `<div class="p-4 text-center text-slate-400 text-xs">无匹配的会议纪要</div>`;
+      } else {
+        list.forEach(m => {
+          const isSelected = String(m.id) === String(currentSelectedMinuteId);
+          const item = document.createElement('div');
+          item.className = `p-3 rounded-lg cursor-pointer transition-all border ${
+            isSelected 
+              ? 'bg-blue-50 border-blue-400 text-blue-950 shadow-xs' 
+              : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-100'
+          }`;
+          item.onclick = () => selectMinute(m.id);
+
+          item.innerHTML = `
+            <div class="flex items-center justify-between mb-1">
+              <span class="text-xs font-bold ${isSelected ? 'text-[#1E3A8A]' : 'text-slate-800'}">
+                📅 ${m.date}
+              </span>
+              <span class="text-[10px] px-1.5 py-0.5 rounded ${isSelected ? 'bg-blue-200 text-blue-900 font-bold' : 'bg-slate-100 text-slate-500'}">
+                ${m.host}主持
+              </span>
+            </div>
+            <div class="text-xs font-medium line-clamp-2 leading-snug">
+              ${m.title.replace("【会议纪要】", "")}
+            </div>
+            <div class="text-[10px] text-slate-400 mt-1.5 flex items-center justify-between">
+              <span>${m.time}</span>
+              <span>点击查阅 ➔</span>
+            </div>
+          `;
+          container.appendChild(item);
+        });
+      }
+
+      renderSelectedMinute();
+    }
+
+    function selectMinute(id) {
+      currentSelectedMinuteId = id;
+      renderMinuteSidebar(document.getElementById('minute-search')?.value || "");
+    }
+
+    function filterMinuteList() {
+      const kw = document.getElementById('minute-search').value.trim();
+      renderMinuteSidebar(kw);
+    }
+
+    function renderSelectedMinute() {
+      const container = document.getElementById('minute-content-display');
+      if (!container) return;
+
+      const m = appData.minutes.find(item => String(item.id) === String(currentSelectedMinuteId)) || appData.minutes[0];
+      if (!m) {
+        container.innerHTML = `
+          <div class='text-center py-20 text-slate-400 space-y-3'>
+            <div class="text-3xl">📝</div>
+            <div class="text-sm">暂无会议纪要记录，点击左侧【⚡ 智能导入】或【+ 新建】即可创建。</div>
+          </div>
+        `;
+        return;
+      }
+
+      currentSelectedMinuteId = m.id;
+
+      container.innerHTML = `
+        <!-- 纪要顶栏与操作按钮 -->
+        <div class="border-b pb-4">
+          <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+            <span class="text-xs font-semibold px-2.5 py-1 bg-blue-100 text-blue-800 rounded-full">
+              📅 ${m.date} 周例会归档
+            </span>
+            <div class="flex space-x-2">
+              <button onclick="openEditMinuteModal('${m.id}')" class="text-xs px-3 py-1.5 bg-blue-50 text-blue-700 border border-blue-200 rounded-lg hover:bg-blue-100 transition font-medium flex items-center shadow-xs">
+                ✏️ 编辑本次纪要
+              </button>
+              <button onclick="copyMinuteToClipboard('${m.id}')" class="text-xs px-2.5 py-1.5 bg-slate-50 text-slate-700 border border-slate-200 rounded-lg hover:bg-slate-100 transition font-medium flex items-center">
+                📋 复制纪要全文
+              </button>
+              <button onclick="deleteMinute('${m.id}')" class="text-xs px-2.5 py-1.5 bg-rose-50 text-rose-700 border border-rose-200 rounded-lg hover:bg-rose-100 transition font-medium flex items-center">
+                🗑️ 删除纪要
+              </button>
+              <button onclick="window.print()" class="text-xs px-2.5 py-1.5 border border-slate-300 rounded-lg hover:bg-slate-50 text-slate-600">
+                🖨️ 打印
+              </button>
+            </div>
+          </div>
+
+          <h2 class="text-lg sm:text-xl font-bold text-slate-900">${m.title}</h2>
+          
+          <!-- 信息格：彻底去除记录人 -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 mt-4 text-xs bg-slate-50 p-3 rounded-lg border border-slate-200">
+            <div><span class="text-slate-400">会议时间：</span><span class="font-medium text-slate-800">${m.time}</span></div>
+            <div><span class="text-slate-400">主持人：</span><span class="font-bold text-blue-900">${m.host}</span></div>
+            <div><span class="text-slate-400">参会状态：</span><span class="font-semibold text-emerald-700">全员全勤</span></div>
+          </div>
+          <div class="mt-2 text-xs text-slate-600 bg-slate-50 px-3 py-2 rounded border border-slate-200">
+            <span class="text-slate-400 font-medium">参会人员：</span>${m.attendees}
+          </div>
+        </div>
+
+        <!-- 纪要正文内容 -->
+        <div class="bg-slate-50 border border-slate-200 rounded-xl p-5 space-y-3">
+          <div class="flex items-center justify-between">
+            <h4 class="text-sm font-bold text-slate-900 flex items-center">
+              <span class="w-2 h-4 bg-blue-700 rounded-sm mr-2"></span>
+              会议主要议题、讨论与决议备忘
+            </h4>
+            <span class="text-[11px] text-slate-400">支持在【编辑本次纪要】中自由扩充修改</span>
+          </div>
+          <div class="text-xs text-slate-800 leading-relaxed whitespace-pre-line bg-white p-4 rounded-lg border border-slate-200/80 font-sans">
+            ${m.content || "暂无记录"}
+          </div>
+        </div>
+
+        <!-- 拆解待办事项卡片 (支持一键提取本次待办) -->
+        ${m.todosText ? `
+          <div class="bg-amber-50/70 border border-amber-200 rounded-xl p-5 space-y-3">
+            <div class="flex items-center justify-between">
+              <h4 class="text-sm font-bold text-amber-900 flex items-center">
+                📌 本次会议督办待办清单
+              </h4>
+              <button onclick="openExtractTodosModal('${m.id}')" class="text-xs px-2.5 py-1 bg-amber-600 text-white rounded font-medium hover:bg-amber-700 transition flex items-center shadow-xs" title="将本次例会的待办防重提取入库到待办追踪表">
+                ⚡ 一键提取本次待办入库 ➔
+              </button>
+            </div>
+            <div class="space-y-2">
+              ${m.todosText.split(/\r?\n/).filter(Boolean).map(t => {
+                const highlighted = t.replace(/(@[一-龥]+)/g, '<span class="bg-amber-200 text-amber-900 px-1.5 py-0.5 rounded font-bold text-[11px]">$1</span>');
+                return `<div class="text-xs text-slate-800 bg-white p-2.5 rounded border border-amber-200/70 shadow-2xs leading-relaxed">${highlighted}</div>`;
+              }).join('')}
+            </div>
+          </div>
+        ` : ''}
+      `;
+    }
+
+    // 打开编辑纪要弹窗 (彻底去除记录人)
+    function openEditMinuteModal(id) {
+      const m = appData.minutes.find(item => String(item.id) === String(id));
+      if (!m) return;
+
+      document.getElementById('modal-minute-title-label').innerText = "✏️ 编辑周例会纪要";
+      document.getElementById('edit-minute-id').value = m.id;
+      document.getElementById('m-form-title').value = m.title || "";
+      document.getElementById('m-form-date').value = m.date || "";
+      document.getElementById('m-form-time').value = m.time || "";
+      document.getElementById('m-form-host').value = m.host || "王亚哲";
+      document.getElementById('m-form-attendees').value = m.attendees || "";
+      document.getElementById('m-form-content').value = m.content || "";
+      document.getElementById('m-form-todos').value = m.todosText || "";
+
+      const mMin = document.getElementById('modal-minute'); mMin.classList.remove('hidden'); mMin.classList.add('flex');
+    }
+
+    // 打开新增纪要弹窗 (手动)
+    function openNewMinuteModal() {
+      document.getElementById('modal-minute-title-label').innerText = "➕ 登记新周例会纪要";
+      document.getElementById('edit-minute-id').value = "";
+      document.getElementById('m-form-title').value = "";
+      document.getElementById('m-form-date').valueAsDate = new Date();
+      document.getElementById('m-form-time').value = "09:30 - 11:30";
+      document.getElementById('m-form-host').value = "王亚哲";
+      document.getElementById('m-form-attendees').value = "王亚哲(区域执行主任/部长)、夏晓飞(武汉)、陈赛男(长沙)、朱敏(成都)、邱月(重庆)、杜易(昆明)、张晶(贵阳)";
+      document.getElementById('m-form-content').value = "";
+      document.getElementById('m-form-todos').value = "";
+
+      const mMin = document.getElementById('modal-minute'); mMin.classList.remove('hidden'); mMin.classList.add('flex');
+    }
+
+    function closeMinuteModal() {
+      const mMin = document.getElementById('modal-minute'); mMin.classList.add('hidden'); mMin.classList.remove('flex');
+    }
+
+    // 保存会议纪要表单
+    function saveMinuteForm() {
+      const id = document.getElementById('edit-minute-id').value;
+      const title = document.getElementById('m-form-title').value.trim();
+      const date = document.getElementById('m-form-date').value;
+      const time = document.getElementById('m-form-time').value.trim();
+      const host = document.getElementById('m-form-host').value.trim();
+      const attendees = document.getElementById('m-form-attendees').value.trim();
+      const content = document.getElementById('m-form-content').value.trim();
+      const todosText = document.getElementById('m-form-todos').value.trim();
+
+      if (!title || !date) {
+        showToast("请填写会议名称与会议日期！", "warn");
+        return;
+      }
+
+      if (id) {
+        const idx = appData.minutes.findIndex(item => String(item.id) === String(id));
+        if (idx !== -1) {
+          appData.minutes[idx] = {
+            ...appData.minutes[idx],
+            title: title,
+            date: date,
+            time: time,
+            host: host,
+            attendees: attendees,
+            content: content,
+            todosText: todosText
+          };
+          currentSelectedMinuteId = id;
+        }
+      } else {
+        const newId = "m-" + Date.now();
+        appData.minutes.unshift({
+          id: newId,
+          title: title,
+          date: date,
+          time: time,
+          host: host,
+          attendees: attendees,
+          content: content,
+          todosText: todosText
+        });
+        currentSelectedMinuteId = newId;
+      }
+
+      saveData();
+      closeMinuteModal();
+      renderMinuteSidebar();
+      updateDashboardMetrics();
+      showToast("✅ 会议纪要已成功保存并实时更新！");
+    }
+
+    // 删除会议纪要
+    function deleteMinute(id) {
+      const m = appData.minutes.find(item => String(item.id) === String(id));
+      if (!m) return;
+
+      if (confirm(`确定要彻底删除【${m.title}】的会议纪要吗？`)) {
+        appData.minutes = appData.minutes.filter(item => String(item.id) !== String(id));
+        if (appData.minutes.length > 0) {
+          currentSelectedMinuteId = appData.minutes[0].id;
+        } else {
+          currentSelectedMinuteId = null;
+        }
+        saveData();
+        renderMinuteSidebar();
+        updateDashboardMetrics();
+        showToast("✅ 该会议纪要已彻底删除！");
+      }
+    }
+
+    // 复制纪要全文到剪贴板
+    function copyMinuteToClipboard(id) {
+      const m = appData.minutes.find(item => String(item.id) === String(id));
+      if (!m) return;
+
+      const text = `${m.title}
+时间：${m.date} ${m.time}
+主持人：${m.host}
+参会人员：${m.attendees}
+
+【主要议题与决议】
+${m.content}
+
+【重点待办清单】
+${m.todosText || '无'}`;
+      navigator.clipboard.writeText(text).then(() => {
+        showToast("📋 已复制纪要全文，可直接粘贴发至微信群/钉钉！");
+      }).catch(() => {
+        showToast("复制失败，请手动选中文本复制", "warn");
+      });
+    }
+
+    // -------------------------------------------------------------
+    // 智能粘贴全文自动匹配并创建新纪要
+    // -------------------------------------------------------------
+    function openSmartImportMinuteModal() {
+      document.getElementById('smart-import-raw-text').value = "";
+      document.getElementById('smart-preview-title').value = "";
+      document.getElementById('smart-preview-date').valueAsDate = new Date();
+      document.getElementById('smart-preview-time').value = "09:30 - 11:30";
+      document.getElementById('smart-preview-host').value = "王亚哲";
+      document.getElementById('smart-preview-attendees').value = "王亚哲(区域执行主任/部长)、夏晓飞(武汉)、陈赛男(长沙)、朱敏(成都)、邱月(重庆)、杜易(昆明)、张晶(贵阳)";
+      document.getElementById('smart-preview-content').value = "";
+      document.getElementById('smart-preview-todos').value = "";
+      document.getElementById('smart-preview-todos-count').innerText = "0 项待办";
+      document.getElementById('smart-parse-status-badge').innerText = "等待输入文本";
+      const mSmart = document.getElementById('modal-smart-import-minute'); mSmart.classList.remove('hidden'); mSmart.classList.add('flex');
+    }
+
+    function closeSmartImportMinuteModal() {
+      const mSmart = document.getElementById('modal-smart-import-minute'); mSmart.classList.add('hidden'); mSmart.classList.remove('flex');
+    }
+
+    function handleSmartImportTextInput() {
+      triggerSmartParse();
+    }
+
+    function triggerSmartParse() {
+      const raw = document.getElementById('smart-import-raw-text').value;
+      if (!raw || !raw.trim()) {
+        document.getElementById('smart-parse-status-badge').innerText = "等待输入文本";
+        return;
+      }
+
+      const parsed = parseRawMinuteText(raw);
+      if (parsed) {
+        document.getElementById('smart-preview-title').value = parsed.title;
+        document.getElementById('smart-preview-date').value = parsed.date;
+        document.getElementById('smart-preview-time').value = parsed.time;
+        document.getElementById('smart-preview-host').value = parsed.host;
+        document.getElementById('smart-preview-attendees').value = parsed.attendees;
+        document.getElementById('smart-preview-content').value = parsed.content;
+        document.getElementById('smart-preview-todos').value = parsed.todosText;
+
+        const count = parsed.todosText ? parsed.todosText.split(/\r?\n/).filter(Boolean).length : 0;
+        document.getElementById('smart-preview-todos-count').innerText = `${count} 项待办`;
+        document.getElementById('smart-parse-status-badge').innerText = "✅ 已自动完成识别匹配";
+        document.getElementById('smart-parse-status-badge').className = "text-[11px] text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded font-bold";
+      }
+    }
+
+    function parseRawMinuteText(raw) {
+      if (!raw || !raw.trim()) return null;
+      const text = raw.trim();
+      const lines = text.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
+
+      let title = "";
+      let date = "";
+      let time = "09:30 - 11:30";
+      let host = "王亚哲";
+      let attendees = "王亚哲(区域执行主任/部长)、夏晓飞(武汉)、陈赛男(长沙)、朱敏(成都)、邱月(重庆)、杜易(昆明)、张晶(贵阳)";
+      let content = "";
+      let todosText = "";
+
+      const dateMatch = text.match(/(\d{4})[-/.年](\d{1,2})[-/.月](\d{1,2})日?/);
+      if (dateMatch) {
+        const y = dateMatch[1];
+        const m = dateMatch[2].padStart(2, '0');
+        const d = dateMatch[3].padStart(2, '0');
+        date = `${y}-${m}-${d}`;
+      } else {
+        date = new Date().toISOString().split('T')[0];
+      }
+
+      const timeMatch = text.match(/(\d{1,2}:\d{2})\s*[-~至到—]\s*(\d{1,2}:\d{2})/);
+      if (timeMatch) {
+        time = `${timeMatch[1]} - ${timeMatch[2]}`;
+      }
+
+      const hostMatch = text.match(/(?:主持人|主持|召集人)[：:\s]+([^\r\n,，。]+)/);
+      if (hostMatch) {
+        host = hostMatch[1].trim();
+      }
+
+      const attMatch = text.match(/(?:参会人员|参会人|出席人员|出席人|参会者|参会)[：:\s]+([^\r\n]+)/);
+      if (attMatch) {
+        attendees = attMatch[1].trim();
+      }
+
+      const titleLine = lines.find(l => l.includes("会议纪要") || l.startsWith("#") || l.includes("例会") || l.includes("大区"));
+      if (titleLine) {
+        title = titleLine.replace(/^[【\[]?/, "【").replace(/[】\]]?$/, "】");
+        if (!title.startsWith("【会议纪要】")) {
+          title = "【会议纪要】" + title.replace(/【|】/g, "");
+        }
+      } else {
+        title = `【会议纪要】${date} 周例会`;
+      }
+
+      let todoStartIndex = -1;
+      for (let i = 0; i < lines.length; i++) {
+        const l = lines[i];
+        if (/^(?:[一二三四五六七八九十\d\.\、\s]*)(?:待办事项|待办清单|重点待办|会议待办|督办事项|督办待办|行动项|任务分工|任务清单)[：:\s]*$/i.test(l) ||
+            /(?:待办事项|重点待办|督办待办)[：:]/.test(l)) {
+          todoStartIndex = i;
+          break;
+        }
+      }
+
+      let contentLines = [];
+      let todoLines = [];
+
+      if (todoStartIndex !== -1) {
+        contentLines = lines.slice(0, todoStartIndex);
+        todoLines = lines.slice(todoStartIndex + 1);
+      } else {
+        lines.forEach(l => {
+          if (l.includes("@") || /(?:待办|负责推进|交付目标|限期完成)/.test(l)) {
+            todoLines.push(l);
+          } else {
+            contentLines.push(l);
+          }
+        });
+      }
+
+      const metaRegex = /^(?:【?会议纪要|时间[：:]|日期[：:]|主持[人]?[：:]|参会[人|人员]?[：:]|地点[：:])/;
+      content = contentLines.filter(l => !metaRegex.test(l) && l !== title).join('\n').trim();
+      todosText = todoLines.join('\n').trim();
+
+      return { title, date, time, host, attendees, content, todosText };
+    }
+
+    function confirmSmartImportMinute() {
+      const title = document.getElementById('smart-preview-title').value.trim();
+      const date = document.getElementById('smart-preview-date').value;
+      const time = document.getElementById('smart-preview-time').value.trim();
+      const host = document.getElementById('smart-preview-host').value.trim();
+      const attendees = document.getElementById('smart-preview-attendees').value.trim();
+      const content = document.getElementById('smart-preview-content').value.trim();
+      const todosText = document.getElementById('smart-preview-todos').value.trim();
+      const autoSyncTodos = document.getElementById('smart-auto-sync-todos-checkbox').checked;
+
+      if (!title || !date) {
+        showToast("请确认会议名称与日期！", "warn");
+        return;
+      }
+
+      const newId = "m-" + Date.now();
+      const newMinute = {
+        id: newId,
+        title: title,
+        date: date,
+        time: time,
+        host: host,
+        attendees: attendees,
+        content: content,
+        todosText: todosText
+      };
+
+      appData.minutes.unshift(newMinute);
+      currentSelectedMinuteId = newId;
+
+      // 自动防重同步待办
+      let addedTodoCount = 0;
+      if (autoSyncTodos && todosText) {
+        const parsedItems = parseTodosFromText(todosText, date, title);
+        parsedItems.forEach((item, idx) => {
+          const duplicate = findDuplicateTodo(item.task, appData.todos);
+          if (!duplicate) {
+            appData.todos.unshift({
+              id: Date.now() + idx,
+              date: item.date,
+              owner: item.owner,
+              org: item.org,
+              task: item.task,
+              deadline: item.deadline,
+              status: "进行中",
+              note: "" // 纯净无填充
+            });
+            addedTodoCount++;
+          }
+        });
+      }
+
+      saveData();
+      closeSmartImportMinuteModal();
+      renderMinuteSidebar();
+      renderTodos();
+      updateDashboardMetrics();
+
+      if (addedTodoCount > 0) {
+        showToast(`✅ 智能新建纪要成功！已自动排重新增 ${addedTodoCount} 条待办！`);
+      } else {
+        showToast("✅ 智能新建纪要成功！已完成归档！");
+      }
+    }
+
+    // -------------------------------------------------------------
+    // 文本去重与清洗核心算法 (防重复检查)
+    // -------------------------------------------------------------
+    function normalizeTaskText(str) {
+      if (!str) return "";
+      return str
+        .replace(/^[一二三四五六七八九十\d\.\、\s\-\*]+/, '')
+        .replace(/@[一-龥]+/g, '')
+        .replace(/[，。；：！？\(\)（）\s\,\.\;\:\!\?\-]/g, '')
+        .toLowerCase();
+    }
+
+    function findDuplicateTodo(itemTask, existingTodos) {
+      const normNew = normalizeTaskText(itemTask);
+      if (!normNew || normNew.length < 3) return null;
+
+      for (const t of existingTodos) {
+        const normExist = normalizeTaskText(t.task);
+        if (!normExist || normExist.length < 3) continue;
+
+        if (normNew === normExist) return t;
+
+        if (normNew.includes(normExist) || normExist.includes(normNew)) {
+          const minLen = Math.min(normNew.length, normExist.length);
+          const maxLen = Math.max(normNew.length, normExist.length);
+          if (minLen / maxLen > 0.5) return t;
+        }
+
+        let matchCount = 0;
+        for (let i = 0; i <= normNew.length - 3; i++) {
+          const gram = normNew.slice(i, i + 3);
+          if (normExist.includes(gram)) matchCount++;
+        }
+        const overlap = matchCount / Math.max(1, normNew.length - 2);
+        if (overlap > 0.65) return t;
+      }
+      return null;
+    }
+
+    // -------------------------------------------------------------
+    // 从会议纪要库提取待办事项 (带自动防重复检查项)
+    // -------------------------------------------------------------
+    let currentExtractedItems = [];
+
+    function openExtractTodosModal(targetMinuteId = "") {
+      const select = document.getElementById('extract-source-minute-select');
+      if (!select) return;
+
+      select.innerHTML = "";
+
+      const optAll = document.createElement('option');
+      optAll.value = "all";
+      optAll.innerText = `【全部会议纪要】合并提取所有待办`;
+      select.appendChild(optAll);
+
+      appData.minutes.forEach(m => {
+        const tLines = m.todosText ? m.todosText.split(/\r?\n/).filter(Boolean) : [];
+        const opt = document.createElement('option');
+        opt.value = m.id;
+        opt.innerText = `${m.date} | ${m.title} (${tLines.length}项待办)`;
+        select.appendChild(opt);
+      });
+
+      if (targetMinuteId && appData.minutes.some(m => String(m.id) === String(targetMinuteId))) {
+        select.value = targetMinuteId;
+      } else if (appData.minutes.length > 0) {
+        select.value = appData.minutes[0].id;
+      } else {
+        select.value = "all";
+      }
+
+      renderExtractTodosPreview();
+      const mExtract = document.getElementById('modal-extract-todos'); mExtract.classList.remove('hidden'); mExtract.classList.add('flex');
+    }
+
+    function closeExtractTodosModal() {
+      const mExtract = document.getElementById('modal-extract-todos'); mExtract.classList.add('hidden'); mExtract.classList.remove('flex');
+    }
+
+    // 渲染待提取事项的勾选预览列表 (带严谨防重检查)
+    function renderExtractTodosPreview() {
+      const select = document.getElementById('extract-source-minute-select');
+      const container = document.getElementById('extract-items-container');
+      const totalCountEl = document.getElementById('extract-total-count');
+      const newCountEl = document.getElementById('extract-new-count');
+      const badgeEl = document.getElementById('extract-duplicates-detected-badge');
+      const autoFilterDup = document.getElementById('extract-auto-filter-duplicates')?.checked ?? true;
+      if (!select || !container) return;
+
+      const selectedVal = select.value;
+      let targetMinutes = [];
+
+      if (selectedVal === "all") {
+        targetMinutes = appData.minutes || [];
+      } else {
+        const found = appData.minutes.find(m => String(m.id) === String(selectedVal));
+        if (found) targetMinutes = [found];
+      }
+
+      currentExtractedItems = [];
+      targetMinutes.forEach(m => {
+        if (m.todosText) {
+          const items = parseTodosFromText(m.todosText, m.date, m.title);
+          currentExtractedItems.push(...items);
+        }
+      });
+
+      if (totalCountEl) totalCountEl.innerText = currentExtractedItems.length;
+
+      if (currentExtractedItems.length === 0) {
+        container.innerHTML = `
+          <div class="p-8 text-center text-slate-400 text-xs">
+            该会议纪要中未检测到待办事项文本，请先在会议纪要中填写督办待办清单。
+          </div>
+        `;
+        document.getElementById('btn-confirm-extract').disabled = true;
+        if (newCountEl) newCountEl.innerText = "0";
+        if (badgeEl) badgeEl.innerText = "无待办事项";
+        return;
+      }
+
+      document.getElementById('btn-confirm-extract').disabled = false;
+
+      let duplicateCount = 0;
+      let newCount = 0;
+
+      container.innerHTML = currentExtractedItems.map((item, idx) => {
+        const duplicateMatch = findDuplicateTodo(item.task, appData.todos);
+        const isDuplicate = !!duplicateMatch;
+
+        if (isDuplicate) {
+          duplicateCount++;
+        } else {
+          newCount++;
+        }
+
+        // 默认勾选逻辑：如果开启了自动防重，已重复的默认不勾选，全新的默认勾选
+        const defaultChecked = autoFilterDup ? !isDuplicate : true;
+
+        return `
+          <div class="p-2.5 flex items-start space-x-3 transition-colors ${isDuplicate ? 'bg-amber-50/40 border-l-2 border-l-amber-400' : 'bg-white hover:bg-slate-50'}">
+            <input type="checkbox" id="extract-chk-${idx}" data-duplicate="${isDuplicate ? '1' : '0'}" ${defaultChecked ? 'checked' : ''} class="mt-1 w-4 h-4 text-emerald-600 rounded focus:ring-emerald-500 cursor-pointer">
+            <div class="flex-1 space-y-1">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-1.5">
+                  <span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-blue-100 text-blue-900 border border-blue-200">${item.owner}</span>
+                  <span class="px-1.5 py-0.5 rounded text-[10px] text-slate-600 bg-slate-100">${item.org}</span>
+                  <span class="text-[10px] font-mono text-rose-600 font-semibold">截止: ${item.deadline}</span>
+                </div>
+                <div>
+                  ${isDuplicate 
+                    ? `<span class="text-[10px] px-2 py-0.5 rounded bg-amber-100 text-amber-900 font-bold border border-amber-200">⚠️ 与已有待办重复 (${duplicateMatch.owner})</span>` 
+                    : '<span class="text-[10px] px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold border border-emerald-200">🟢 全新待办 (待入库)</span>'
+                  }
+                </div>
+              </div>
+              <p class="text-xs font-medium leading-relaxed ${isDuplicate ? 'text-slate-600' : 'text-slate-900'}">${item.task}</p>
+              <div class="flex items-center justify-between text-[10px] text-slate-400">
+                <span>来源：${item.sourceTitle}</span>
+                ${isDuplicate ? `<span class="text-amber-700">库中已有事项：“${duplicateMatch.task.slice(0, 18)}...”</span>` : ''}
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      if (newCountEl) newCountEl.innerText = newCount;
+      if (badgeEl) {
+        if (duplicateCount > 0) {
+          badgeEl.innerText = `检测到 ${duplicateCount} 项已存在 (已自动排除)`;
+          badgeEl.className = "text-[11px] font-semibold text-amber-800 bg-amber-100 px-2 py-0.5 rounded border border-amber-200";
+        } else {
+          badgeEl.innerText = `全部为全新待办 (无重复)`;
+          badgeEl.className = "text-[11px] font-semibold text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded border border-emerald-200";
+        }
+      }
+    }
+
+    function parseTodosFromText(todosText, meetingDate, sourceTitle) {
+      if (!todosText) return [];
+      const lines = todosText.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
+      const items = [];
+
+      lines.forEach(line => {
+        let cleanLine = line.replace(/^[一二三四五六七八九十\d\.\、\s\-\*]+/, '').trim();
+        if (!cleanLine) return;
+
+        const atMatches = line.match(/@([一-龥]+)/g);
+        let owner = "王亚哲";
+        let org = "大区/总办";
+
+        if (atMatches && atMatches.length > 0) {
+          const names = atMatches.map(m => m.replace('@', ''));
+          owner = names.join('、');
+          const first = names[0];
+          org = guessBranchByOwner(first);
+        } else {
+          if (cleanLine.includes("武汉") || cleanLine.includes("夏晓飞")) { owner = "夏晓飞"; org = "武汉分所"; }
+          else if (cleanLine.includes("长沙") || cleanLine.includes("陈赛男")) { owner = "陈赛男"; org = "长沙分所"; }
+          else if (cleanLine.includes("成都") || cleanLine.includes("朱敏")) { owner = "朱敏"; org = "成都分所"; }
+          else if (cleanLine.includes("重庆") || cleanLine.includes("邱月")) { owner = "邱月"; org = "重庆分所"; }
+          else if (cleanLine.includes("昆明") || cleanLine.includes("杜易")) { owner = "杜易"; org = "昆明分所"; }
+          else if (cleanLine.includes("贵阳") || cleanLine.includes("张晶")) { owner = "张晶"; org = "贵阳分所"; }
+          else if (cleanLine.includes("全体")) { owner = "全体主任"; org = "大区各所"; }
+        }
+
+        let deadline = "2026-10-25";
+        try {
+          const d = new Date(meetingDate || new Date());
+          d.setDate(d.getDate() + 10);
+          deadline = d.toISOString().split('T')[0];
+        } catch (e) {
+          deadline = "尽快完成";
+        }
+
+        items.push({
+          date: meetingDate || new Date().toISOString().split('T')[0],
+          owner: owner,
+          org: org,
+          task: cleanLine,
+          deadline: deadline,
+          sourceTitle: sourceTitle || "周例会"
+        });
+      });
+
+      return items;
+    }
+
+    function guessBranchByOwner(name) {
+      if (name.includes("夏晓飞")) return "武汉分所";
+      if (name.includes("陈赛男")) return "长沙分所";
+      if (name.includes("朱敏")) return "成都分所";
+      if (name.includes("邱月")) return "重庆分所";
+      if (name.includes("杜易")) return "昆明分所";
+      if (name.includes("张晶")) return "贵阳分所";
+      if (name.includes("全体")) return "大区各所";
+      return "大区/总办";
+    }
+
+    function toggleAllExtractCheckboxes(checked) {
+      const autoFilterDup = document.getElementById('extract-auto-filter-duplicates')?.checked ?? true;
+      currentExtractedItems.forEach((_, idx) => {
+        const el = document.getElementById(`extract-chk-${idx}`);
+        if (el) {
+          if (checked && autoFilterDup) {
+            // 只全选非重复项
+            el.checked = el.getAttribute('data-duplicate') !== '1';
+          } else {
+            el.checked = checked;
+          }
+        }
+      });
+    }
+
+    // 确认提取并新增所选待办 (带严格防重入库保障)
+    function confirmExtractTodos() {
+      const autoFilterDup = document.getElementById('extract-auto-filter-duplicates')?.checked ?? true;
+      let count = 0;
+      let skippedCount = 0;
+
+      currentExtractedItems.forEach((item, idx) => {
+        const el = document.getElementById(`extract-chk-${idx}`);
+        if (el && el.checked) {
+          // 如果勾选了防重，进行二次排重保护
+          if (autoFilterDup && findDuplicateTodo(item.task, appData.todos)) {
+            skippedCount++;
+            return;
+          }
+
+          appData.todos.unshift({
+            id: Date.now() + idx,
+            date: item.date,
+            owner: item.owner,
+            org: item.org,
+            task: item.task,
+            deadline: item.deadline,
+            status: "进行中",
+            note: "" // 纯净空白，不再自动填充无用说明
+          });
+          count++;
+        }
+      });
+
+      if (count === 0) {
+        if (skippedCount > 0) {
+          showToast(`⚠️ 所选待办均已存在于待办库中，已为您自动拦截排重！`, "warn");
+        } else {
+          showToast("请至少勾选一项要导入的待办事项！", "warn");
+        }
+        return;
+      }
+
+      saveData();
+      closeExtractTodosModal();
+      renderTodos();
+      updateDashboardMetrics();
+
+      if (skippedCount > 0) {
+        showToast(`✅ 已提取入库 ${count} 条新待办 (自动排重跳过 ${skippedCount} 条重复项)`);
+      } else {
+        showToast(`✅ 已成功提取并新增 ${count} 条待办事项！`);
+      }
+      switchTab('todos');
+    }
+
+    // -------------------------------------------------------------
+    // 模块 4：待办事项追踪 (行内修改、全字段弹窗编辑、纯净无自动填充)
+    // -------------------------------------------------------------
+    let currentTodoStatusFilter = "all";
+
+    function setTodoStatusFilter(status) {
+      currentTodoStatusFilter = status;
+      document.querySelectorAll('#todo-status-tabs button').forEach(btn => {
+        btn.className = "px-2.5 py-1 rounded-md text-xs font-medium border border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100";
+      });
+      const activeBtnMap = {
+        'all': 'btn-st-all',
+        '进行中': 'btn-st-progress',
+        '已完成': 'btn-st-done',
+        '未开始': 'btn-st-notyet'
+      };
+      const b = document.getElementById(activeBtnMap[status]);
+      if (b) {
+        b.className = "px-2.5 py-1 rounded-md text-xs font-bold border border-blue-300 bg-blue-100 text-blue-900";
+      }
+      renderTodos();
+    }
+
+    function renderTodos() {
+      const tbody = document.getElementById('todos-table-body');
+      const ownerFilter = document.getElementById('todo-owner-filter')?.value || "all";
+      if (!tbody) return;
+
+      const allCount = appData.todos.length;
+      const progressCount = appData.todos.filter(t => t.status === "进行中").length;
+      const doneCount = appData.todos.filter(t => t.status === "已完成").length;
+      const notYetCount = appData.todos.filter(t => t.status === "未开始").length;
+
+      document.getElementById('cnt-all').innerText = allCount;
+      document.getElementById('cnt-progress').innerText = progressCount;
+      document.getElementById('cnt-done').innerText = doneCount;
+      document.getElementById('cnt-notyet').innerText = notYetCount;
+
+      let list = appData.todos || [];
+      if (ownerFilter !== "all") {
+        list = list.filter(t => t.owner.includes(ownerFilter));
+      }
+      if (currentTodoStatusFilter !== "all") {
+        list = list.filter(t => t.status === currentTodoStatusFilter);
+      }
+
+      if (list.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="8" class="p-8 text-center text-slate-400 text-xs">暂无匹配的待办事项</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = list.map(t => `
+        <tr class="hover:bg-slate-50/80 transition-colors">
+          <td class="p-3 text-center">
+            <input type="checkbox" ${t.status === "已完成" ? "checked" : ""} onchange="quickToggleTodo(${t.id})" class="rounded text-blue-600 focus:ring-blue-500 cursor-pointer w-4 h-4">
+          </td>
+          <td class="p-3 font-bold text-slate-900 whitespace-nowrap">
+            ${t.owner}
+          </td>
+          <td class="p-3 text-slate-800 font-medium leading-relaxed">
+            ${t.task}
+          </td>
+          <td class="p-3 text-slate-500 text-[11px] whitespace-nowrap">
+            ${t.org || "大区"}
+          </td>
+          <td class="p-3 text-center text-rose-600 font-mono text-[11px] font-semibold whitespace-nowrap">
+            ${t.deadline}
+          </td>
+          <td class="p-3">
+            <select onchange="updateTodoStatus(${t.id}, this.value)" class="text-xs font-semibold px-2 py-1 rounded border focus:outline-none ${
+              t.status === '已完成' ? 'bg-emerald-50 text-emerald-800 border-emerald-300' :
+              t.status === '进行中' ? 'bg-amber-50 text-amber-800 border-amber-300' :
+              'bg-rose-50 text-rose-800 border-rose-300'
+            }">
+              <option value="进行中" ${t.status === '进行中' ? 'selected' : ''}>🟡 进行中</option>
+              <option value="已完成" ${t.status === '已完成' ? 'selected' : ''}>🟢 已完成</option>
+              <option value="未开始" ${t.status === '未开始' ? 'selected' : ''}>🔴 未开始</option>
+            </select>
+          </td>
+          <td class="p-3">
+            <!-- 优化：禁止浏览器自动填充，无默认杂质填充，仅保存真实录入 -->
+            <input type="text" value="${t.note || ''}" onchange="updateTodoNote(${t.id}, this.value)" placeholder="点击填写进展..." autocomplete="off" spellcheck="false" class="w-full text-xs p-1.5 border border-slate-200 rounded hover:border-blue-300 focus:border-blue-500 bg-white text-slate-800 placeholder-slate-300">
+          </td>
+          <td class="p-3 text-center whitespace-nowrap space-x-1">
+            <!-- 新增需求 2：已录入待办可点击编辑 -->
+            <button onclick="openEditTodoModal(${t.id})" class="text-blue-600 hover:text-blue-800 px-1.5 py-0.5 rounded text-xs font-bold hover:bg-blue-50" title="编辑该待办全部信息">✏️ 编辑</button>
+            <button onclick="deleteTodo(${t.id})" class="text-slate-400 hover:text-rose-600 p-1 text-xs" title="删除">🗑️</button>
+          </td>
+        </tr>
+      `).join("");
+    }
+
+    function quickToggleTodo(id) {
+      const todo = appData.todos.find(t => t.id === id);
+      if (todo) {
+        // 优化：彻底移除自动填充“已按期交付销项”的逻辑，保留用户自己的说明
+        todo.status = todo.status === "已完成" ? "进行中" : "已完成";
+        saveData();
+        renderTodos();
+        updateDashboardMetrics();
+        showToast(`已标为【${todo.status}】`);
+      }
+    }
+
+    function updateTodoStatus(id, newStatus) {
+      const todo = appData.todos.find(t => t.id === id);
+      if (todo) {
+        todo.status = newStatus;
+        saveData();
+        renderTodos();
+        updateDashboardMetrics();
+        showToast(`状态已更新为【${newStatus}】`);
+      }
+    }
+
+    function updateTodoNote(id, newNote) {
+      const todo = appData.todos.find(t => t.id === id);
+      if (todo) {
+        todo.note = newNote.trim();
+        saveData();
+        showToast("进展说明已保存！");
+      }
+    }
+
+    // 需求 2：打开编辑待办弹窗并预填所有数据
+    function openEditTodoModal(id) {
+      const todo = appData.todos.find(t => t.id === id);
+      if (!todo) return;
+
+      document.getElementById('edit-todo-id').value = todo.id;
+      document.getElementById('edit-todo-owner').value = todo.owner;
+      document.getElementById('edit-todo-org').value = todo.org || "大区";
+      document.getElementById('edit-todo-task').value = todo.task || "";
+      document.getElementById('edit-todo-deadline').value = todo.deadline || "";
+      document.getElementById('edit-todo-status').value = todo.status || "进行中";
+      document.getElementById('edit-todo-note').value = todo.note || "";
+
+      const mEditTodo = document.getElementById('modal-edit-todo'); mEditTodo.classList.remove('hidden'); mEditTodo.classList.add('flex');
+    }
+
+    function closeEditTodoModal() {
+      const mEditTodo = document.getElementById('modal-edit-todo'); mEditTodo.classList.add('hidden'); mEditTodo.classList.remove('flex');
+    }
+
+    function saveEditTodoForm() {
+      const id = parseInt(document.getElementById('edit-todo-id').value);
+      const todo = appData.todos.find(t => t.id === id);
+      if (!todo) return;
+
+      const owner = document.getElementById('edit-todo-owner').value;
+      const org = document.getElementById('edit-todo-org').value.trim() || "大区";
+      const task = document.getElementById('edit-todo-task').value.trim();
+      const deadline = document.getElementById('edit-todo-deadline').value;
+      const status = document.getElementById('edit-todo-status').value;
+      const note = document.getElementById('edit-todo-note').value.trim();
+
+      if (!task) {
+        showToast("待办事项内容不能为空！", "warn");
+        return;
+      }
+
+      todo.owner = owner;
+      todo.org = org;
+      todo.task = task;
+      todo.deadline = deadline || "尽快完成";
+      todo.status = status;
+      todo.note = note;
+
+      saveData();
+      closeEditTodoModal();
+      renderTodos();
+      updateDashboardMetrics();
+      showToast("✅ 待办事项已成功更新！");
+    }
+
+    function deleteTodo(id) {
+      if (confirm("确定要删除这条待办事项吗？")) {
+        appData.todos = appData.todos.filter(t => t.id !== id);
+        saveData();
+        renderTodos();
+        updateDashboardMetrics();
+        showToast("✅ 已成功删除待办");
+      }
+    }
+
+    function openNewTodoModal() {
+      const mNewTodo = document.getElementById('modal-new-todo'); mNewTodo.classList.remove('hidden'); mNewTodo.classList.add('flex');
+      document.getElementById('new-todo-deadline').valueAsDate = new Date();
+    }
+    function closeNewTodoModal() {
+      const mNewTodo = document.getElementById('modal-new-todo'); mNewTodo.classList.add('hidden'); mNewTodo.classList.remove('flex');
+    }
+    function saveNewTodo() {
+      const owner = document.getElementById('new-todo-owner').value;
+      const org = document.getElementById('new-todo-org').value.trim() || "大区";
+      const task = document.getElementById('new-todo-task').value.trim();
+      const deadline = document.getElementById('new-todo-deadline').value;
+
+      if (!task) {
+        showToast("请填写具体的待办事项内容！", "warn");
+        return;
+      }
+
+      appData.todos.unshift({
+        id: Date.now(),
+        date: new Date().toISOString().split("T")[0],
+        owner: owner,
+        org: org,
+        task: task,
+        deadline: deadline || "尽快完成",
+        status: "进行中",
+        note: "" // 纯净空白，不再自动填充
+      });
+
+      saveData();
+      closeNewTodoModal();
+      renderTodos();
+      updateDashboardMetrics();
+      showToast("✅ 待办事项已成功添加！");
+    }
+
+    // 启动初始化
+    
+        // =============================================================
+    // 模块 6：云端多人协同与全自动保存同步引擎
+    // =============================================================
+    const CLOUD_URL_KEY = 'zhiheng_cloud_sync_url';
+    const DEFAULT_CLOUD_URL = 'https://r040z4s7j1.sealosbja.site/sync';
+    let isCloudSyncing = false;
+    let hasPendingCloudSync = false;
+    let cloudPollingTimer = null;
+
+    // 获取当前配置的云端 URL (默认直接加载用户的 Sealos 云端接口)
+    function getCloudUrl() {
+      try {
+        const saved = localStorage.getItem(CLOUD_URL_KEY);
+        if (saved) return saved.trim();
+      } catch (e) {}
+      return DEFAULT_CLOUD_URL;
+    }
+
+    // 更新顶部云端状态角标 (无论手机或电脑，单按钮稳固显示)
+    function updateCloudBadge(state, text) {
+      const btn = document.getElementById('cloud-status-btn');
+      const dot = document.getElementById('cloud-status-dot');
+      const txt = document.getElementById('cloud-status-text');
+      if (!dot || !txt) return;
+
+      if (state === 'connected') {
+        if (btn) btn.className = 'flex items-center space-x-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold transition-all flex-shrink-0 ml-1 cursor-pointer cloud-badge-connected';
+        dot.className = 'w-2 h-2 rounded-full bg-emerald-400';
+        txt.innerText = '🟢 ' + (text || '云端已连接');
+      } else if (state === 'syncing') {
+        if (btn) btn.className = 'flex items-center space-x-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold transition-all flex-shrink-0 ml-1 cursor-pointer cloud-badge-syncing';
+        dot.className = 'w-2 h-2 rounded-full bg-amber-400 animate-pulse';
+        txt.innerText = '🔄 ' + (text || '同步中...');
+      } else if (state === 'error') {
+        if (btn) btn.className = 'flex items-center space-x-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold transition-all flex-shrink-0 ml-1 cursor-pointer cloud-badge-error';
+        dot.className = 'w-2 h-2 rounded-full bg-rose-400';
+        txt.innerText = '⚠️ ' + (text || '离线模式');
+      } else {
+        if (btn) btn.className = 'flex items-center space-x-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold transition-all flex-shrink-0 ml-1 cursor-pointer cloud-badge-offline';
+        dot.className = 'w-2 h-2 rounded-full bg-slate-300';
+        txt.innerText = '☁️ ' + (text || '单机模式');
+      }
+    }
+
+    // 弹窗控制
+    function openCloudConfigModal() {
+      const modal = document.getElementById('modal-cloud-config');
+      if (!modal) return;
+      document.getElementById('cloud-api-url-input').value = getCloudUrl();
+      const resEl = document.getElementById('cloud-test-result');
+      resEl.className = 'hidden p-2.5 rounded text-xs font-medium';
+      resEl.innerText = '';
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeCloudConfigModal() {
+      const modal = document.getElementById('modal-cloud-config');
+      if (!modal) return;
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    // 保存并测试云端连接
+    async function saveAndTestCloudConfig() {
+      const input = document.getElementById('cloud-api-url-input');
+      const resEl = document.getElementById('cloud-test-result');
+      const url = input.value.trim();
+
+      if (!url) {
+        resEl.className = 'p-2.5 rounded text-xs font-medium bg-amber-100 text-amber-800';
+        resEl.innerText = '⚠️ 请先输入云端同步接口 URL';
+        return;
+      }
+
+      resEl.className = 'p-2.5 rounded text-xs font-medium bg-blue-100 text-blue-800';
+      resEl.innerText = '🔄 正在连接并测试云端接口通讯...';
+
+      try {
+        // 先测试 POST 写入当前本地数据
+        const postRes = await fetch(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(appData)
+        });
+
+        if (!postRes.ok) throw new Error('HTTP 状态码: ' + postRes.status);
+
+        // 再测试 GET 读取
+        const getRes = await fetch(url, { cache: 'no-store' });
+        if (!getRes.ok) throw new Error('GET 读取失败: ' + getRes.status);
+
+        // 保存到本地配置
+        localStorage.setItem(CLOUD_URL_KEY, url);
+        resEl.className = 'p-2.5 rounded text-xs font-medium bg-emerald-100 text-emerald-800';
+        resEl.innerText = '✅ 测试通过！已成功建立云端双向通信，全员实时协同已生效！';
+        updateCloudBadge('connected', '云端协同已连接');
+        startCloudPolling();
+        showToast('✅ 云端多人协同已成功激活！');
+      } catch (err) {
+        resEl.className = 'p-2.5 rounded text-xs font-medium bg-rose-100 text-rose-800';
+        resEl.innerText = '❌ 连接失败: ' + err.message + '。请检查 URL 是否正确且已在云端发布。';
+        updateCloudBadge('error', '云端无法连接');
+      }
+    }
+
+    // 断开云端
+    function clearCloudConfig() {
+      if (confirm('确定断开云端连接并恢复单机离线模式吗？')) {
+        localStorage.removeItem(CLOUD_URL_KEY);
+        if (cloudPollingTimer) clearInterval(cloudPollingTimer);
+        document.getElementById('cloud-api-url-input').value = '';
+        const resEl = document.getElementById('cloud-test-result');
+        resEl.className = 'p-2.5 rounded text-xs font-medium bg-slate-100 text-slate-700';
+        resEl.innerText = '已恢复单机模式，数据将仅保存在本机浏览器中。';
+        updateCloudBadge('unconfigured', '单机模式 (点击配置)');
+        showToast('已切换为单机模式');
+      }
+    }
+
+    // 云端静默推送保存
+    async function syncToCloud() {
+      const url = getCloudUrl();
+      if (!url) return;
+
+      if (isCloudSyncing) {
+        hasPendingCloudSync = true;
+        return;
+      }
+
+      isCloudSyncing = true;
+      updateCloudBadge('syncing', '正在自动保存至云端...');
+
+      try {
+        const res = await fetch(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(appData)
+        });
+        if (res.ok) {
+          updateCloudBadge('connected', '云端已实时保存');
+        } else {
+          updateCloudBadge('error', '云端保存失败(' + res.status + ')');
+        }
+      } catch (e) {
+        updateCloudBadge('offline', '离线(已存本地)');
+      } finally {
+        isCloudSyncing = false;
+        if (hasPendingCloudSync) {
+          hasPendingCloudSync = false;
+          syncToCloud();
+        }
+      }
+    }
+
+    // 云端后台静默轮询更新 (自动拉取其他人填报的最新数据)
+    function startCloudPolling() {
+      if (cloudPollingTimer) clearInterval(cloudPollingTimer);
+      const url = getCloudUrl();
+      if (!url) return;
+
+      cloudPollingTimer = setInterval(async () => {
+        // 如果当前页面有表单正在获得焦点输入，或者正在保存，暂时跳过轮询避免打扰输入
+        const activeTag = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
+        if (activeTag === 'input' || activeTag === 'textarea' || isCloudSyncing) return;
+
+        const syncUrl = getCloudUrl();
+        if (!syncUrl) return;
+
+        try {
+          const res = await fetch(syncUrl, { cache: 'no-store' });
+          if (res.ok) {
+            const remote = await res.json();
+            if (remote && remote.reports && JSON.stringify(remote) !== JSON.stringify(appData)) {
+              console.log("检测到其他协作者的最新改动，已自动静默同步");
+              appData = remote;
+              try { localStorage.setItem(STORAGE_KEY, JSON.stringify(appData)); } catch(e){}
+              refreshCurrentTab();
+            }
+          }
+        } catch(e) {}
+      }, 5000);
+    }
+
+    // 页面刷新当前所在 Tab 的视图
+    function refreshCurrentTab() {
+      const activeBtn = document.querySelector('.nav-btn.bg-white');
+      if (activeBtn) {
+        const id = activeBtn.id.replace('nav-', '');
+        if (id === 'dashboard') updateDashboardMetrics();
+        else if (id === 'reports') { renderWeekSelectDropdown(); renderWeeklyReports(); }
+        else if (id === 'minutes') { renderMinuteSidebar(); }
+        else if (id === 'todos') { renderTodos(); }
+      }
+    }
+
+    // 初始化云端协同
+    async function initCloudSync() {
+      const url = getCloudUrl();
+      if (!url) {
+        updateCloudBadge('unconfigured', '单机模式 (点击配置)');
+        return;
+      }
+
+      updateCloudBadge('syncing', '正在连接云端...');
+      try {
+        const res = await fetch(url, { cache: 'no-store' });
+        if (res.ok) {
+          const remote = await res.json();
+          if (remote && remote.reports) {
+            appData = remote;
+            try { localStorage.setItem(STORAGE_KEY, JSON.stringify(appData)); } catch(e){}
+            refreshCurrentTab();
+            updateCloudBadge('connected', '云端已连接');
+            startCloudPolling();
+            return;
+          }
+        }
+        // 若云端尚为空，则将本地数据首次推送到云端
+        await syncToCloud();
+        updateCloudBadge('connected', '云端已连接');
+        startCloudPolling();
+      } catch (e) {
+        updateCloudBadge('offline', '离线模式 (已使用本地数据)');
+      }
+    }
+
+    window.onload = function() {
+      renderWeekSelectDropdown();
+      renderMinuteSidebar();
+      renderTodos();
+      switchTab('dashboard'); // 默认展示例会看板
+      initCloudSync(); // 自动初始化云端同步
+    };
+  </script>
+</body>
+</html>
