@@ -1230,6 +1230,59 @@
       appData = JSON.parse(JSON.stringify(initialData));
     }
 
+    // 数据平滑迁移：自动将旧周次 (41/42/43) 无损升级为规范月度结构
+    function migrateDataToMonthly() {
+      if (!appData || !appData.reports) return;
+      const keys = Object.keys(appData.reports);
+      let needMigration = false;
+      if (appData.weekLabels) {
+        for (let k in appData.weekLabels) {
+          if (appData.weekLabels[k] && appData.weekLabels[k].includes("周")) {
+            needMigration = true;
+            break;
+          }
+        }
+      }
+      if (keys.some(k => k === "41" || k === "42" || k === "43")) {
+        needMigration = true;
+      }
+
+      if (needMigration) {
+        try { console.log("检测到周报结构数据，正在自动平滑升级为月报结构..."); } catch(e){}
+        const oldRep = appData.reports["41"] || appData.reports["43"] || appData.reports["42"];
+        const newReports = {
+          "2026-10": (oldRep && oldRep.length) ? oldRep : defaultBranchList.map(b => Object.assign({}, b, { work: "", plan: "", yazhe: "无", hq: "无" })),
+          "2026-11": defaultBranchList.map(b => Object.assign({}, b, { work: "", plan: "", yazhe: "无", hq: "无" })),
+          "2026-09": defaultBranchList.map(b => Object.assign({}, b, { work: "", plan: "", yazhe: "无", hq: "无" }))
+        };
+
+        keys.forEach(k => {
+          if (k !== "41" && k !== "42" && k !== "43" && !k.startsWith("week")) {
+            newReports[k] = appData.reports[k];
+          }
+        });
+
+        appData.reports = newReports;
+        appData.weekLabels = {
+          "2026-10": "2026年10月度 (本月)",
+          "2026-11": "2026年11月度",
+          "2026-09": "2026年09月度"
+        };
+        appData.currentWeek = "2026-10";
+
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(appData));
+        } catch(e){}
+      }
+
+      if (!appData.currentWeek || !appData.reports[appData.currentWeek]) {
+        appData.currentWeek = Object.keys(appData.reports)[0] || "2026-10";
+      }
+    }
+
+    migrateDataToMonthly();
+
+
     function saveData() {
       try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(appData));
@@ -1440,16 +1493,18 @@
     // 模块 2：分所周报填报 (添加新周次、删除周次、一键清空全部内容、即时保存)
     // -------------------------------------------------------------
     function renderWeekSelectDropdown() {
+      migrateDataToMonthly();
       const select = document.getElementById('report-week-select');
       if (!select) return;
 
       select.innerHTML = "";
-      const weekKeys = Object.keys(appData.reports).sort((a, b) => parseInt(a) - parseInt(b));
+      // 最新月份排最前（降序）
+      const weekKeys = Object.keys(appData.reports).sort((a, b) => b.localeCompare(a));
 
       weekKeys.forEach(w => {
         const opt = document.createElement('option');
         opt.value = w;
-        opt.innerText = appData.weekLabels[w] || `第${w}周`;
+        opt.innerText = (appData.weekLabels && appData.weekLabels[w]) ? appData.weekLabels[w] : `${w}月度`;
         if (w === appData.currentWeek) opt.selected = true;
         select.appendChild(opt);
       });
@@ -2899,6 +2954,7 @@ ${m.todosText || '无'}`;
           const remote = await fetchGitHubData(ghToken, ghRepo);
           if (remote && remote.reports) {
             appData = remote;
+            migrateDataToMonthly();
             try { localStorage.setItem(STORAGE_KEY, JSON.stringify(appData)); } catch(e){}
             refreshCurrentTab();
           } else {
@@ -3029,6 +3085,7 @@ ${m.todosText || '无'}`;
             if (remote && remote.reports && JSON.stringify(remote) !== JSON.stringify(appData)) {
               console.log("检测到其他协作者改动，已自动静默同步");
               appData = remote;
+              migrateDataToMonthly();
               try { localStorage.setItem(STORAGE_KEY, JSON.stringify(appData)); } catch(e){}
               refreshCurrentTab();
             }
@@ -3098,6 +3155,7 @@ ${m.todosText || '无'}`;
           const remote = await fetchGitHubData(ghToken);
           if (remote && remote.reports) {
             appData = remote;
+            migrateDataToMonthly();
             try { localStorage.setItem(STORAGE_KEY, JSON.stringify(appData)); } catch(e){}
             refreshCurrentTab();
           } else {
