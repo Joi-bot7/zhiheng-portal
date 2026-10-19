@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>知恒 · 中部与西南大区 周报与周例会协同系统</title>
+  <title>知恒 · 中部与西南大区 月报与月度例会协同系统</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     /* 高阶行政商务视觉规范 (Executive Luxury Legal Palette) */
@@ -331,7 +331,7 @@
               <h1 class="text-sm sm:text-lg font-bold tracking-tight text-white">知恒 · 中部与西南大区协同工作台</h1>
               <span class="text-[10px] font-semibold px-1.5 py-0.5 rounded text-amber-300 bg-amber-400/10 border border-amber-400/20 hidden sm:inline-block">协同管理系统</span>
             </div>
-            <p class="text-[11px] text-slate-300 hidden sm:block mt-0.5">区域负责人：王亚哲 (区域执行主任/部长) · 6家分所周报与周例会督办</p>
+            <p class="text-[11px] text-slate-300 hidden sm:block mt-0.5">区域负责人：王亚哲 (区域执行主任/部长) · 6家分所月报与月度例会督办</p>
           </div>
         </div>
 
@@ -342,7 +342,7 @@
               📊 例会看板
             </button>
             <button onclick="switchTab('reports')" id="nav-reports" class="nav-btn px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition-all text-slate-200 hover:text-white hover:bg-white/10 flex-shrink-0">
-              📋 分所周报填报
+              📋 分所月报填报
             </button>
             <button onclick="switchTab('minutes')" id="nav-minutes" class="nav-btn px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition-all text-slate-200 hover:text-white hover:bg-white/10 relative flex-shrink-0">
               📝 会议纪要库
@@ -381,12 +381,12 @@
         </div>
 
         <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between">
-          <span class="text-xs font-medium text-slate-500">本周周报提交状态</span>
+          <span class="text-xs font-medium text-slate-500">当月月报提交状态</span>
           <div class="flex items-baseline justify-between mt-2">
-            <span class="text-2xl font-bold text-emerald-600">6 / 6 所</span>
-            <span class="text-xs text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded font-medium">全员已提交</span>
+            <span class="text-2xl font-bold text-emerald-600" id="dash-report-submit-ratio">6 / 6 所</span>
+            <span class="text-xs text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded font-medium" id="dash-report-submit-badge">全员已提交</span>
           </div>
-          <span class="text-[11px] text-slate-400 mt-2">各分所主任已完成周报填报</span>
+          <span class="text-[11px] text-slate-400 mt-2">各分所主任月度重点工作填报</span>
         </div>
 
         <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between border-l-4 border-l-amber-500">
@@ -417,7 +417,7 @@
             <div class="flex items-center justify-between pb-3 border-b border-slate-100">
               <div class="flex items-center space-x-2">
                 <span class="w-2.5 h-2.5 bg-blue-600 rounded-full"></span>
-                <h3 class="text-sm font-bold text-slate-900">📝 最新周例会纪要速览</h3>
+                <h3 class="text-sm font-bold text-slate-900">📝 最新例会纪要速览</h3>
               </div>
               <span class="text-xs font-semibold px-2 py-0.5 bg-blue-50 text-blue-700 rounded" id="dash-latest-m-date">加载中...</span>
             </div>
@@ -453,7 +453,7 @@
             <div class="flex items-center justify-between">
               <div>
                 <h4 class="text-xs font-bold text-slate-900 flex items-center">
-                  📊 本周各分所提交协调事项统计
+                  📊 当月各分所提交协调事项统计
                 </h4>
                 <p class="text-[11px] text-slate-400 mt-0.5">区分王亚哲老师亲自协调与总部各职能部门配合</p>
               </div>
@@ -505,21 +505,21 @@
     </section>
 
     <!-- ========================================================================= -->
-    <!-- TAB 2: 📋 分所周报填报 (支持添加新周次、删除周次、一键清空全部内容、即时保存) -->
+    <!-- TAB 2: 📋 分所月报填报 (支持添加新周次、删除周次、一键清空全部内容、即时保存) -->
     <!-- ========================================================================= -->
     <section id="tab-reports" class="tab-pane hidden space-y-4">
       <!-- 周期管理工具栏 -->
       <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-wrap items-center justify-between gap-3">
         <div class="flex items-center space-x-2">
-          <label class="text-xs font-bold text-slate-700">当前周次：</label>
+          <label class="text-xs font-bold text-slate-700">当前月份：</label>
           <select id="report-week-select" onchange="changeReportWeek(this.value)" class="text-sm font-semibold text-blue-900 bg-blue-50 border border-blue-200 rounded-lg px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-blue-500">
-            <!-- 动态渲染周次列表 -->
+            <!-- 动态渲染月份列表 -->
           </select>
           <button onclick="openAddWeekModal()" class="text-xs px-2.5 py-1.5 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition font-medium flex items-center">
-            ➕ 添加新周次
+            ➕ 添加新月份
           </button>
           <button onclick="deleteCurrentWeek()" class="text-xs px-2.5 py-1.5 text-rose-600 bg-rose-50 border border-rose-200 rounded-lg hover:bg-rose-100 transition font-medium">
-            🗑️ 删除当前周
+            🗑️ 删除当前月
           </button>
         </div>
 
@@ -535,7 +535,7 @@
     </section>
 
     <!-- ========================================================================= -->
-    <!-- TAB 3: 📝 周例会纪要库 (带侧边栏查看、文本一键智能导入、编辑/删除、彻底去除记录人) -->
+    <!-- TAB 3: 📝 例会纪要库 (带侧边栏查看、文本一键智能导入、编辑/删除、彻底去除记录人) -->
     <!-- ========================================================================= -->
     <section id="tab-minutes" class="tab-pane hidden">
       <!-- 左右两栏布局 -->
@@ -738,7 +738,7 @@
   <div id="modal-minute" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 hidden items-center justify-center p-4" onclick="if(event.target === this) closeMinuteModal()">
     <div class="bg-white rounded-xl max-w-2xl w-full p-6 shadow-xl border border-slate-200 space-y-4 max-h-[90vh] overflow-y-auto custom-scrollbar">
       <div class="flex justify-between items-center border-b pb-3">
-        <h3 class="text-base font-bold text-slate-800" id="modal-minute-title-label">➕ 登记新周例会纪要</h3>
+        <h3 class="text-base font-bold text-slate-800" id="modal-minute-title-label">➕ 登记新例会纪要</h3>
         <button onclick="closeMinuteModal()" class="text-slate-400 hover:text-slate-600">✕</button>
       </div>
       <input type="hidden" id="edit-minute-id">
@@ -817,7 +817,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
           <div>
             <label class="block text-[11px] font-bold text-slate-700 mb-1">识别出的会议名称/期次：</label>
-            <input type="text" id="smart-preview-title" placeholder="如：【会议纪要】#1015 周例会" class="w-full p-2 border rounded bg-white font-medium">
+            <input type="text" id="smart-preview-title" placeholder="如：【会议纪要】10月大区工作例会" class="w-full p-2 border rounded bg-white font-medium">
           </div>
           <div class="grid grid-cols-2 gap-2">
             <div>
@@ -991,23 +991,23 @@
     </div>
   </div>
 
-  <!-- 模态框 5：添加新周次 -->
+  <!-- 模态框 5：添加新月报填报周期 -->
   <div id="modal-add-week" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 hidden items-center justify-center p-4" onclick="if(event.target === this) closeAddWeekModal()">
     <div class="bg-white rounded-xl max-w-sm w-full p-5 shadow-xl border border-slate-200 space-y-4">
       <div class="flex justify-between items-center border-b pb-2">
-        <h3 class="text-sm font-bold text-slate-800">➕ 添加新周报填报周期</h3>
+        <h3 class="text-sm font-bold text-slate-800">➕ 添加新月报填报周期</h3>
         <button onclick="closeAddWeekModal()" class="text-slate-400 hover:text-slate-600">✕</button>
       </div>
       <div class="space-y-3 text-xs">
         <div>
-          <label class="block font-medium text-slate-700 mb-1">周次编号（纯数字）：</label>
-          <input type="number" id="new-week-num" placeholder="如：44" class="w-full p-2 border rounded focus:ring-1 focus:ring-blue-500 font-bold">
+          <label class="block font-medium text-slate-700 mb-1">选择月份：</label>
+          <input type="month" id="new-month-picker" onchange="autoFillMonthLabel(this.value)" class="w-full p-2 border rounded focus:ring-1 focus:ring-blue-500 font-bold text-slate-800">
         </div>
         <div>
-          <label class="block font-medium text-slate-700 mb-1">周次名称/周期区间：</label>
-          <input type="text" id="new-week-label" placeholder="如：第44周 (10.26 - 11.01)" class="w-full p-2 border rounded focus:ring-1 focus:ring-blue-500">
+          <label class="block font-medium text-slate-700 mb-1">月报显示名称：</label>
+          <input type="text" id="new-week-label" placeholder="如：2026年11月度" class="w-full p-2 border rounded focus:ring-1 focus:ring-blue-500 font-medium">
         </div>
-        <p class="text-[11px] text-slate-400">💡 创建后，系统将自动排布 6 家分所标准卡片，由各位主任直接填写。</p>
+        <p class="text-[11px] text-slate-400">💡 创建后，系统将自动排布 6 家分所标准月报卡片，由各位主任直接填写。</p>
       </div>
       <div class="flex justify-end space-x-2 pt-2 border-t">
         <button onclick="closeAddWeekModal()" class="px-3 py-1.5 border rounded text-xs text-slate-600 hover:bg-slate-50">取消</button>
@@ -1072,13 +1072,13 @@
     ];
 
     const initialData = {
-      // 周次映射字典
+      // 月度映射字典
       weekLabels: {
-        "41": "第41周 (10.05 - 10.11)",
-        "42": "第42周 (10.12 - 10.18)",
-        "43": "第43周 (10.19 - 10.25)"
+        "2026-10": "2026年10月度 (本月)",
+        "2026-11": "2026年11月度",
+        "2026-09": "2026年09月度"
       },
-      currentWeek: "41",
+      currentWeek: "2026-10",
 
       // 会议纪要库
       minutes: [
@@ -1130,9 +1130,9 @@
         }
       ],
 
-      // 周报数据 (按周存储)
+      // 月报数据 (按月存储)
       reports: {
-        "41": [
+        "2026-10": [
           {
             region: "中部大区", branch: "武汉分所", lead: "夏晓飞 (管委会副主任/执行主任)",
             work: `1. 跟进杜金凤团队降本方案；本月可转入2位律师，月底冲刺80人目标；
@@ -1141,7 +1141,7 @@
             plan: `1. 锁定盈科大团队转入谈判；
 2. 落实专业部门主任责任书确认；
 3. 催收三季度未到款项。`,
-            yazhe: "希望亚哲主任下周协助跟进大团队引进商务谈判，切入高端法务合作。",
+            yazhe: "希望亚哲主任本月协助跟进大团队引进商务谈判，切入高端法务合作。",
             hq: "需要总部合规风控部协助加急审核国企合规项目的专项投标合同条款。"
           },
           {
@@ -1196,8 +1196,8 @@
             hq: "办案系统偶发网络延迟，需总部技术部排查服务器连接问题。"
           }
         ],
-        "42": defaultBranchList.map(b => ({ ...b, work: "", plan: "", yazhe: "无", hq: "无" })),
-        "43": defaultBranchList.map(b => ({ ...b, work: "", plan: "", yazhe: "无", hq: "无" }))
+        "2026-11": defaultBranchList.map(b => ({ ...b, work: "", plan: "", yazhe: "无", hq: "无" })),
+        "2026-09": defaultBranchList.map(b => ({ ...b, work: "", plan: "", yazhe: "无", hq: "无" }))
       },
 
       // 待办事项 (优化：移除默认自动填充的废弃说明，保持干净整洁)
@@ -1338,9 +1338,26 @@
         if (todosCntEl) todosCntEl.innerText = "0 项";
       }
 
-      // 2. 统计当前周次各分所协调诉求
-      const currentWeekKey = appData.currentWeek || Object.keys(appData.reports)[0] || "41";
+      // 2. 统计当月各分所月报提交状态与协调诉求
+      const currentWeekKey = appData.currentWeek || Object.keys(appData.reports)[0] || "2026-10";
       const currentReports = appData.reports[currentWeekKey] || [];
+      
+      const submittedCount = currentReports.filter(r => r.work && r.work.trim()).length;
+      const submitRatioEl = document.getElementById('dash-report-submit-ratio');
+      const submitBadgeEl = document.getElementById('dash-report-submit-badge');
+      if (submitRatioEl) submitRatioEl.innerText = `${submittedCount} / 6 所`;
+      if (submitBadgeEl) {
+        if (submittedCount === 6) {
+          submitBadgeEl.className = 'text-xs text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded font-medium';
+          submitBadgeEl.innerText = '全员已提交';
+        } else if (submittedCount === 0) {
+          submitBadgeEl.className = 'text-xs text-slate-500 bg-slate-100 px-2 py-0.5 rounded font-medium';
+          submitBadgeEl.innerText = '待各所填报';
+        } else {
+          submitBadgeEl.className = 'text-xs text-blue-700 bg-blue-50 px-2 py-0.5 rounded font-medium';
+          submitBadgeEl.innerText = `已提交 ${submittedCount} 所`;
+        }
+      }
       
       let yazheCount = 0;
       let hqCount = 0;
@@ -1454,7 +1471,7 @@
       if (list.length === 0) {
         container.innerHTML = `
           <div class="bg-white p-8 rounded-xl border text-center text-slate-400">
-            该周次暂无填报卡片，点击上方【➕ 添加新周次】即可自动生成名单。
+            该月份暂无填报卡片，点击上方【➕ 添加新月份】即可自动生成名单。
           </div>
         `;
         return;
@@ -1474,7 +1491,7 @@
               <button onclick="saveReportRow('${week}', ${idx})" class="text-xs px-3 py-1 bg-emerald-600 text-white rounded font-medium hover:bg-emerald-700 transition flex items-center shadow-xs">
                 💾 保存修改
               </button>
-              <button onclick="clearReportRow('${week}', ${idx})" class="text-xs px-2.5 py-1 text-slate-600 bg-slate-100 hover:bg-rose-50 hover:text-rose-600 border border-slate-200 rounded font-medium transition flex items-center shadow-xs" title="一键清空该分所本周填报的全部4项内容">
+              <button onclick="clearReportRow('${week}', ${idx})" class="text-xs px-2.5 py-1 text-slate-600 bg-slate-100 hover:bg-rose-50 hover:text-rose-600 border border-slate-200 rounded font-medium transition flex items-center shadow-xs" title="一键清空该分所本月填报的全部4项内容">
                 🧹 一键清空
               </button>
             </div>
@@ -1483,16 +1500,16 @@
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label class="block text-xs font-bold text-slate-700 mb-1">
-                1. 本周重点工作及进展 (量化成果/大部门建设/人才引进)：
+                1. 本月重点工作及进展 (量化成果/大部门建设/人才引进)：
               </label>
-              <textarea id="rep-work-${idx}" onchange="autoSaveReportRow('${week}', ${idx})" rows="3" class="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-1 focus:ring-blue-500 text-slate-800 custom-scrollbar leading-relaxed" placeholder="请填写本周核心业务推进情况...">${item.work || ""}</textarea>
+              <textarea id="rep-work-${idx}" onchange="autoSaveReportRow('${week}', ${idx})" rows="3" class="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-1 focus:ring-blue-500 text-slate-800 custom-scrollbar leading-relaxed" placeholder="请填写本月核心业务推进情况...">${item.work || ""}</textarea>
             </div>
 
             <div>
               <label class="block text-xs font-bold text-slate-700 mb-1">
-                2. 下周核心工作计划 (下周重点抓什么)：
+                2. 下月核心工作计划 (下月重点抓什么)：
               </label>
-              <textarea id="rep-plan-${idx}" onchange="autoSaveReportRow('${week}', ${idx})" rows="3" class="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-1 focus:ring-blue-500 text-slate-800 custom-scrollbar leading-relaxed" placeholder="请填写下周关键计划...">${item.plan || ""}</textarea>
+              <textarea id="rep-plan-${idx}" onchange="autoSaveReportRow('${week}', ${idx})" rows="3" class="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-1 focus:ring-blue-500 text-slate-800 custom-scrollbar leading-relaxed" placeholder="请填写下月关键工作计划...">${item.plan || ""}</textarea>
             </div>
           </div>
 
@@ -1533,7 +1550,7 @@
 
     function saveReportRow(week, idx) {
       autoSaveReportRow(week, idx);
-      showToast("✅ 周报已成功保存！");
+      showToast("✅ 月报已成功保存！");
     }
 
     // 一键清空该分所本周填报的全部内容
@@ -1542,7 +1559,7 @@
       if (!item) return;
 
       const weekLabel = appData.weekLabels[week] || `第${week}周`;
-      if (confirm(`确定要一键清空【${item.branch}】在【${weekLabel}】的全部周报填报内容吗？`)) {
+      if (confirm(`确定要一键清空【${item.branch}】在【${weekLabel}】的全部月报填报内容吗？`)) {
         item.work = "";
         item.plan = "";
         item.yazhe = "无";
@@ -1559,56 +1576,78 @@
 
         saveData();
         updateDashboardMetrics();
-        showToast(`🧹 已一键清空【${item.branch}】周报内容！`);
+        showToast(`🧹 已一键清空【${item.branch}】月报内容！`);
       }
     }
 
-    // 添加新周次
+    // 添加新月份
     function openAddWeekModal() {
-      const mAddWeek = document.getElementById('modal-add-week'); mAddWeek.classList.remove('hidden'); mAddWeek.classList.add('flex');
-      const currentKeys = Object.keys(appData.reports).map(k => parseInt(k)).filter(n => !isNaN(n));
-      const nextNum = (Math.max(...currentKeys) || 43) + 1;
-      document.getElementById('new-week-num').value = nextNum;
-      document.getElementById('new-week-label').value = `第${nextNum}周`;
+      const mAddWeek = document.getElementById('modal-add-week');
+      mAddWeek.classList.remove('hidden');
+      mAddWeek.classList.add('flex');
+      
+      const now = new Date();
+      const nextMonth = new Date(now.getFullYear(), now.getMonth() + 1, 1);
+      const y = nextMonth.getFullYear();
+      const m = String(nextMonth.getMonth() + 1).padStart(2, '0');
+      const ym = `${y}-${m}`;
+
+      const picker = document.getElementById('new-month-picker');
+      if (picker) picker.value = ym;
+      const labelInput = document.getElementById('new-week-label');
+      if (labelInput) labelInput.value = `${y}年${m}月度`;
     }
+
+    function autoFillMonthLabel(val) {
+      if (!val) return;
+      const parts = val.split('-');
+      if (parts.length === 2) {
+        document.getElementById('new-week-label').value = `${parts[0]}年${parts[1]}月度`;
+      }
+    }
+
     function closeAddWeekModal() {
-      const mAddWeek = document.getElementById('modal-add-week'); mAddWeek.classList.add('hidden'); mAddWeek.classList.remove('flex');
+      const mAddWeek = document.getElementById('modal-add-week');
+      mAddWeek.classList.add('hidden');
+      mAddWeek.classList.remove('flex');
     }
+
     function confirmAddWeek() {
-      const weekNum = document.getElementById('new-week-num').value.trim();
-      const weekLabel = document.getElementById('new-week-label').value.trim();
+      const picker = document.getElementById('new-month-picker');
+      const monthKey = (picker && picker.value.trim()) || document.getElementById('new-week-label').value.trim();
+      const monthLabel = document.getElementById('new-week-label').value.trim() || `${monthKey}月度`;
 
-      if (!weekNum) {
-        showToast("请输入周次编号！", "warn");
+      if (!monthKey) {
+        showToast("请选择月份或输入标识！", "warn");
         return;
       }
-      if (appData.reports[weekNum]) {
-        showToast(`第${weekNum}周已经存在！无需重复添加。`, "warn");
+      if (appData.reports[monthKey]) {
+        showToast(`【${monthLabel}】已经存在！无需重复添加。`, "warn");
         return;
       }
 
-      appData.reports[weekNum] = defaultBranchList.map(b => ({
+      appData.reports[monthKey] = defaultBranchList.map(b => ({
         ...b,
         work: "",
         plan: "",
         yazhe: "无",
         hq: "无"
       }));
-      appData.weekLabels[weekNum] = weekLabel || `第${weekNum}周`;
-      appData.currentWeek = weekNum;
+      appData.weekLabels[monthKey] = monthLabel;
+      appData.currentWeek = monthKey;
 
       saveData();
       closeAddWeekModal();
       renderWeekSelectDropdown();
       renderWeeklyReports();
       updateDashboardMetrics();
-      showToast(`✅ 已创建【${weekLabel || '第' + weekNum + '周'}】，已排布6所空白卡片！`);
+      showToast(`✅ 已创建【${monthLabel}】，已排布6所空白卡片！`);
     }
 
-    // 删除当前周次
+    // 删除当前月份
     function deleteCurrentWeek() {
       const week = appData.currentWeek;
-      const label = appData.weekLabels[week] || `第${week}周`;
+      const label = appData.weekLabels[week] || `${week}月度`;
 
       if (Object.keys(appData.reports).length <= 1) {
         showToast("至少需保留一个填报周期，无法全部删除！", "warn");
@@ -1715,7 +1754,7 @@
         <div class="border-b pb-4">
           <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
             <span class="text-xs font-semibold px-2.5 py-1 bg-blue-100 text-blue-800 rounded-full">
-              📅 ${m.date} 周例会归档
+              📅 ${m.date} 例会归档
             </span>
             <div class="flex space-x-2">
               <button onclick="openEditMinuteModal('${m.id}')" class="text-xs px-3 py-1.5 bg-blue-50 text-blue-700 border border-blue-200 rounded-lg hover:bg-blue-100 transition font-medium flex items-center shadow-xs">
@@ -1787,7 +1826,7 @@
       const m = appData.minutes.find(item => String(item.id) === String(id));
       if (!m) return;
 
-      document.getElementById('modal-minute-title-label').innerText = "✏️ 编辑周例会纪要";
+      document.getElementById('modal-minute-title-label').innerText = "✏️ 编辑例会纪要";
       document.getElementById('edit-minute-id').value = m.id;
       document.getElementById('m-form-title').value = m.title || "";
       document.getElementById('m-form-date').value = m.date || "";
@@ -1802,7 +1841,7 @@
 
     // 打开新增纪要弹窗 (手动)
     function openNewMinuteModal() {
-      document.getElementById('modal-minute-title-label').innerText = "➕ 登记新周例会纪要";
+      document.getElementById('modal-minute-title-label').innerText = "➕ 登记新例会纪要";
       document.getElementById('edit-minute-id').value = "";
       document.getElementById('m-form-title').value = "";
       document.getElementById('m-form-date').valueAsDate = new Date();
@@ -2007,7 +2046,7 @@ ${m.todosText || '无'}`;
           title = "【会议纪要】" + title.replace(/【|】/g, "");
         }
       } else {
-        title = `【会议纪要】${date} 周例会`;
+        title = `【会议纪要】${date} 例会`;
       }
 
       let todoStartIndex = -1;
@@ -2329,7 +2368,7 @@ ${m.todosText || '无'}`;
           org: org,
           task: cleanLine,
           deadline: deadline,
-          sourceTitle: sourceTitle || "周例会"
+          sourceTitle: sourceTitle || "月度例会"
         });
       });
 
@@ -3085,6 +3124,7 @@ ${m.todosText || '无'}`;
     }
 
     window.onload = function() {
+      migrateDataToMonthly();
       renderWeekSelectDropdown();
       renderMinuteSidebar();
       renderTodos();
