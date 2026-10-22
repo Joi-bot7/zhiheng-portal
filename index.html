@@ -627,7 +627,7 @@
           <table class="w-full text-left border-collapse">
             <thead>
               <tr class="bg-slate-50 border-b border-slate-200 text-[11px] font-bold text-slate-600">
-                <th class="p-3 w-10 text-center">销项</th>
+                <th class="p-3 w-12 text-center text-slate-400 font-mono">序号</th>
                 <th class="p-3 w-28">责任人</th>
                 <th class="p-3">具体行动事项与交付目标</th>
                 <th class="p-3 w-24">所属组织</th>
@@ -2558,10 +2558,10 @@ ${m.todosText || '无'}`;
         return;
       }
 
-      tbody.innerHTML = list.map(t => `
+      tbody.innerHTML = list.map((t, idx) => `
         <tr class="hover:bg-slate-50/80 transition-colors">
-          <td class="p-3 text-center">
-            <input type="checkbox" ${t.status === "已完成" ? "checked" : ""} onchange="quickToggleTodo(${t.id})" class="rounded text-blue-600 focus:ring-blue-500 cursor-pointer w-4 h-4">
+          <td class="p-3 text-center font-mono text-[11px] text-slate-400 font-semibold select-none">
+            #${idx + 1}
           </td>
           <td class="p-3 font-bold text-slate-900 whitespace-nowrap">
             ${t.owner}
