@@ -600,6 +600,8 @@
           <select id="todo-owner-filter" onchange="renderTodos()" class="text-xs border border-slate-300 rounded px-2 py-1 bg-white focus:outline-none">
             <option value="all">全部责任人</option>
             <option value="王亚哲">王亚哲</option>
+            <option value="胡侨益">胡侨益 (总办/引才)</option>
+            <option value="张歆妍">张歆妍 (IP运营中心)</option>
             <option value="夏晓飞">夏晓飞 (武汉)</option>
             <option value="陈赛男">陈赛男 (长沙)</option>
             <option value="朱敏">朱敏 (成都)</option>
@@ -763,7 +765,7 @@
         </div>
         <div>
           <label class="block font-medium text-slate-700 mb-1">参会人员：</label>
-          <input type="text" id="m-form-attendees" value="王亚哲(区域执行主任/部长)、夏晓飞(武汉)、陈赛男(长沙)、朱敏(成都)、邱月(重庆)、杜易(昆明)、张晶(贵阳)" class="w-full p-2 border rounded focus:ring-1 focus:ring-blue-500">
+          <input type="text" id="m-form-attendees" value="王亚哲(区域执行主任/部长)、夏晓飞(武汉)、陈赛男(长沙)、朱敏(成都)、邱月(重庆)、杜易(昆明)、张晶(贵阳)、胡侨益(总办/引才)、张歆妍(IP运营中心)" class="w-full p-2 border rounded focus:ring-1 focus:ring-blue-500">
         </div>
         <div>
           <label class="block font-medium text-slate-700 mb-1">会议主要议题与决议内容 (支持分段整理)：</label>
@@ -945,8 +947,10 @@
         <div class="grid grid-cols-2 gap-3">
           <div>
             <label class="block font-medium text-slate-700 mb-1">责任人：</label>
-            <select id="edit-todo-owner" class="w-full p-2 border rounded focus:ring-1 focus:ring-blue-500 font-bold">
+            <select id="edit-todo-owner" onchange="if(!document.getElementById('edit-todo-org').value || document.getElementById('edit-todo-org').value==='大区') document.getElementById('edit-todo-org').value = guessBranchByOwner(this.value)" class="w-full p-2 border rounded focus:ring-1 focus:ring-blue-500 font-bold">
               <option value="王亚哲">王亚哲</option>
+              <option value="胡侨益">胡侨益 (总办/引才)</option>
+              <option value="张歆妍">张歆妍 (IP运营中心)</option>
               <option value="夏晓飞">夏晓飞 (武汉)</option>
               <option value="陈赛男">陈赛男 (长沙)</option>
               <option value="朱敏">朱敏 (成都)</option>
@@ -1027,8 +1031,10 @@
         <div class="grid grid-cols-2 gap-3">
           <div>
             <label class="block font-medium text-slate-700 mb-1">责任人：</label>
-            <select id="new-todo-owner" class="w-full p-2 border rounded focus:ring-1 focus:ring-blue-500 font-bold">
+            <select id="new-todo-owner" onchange="document.getElementById('new-todo-org').value = guessBranchByOwner(this.value)" class="w-full p-2 border rounded focus:ring-1 focus:ring-blue-500 font-bold">
               <option value="王亚哲">王亚哲</option>
+              <option value="胡侨益">胡侨益 (总办/引才)</option>
+              <option value="张歆妍">张歆妍 (IP运营中心)</option>
               <option value="夏晓飞">夏晓飞 (武汉)</option>
               <option value="陈赛男">陈赛男 (长沙)</option>
               <option value="朱敏">朱敏 (成都)</option>
@@ -1902,7 +1908,7 @@
       document.getElementById('m-form-date').valueAsDate = new Date();
       document.getElementById('m-form-time').value = "09:30 - 11:30";
       document.getElementById('m-form-host').value = "王亚哲";
-      document.getElementById('m-form-attendees').value = "王亚哲(区域执行主任/部长)、夏晓飞(武汉)、陈赛男(长沙)、朱敏(成都)、邱月(重庆)、杜易(昆明)、张晶(贵阳)";
+      document.getElementById('m-form-attendees').value = "王亚哲(区域执行主任/部长)、夏晓飞(武汉)、陈赛男(长沙)、朱敏(成都)、邱月(重庆)、杜易(昆明)、张晶(贵阳)、胡侨益(总办/引才)、张歆妍(IP运营中心)";
       document.getElementById('m-form-content').value = "";
       document.getElementById('m-form-todos').value = "";
 
@@ -2016,7 +2022,7 @@ ${m.todosText || '无'}`;
       document.getElementById('smart-preview-date').valueAsDate = new Date();
       document.getElementById('smart-preview-time').value = "09:30 - 11:30";
       document.getElementById('smart-preview-host').value = "王亚哲";
-      document.getElementById('smart-preview-attendees').value = "王亚哲(区域执行主任/部长)、夏晓飞(武汉)、陈赛男(长沙)、朱敏(成都)、邱月(重庆)、杜易(昆明)、张晶(贵阳)";
+      document.getElementById('smart-preview-attendees').value = "王亚哲(区域执行主任/部长)、夏晓飞(武汉)、陈赛男(长沙)、朱敏(成都)、邱月(重庆)、杜易(昆明)、张晶(贵阳)、胡侨益(总办/引才)、张歆妍(IP运营中心)";
       document.getElementById('smart-preview-content').value = "";
       document.getElementById('smart-preview-todos').value = "";
       document.getElementById('smart-preview-todos-count').innerText = "0 项待办";
@@ -2065,7 +2071,7 @@ ${m.todosText || '无'}`;
       let date = "";
       let time = "09:30 - 11:30";
       let host = "王亚哲";
-      let attendees = "王亚哲(区域执行主任/部长)、夏晓飞(武汉)、陈赛男(长沙)、朱敏(成都)、邱月(重庆)、杜易(昆明)、张晶(贵阳)";
+      let attendees = "王亚哲(区域执行主任/部长)、夏晓飞(武汉)、陈赛男(长沙)、朱敏(成都)、邱月(重庆)、杜易(昆明)、张晶(贵阳)、胡侨益(总办/引才)、张歆妍(IP运营中心)";
       let content = "";
       let todosText = "";
 
@@ -2399,22 +2405,52 @@ ${m.todosText || '无'}`;
           const first = names[0];
           org = guessBranchByOwner(first);
         } else {
-          if (cleanLine.includes("武汉") || cleanLine.includes("夏晓飞")) { owner = "夏晓飞"; org = "武汉分所"; }
-          else if (cleanLine.includes("长沙") || cleanLine.includes("陈赛男")) { owner = "陈赛男"; org = "长沙分所"; }
-          else if (cleanLine.includes("成都") || cleanLine.includes("朱敏")) { owner = "朱敏"; org = "成都分所"; }
-          else if (cleanLine.includes("重庆") || cleanLine.includes("邱月")) { owner = "邱月"; org = "重庆分所"; }
-          else if (cleanLine.includes("昆明") || cleanLine.includes("杜易")) { owner = "杜易"; org = "昆明分所"; }
-          else if (cleanLine.includes("贵阳") || cleanLine.includes("张晶")) { owner = "张晶"; org = "贵阳分所"; }
+          const respMatch = line.match(/责任人[：:]\s*([一-龥]+)/);
+          if (respMatch && respMatch[1]) {
+            owner = respMatch[1];
+            org = guessBranchByOwner(owner);
+          } else if (cleanLine.includes("胡侨益")) { owner = "胡侨益"; org = "大区/总办"; }
+          else if (cleanLine.includes("张歆妍")) { owner = "张歆妍"; org = "大区/IP运营中心"; }
+          else if (cleanLine.includes("夏晓飞")) { owner = "夏晓飞"; org = "武汉分所"; }
+          else if (cleanLine.includes("陈赛男")) { owner = "陈赛男"; org = "长沙分所"; }
+          else if (cleanLine.includes("朱敏")) { owner = "朱敏"; org = "成都分所"; }
+          else if (cleanLine.includes("邱月")) { owner = "邱月"; org = "重庆分所"; }
+          else if (cleanLine.includes("杜易")) { owner = "杜易"; org = "昆明分所"; }
+          else if (cleanLine.includes("张晶")) { owner = "张晶"; org = "贵阳分所"; }
+          else if (cleanLine.includes("武汉")) { owner = "夏晓飞"; org = "武汉分所"; }
+          else if (cleanLine.includes("长沙")) { owner = "陈赛男"; org = "长沙分所"; }
+          else if (cleanLine.includes("成都")) { owner = "朱敏"; org = "成都分所"; }
+          else if (cleanLine.includes("重庆")) { owner = "邱月"; org = "重庆分所"; }
+          else if (cleanLine.includes("昆明")) { owner = "杜易"; org = "昆明分所"; }
+          else if (cleanLine.includes("贵阳")) { owner = "张晶"; org = "贵阳分所"; }
           else if (cleanLine.includes("全体")) { owner = "全体主任"; org = "大区各所"; }
         }
 
-        let deadline = "2026-10-25";
-        try {
-          const d = new Date(meetingDate || new Date());
-          d.setDate(d.getDate() + 10);
-          deadline = d.toISOString().split('T')[0];
-        } catch (e) {
-          deadline = "尽快完成";
+        let deadline = "";
+        const timeMatch = line.match(/(?:完成时间|截止时间|截止日期)[：:]\s*([^\s；;，,。]+)/);
+        if (timeMatch && timeMatch[1]) {
+          const tStr = timeMatch[1].trim();
+          const monthDayMatch = tStr.match(/(?:(\d{4})[-年/])?(\d{1,2})[月/-](\d{1,2})/);
+          if (monthDayMatch) {
+            const year = monthDayMatch[1] || (meetingDate ? meetingDate.split('-')[0] : "2026");
+            const m = String(monthDayMatch[2]).padStart(2, '0');
+            const d = String(monthDayMatch[3]).padStart(2, '0');
+            deadline = `${year}-${m}-${d}`;
+          } else if (tStr.includes("月底")) {
+            const baseMonth = meetingDate ? meetingDate.substring(0, 7) : "2026-10";
+            deadline = `${baseMonth}-31`;
+          } else {
+            deadline = tStr;
+          }
+        }
+        if (!deadline) {
+          try {
+            const d = new Date(meetingDate || new Date());
+            d.setDate(d.getDate() + 10);
+            deadline = d.toISOString().split('T')[0];
+          } catch (e) {
+            deadline = "尽快完成";
+          }
         }
 
         items.push({
@@ -2431,12 +2467,15 @@ ${m.todosText || '无'}`;
     }
 
     function guessBranchByOwner(name) {
+      if (!name) return "大区/总办";
       if (name.includes("夏晓飞")) return "武汉分所";
       if (name.includes("陈赛男")) return "长沙分所";
       if (name.includes("朱敏")) return "成都分所";
       if (name.includes("邱月")) return "重庆分所";
       if (name.includes("杜易")) return "昆明分所";
       if (name.includes("张晶")) return "贵阳分所";
+      if (name.includes("胡侨益")) return "大区/总办";
+      if (name.includes("张歆妍")) return "大区/IP运营中心";
       if (name.includes("全体")) return "大区各所";
       return "大区/总办";
     }
@@ -2637,8 +2676,16 @@ ${m.todosText || '无'}`;
       if (!todo) return;
 
       document.getElementById('edit-todo-id').value = todo.id;
-      document.getElementById('edit-todo-owner').value = todo.owner;
-      document.getElementById('edit-todo-org').value = todo.org || "大区";
+      const ownerSel = document.getElementById('edit-todo-owner');
+      ownerSel.value = todo.owner;
+      if (!ownerSel.value && todo.owner) {
+        const opt = document.createElement('option');
+        opt.value = todo.owner;
+        opt.innerText = todo.owner;
+        opt.selected = true;
+        ownerSel.appendChild(opt);
+      }
+      document.getElementById('edit-todo-org').value = todo.org || guessBranchByOwner(todo.owner);
       document.getElementById('edit-todo-task').value = todo.task || "";
       document.getElementById('edit-todo-deadline').value = todo.deadline || "";
       document.getElementById('edit-todo-status').value = todo.status || "进行中";
@@ -2695,6 +2742,10 @@ ${m.todosText || '无'}`;
     function openNewTodoModal() {
       const mNewTodo = document.getElementById('modal-new-todo'); mNewTodo.classList.remove('hidden'); mNewTodo.classList.add('flex');
       document.getElementById('new-todo-deadline').valueAsDate = new Date();
+      const currentOwner = document.getElementById('new-todo-owner').value;
+      if (!document.getElementById('new-todo-org').value) {
+        document.getElementById('new-todo-org').value = guessBranchByOwner(currentOwner);
+      }
     }
     function closeNewTodoModal() {
       const mNewTodo = document.getElementById('modal-new-todo'); mNewTodo.classList.add('hidden'); mNewTodo.classList.remove('flex');
