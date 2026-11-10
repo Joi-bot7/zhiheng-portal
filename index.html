@@ -3473,7 +3473,8 @@ ${m.todosText || '无'}`;
         return;
       }
       const enc = btoa(token);
-      const inviteUrl = window.location.origin + window.location.pathname + '#sync=' + enc;
+      const baseUrl = (window.location.protocol === 'file:' || !window.location.origin || window.location.origin === 'null') ? 'https://joi-bot7.github.io/zhiheng-portal/' : (window.location.origin + window.location.pathname);
+      const inviteUrl = baseUrl + '#sync=' + enc;
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(inviteUrl).then(() => {
           showToast('✅ 已复制免配协同链接！发给分所主任即可一键直连！');
@@ -3614,7 +3615,7 @@ ${m.todosText || '无'}`;
     }
 
     // 初始化云端协同
-    async function initCloudSync() {
+    async function initCloudSync(retryCount = 0) {
       checkUrlHashSyncToken(); // 自动检查并导入分享链接中的密钥
       const ghToken = getGitHubToken();
       const customUrl = getCloudUrl();
@@ -3652,6 +3653,12 @@ ${m.todosText || '无'}`;
           startCloudPolling();
         }
       } catch (e) {
+        console.error("云端连接失败详情:", e);
+        if (retryCount < 1) {
+          console.log("正在尝试重新连接云端...");
+          setTimeout(() => initCloudSync(retryCount + 1), 1500);
+          return;
+        }
         updateCloudBadge('offline', '离线模式 (已使用本地数据)');
       }
     }
