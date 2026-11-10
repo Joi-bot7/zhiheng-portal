@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>知恒 · 中部与西南大区 月报与月度例会协同系统</title>
+  <title>知恒 · 中部与西南大区 & 业发委 协同工作台</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     /* 高阶行政商务视觉规范 (Executive Luxury Legal Palette) */
@@ -328,10 +328,10 @@
           </div>
           <div>
             <div class="flex items-center space-x-2">
-              <h1 class="text-sm sm:text-lg font-bold tracking-tight text-white">知恒 · 中部与西南大区协同工作台</h1>
-              <span class="text-[10px] font-semibold px-1.5 py-0.5 rounded text-amber-300 bg-amber-400/10 border border-amber-400/20 hidden sm:inline-block">协同管理系统</span>
+              <h1 class="text-sm sm:text-lg font-bold tracking-tight text-white">知恒 · 中部与西南大区 & 业发委 协同工作台</h1>
+              <span class="text-[10px] font-semibold px-1.5 py-0.5 rounded text-amber-300 bg-amber-400/10 border border-amber-400/20 hidden sm:inline-block">双线协同管理</span>
             </div>
-            <p class="text-[11px] text-slate-300 hidden sm:block mt-0.5">区域负责人：王亚哲 (区域执行主任/部长) · 6家分所月报与月度例会督办</p>
+            <p class="text-[11px] text-slate-300 hidden sm:block mt-0.5">分管领导：王亚哲 (区域执行主任 / 业发委副主任兼秘书长) · 例会督办与事项闭环管理</p>
           </div>
         </div>
 
@@ -339,16 +339,19 @@
         <div class="flex items-center space-x-1.5 sm:space-x-2 overflow-x-auto custom-scrollbar pb-1 sm:pb-0">
           <nav class="flex space-x-1 sm:space-x-1.5 whitespace-nowrap bg-white/10 p-1 rounded-xl border border-white/10 backdrop-blur-md">
             <button onclick="switchTab('dashboard')" id="nav-dashboard" class="nav-btn px-3 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition-all bg-white text-[#0F172A] shadow-sm flex-shrink-0">
-              📊 例会看板
+              📊 综合大盘
             </button>
-            <button onclick="switchTab('reports')" id="nav-reports" class="nav-btn px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition-all text-slate-200 hover:text-white hover:bg-white/10 flex-shrink-0">
-              📋 分所月报填报
+            <button onclick="switchTab('minutes', 'region')" id="nav-minutes-region" class="nav-btn px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition-all text-slate-200 hover:text-white hover:bg-white/10 flex-shrink-0">
+              🏛️ 大区会议纪要
             </button>
-            <button onclick="switchTab('minutes')" id="nav-minutes" class="nav-btn px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition-all text-slate-200 hover:text-white hover:bg-white/10 relative flex-shrink-0">
-              📝 会议纪要库
+            <button onclick="switchTab('todos', 'region')" id="nav-todos-region" class="nav-btn px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition-all text-slate-200 hover:text-white hover:bg-white/10 flex-shrink-0">
+              📌 大区待办追踪
             </button>
-            <button onclick="switchTab('todos')" id="nav-todos" class="nav-btn px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition-all text-slate-200 hover:text-white hover:bg-white/10 flex-shrink-0">
-              📌 待办事项追踪
+            <button onclick="switchTab('minutes', 'yefawei')" id="nav-minutes-yefawei" class="nav-btn px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition-all text-slate-200 hover:text-white hover:bg-white/10 flex-shrink-0">
+              💼 业发委会议纪要
+            </button>
+            <button onclick="switchTab('todos', 'yefawei')" id="nav-todos-yefawei" class="nav-btn px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition-all text-slate-200 hover:text-white hover:bg-white/10 flex-shrink-0">
+              📋 业发委待办追踪
             </button>
           </nav>
 
@@ -366,186 +369,225 @@
   <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6">
 
     <!-- ========================================================================= -->
-    <!-- TAB 1: 📊 例会看板 (去除非必要细节，聚焦例会纪要决议与诉求图表) -->
+    <!-- TAB 1: 📊 综合大盘 (双线督办：中部与西南大区 + 业务发展委员会) -->
     <!-- ========================================================================= -->
     <section id="tab-dashboard" class="tab-pane space-y-6">
-      <!-- 核心指标卡 (聚焦例会协调核心) -->
+      <!-- 核心指标卡 (双业务板块全景态势) -->
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+        <!-- 卡片 1：大区会议归档 -->
         <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between">
-          <span class="text-xs font-medium text-slate-500">管辖分所总数</span>
-          <div class="flex items-baseline justify-between mt-2">
-            <span class="text-2xl font-bold text-slate-900">6 <span class="text-xs font-normal text-slate-500">所</span></span>
-            <span class="text-xs text-blue-700 bg-blue-50 px-2 py-0.5 rounded font-medium">中部2所 / 西南4所</span>
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-medium text-slate-500">🏛️ 大区会议归档</span>
+            <span class="text-[10px] text-blue-700 bg-blue-50 px-2 py-0.5 rounded font-medium">6所全勤</span>
           </div>
-          <span class="text-[11px] text-slate-400 mt-2">武汉·长沙·成都·重庆·昆明·贵阳</span>
+          <div class="flex items-baseline justify-between mt-2">
+            <span class="text-2xl font-bold text-slate-900"><span id="dash-region-minutes-total">0</span> <span class="text-xs font-normal text-slate-500">场</span></span>
+            <span class="text-xs text-slate-400">中部2所 / 西南4所</span>
+          </div>
+          <span class="text-[11px] text-slate-400 mt-2 truncate">武汉·长沙·成都·重庆·昆明·贵阳</span>
         </div>
 
-        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between">
-          <span class="text-xs font-medium text-slate-500">当月月报提交状态</span>
-          <div class="flex items-baseline justify-between mt-2">
-            <span class="text-2xl font-bold text-emerald-600" id="dash-report-submit-ratio">6 / 6 所</span>
-            <span class="text-xs text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded font-medium" id="dash-report-submit-badge">全员已提交</span>
-          </div>
-          <span class="text-[11px] text-slate-400 mt-2">各分所主任月度重点工作填报</span>
-        </div>
-
-        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between border-l-4 border-l-amber-500">
-          <span class="text-xs font-medium text-amber-800 font-semibold">🔑 需亚哲主任协调</span>
-          <div class="flex items-baseline justify-between mt-2">
-            <span class="text-2xl font-bold text-amber-900" id="dash-yazhe-count">0 <span class="text-xs font-normal text-slate-500">项</span></span>
-            <span class="text-xs text-purple-700 bg-purple-50 px-2 py-0.5 rounded font-medium">例会定调事项</span>
-          </div>
-          <span class="text-[11px] text-slate-400 mt-2">大团队引进/战略把关/论坛</span>
-        </div>
-
+        <!-- 卡片 2：大区重点待办 -->
         <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between border-l-4 border-l-blue-600">
-          <span class="text-xs font-medium text-blue-900 font-semibold">🏛️ 需总部职能协同</span>
-          <div class="flex items-baseline justify-between mt-2">
-            <span class="text-2xl font-bold text-blue-900" id="dash-hq-count">0 <span class="text-xs font-normal text-slate-500">项</span></span>
-            <span class="text-xs text-sky-700 bg-sky-50 px-2 py-0.5 rounded font-medium">跨部门职能支持</span>
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-semibold text-blue-900">📌 大区待办督办</span>
+            <span class="text-[10px] text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded font-medium" id="dash-region-todos-badge">推进中</span>
           </div>
-          <span class="text-[11px] text-slate-400 mt-2">合规/财务开票/招聘/物料支持</span>
+          <div class="flex items-baseline justify-between mt-2">
+            <span class="text-2xl font-bold text-blue-900"><span id="dash-region-todos-total">0</span> <span class="text-xs font-normal text-slate-500">项</span></span>
+            <span class="text-xs text-slate-500">完成率 <strong id="dash-region-rate" class="text-emerald-600">0%</strong></span>
+          </div>
+          <div class="text-[11px] text-slate-500 mt-2 flex items-center space-x-2">
+            <span>已完成: <strong id="dash-region-done" class="text-emerald-600 font-mono">0</strong></span>
+            <span>·</span>
+            <span>进行中: <strong id="dash-region-prog" class="text-amber-600 font-mono">0</strong></span>
+          </div>
+        </div>
+
+        <!-- 卡片 3：业发委推进会 -->
+        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-medium text-slate-500">💼 业发委工作档案</span>
+            <span class="text-[10px] text-purple-700 bg-purple-50 px-2 py-0.5 rounded font-medium">双百专项</span>
+          </div>
+          <div class="flex items-baseline justify-between mt-2">
+            <span class="text-2xl font-bold text-slate-900"><span id="dash-yefawei-minutes-total">0</span> <span class="text-xs font-normal text-slate-500">场</span></span>
+            <span class="text-xs text-slate-400">全国专业委员会</span>
+          </div>
+          <span class="text-[11px] text-slate-400 mt-2 truncate">双百赋能 · 责任状 · 跨区协同</span>
+        </div>
+
+        <!-- 卡片 4：业发委重点待办 -->
+        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between border-l-4 border-l-purple-600">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-semibold text-purple-900">📋 业发委待办督办</span>
+            <span class="text-[10px] text-purple-700 bg-purple-50 px-2 py-0.5 rounded font-medium" id="dash-yefawei-todos-badge">专项督办</span>
+          </div>
+          <div class="flex items-baseline justify-between mt-2">
+            <span class="text-2xl font-bold text-purple-900"><span id="dash-yefawei-todos-total">0</span> <span class="text-xs font-normal text-slate-500">项</span></span>
+            <span class="text-xs text-slate-500">完成率 <strong id="dash-yefawei-rate" class="text-emerald-600">0%</strong></span>
+          </div>
+          <div class="text-[11px] text-slate-500 mt-2 flex items-center space-x-2">
+            <span>已完成: <strong id="dash-yefawei-done" class="text-emerald-600 font-mono">0</strong></span>
+            <span>·</span>
+            <span>进行中: <strong id="dash-yefawei-prog" class="text-amber-600 font-mono">0</strong></span>
+          </div>
         </div>
       </div>
 
-      <!-- 核心板块：左侧最新会议纪要速览 + 右侧两大智能图表 -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      <!-- 核心板块：两大业务板块最新工作速报卡 (并排双柱) -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         
-        <!-- 左侧：最新例会纪要决议速报卡 (彻底去除记录人，内容动态绑定最新纪要) -->
-        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm lg:col-span-5 flex flex-col justify-between space-y-4">
+        <!-- 板块 1：中部与西南大区最新纪要与待办速览 -->
+        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
           <div>
             <div class="flex items-center justify-between pb-3 border-b border-slate-100">
               <div class="flex items-center space-x-2">
                 <span class="w-2.5 h-2.5 bg-blue-600 rounded-full"></span>
-                <h3 class="text-sm font-bold text-slate-900">📝 最新例会纪要速览</h3>
+                <h3 class="text-sm font-bold text-slate-900">🏛️ 中部与西南大区 · 最新例会速览</h3>
               </div>
-              <span class="text-xs font-semibold px-2 py-0.5 bg-blue-50 text-blue-700 rounded" id="dash-latest-m-date">加载中...</span>
+              <span class="text-xs font-semibold px-2 py-0.5 bg-blue-50 text-blue-700 rounded" id="dash-region-m-date">加载中...</span>
             </div>
 
             <div class="mt-3 space-y-3">
               <div>
-                <h4 class="text-xs font-bold text-slate-800 line-clamp-1" id="dash-latest-m-title">【会议纪要】加载中...</h4>
-                <p class="text-[11px] text-slate-500 mt-0.5" id="dash-latest-m-host">主持人：王亚哲 (区域主任/部长)</p>
+                <h4 class="text-xs font-bold text-slate-800 line-clamp-1" id="dash-region-m-title">【会议纪要】加载中...</h4>
+                <p class="text-[11px] text-slate-500 mt-0.5" id="dash-region-m-host">主持人：王亚哲 (区域主任/部长)</p>
               </div>
 
               <div class="bg-slate-50 p-3 rounded-lg border border-slate-100 space-y-2 text-xs">
-                <span class="font-bold text-slate-700 block">📌 本次会议核心定调与决议：</span>
-                <div id="dash-latest-m-resolutions" class="space-y-1.5 text-slate-600 text-[11px] leading-relaxed max-h-48 overflow-y-auto custom-scrollbar whitespace-pre-line">
-                  <!-- 由 JavaScript 动态读取最新纪要填充，绝不写死静态文本 -->
+                <span class="font-bold text-slate-700 block">📌 本次例会核心定调与决议：</span>
+                <div id="dash-region-m-resolutions" class="space-y-1.5 text-slate-600 text-[11px] leading-relaxed max-h-40 overflow-y-auto custom-scrollbar whitespace-pre-line">
+                  <!-- 动态填充 -->
                 </div>
               </div>
             </div>
           </div>
 
           <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
-            <span class="text-xs text-slate-500">产生的待办事项：<strong class="text-blue-900" id="dash-latest-m-todos-count">0 项</strong></span>
-            <button onclick="switchTab('minutes')" class="text-xs px-3 py-1.5 bg-[#0F172A] text-white rounded-lg hover:bg-blue-800 transition font-medium shadow-xs">
-              查阅完整纪要全文 ➔
-            </button>
+            <span class="text-xs text-slate-500">产生的待办事项：<strong class="text-blue-900" id="dash-region-m-todos-count">0 项</strong></span>
+            <div class="flex space-x-2">
+              <button onclick="switchTab('minutes', 'region')" class="text-xs px-2.5 py-1 text-slate-700 bg-slate-100 rounded hover:bg-slate-200 transition font-medium">
+                查看大区纪要 ➔
+              </button>
+              <button onclick="switchTab('todos', 'region')" class="text-xs px-2.5 py-1 bg-[#0F172A] text-white rounded hover:bg-blue-800 transition font-medium">
+                管理大区待办 ➔
+              </button>
+            </div>
           </div>
         </div>
 
-        <!-- 右侧：图表可视化 (各分所诉求对比柱状图 + 待办闭环推进状态) -->
-        <div class="space-y-6 lg:col-span-7 flex flex-col justify-between">
-          
-          <!-- 图表1：各分所提出协调事项对比柱状图 -->
-          <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm space-y-3">
-            <div class="flex items-center justify-between">
+        <!-- 板块 2：业务发展委员会 (业发委) 最新纪要与待办速览 -->
+        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between space-y-4">
+          <div>
+            <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+              <div class="flex items-center space-x-2">
+                <span class="w-2.5 h-2.5 bg-purple-600 rounded-full"></span>
+                <h3 class="text-sm font-bold text-slate-900">💼 业务发展委员会 (业发委) · 专项推进速览</h3>
+              </div>
+              <span class="text-xs font-semibold px-2 py-0.5 bg-purple-50 text-purple-700 rounded" id="dash-yefawei-m-date">加载中...</span>
+            </div>
+
+            <div class="mt-3 space-y-3">
               <div>
-                <h4 class="text-xs font-bold text-slate-900 flex items-center">
-                  📊 当月各分所提交协调事项统计
-                </h4>
-                <p class="text-[11px] text-slate-400 mt-0.5">区分王亚哲老师亲自协调与总部各职能部门配合</p>
+                <h4 class="text-xs font-bold text-slate-800 line-clamp-1" id="dash-yefawei-m-title">【会议纪要】加载中...</h4>
+                <p class="text-[11px] text-slate-500 mt-0.5" id="dash-yefawei-m-host">负责人：王亚哲 · 业发委秘书处：马梦然</p>
               </div>
-              <div class="flex items-center space-x-3 text-xs">
-                <span class="flex items-center text-slate-600"><span class="w-2.5 h-2.5 bg-amber-500 rounded-sm mr-1"></span>需亚哲协调</span>
-                <span class="flex items-center text-slate-600"><span class="w-2.5 h-2.5 bg-blue-600 rounded-sm mr-1"></span>需总部协调</span>
-              </div>
-            </div>
 
-            <!-- 条形图容器 (动态渲染) -->
-            <div id="dash-chart-bars" class="h-32 pt-4 flex items-end justify-between gap-2 border-b border-slate-100 pb-2">
-              <!-- JavaScript 动态渲染各分所柱状条 -->
+              <div class="bg-purple-50/40 p-3 rounded-lg border border-purple-100 space-y-2 text-xs">
+                <span class="font-bold text-purple-900 block">📌 本次会议重点工作与决议：</span>
+                <div id="dash-yefawei-m-resolutions" class="space-y-1.5 text-slate-600 text-[11px] leading-relaxed max-h-40 overflow-y-auto custom-scrollbar whitespace-pre-line">
+                  <!-- 动态填充 -->
+                </div>
+              </div>
             </div>
           </div>
 
-          <!-- 图表2：环形图 (待办闭环推进状态) -->
-          <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex items-center justify-between">
-            <div class="flex items-center space-x-4">
-              <div class="relative w-24 h-24 flex items-center justify-center">
-                <svg class="w-24 h-24 transform -rotate-90" viewBox="0 0 36 36">
-                  <path class="text-slate-100" stroke-width="4.5" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
-                  <path id="donut-done" class="text-emerald-500" stroke-width="4.5" stroke-dasharray="0, 100" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
-                  <path id="donut-progress" class="text-amber-500" stroke-width="4.5" stroke-dasharray="0, 100" stroke-dashoffset="0" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
-                  <path id="donut-notyet" class="text-rose-400" stroke-width="4.5" stroke-dasharray="0, 100" stroke-dashoffset="0" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
-                </svg>
-                <div class="absolute text-center">
-                  <span class="text-lg font-bold text-slate-800" id="dash-todo-total">0</span>
-                  <span class="text-[9px] block text-slate-400 -mt-1">项待办</span>
-                </div>
-              </div>
-
-              <div class="space-y-1 text-xs">
-                <div class="font-bold text-slate-800">🍩 例会重点待办执行闭环率</div>
-                <div class="text-[11px] text-slate-500 flex items-center space-x-3">
-                  <span class="flex items-center"><span class="w-2 h-2 bg-emerald-500 rounded-full mr-1"></span>已完成: <strong class="text-emerald-600 ml-1" id="dash-cnt-done">0项</strong></span>
-                  <span class="flex items-center"><span class="w-2 h-2 bg-amber-500 rounded-full mr-1"></span>进行中: <strong class="text-amber-600 ml-1" id="dash-cnt-progress">0项</strong></span>
-                  <span class="flex items-center"><span class="w-2 h-2 bg-rose-400 rounded-full mr-1"></span>未开始: <strong class="text-rose-600 ml-1" id="dash-cnt-notyet">0项</strong></span>
-                </div>
-              </div>
+          <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
+            <span class="text-xs text-slate-500">督办待办事项：<strong class="text-purple-900" id="dash-yefawei-m-todos-count">0 项</strong></span>
+            <div class="flex space-x-2">
+              <button onclick="switchTab('minutes', 'yefawei')" class="text-xs px-2.5 py-1 text-slate-700 bg-slate-100 rounded hover:bg-slate-200 transition font-medium">
+                查看业发委纪要 ➔
+              </button>
+              <button onclick="switchTab('todos', 'yefawei')" class="text-xs px-2.5 py-1 bg-purple-900 text-white rounded hover:bg-purple-800 transition font-medium">
+                管理业发委待办 ➔
+              </button>
             </div>
+          </div>
+        </div>
 
-            <button onclick="switchTab('todos')" class="text-xs px-2.5 py-1 text-blue-700 bg-blue-50 border border-blue-200 rounded hover:bg-blue-100 transition font-medium">
-              管理待办 ➔
+      </div>
+
+      <!-- 下方：全景待办闭环推进状态对比卡片 -->
+      <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="flex items-center space-x-5">
+          <div class="relative w-24 h-24 flex items-center justify-center flex-shrink-0">
+            <svg class="w-24 h-24 transform -rotate-90" viewBox="0 0 36 36">
+              <path class="text-slate-100" stroke-width="4.5" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+              <path id="donut-done" class="text-emerald-500" stroke-width="4.5" stroke-dasharray="0, 100" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+              <path id="donut-progress" class="text-amber-500" stroke-width="4.5" stroke-dasharray="0, 100" stroke-dashoffset="0" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+              <path id="donut-notyet" class="text-rose-400" stroke-width="4.5" stroke-dasharray="0, 100" stroke-dashoffset="0" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+            </svg>
+            <div class="absolute text-center">
+              <span class="text-xl font-bold text-slate-800" id="dash-todo-total">0</span>
+              <span class="text-[9px] block text-slate-400 -mt-1">项总待办</span>
+            </div>
+          </div>
+
+          <div class="space-y-1.5 text-xs">
+            <div class="font-bold text-slate-800 text-sm">🍩 全盘重点待办闭环执行率</div>
+            <p class="text-slate-500 text-[11px]">涵盖中部&西南大区 6 家分所工作与业务发展委员会(业发委)双百推进事项</p>
+            <div class="text-[11px] text-slate-600 flex flex-wrap items-center gap-3 pt-1">
+              <span class="flex items-center"><span class="w-2.5 h-2.5 bg-emerald-500 rounded-full mr-1"></span>已完成: <strong class="text-emerald-700 ml-1" id="dash-cnt-done">0项</strong></span>
+              <span class="flex items-center"><span class="w-2.5 h-2.5 bg-amber-500 rounded-full mr-1"></span>进行中: <strong class="text-amber-700 ml-1" id="dash-cnt-progress">0项</strong></span>
+              <span class="flex items-center"><span class="w-2.5 h-2.5 bg-rose-400 rounded-full mr-1"></span>未开始: <strong class="text-rose-700 ml-1" id="dash-cnt-notyet">0项</strong></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex items-center space-x-3 w-full md:w-auto justify-end">
+          <button onclick="switchTab('todos', 'region')" class="text-xs px-3 py-1.5 text-blue-700 bg-blue-50 border border-blue-200 rounded-lg hover:bg-blue-100 transition font-medium">
+            🏛️ 查阅大区待办 ➔
+          </button>
+          <button onclick="switchTab('todos', 'yefawei')" class="text-xs px-3 py-1.5 text-purple-700 bg-purple-50 border border-purple-200 rounded-lg hover:bg-purple-100 transition font-medium">
+            💼 查阅业发委待办 ➔
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 2: 📝 会议纪要库 (支持【中部与西南大区】及【业务发展委员会】双板块切换) -->
+    <!-- ========================================================================= -->
+    <section id="tab-minutes" class="tab-pane hidden space-y-4">
+      <!-- 业务板块切换药丸 (大区例会 vs 业发委推进会) -->
+      <div class="bg-white p-3 rounded-xl border border-slate-200 shadow-sm flex flex-wrap items-center justify-between gap-3">
+        <div class="flex items-center space-x-2">
+          <span class="text-xs font-bold text-slate-500">会议归属分类：</span>
+          <div class="flex items-center space-x-1.5 p-1 bg-slate-100 rounded-lg">
+            <button onclick="setMinuteCategory('region')" id="btn-min-cat-region" class="px-3 py-1.5 rounded-md text-xs font-bold transition-all bg-white text-slate-900 shadow-xs flex items-center space-x-1.5">
+              <span>🏛️ 中部与西南大区例会</span>
+              <span id="badge-min-cnt-region" class="px-1.5 py-0.2 rounded-full text-[10px] bg-blue-100 text-blue-800 font-mono">0</span>
+            </button>
+            <button onclick="setMinuteCategory('yefawei')" id="btn-min-cat-yefawei" class="px-3 py-1.5 rounded-md text-xs font-medium transition-all text-slate-600 hover:text-slate-900 flex items-center space-x-1.5">
+              <span>💼 业务发展委员会 (业发委)</span>
+              <span id="badge-min-cnt-yefawei" class="px-1.5 py-0.2 rounded-full text-[10px] bg-slate-200 text-slate-700 font-mono">0</span>
             </button>
           </div>
         </div>
-
-      </div>
-    </section>
-
-    <!-- ========================================================================= -->
-    <!-- TAB 2: 📋 分所月报填报 (支持添加新周次、删除周次、一键清空全部内容、即时保存) -->
-    <!-- ========================================================================= -->
-    <section id="tab-reports" class="tab-pane hidden space-y-4">
-      <!-- 周期管理工具栏 -->
-      <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-wrap items-center justify-between gap-3">
-        <div class="flex items-center space-x-2">
-          <label class="text-xs font-bold text-slate-700">当前月份：</label>
-          <select id="report-week-select" onchange="changeReportWeek(this.value)" class="text-sm font-semibold text-blue-900 bg-blue-50 border border-blue-200 rounded-lg px-3 py-1.5 focus:outline-none focus:ring-2 focus:ring-blue-500">
-            <!-- 动态渲染月份列表 -->
-          </select>
-          <button onclick="openAddWeekModal()" class="text-xs px-2.5 py-1.5 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition font-medium flex items-center">
-            ➕ 添加新月份
-          </button>
-          <button onclick="deleteCurrentWeek()" class="text-xs px-2.5 py-1.5 text-rose-600 bg-rose-50 border border-rose-200 rounded-lg hover:bg-rose-100 transition font-medium">
-            🗑️ 删除当前月
-          </button>
-        </div>
-
-        <div class="text-xs text-amber-800 bg-amber-50 border border-amber-200 px-3 py-1.5 rounded-lg flex items-center">
-          💡 各位主任在本人分所卡片填写后4项即可，没有协调事项填“无”。支持点击【保存修改】或【一键清空】。
+        <div class="text-xs text-slate-500 flex items-center space-x-2">
+          <span id="min-category-desc" class="hidden sm:inline text-[11px] text-slate-400">管理中部2所与西南4所大区月度执行例会及沟通纪要</span>
         </div>
       </div>
 
-      <!-- 6个分所卡片列表容器 -->
-      <div id="branch-reports-container" class="space-y-4">
-        <!-- 由 JavaScript 动态渲染 -->
-      </div>
-    </section>
-
-    <!-- ========================================================================= -->
-    <!-- TAB 3: 📝 例会纪要库 (带侧边栏查看、文本一键智能导入、编辑/删除、彻底去除记录人) -->
-    <!-- ========================================================================= -->
-    <section id="tab-minutes" class="tab-pane hidden">
       <!-- 左右两栏布局 -->
       <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden flex flex-col lg:flex-row min-h-[640px]">
         
         <!-- 左侧：日期与期次侧边栏 -->
         <aside class="w-full lg:w-72 bg-slate-50 border-r border-slate-200 flex flex-col flex-shrink-0">
           <div class="p-3.5 border-b border-slate-200 bg-slate-100 flex items-center justify-between">
-            <span class="text-xs font-bold text-slate-700 flex items-center">
-              📅 历史例会档案
+            <span class="text-xs font-bold text-slate-700 flex items-center" id="min-sidebar-heading">
+              📅 历史会议档案
             </span>
             <div class="flex items-center space-x-1.5">
               <button onclick="openSmartImportMinuteModal()" class="text-xs bg-emerald-600 text-white px-2 py-1 rounded hover:bg-emerald-700 transition flex items-center font-medium shadow-xs" title="复制粘贴全文，系统自动识别匹配创建新纪要">
@@ -568,7 +610,7 @@
           </div>
 
           <div class="p-2.5 border-t border-slate-200 text-[11px] text-slate-400 text-center">
-            已归档 <span id="minute-total-count" class="font-bold text-slate-700">0</span> 场会议
+            当前分类已归档 <span id="minute-total-count" class="font-bold text-slate-700">0</span> 场会议
           </div>
         </aside>
 
@@ -578,6 +620,85 @@
             <!-- 由 JavaScript 渲染 -->
           </div>
         </main>
+      </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 3: 📌 待办事项追踪 (支持【中部与西南大区】及【业务发展委员会】双板块独立追踪) -->
+    <!-- ========================================================================= -->
+    <section id="tab-todos" class="tab-pane hidden space-y-4">
+      <!-- 业务板块切换药丸 (大区待办 vs 业发委待办) -->
+      <div class="bg-white p-3 rounded-xl border border-slate-200 shadow-sm flex flex-wrap items-center justify-between gap-3">
+        <div class="flex items-center space-x-2">
+          <span class="text-xs font-bold text-slate-500">待办归属分类：</span>
+          <div class="flex items-center space-x-1.5 p-1 bg-slate-100 rounded-lg">
+            <button onclick="setTodoCategory('region')" id="btn-todo-cat-region" class="px-3 py-1.5 rounded-md text-xs font-bold transition-all bg-white text-slate-900 shadow-xs flex items-center space-x-1.5">
+              <span>🏛️ 中部与西南大区待办</span>
+              <span id="badge-todo-cnt-region" class="px-1.5 py-0.2 rounded-full text-[10px] bg-blue-100 text-blue-800 font-mono">0</span>
+            </button>
+            <button onclick="setTodoCategory('yefawei')" id="btn-todo-cat-yefawei" class="px-3 py-1.5 rounded-md text-xs font-medium transition-all text-slate-600 hover:text-slate-900 flex items-center space-x-1.5">
+              <span>💼 业务发展委员会 (业发委)</span>
+              <span id="badge-todo-cnt-yefawei" class="px-1.5 py-0.2 rounded-full text-[10px] bg-slate-200 text-slate-700 font-mono">0</span>
+            </button>
+          </div>
+        </div>
+        <div class="text-xs text-slate-500 flex items-center space-x-2">
+          <span id="todo-category-desc" class="hidden sm:inline text-[11px] text-slate-400">大区重点督办：人才引进·合规论坛·场地合租·IP运营</span>
+        </div>
+      </div>
+
+      <!-- 快捷状态筛选栏与顶部操作栏 -->
+      <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-wrap items-center justify-between gap-3">
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="text-xs font-bold text-slate-600">进展状态：</span>
+          <div class="flex items-center space-x-1" id="todo-status-tabs">
+            <button onclick="setTodoStatusFilter('all')" id="btn-st-all" class="px-2.5 py-1 rounded-md text-xs font-bold bg-blue-100 text-blue-900 border border-blue-200">全部 (<span id="cnt-all">0</span>)</button>
+            <button onclick="setTodoStatusFilter('进行中')" id="btn-st-progress" class="px-2.5 py-1 rounded-md text-xs font-medium bg-amber-50 text-amber-800 border border-amber-200 hover:bg-amber-100">🟡 进行中 (<span id="cnt-progress">0</span>)</button>
+            <button onclick="setTodoStatusFilter('已完成')" id="btn-st-done" class="px-2.5 py-1 rounded-md text-xs font-medium bg-emerald-50 text-emerald-800 border border-emerald-200 hover:bg-emerald-100">🟢 已完成 (<span id="cnt-done">0</span>)</button>
+            <button onclick="setTodoStatusFilter('未开始')" id="btn-st-notyet" class="px-2.5 py-1 rounded-md text-xs font-medium bg-rose-50 text-rose-800 border border-rose-200 hover:bg-rose-100">🔴 未开始 (<span id="cnt-notyet">0</span>)</button>
+          </div>
+
+          <span class="text-xs font-bold text-slate-600 ml-3">责任人：</span>
+          <select id="todo-owner-filter" onchange="renderTodos()" class="text-xs border border-slate-300 rounded px-2 py-1 bg-white focus:outline-none">
+            <!-- 动态根据当前分类适配责任人 -->
+          </select>
+        </div>
+
+        <div class="flex items-center space-x-2">
+          <!-- 核心功能：防重复提取纪要待办 -->
+          <button onclick="openExtractTodosModal()" class="text-xs bg-emerald-700 hover:bg-emerald-800 text-white px-3 py-1.5 rounded-lg transition flex items-center font-medium shadow-xs" title="选择一篇或全部会议纪要，智能防重复提取待办事项入库">
+            ⚡ 从会议纪要提取待办
+          </button>
+          <button onclick="openNewTodoModal()" class="text-xs bg-[#0F172A] text-white px-3 py-1.5 rounded-lg hover:bg-blue-800 transition flex items-center font-medium shadow-xs">
+            + 手动添加待办
+          </button>
+        </div>
+      </div>
+
+      <!-- 待办任务表格卡片 -->
+      <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="bg-slate-50 border-b border-slate-200 text-[11px] font-bold text-slate-600">
+                <th class="p-3 w-12 text-center text-slate-400 font-mono">序号</th>
+                <th class="p-3 w-28">责任人</th>
+                <th class="p-3">具体行动事项与交付目标</th>
+                <th class="p-3 w-28">所属组织</th>
+                <th class="p-3 w-28 text-center">要求截止时间</th>
+                <th class="p-3 w-32">当前进展状态</th>
+                <th class="p-3 w-64">最新进展说明</th>
+                <th class="p-3 w-24 text-center">操作</th>
+              </tr>
+            </thead>
+            <tbody id="todos-table-body" class="divide-y divide-slate-100 text-xs">
+              <!-- 由 JavaScript 动态渲染 -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
       </div>
     </section>
 
@@ -746,6 +867,19 @@
       <input type="hidden" id="edit-minute-id">
       <div class="space-y-3 text-xs">
         <div>
+          <label class="block font-medium text-slate-700 mb-1">所属业务分类：</label>
+          <div class="grid grid-cols-2 gap-2">
+            <label class="flex items-center space-x-2 border rounded-lg p-2 cursor-pointer hover:bg-slate-50 bg-white">
+              <input type="radio" name="minute-category" value="region" id="m-cat-region" onchange="adaptMinuteFormAttendees(this.value)" class="text-blue-600" checked>
+              <span class="font-bold text-slate-800 text-xs">🏛️ 中部与西南大区例会</span>
+            </label>
+            <label class="flex items-center space-x-2 border rounded-lg p-2 cursor-pointer hover:bg-slate-50 bg-white">
+              <input type="radio" name="minute-category" value="yefawei" id="m-cat-yefawei" onchange="adaptMinuteFormAttendees(this.value)" class="text-purple-600">
+              <span class="font-bold text-slate-800 text-xs">💼 业务发展委员会 (业发委)</span>
+            </label>
+          </div>
+        </div>
+        <div>
           <label class="block font-medium text-slate-700 mb-1">会议名称/期次：</label>
           <input type="text" id="m-form-title" placeholder="如：#0918 西南&中部大区执行主任九月会议" class="w-full p-2 border rounded focus:ring-1 focus:ring-blue-500">
         </div>
@@ -814,6 +948,20 @@
             🤖 智能识别提取结果预览 (可直接在此确认或微调)
           </span>
           <span class="text-[11px] text-blue-700 bg-blue-100 px-2 py-0.5 rounded font-medium" id="smart-parse-status-badge">等待输入文本</span>
+        </div>
+
+        <div>
+          <label class="block text-[11px] font-bold text-slate-700 mb-1">存入业务分类：</label>
+          <div class="grid grid-cols-2 gap-2">
+            <label class="flex items-center space-x-2 border border-blue-200 rounded-lg p-1.5 bg-white cursor-pointer hover:bg-slate-50">
+              <input type="radio" name="smart-minute-category" value="region" id="smart-cat-region" onchange="adaptSmartAttendeesDefault(this.value)" class="text-blue-600" checked>
+              <span class="font-bold text-slate-800 text-xs">🏛️ 中部与西南大区例会</span>
+            </label>
+            <label class="flex items-center space-x-2 border border-purple-200 rounded-lg p-1.5 bg-white cursor-pointer hover:bg-slate-50">
+              <input type="radio" name="smart-minute-category" value="yefawei" id="smart-cat-yefawei" onchange="adaptSmartAttendeesDefault(this.value)" class="text-purple-600">
+              <span class="font-bold text-slate-800 text-xs">💼 业务发展委员会 (业发委)</span>
+            </label>
+          </div>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
@@ -944,6 +1092,19 @@
       </div>
       <input type="hidden" id="edit-todo-id">
       <div class="space-y-3 text-xs">
+        <div>
+          <label class="block font-medium text-slate-700 mb-1">所属业务分类：</label>
+          <div class="grid grid-cols-2 gap-2">
+            <label class="flex items-center space-x-2 border rounded-lg p-1.5 cursor-pointer hover:bg-slate-50 bg-white">
+              <input type="radio" name="edit-todo-category" value="region" id="edit-todo-cat-region" onchange="adaptEditTodoOwnerOptions(this.value)" class="text-blue-600" checked>
+              <span class="font-bold text-slate-800 text-xs">🏛️ 中部与西南大区</span>
+            </label>
+            <label class="flex items-center space-x-2 border rounded-lg p-1.5 cursor-pointer hover:bg-slate-50 bg-white">
+              <input type="radio" name="edit-todo-category" value="yefawei" id="edit-todo-cat-yefawei" onchange="adaptEditTodoOwnerOptions(this.value)" class="text-purple-600">
+              <span class="font-bold text-slate-800 text-xs">💼 业务发展委员会 (业发委)</span>
+            </label>
+          </div>
+        </div>
         <div class="grid grid-cols-2 gap-3">
           <div>
             <label class="block font-medium text-slate-700 mb-1">责任人：</label>
@@ -995,31 +1156,6 @@
     </div>
   </div>
 
-  <!-- 模态框 5：添加新月报填报周期 -->
-  <div id="modal-add-week" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 hidden items-center justify-center p-4" onclick="if(event.target === this) closeAddWeekModal()">
-    <div class="bg-white rounded-xl max-w-sm w-full p-5 shadow-xl border border-slate-200 space-y-4">
-      <div class="flex justify-between items-center border-b pb-2">
-        <h3 class="text-sm font-bold text-slate-800">➕ 添加新月报填报周期</h3>
-        <button onclick="closeAddWeekModal()" class="text-slate-400 hover:text-slate-600">✕</button>
-      </div>
-      <div class="space-y-3 text-xs">
-        <div>
-          <label class="block font-medium text-slate-700 mb-1">选择月份：</label>
-          <input type="month" id="new-month-picker" onchange="autoFillMonthLabel(this.value)" class="w-full p-2 border rounded focus:ring-1 focus:ring-blue-500 font-bold text-slate-800">
-        </div>
-        <div>
-          <label class="block font-medium text-slate-700 mb-1">月报显示名称：</label>
-          <input type="text" id="new-week-label" placeholder="如：2026年11月度" class="w-full p-2 border rounded focus:ring-1 focus:ring-blue-500 font-medium">
-        </div>
-        <p class="text-[11px] text-slate-400">💡 创建后，系统将自动排布 6 家分所标准月报卡片，由各位主任直接填写。</p>
-      </div>
-      <div class="flex justify-end space-x-2 pt-2 border-t">
-        <button onclick="closeAddWeekModal()" class="px-3 py-1.5 border rounded text-xs text-slate-600 hover:bg-slate-50">取消</button>
-        <button onclick="confirmAddWeek()" class="px-3 py-1.5 bg-emerald-600 text-white rounded text-xs font-medium hover:bg-emerald-700">确认添加</button>
-      </div>
-    </div>
-  </div>
-
   <!-- 模态框 6：添加待办事项 (手动) -->
   <div id="modal-new-todo" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 hidden items-center justify-center p-4" onclick="if(event.target === this) closeNewTodoModal()">
     <div class="bg-white rounded-xl max-w-md w-full p-5 shadow-xl border border-slate-200 space-y-4">
@@ -1028,6 +1164,19 @@
         <button onclick="closeNewTodoModal()" class="text-slate-400 hover:text-slate-600">✕</button>
       </div>
       <div class="space-y-3 text-xs">
+        <div>
+          <label class="block font-medium text-slate-700 mb-1">所属业务分类：</label>
+          <div class="grid grid-cols-2 gap-2">
+            <label class="flex items-center space-x-2 border rounded-lg p-1.5 cursor-pointer hover:bg-slate-50 bg-white">
+              <input type="radio" name="new-todo-category" value="region" id="new-todo-cat-region" onchange="adaptNewTodoOwnerOptions(this.value)" class="text-blue-600" checked>
+              <span class="font-bold text-slate-800 text-xs">🏛️ 中部与西南大区</span>
+            </label>
+            <label class="flex items-center space-x-2 border rounded-lg p-1.5 cursor-pointer hover:bg-slate-50 bg-white">
+              <input type="radio" name="new-todo-category" value="yefawei" id="new-todo-cat-yefawei" onchange="adaptNewTodoOwnerOptions(this.value)" class="text-purple-600">
+              <span class="font-bold text-slate-800 text-xs">💼 业务发展委员会 (业发委)</span>
+            </label>
+          </div>
+        </div>
         <div class="grid grid-cols-2 gap-3">
           <div>
             <label class="block font-medium text-slate-700 mb-1">责任人：</label>
@@ -1066,7 +1215,7 @@
   </div>
 
   <!-- JavaScript 核心逻辑 -->
-  <script>
+    <script>
     // 基础6家分所标准模板
     const defaultBranchList = [
       { region: "中部大区", branch: "武汉分所", lead: "夏晓飞 (管委会副主任/执行主任)" },
@@ -1078,153 +1227,436 @@
     ];
 
     const initialData = {
-      // 月度映射字典
-      weekLabels: {
-        "2026-10": "2026年10月度 (本月)",
-        "2026-11": "2026年11月度",
-        "2026-09": "2026年09月度"
+  "weekLabels": {
+    "2026-10": "2026年10月度 (本月)",
+    "2026-11": "2026年11月度",
+    "2026-09": "2026年09月度"
+  },
+  "currentWeek": "2026-10",
+  "minutes": [
+    {
+      "id": "m-1792636987016",
+      "title": "#1021 西南&中部大区10月月度工作会议",
+      "date": "2026-10-21",
+      "time": "14:00 - 15:30",
+      "host": "王亚哲",
+      "attendees": "王亚哲、朱敏、邱月、夏晓飞、杜易、张晶、陈赛男、张歆妍、胡侨益",
+      "content": "会议时间：2026年10月21日 14:00 - 15:30\n参会人员：王亚哲、朱敏、邱月、夏晓飞、杜易、张晶、陈赛男、张歆妍、胡侨益\n会议主旨：攻坚人才引进堵点、敲定大部门责任书签署节点、启动西南 IP 运营中心赋能\n一、人才引进：各所进度复盘与卡点对策\n1. 大盘现状：10月各所目标合计49人，当前实际转入仅5人（成都1、重庆2、贵阳1、武汉1、昆明0），约谈与转化效率普遍滞后。\n2. 分所核心卡点与解法：\n成都：引才岗位严重断档（2人离职、1人陪产，仅剩1人支撑）。对策：由胡侨益对接总部招聘资源，专项支持补人。\n重庆：高创收合伙人因房间费政策产生分歧。对策：灵活协商空间政策，加速重点团队谈判。\n昆明：线索匮乏且HR主管病休。对策：依托大区统一导出的法禅名单，加强电话触达。\n贵阳：线索管理混乱、优质资源断跟。对策：张晶主任安排人力复盘6至10月线索，向亚哲老师做专题汇报。\n武汉：新增人资专员排查200人名单，5至6人有意向，正重点攻坚20至30人的盈科合伙人大团队。\n二、大部门建设：目标责任书签订排期\n业发委将对部门长实施双百计划（每月交流加季度实战训战），各所须推进年度经营责任状（创收、专业品牌、引才）签署，签约节点明确如下：\n1. 10月底前完成：武汉、重庆、贵阳（贵阳刑事部门先定牵头人再扩充队伍）；\n2. 11月10日前完成：昆明；\n3. 11月15日左右完成：成都（召开全体部门主任大会现场签订2027年全年责任书）。\n三、IP 运营中心启动：实战营与50个伴飞名额\n张歆妍正式履新大区IP运营中心负责人，全面启动新媒体赋能以驱动人才引进：\n1. 启动模式：11月初举办两天一夜IP律师实战训练营，邀请行业知名导师授课，对试点所执业律师及拟加盟律师全免费开放。\n2. 首期赋能名额（大区共50人）：训后每家分所首批锁定10个深度伴飞名额，享受180天免费剪辑、方法论辅导及社群陪跑，实行进出动态增补。\n3. 分所协同需求：各主任在所内全力动员报名（重点挖掘有专业积累的律师），并协助当地直播间及会务资源调研。\n1. 线索支持：导出法禅系统律师名录并分发各分所，责任人：王亚哲，完成时间：本周内；\n2. 引才补人：对接总部招聘组专项支援成都所招引才专员，责任人：胡侨益，完成时间：10月23日前；\n3. 线索复盘：复盘贵阳6至10月引才线索流转断点并汇报，责任人：张晶，完成时间：10月25日前；\n4. 责任书签署：按既定节点推进大部门责任状签署并交马梦然，责任人：邱月、夏晓飞、杜易、朱敏，完成时间：见各所排期；\n5. IP方案出台：完成训练营及赋能手册定稿并制作宣发材料，责任人：张歆妍，完成时间：10月25日前；",
+      "todosText": "1. 线索支持：导出法禅系统律师名录并分发各分所，责任人：王亚哲，完成时间：本周内；\n2. 引才补人：对接总部招聘组专项支援成都所招引才专员，责任人：胡侨益，完成时间：10月23日前；\n3. 线索复盘：复盘贵阳6至10月引才线索流转断点并汇报，责任人：张晶，完成时间：10月25日前；\n4. 责任书签署：按既定节点推进大部门责任状签署并交马梦然，责任人：邱月、夏晓飞、杜易、朱敏，完成时间：见各所排期；\n5. IP方案出台：完成训练营及赋能手册定稿并制作宣发材料，责任人：张歆妍，完成时间：10月25日前；\n6. 律师报名动员：各所启动律师参营动员并挖掘种子律师，责任人：各分所主任，完成时间：10月底前。 @所有人",
+      "category": "region"
+    },
+    {
+      "id": "m-1792637000001",
+      "title": "【会议纪要】#1102 业务发展委员会(业发委)双百计划与专业部门责任状推进会",
+      "date": "2026-11-02",
+      "time": "14:30 - 16:00",
+      "host": "王亚哲",
+      "attendees": "王亚哲(业发委副主任/部长)、马梦然、各业务中心主任、各专业部门负责人",
+      "content": "会议主旨：推进各分所专业大部门年度经营目标责任书签署，部署双百计划实战训战与跨区业务联动。\n一、大部门建设与责任状签署进度排期\n1. 明确各分所专业部门目标责任书签署节点（武汉、重庆、贵阳10月底前完成，昆明11月10日前完成，成都11月15日前全员大会签订）。\n2. 马梦然负责收集各所签约协议文本并建立业发委备案库。\n二、双百计划赋能实施\n1. 业发委启动月度业务交流与季度实战训战，全国遴选首批骨干律师重点伴飞。\n2. 联合大区IP运营中心，做好产品研发与新媒体宣发融合。\n三、跨区业务协作与重大案源协同\n建立全国跨区分所重大业务联合投标与专家库调配机制。",
+      "todosText": "1. 汇总跟进各分所专业大部门经营责任状签约协议并归档 @马梦然 完成时间：11月10日前；\n2. 制定业发委“双百计划”首期训战方案与导师排期 @王亚哲 完成时间：11月15日前；\n3. 梳理跨区业务协同与分润备案申报指南 @业发委秘书处 完成时间：11月20日前；",
+      "category": "yefawei"
+    },
+    {
+      "id": "m-1791622423211",
+      "title": "#0922 贵阳&长沙沟通纪要",
+      "date": "2026-09-22",
+      "time": "",
+      "host": "王亚哲",
+      "attendees": "王亚哲(区域执行主任/部长)、陈赛男(长沙)、张晶(贵阳)",
+      "content": "一、 贵阳分所专项治理（财务·合同·降本）\n1、财务账目重构：当前财务数据严重矛盾（管理费与税费未拆分、座位费虚高、134万亏损数据存疑）。财务须统一核算口径，尽快重算并输出真实的经营盈亏底表。\n2、合规与管理费落地：多位合伙人长期未签书面协议且收费标准混乱。确定过渡期方案：今年底前维持原3%政策，本月内完成全员合同补签，明年1月1日起全面执行新管理费规则。\n3、场地极致降本：针对2000㎡仅10余人使用的低效现状，重新校准房间费定价模型；首选“对外合租砍半至1000㎡”，备选“协商退租一半（承担违约金）”，切实降低租金与摊销负担。\n二、 长沙分所筹建（选址·谈判·节点）\n1、场地比选与谈判：\n- 佳兆业广场21楼（首选）：约1062㎡，年租金98万（含物业），形象展示佳且具备扩租条件。\n- 合作谈判底线：若与季红主任合作，坚持“只租房、不补贴装修款”，以监事会主任等荣誉/身份进行激励。\n2、时间节点：10月内锁定选址大方向并组织实地考察，随后启动2个月装修改造，确保年内落地。\n三、 组织文化与人才目标\n企业文化：推行“华为奋斗者文化”，强调价值创造与优胜劣汰，杜绝吃大锅饭；平衡总所全国协同与分所本地利益分配。\n规模规划：确立长沙分所人才梯队目标（3年150人、6年240人），倒逼总部赋能工具的研发与支持。\n1. 贵阳财务核盘：清理矛盾科目与记账口径，输出真实经营总览底表，制定收支平衡与盈亏平衡计划。\n2. 管理费合同补签：梳理历史合伙人原始约定，本月内完成全部合同拟定与补签，确保明年1月1日平稳切换新规。\n3. 场地降本方案落地： 推进对外合租将面积降至1000㎡；同步测算并沟通退租一半的违约金方案，全力降低房租成本。",
+      "todosText": "1. 贵阳财务核盘：清理矛盾科目与记账口径，输出真实经营总览底表，制定收支平衡与盈亏平衡计划。\n2. 管理费合同补签：梳理历史合伙人原始约定，本月内完成全部合同拟定与补签，确保明年1月1日平稳切换新规。\n3. 场地降本方案落地： 推进对外合租将面积降至1000㎡；同步测算并沟通退租一半的违约金方案，全力降低房租成本。\n4. 长沙筹建节点推进：10月内确定场地大方向，组织实地考察并启动装修，力争年内完成筹建。 @陈赛男 @张晶",
+      "category": "region"
+    },
+    {
+      "id": "m-1791622306108",
+      "title": "#0918 西南&中部大区执行主任九月会议",
+      "date": "2026-09-18",
+      "time": "",
+      "host": "王亚哲",
+      "attendees": "王亚哲(区域执行主任/部长)、夏晓飞(武汉)、陈赛男(长沙)、朱敏(成都)、邱月(重庆)、杜易(昆明)、张晶(贵阳)",
+      "content": "#0918 西南&中部大区执行主任九月会议\n本次会议主要围绕西南&中部大区各分所的人才引进进度、专业部门建设规划、租售比优化及IP中心项目等议题展开，重点内容备忘如下——\n1. 各办公室人才引进进度汇报\n●重庆办公室：9月目标引进3位律师，已完成，在册律师67位，再加3位转入可达69位。存在问题：引进的青年律师偏多，创收较低，重点引进大团队被卡住，希望亚哲主任协助谈判。亚哲主任建议国庆后在重庆举办活动扩大线索，同时关注管委会主任级别人才引进。\n●武汉办公室：本月可转入2位律师，跟进两个盈科团队，杜金凤团队因降本方案有较大希望。面临恒都武汉、前程武汉新所竞争，地理位置不占优，但已与物业谈判将房租和物业费下调20%。目前人员流失率较高，今年进15人走11人，到月底目标达80人。\n●贵阳办公室：9月目标为1位权益合伙人、1位合伙人和6位专职律师，目前已完成1位合伙人和1位专职律师，另有1位在途。跟进盈科和大成两个律师团队。存在问题：办公成本高，政策不明朗，青年律师转入多，希望亚哲主任介绍优质团队并加快IP中心项目落地。\n●成都办公室：在册76位律师，9月目标5位，已转入4位，另4位待转入，有望达80人。今年已走16位律师，经济环境导致创收下降，青年律师案源不稳定。目前在跟进多个律师团队，希望亚哲主任多介绍线索支持引进。\n2. 人才引进策略与抓手\n●三大法宝：亚哲主任提出“知恒三大法宝”作为吸引大团队的差异化优势：一是构建全国最丰富的专业部门体系，可帮助团队设立部门并打通全国市场；二是搭建全国最确定的内部交易市场，内部交易系统将于两个月后上线，合作目标达到40%以上；三是实施全国最扎实的赋能计划（双百计划），为专业部门负责人提供闭门私董圈、法律服务产品研发、实务课程辅导、市场开拓辅导及业绩增长实战训练营等六大方面支撑。\n●人才引进顾问政策：介绍了人才引进代理商模式，采用阶梯制费用，建议各执行主任可在内部选择活跃律师担任顾问。\n3. 专业部门建设指引\n●指引重点内容：①设立原则：各部门均可设立，但避免业务交叉重复，命名参考当地律协专业委员会。②由各地业发委办公室推荐，无业发委则由执行主任推荐，经管委会或大区主任审核，全国业发委备案。③主任需签订经营责任状，包含部门创收目标、个人创收目标及品牌建设、人才培养等要求。④各地办公室在册执业律师只能加入一个部门（财务记账主部门），但可一专多辅，每年可申请更换部门。⑤考核与激励：部门基础创收目标原则上不低于300万，过渡期可弹性调整。考核权重：部门创收35%、主任创收25%、业务发展支持40%。⑥双百计划衔接：部门主任签订责任状后可优先纳入双百计划，获得总部赋能支持。\n●时间节点：9月底前完成部门组建，10月中旬前完成主任聘任和签约仪式。对于新引进团队，可立即成立对应部门。\n4. 租售比分析与降本措施\n●各办公室租售比数据：王亚哲通报了各办公室租售比，贵阳超过1000%，成都310%，重庆203%，武汉185%，昆明124%，良性的标准为62%。目前仅昆明合格，其他办公室需关注降本。\n●降本建议：武汉已主动申请降租金，贵阳需评估换址可能性。各办公室需调研写字楼行情，争取降低租金。\n5. IP中心项目\n●IP中心项目：计划在西南和中部区域同时开启IP中心，初期需投入1-2个剪辑人员，成本对价是帮助人才引进增量，计划于国庆后正式启动，各办公室均可参与。",
+      "todosText": "1.策划重庆活动: 国庆后在重庆组织人才引进活动，邀请熟悉人士扩大线索；邱月配合安排时间。@王亚哲 @邱月\n2.完成部门签约: 各执行主任在9月底前完成专业部门目标责任书确认，并组织签约仪式；若时间紧可延至国庆后一周。@夏晓飞@张晶@朱敏@杜易@邱月@马梦然\n3.调研降本方案: 各办公室调研当地写字楼租金行情，争取降低租金；贵阳需评估换址可能性，做三年计划。@夏晓飞@张晶@朱敏@杜易@邱月\n4.启动IP中心: 国庆后正式启动西南及中部区域IP中心项目，前期需投入剪辑人员，提前与各主任同步具体方案。@王亚哲\n5.人才顾问签约：各办公室执行主任，可以与人才引进顾问进行正式的合同确认，后面按照合同约定支付对应的人才引进激励费用。重点可以选择所内有影响力的律师、所外渠道人员等。9月底前各办公室需要同步各自人才顾问签约情况进度。@夏晓飞@张晶@朱敏@杜易@邱月",
+      "category": "region"
+    }
+  ],
+  "todos": [
+    {
+      "id": 1792637000011,
+      "date": "2026-11-02",
+      "owner": "马梦然",
+      "org": "业发委秘书处",
+      "task": "汇总跟进各分所专业大部门经营责任状签约协议并归档",
+      "deadline": "2026-11-10",
+      "status": "进行中",
+      "note": "已收到武汉、重庆签约件，昆明正推进",
+      "category": "yefawei"
+    },
+    {
+      "id": 1792637000012,
+      "date": "2026-11-02",
+      "owner": "王亚哲",
+      "org": "业发委",
+      "task": "制定业发委“双百计划”首期训战方案与导师排期",
+      "deadline": "2026-11-15",
+      "status": "进行中",
+      "note": "实战训战方案初稿已起草",
+      "category": "yefawei"
+    },
+    {
+      "id": 1792637000013,
+      "date": "2026-11-02",
+      "owner": "全体主任",
+      "org": "业发委",
+      "task": "梳理跨区业务协同与分润备案申报指南",
+      "deadline": "2026-11-20",
+      "status": "未开始",
+      "note": "",
+      "category": "yefawei"
+    },
+    {
+      "id": 1792636987025,
+      "date": "2026-10-21",
+      "owner": "所有人",
+      "org": "大区/总办",
+      "task": "律师报名动员：各所启动律师参营动员并挖掘种子律师，责任人：各分所主任，完成时间：10月底前。 @所有人",
+      "deadline": "2026-10-31",
+      "status": "进行中",
+      "note": "持续进行中",
+      "category": "region"
+    },
+    {
+      "id": 1792636987024,
+      "date": "2026-10-21",
+      "owner": "张歆妍",
+      "org": "大区/IP运营中心",
+      "task": "IP方案出台：完成训练营及赋能手册定稿并制作宣发材料，责任人：张歆妍，完成时间：10月25日前；",
+      "deadline": "2026-10-25",
+      "status": "已完成",
+      "note": "已完成宣发材料制作及动员发出",
+      "category": "region"
+    },
+    {
+      "id": 1792636987023,
+      "date": "2026-10-21",
+      "owner": "全体主任",
+      "org": "武汉分所",
+      "task": "责任书签署：按既定节点推进大部门责任状签署并交马梦然，责任人：邱月、夏晓飞、杜易、朱敏，完成时间：见各所排期；",
+      "deadline": "2026-10-31",
+      "status": "进行中",
+      "note": "持续进行中",
+      "category": "region"
+    },
+    {
+      "id": 1792636987022,
+      "date": "2026-10-21",
+      "owner": "张晶",
+      "org": "贵阳分所",
+      "task": "线索复盘：复盘贵阳6至10月引才线索流转断点并汇报，责任人：张晶，完成时间：10月25日前；",
+      "deadline": "2026-10-25",
+      "status": "已完成",
+      "note": "10月23日已完成汇报",
+      "category": "region"
+    },
+    {
+      "id": 1792636987021,
+      "date": "2026-10-21",
+      "owner": "胡侨益",
+      "org": "HRBP",
+      "task": "引才补人：对接总部招聘组专项支援成都所招引才专员，责任人：胡侨益，完成时间：10月23日前；",
+      "deadline": "2026-10-31",
+      "status": "已完成",
+      "note": "人选已面试确认",
+      "category": "region"
+    },
+    {
+      "id": 1792636987020,
+      "date": "2026-10-21",
+      "owner": "王亚哲",
+      "org": "大区/总办",
+      "task": "线索支持：导出法禅系统律师名录并分发各分所，责任人：王亚哲，完成时间：本周内；",
+      "deadline": "2026-10-31",
+      "status": "已完成",
+      "note": "",
+      "category": "region"
+    },
+    {
+      "id": 1791622423214,
+      "date": "2026-09-22",
+      "owner": "陈赛男",
+      "org": "长沙分所",
+      "task": "长沙筹建节点推进：10月内确定场地大方向，组织实地考察并启动装修，力争年内完成筹建。 @陈赛男",
+      "deadline": "2026-10-31",
+      "status": "进行中",
+      "note": "",
+      "category": "region"
+    },
+    {
+      "id": 1791622423213,
+      "date": "2026-09-22",
+      "owner": "张晶",
+      "org": "贵阳分所",
+      "task": "场地降本方案落地： 推进对外合租将面积降至1000㎡；同步测算并沟通退租一半的违约金方案，全力降低房租成本。",
+      "deadline": "2026-10-31",
+      "status": "进行中",
+      "note": "",
+      "category": "region"
+    },
+    {
+      "id": 1791622423212,
+      "date": "2026-09-22",
+      "owner": "张晶",
+      "org": "贵阳分所",
+      "task": "管理费合同补签：梳理历史合伙人原始约定，本月内完成全部合同拟定与补签，确保明年1月1日平稳切换新规。",
+      "deadline": "2026-10-31",
+      "status": "进行中",
+      "note": "",
+      "category": "region"
+    },
+    {
+      "id": 1791622423211,
+      "date": "2026-09-22",
+      "owner": "张晶",
+      "org": "贵阳分所",
+      "task": "贵阳财务核盘：清理矛盾科目与记账口径，输出真实经营总览底表，制定收支平衡与盈亏平衡计划。",
+      "deadline": "2026-10-31",
+      "status": "进行中",
+      "note": "",
+      "category": "region"
+    },
+    {
+      "id": 1791622306112,
+      "date": "2026-09-18",
+      "owner": "全体主任",
+      "org": "大区",
+      "task": "人才顾问签约：各办公室执行主任，可以与人才引进顾问进行正式的合同确认，后面按照合同约定支付对应的人才引进激励费用。重点可以选择所内有影响力的律师、所外渠道人员等。9月底前各办公室需要同步各自人才顾问签约情况进度。@夏晓飞@张晶@朱敏@杜易@邱月",
+      "deadline": "2026-09-28",
+      "status": "进行中",
+      "note": "",
+      "category": "region"
+    },
+    {
+      "id": 1791622306111,
+      "date": "2026-09-18",
+      "owner": "王亚哲",
+      "org": "大区",
+      "task": "启动IP中心: 国庆后正式启动西南及中部区域IP中心项目，前期需投入剪辑人员，提前与各主任同步具体方案。@王亚哲",
+      "deadline": "2026-10-31",
+      "status": "进行中",
+      "note": "",
+      "category": "region"
+    },
+    {
+      "id": 1791622306110,
+      "date": "2026-09-18",
+      "owner": "全体主任",
+      "org": "大区",
+      "task": "调研降本方案: 各办公室调研当地写字楼租金行情，争取降低租金；贵阳需评估换址可能性，做三年计划。@夏晓飞@张晶@朱敏@杜易@邱月",
+      "deadline": "2026-10-31",
+      "status": "进行中",
+      "note": "",
+      "category": "region"
+    },
+    {
+      "id": 1791622306109,
+      "date": "2026-09-18",
+      "owner": "全体主任",
+      "org": "大区",
+      "task": "完成部门签约: 各执行主任在9月底前完成专业部门目标责任书确认，并组织签约仪式；若时间紧可延至国庆后一周。@夏晓飞@张晶@朱敏@杜易@邱月@马梦然",
+      "deadline": "2026-09-28",
+      "status": "进行中",
+      "note": "",
+      "category": "region"
+    },
+    {
+      "id": 1791622306108,
+      "date": "2026-09-18",
+      "owner": "邱月",
+      "org": "重庆分所",
+      "task": "策划重庆活动: 国庆后在重庆组织人才引进活动，邀请熟悉人士扩大线索；邱月配合安排时间。@王亚哲 @邱月",
+      "deadline": "2026-10-31",
+      "status": "进行中",
+      "note": "",
+      "category": "region"
+    }
+  ],
+  "reports": {
+    "2026-10": [
+      {
+        "region": "中部大区",
+        "branch": "武汉分所",
+        "lead": "夏晓飞 (管委会副主任/执行主任)",
+        "work": "",
+        "plan": "",
+        "yazhe": "无",
+        "hq": "无"
       },
-      currentWeek: "2026-10",
-
-      // 会议纪要库
-      minutes: [
-        {
-          id: "m-0918",
-          date: "2026-10-08",
-          title: "【会议纪要】#0918 西南&中部大区执行主任九月会议",
-          time: "09:30 - 11:30",
-          host: "王亚哲",
-          attendees: "王亚哲(区域执行主任/部长)、夏晓飞(武汉)、陈赛男(长沙)、朱敏(成都)、邱月(重庆)、杜易(昆明)、张晶(贵阳)",
-          content: `本次会议主要围绕西南&中部大区各分所的人才引进进度、专业部门建设规划、租售比优化及IP中心项目等议题展开，重点内容备忘如下：
-
-1. 各办公室人才引进进度汇报
-● 重庆办公室：9月目标引进3位律师，已完成，在册律师67位，再加3位转入可达69位。存在问题：引进青年律师偏多，创收较低，重点引进大团队被卡住，希望亚哲主任协助谈判。亚哲主任建议国庆后在重庆举办活动扩大线索，同时关注管委会主任级别人才引进。
-● 武汉办公室：本月可转入2位律师，跟进两个盈科团队，杜金凤团队因降本方案有较大希望。面临恒都武汉、前程武汉新所竞争，但已与物业谈判将房租物业费下调20%。目前人员流失率较高，今年进15人走11人，到月底目标达80人。
-● 贵阳办公室：9月目标为1位权益合伙人、1位合伙人和6位专职律师，目前已完成1位合伙人和1位专职律师，另有1位在途。跟进盈科和大成两个团队。存在问题：办公成本高，政策不明朗，青年律师转入多，希望亚哲主任介绍优质团队并加快IP中心项目落地。
-● 成都办公室：在册76位律师，9月目标5位，已转入4位，另4位待转入，有望达80人。今年已走16位律师，经济环境导致创收下降。目前在跟进多个律师团队，希望亚哲主任多介绍线索支持引进。
-
-2. 人才引进策略与抓手
-● 知恒三大法宝：亚哲主任提出“知恒三大法宝”作为吸引大团队的差异化优势：一是构建全国最丰富的专业部门体系，可帮助团队设立部门并打通全国市场；二是搭建全国最确定的内部交易市场，内部交易系统将于两个月后上线，合作目标达到40%以上；三是实施全国最扎实的赋能计划（双百计划），为专业部门负责人提供闭门私董圈、法律服务产品研发、实务课程辅导、市场开拓辅导及业绩增长实战训练营等六大方面支撑。
-
-3. 专业部门建设规划与落地节点
-● 指引下发：专业部门设立指引已下发，涵盖申请条件、部门设置、支持与赋能及业务目标等。
-● 时间节点：9月底前完成部门组建，10月中旬前完成主任聘任和签约仪式。
-
-4. 租售比分析与降本措施
-● 租售比数据：王亚哲通报了各办公室租售比，贵阳超过1000%，成都310%，重庆203%，武汉185%，昆明124%，良性标准为62%。目前仅昆明合格，其他办公室需重点关注降本。
-● 降本建议：武汉已主动申请降租金，贵阳需评估换址可能性。各办公室需调研写字楼行情，争取降低租金。
-
-5. IP中心项目
-● 计划在西南和中部区域同时开启IP中心，初期投入1-2个剪辑人员，成本对价是帮助人才引进增量，计划于国庆后正式启动。`,
-          todosText: `1. 策划重庆活动: 国庆后在重庆组织人才引进活动，邀请熟悉人士扩大线索；邱月配合安排时间。@王亚哲 @邱月
-2. 完成部门签约: 各执行主任在9月底前完成专业部门目标责任书确认，并组织签约仪式；若时间紧可延至国庆后一周。@夏晓飞 @张晶 @朱敏 @杜易 @邱月
-3. 调研降本方案: 各办公室调研当地写字楼租金行情，争取降低租金；贵阳需评估换址可能性，做三年计划。@夏晓飞 @张晶 @朱敏 @杜易 @邱月
-4. 启动IP中心: 国庆后正式启动西南及中部区域IP中心项目，前期需投入剪辑人员，提前与各主任同步具体方案。@王亚哲
-5. 人才顾问签约：各办公室执行主任与人才引进顾问进行正式合同确认，9月底前同步签约进度。@夏晓飞 @张晶 @朱敏 @杜易 @邱月`
-        },
-        {
-          id: "m-0924",
-          date: "2026-09-24",
-          title: "【会议纪要】#0917 大区双百计划宣贯与跨区业务联动会",
-          time: "09:30 - 11:00",
-          host: "王亚哲",
-          attendees: "王亚哲、夏晓飞(武汉)、陈赛男(长沙)、朱敏(成都)、邱月(重庆)、杜易(昆明)、张晶(贵阳)",
-          content: `1. 推动双百赋能计划落地，各所确定首批参与全国法律产品研发骨干律师名单；
-2. 跨区分所业务协作与分润原则宣导，重大案件由大区统筹支持。`,
-          todosText: `1. 报送首期双百计划意向名单。@夏晓飞 @朱敏
-2. 梳理第四季度重大跨区域投标清单。@全体主任`
-        }
-      ],
-
-      // 月报数据 (按月存储)
-      reports: {
-        "2026-10": [
-          {
-            region: "中部大区", branch: "武汉分所", lead: "夏晓飞 (管委会副主任/执行主任)",
-            work: `1. 跟进杜金凤团队降本方案；本月可转入2位律师，月底冲刺80人目标；
-2. 与写字楼物业谈判成功将房租和物业费下调20%；
-3. 梳理业务部门设立规划。`,
-            plan: `1. 锁定盈科大团队转入谈判；
-2. 落实专业部门主任责任书确认；
-3. 催收三季度未到款项。`,
-            yazhe: "希望亚哲主任本月协助跟进大团队引进商务谈判，切入高端法务合作。",
-            hq: "需要总部合规风控部协助加急审核国企合规项目的专项投标合同条款。"
-          },
-          {
-            region: "中部大区", branch: "长沙分所", lead: "陈赛男 (执行主任)",
-            work: `1. 梳理长沙分所四季度创收目标与存量案源；
-2. 接洽本地文创园区入驻企业8家；
-3. 开展青年律师业务合规自查。`,
-            plan: `1. 举办长沙Q4业绩冲刺启动会；
-2. 拜访2家意向战略合作金融机构；
-3. 推进重点争议案件前期论证。`,
-            yazhe: "针对长沙新办公场地租赁选址方案，请亚哲主任在预算及战略定位上予以把关指导。",
-            hq: "急需总部人事部门协助在长沙招聘1名资深商事诉讼骨干律师。"
-          },
-          {
-            region: "西南大区", branch: "成都分所", lead: "朱敏 (执行主任)",
-            work: `1. 在册76位律师，9月目标5位，已转入4位，另4位待转入，有望达80人；
-2. 文旅项目首期方案成功交付；回款到账65万元。`,
-            plan: `1. 全力推进文旅项目二期商务谈判；
-2. 组织开展专业部门责任书签约；
-3. 调研成都写字楼行情降本。`,
-            yazhe: "希望亚哲主任多介绍优质律师团队线索，支持成都所人才引进。",
-            hq: "需要总部财务部加急为文旅项目开具85万元增值税专票，以便客户月初打款。"
-          },
-          {
-            region: "西南大区", branch: "重庆分所", lead: "邱月 (管委会委员/执行主任)",
-            work: `1. 9月引进3位律师目标已完成，在册67位，即将达69位；
-2. 举办两江新区新能源企业风控讲座；跟进城投重整意向项目。`,
-            plan: `1. 配合亚哲主任策划国庆后重庆人才引进活动；
-2. 重点攻坚管委会主任级别人才与大团队引进；
-3. 推进专业部门确认签约。`,
-            yazhe: "重点引进大团队被卡住，希望亚哲主任亲自协助商务谈判；国庆后在重庆办活动。",
-            hq: "无"
-          },
-          {
-            region: "西南大区", branch: "昆明分所", lead: "杜易 (执行主任)",
-            work: `1. 租售比124%在大区内表现最好；拓展跨境贸易合规业务5家；
-2. 举办青年律师辩论赛；完成合规排查。`,
-            plan: `1. 推进跨境出海合规产品包落地推广；
-2. 锁定2家进出口企业常年顾问；
-3. 筹备出海合规高峰论坛。`,
-            yazhe: "计划于10月下旬联合商会举办出海合规论坛，邀请亚哲主任担任主旨演讲嘉宾。",
-            hq: "昆明所申请总部市场部下发一批出海业务定制宣传手册与展架。"
-          },
-          {
-            region: "西南大区", branch: "贵阳分所", lead: "张晶 (执行主任)",
-            work: `1. 9月已完成1位合伙人、1位专职律师转入，跟进盈科和大成两个团队；
-2. 对接大数据产业企业意向2家；回款40万元。`,
-            plan: `1. 评估贵阳办公场地换址可行性，做三年降租计划；
-2. 推进专业部门确认签约；
-3. 落实人才顾问协议签约。`,
-            yazhe: "办公成本高，希望亚哲主任介绍优质团队支持引进，并加快IP中心在贵阳落地。",
-            hq: "办案系统偶发网络延迟，需总部技术部排查服务器连接问题。"
-          }
-        ],
-        "2026-11": defaultBranchList.map(b => ({ ...b, work: "", plan: "", yazhe: "无", hq: "无" })),
-        "2026-09": defaultBranchList.map(b => ({ ...b, work: "", plan: "", yazhe: "无", hq: "无" }))
+      {
+        "region": "中部大区",
+        "branch": "长沙分所",
+        "lead": "陈赛男 (执行主任)",
+        "work": "",
+        "plan": "",
+        "yazhe": "无",
+        "hq": "无"
       },
-
-      // 待办事项 (优化：移除默认自动填充的废弃说明，保持干净整洁)
-      todos: [
-        { id: 1, date: "2026-10-08", owner: "王亚哲", org: "大区/总办", task: "国庆后在重庆组织人才引进活动，扩大线索；邱月配合安排时间", deadline: "2026-10-18", status: "进行中", note: "" },
-        { id: 2, date: "2026-10-08", owner: "邱月", org: "重庆分所", task: "配合亚哲主任策划重庆人才活动，对接场地与意向大团队清单", deadline: "2026-10-18", status: "进行中", note: "" },
-        { id: 3, date: "2026-10-08", owner: "夏晓飞", org: "武汉分所", task: "9月底前完成专业部门目标责任书确认与签约；继续跟进杜金凤团队降本方案", deadline: "2026-10-15", status: "进行中", note: "" },
-        { id: 4, date: "2026-10-08", owner: "张晶", org: "贵阳分所", task: "调研当地写字楼行情，评估贵阳分所换址可能性，做三年降租计划", deadline: "2026-10-25", status: "未开始", note: "" },
-        { id: 5, date: "2026-10-08", owner: "朱敏", org: "成都分所", task: "完成专业部门责任书签约；收到85万专票后催缴文旅项目款项", deadline: "2026-10-15", status: "未开始", note: "" },
-        { id: 6, date: "2026-10-08", owner: "杜易", org: "昆明分所", task: "拟定出海合规论坛具体议程，报送亚哲主任主旨发言方案；保持租售比优势", deadline: "2026-10-20", status: "进行中", note: "" },
-        { id: 7, date: "2026-10-08", owner: "陈赛男", org: "长沙分所", task: "梳理新办公场地两套租赁备选方案租金与位置对比表，报亚哲主任定夺", deadline: "2026-10-12", status: "已完成", note: "" },
-        { id: 8, date: "2026-10-08", owner: "王亚哲", org: "大区/总办", task: "国庆后正式启动西南及中部区域IP中心项目，投入1-2个剪辑人员", deadline: "2026-10-20", status: "已完成", note: "" }
-      ]
-    };
+      {
+        "region": "西南大区",
+        "branch": "成都分所",
+        "lead": "朱敏 (执行主任)",
+        "work": "",
+        "plan": "",
+        "yazhe": "无",
+        "hq": "无"
+      },
+      {
+        "region": "西南大区",
+        "branch": "重庆分所",
+        "lead": "邱月 (管委会委员/执行主任)",
+        "work": "",
+        "plan": "",
+        "yazhe": "无",
+        "hq": "无"
+      },
+      {
+        "region": "西南大区",
+        "branch": "昆明分所",
+        "lead": "杜易 (执行主任)",
+        "work": "",
+        "plan": "",
+        "yazhe": "无",
+        "hq": "无"
+      },
+      {
+        "region": "西南大区",
+        "branch": "贵阳分所",
+        "lead": "张晶 (执行主任)",
+        "work": "",
+        "plan": "",
+        "yazhe": "无",
+        "hq": "无"
+      }
+    ],
+    "2026-11": [
+      {
+        "region": "中部大区",
+        "branch": "武汉分所",
+        "lead": "夏晓飞 (管委会副主任/执行主任)",
+        "work": "",
+        "plan": "",
+        "yazhe": "无",
+        "hq": "无"
+      },
+      {
+        "region": "中部大区",
+        "branch": "长沙分所",
+        "lead": "陈赛男 (执行主任)",
+        "work": "",
+        "plan": "",
+        "yazhe": "无",
+        "hq": "无"
+      },
+      {
+        "region": "西南大区",
+        "branch": "成都分所",
+        "lead": "朱敏 (执行主任)",
+        "work": "",
+        "plan": "",
+        "yazhe": "无",
+        "hq": "无"
+      },
+      {
+        "region": "西南大区",
+        "branch": "重庆分所",
+        "lead": "邱月 (管委会委员/执行主任)",
+        "work": "",
+        "plan": "",
+        "yazhe": "无",
+        "hq": "无"
+      },
+      {
+        "region": "西南大区",
+        "branch": "昆明分所",
+        "lead": "杜易 (执行主任)",
+        "work": "",
+        "plan": "",
+        "yazhe": "无",
+        "hq": "无"
+      },
+      {
+        "region": "西南大区",
+        "branch": "贵阳分所",
+        "lead": "张晶 (执行主任)",
+        "work": "",
+        "plan": "",
+        "yazhe": "无",
+        "hq": "无"
+      }
+    ],
+    "2026-09": [
+      {
+        "region": "中部大区",
+        "branch": "武汉分所",
+        "lead": "夏晓飞 (管委会副主任/执行主任)",
+        "work": "",
+        "plan": "",
+        "yazhe": "无",
+        "hq": "无"
+      },
+      {
+        "region": "中部大区",
+        "branch": "长沙分所",
+        "lead": "陈赛男 (执行主任)",
+        "work": "",
+        "plan": "",
+        "yazhe": "无",
+        "hq": "无"
+      },
+      {
+        "region": "西南大区",
+        "branch": "成都分所",
+        "lead": "朱敏 (执行主任)",
+        "work": "",
+        "plan": "",
+        "yazhe": "无",
+        "hq": "无"
+      },
+      {
+        "region": "西南大区",
+        "branch": "重庆分所",
+        "lead": "邱月 (管委会委员/执行主任)",
+        "work": "",
+        "plan": "",
+        "yazhe": "无",
+        "hq": "无"
+      },
+      {
+        "region": "西南大区",
+        "branch": "昆明分所",
+        "lead": "杜易 (执行主任)",
+        "work": "",
+        "plan": "",
+        "yazhe": "无",
+        "hq": "无"
+      },
+      {
+        "region": "西南大区",
+        "branch": "贵阳分所",
+        "lead": "张晶 (执行主任)",
+        "work": "",
+        "plan": "",
+        "yazhe": "无",
+        "hq": "无"
+      }
+    ]
+  }
+};
 
     // 存储管理
-    const STORAGE_KEY = 'zhiheng_collab_data_v3';
+    const STORAGE_KEY = 'zhiheng_collab_data_v4';
     let appData = null;
 
     try {
-      const raw = localStorage.getItem(STORAGE_KEY);
+      const raw = localStorage.getItem(STORAGE_KEY) || localStorage.getItem('zhiheng_collab_data_v3');
       if (raw) {
         appData = JSON.parse(raw);
       }
@@ -1232,62 +1664,74 @@
       console.warn("读取 localStorage 失败:", e);
     }
 
-    if (!appData || !appData.minutes || !appData.reports) {
+    if (!appData || !appData.minutes || !appData.todos) {
       appData = JSON.parse(JSON.stringify(initialData));
     }
 
-    // 数据平滑迁移：自动将旧周次 (41/42/43) 无损升级为规范月度结构
-    function migrateDataToMonthly() {
-      if (!appData || !appData.reports) return;
-      const keys = Object.keys(appData.reports);
-      let needMigration = false;
-      if (appData.weekLabels) {
-        for (let k in appData.weekLabels) {
-          if (appData.weekLabels[k] && appData.weekLabels[k].includes("周")) {
-            needMigration = true;
-            break;
-          }
-        }
+    // 分类字典与预置信息
+    const categoryLabels = {
+      region: {
+        name: "中部与西南大区",
+        minutePill: "🏛️ 中部与西南大区例会",
+        minuteDesc: "管理中部2所与西南4所大区月度执行例会及沟通纪要",
+        todoPill: "🏛️ 中部与西南大区待办",
+        todoDesc: "大区重点督办：人才引进·专业部门责任状·场地降本·IP中心",
+        defaultAttendees: "王亚哲(区域执行主任/部长)、夏晓飞(武汉)、陈赛男(长沙)、朱敏(成都)、邱月(重庆)、杜易(昆明)、张晶(贵阳)、胡侨益(HRBP)、张歆妍(IP运营中心)",
+        defaultOrg: "大区/总办",
+        owners: [
+          { value: "all", label: "全部责任人" },
+          { value: "王亚哲", label: "王亚哲" },
+          { value: "胡侨益", label: "胡侨益 (HRBP)" },
+          { value: "张歆妍", label: "张歆妍 (IP运营中心)" },
+          { value: "夏晓飞", label: "夏晓飞 (武汉)" },
+          { value: "陈赛男", label: "陈赛男 (长沙)" },
+          { value: "朱敏", label: "朱敏 (成都)" },
+          { value: "邱月", label: "邱月 (重庆)" },
+          { value: "杜易", label: "杜易 (昆明)" },
+          { value: "张晶", label: "张晶 (贵阳)" },
+          { value: "全体主任", label: "全体主任" }
+        ]
+      },
+      yefawei: {
+        name: "业务发展委员会 (业发委)",
+        minutePill: "💼 业务发展委员会 (业发委)",
+        minuteDesc: "统筹全国专业部门建设、双百计划赋能、跨区业务分润与经营责任状",
+        todoPill: "💼 业务发展委员会 (业发委)",
+        todoDesc: "业发委重点督办：双百训战·大部门签约·产品研发·跨区协同备案",
+        defaultAttendees: "王亚哲(业发委副主任/部长)、马梦然(业发委秘书处)、张歆妍(IP运营中心)、各分所主任及全国专业部门负责人",
+        defaultOrg: "业发委秘书处",
+        owners: [
+          { value: "all", label: "全部责任人" },
+          { value: "王亚哲", label: "王亚哲 (副主任/部长)" },
+          { value: "马梦然", label: "马梦然 (业发委秘书处)" },
+          { value: "张歆妍", label: "张歆妍 (IP运营中心)" },
+          { value: "全体主任", label: "全体主任 / 各部门主任" }
+        ]
       }
-      if (keys.some(k => k === "41" || k === "42" || k === "43")) {
-        needMigration = true;
-      }
+    };
 
-      if (needMigration) {
-        try { console.log("检测到周报结构数据，正在自动平滑升级为月报结构..."); } catch(e){}
-        const oldRep = appData.reports["41"] || appData.reports["43"] || appData.reports["42"];
-        const newReports = {
-          "2026-10": (oldRep && oldRep.length) ? oldRep : defaultBranchList.map(b => Object.assign({}, b, { work: "", plan: "", yazhe: "无", hq: "无" })),
-          "2026-11": defaultBranchList.map(b => Object.assign({}, b, { work: "", plan: "", yazhe: "无", hq: "无" })),
-          "2026-09": defaultBranchList.map(b => Object.assign({}, b, { work: "", plan: "", yazhe: "无", hq: "无" }))
-        };
-
-        keys.forEach(k => {
-          if (k !== "41" && k !== "42" && k !== "43" && !k.startsWith("week")) {
-            newReports[k] = appData.reports[k];
+    // 确保所有纪要和待办都有明确的 category 属性 (平滑无损兼容历史缓存)
+    function ensureCategories(data) {
+      if (!data) return;
+      if (data.minutes && Array.isArray(data.minutes)) {
+        data.minutes.forEach(m => {
+          if (!m.category) {
+            const text = (m.title || '') + (m.content || '') + (m.todosText || '');
+            m.category = (text.includes("业发委") || text.includes("双百计划") || text.includes("业务发展")) ? "yefawei" : "region";
           }
         });
-
-        appData.reports = newReports;
-        appData.weekLabels = {
-          "2026-10": "2026年10月度 (本月)",
-          "2026-11": "2026年11月度",
-          "2026-09": "2026年09月度"
-        };
-        appData.currentWeek = "2026-10";
-
-        try {
-          localStorage.setItem(STORAGE_KEY, JSON.stringify(appData));
-        } catch(e){}
       }
-
-      if (!appData.currentWeek || !appData.reports[appData.currentWeek]) {
-        appData.currentWeek = Object.keys(appData.reports)[0] || "2026-10";
+      if (data.todos && Array.isArray(data.todos)) {
+        data.todos.forEach(t => {
+          if (!t.category) {
+            const text = (t.task || '') + (t.org || '') + (t.owner || '');
+            t.category = (text.includes("业发委") || text.includes("双百计划") || text.includes("马梦然") || text.includes("业务发展")) ? "yefawei" : "region";
+          }
+        });
       }
     }
 
-    migrateDataToMonthly();
-
+    ensureCategories(appData);
 
     function saveData() {
       try {
@@ -1295,7 +1739,6 @@
       } catch (e) {
         console.warn("保存到 localStorage 失败:", e);
       }
-      // 只要有任何数据改动，全自动静默推送到云端
       syncToCloud();
     }
 
@@ -1330,8 +1773,18 @@
       }, 2000);
     }
 
-    // Tab 切换逻辑
-    function switchTab(tabId) {
+    // -------------------------------------------------------------
+    // Tab 导航与分类联动切换
+    // -------------------------------------------------------------
+    let currentMinuteCategory = 'region'; // 'region' | 'yefawei'
+    let currentTodoCategory = 'region';   // 'region' | 'yefawei'
+
+    function switchTab(tabId, category = null) {
+      if (category) {
+        if (tabId === 'minutes') currentMinuteCategory = category;
+        if (tabId === 'todos') currentTodoCategory = category;
+      }
+
       document.querySelectorAll('.tab-pane').forEach(el => el.classList.add('hidden'));
       document.querySelectorAll('.nav-btn').forEach(btn => {
         btn.classList.remove('bg-white', 'text-[#0F172A]', 'shadow-sm', 'font-semibold');
@@ -1339,135 +1792,208 @@
       });
 
       const activePane = document.getElementById('tab-' + tabId);
-      const activeBtn = document.getElementById('nav-' + tabId);
       if (activePane) activePane.classList.remove('hidden');
+
+      let navBtnId = 'nav-' + tabId;
+      if (tabId === 'minutes') {
+        navBtnId = 'nav-minutes-' + currentMinuteCategory;
+      } else if (tabId === 'todos') {
+        navBtnId = 'nav-todos-' + currentTodoCategory;
+      }
+
+      const activeBtn = document.getElementById(navBtnId);
       if (activeBtn) {
         activeBtn.classList.remove('text-slate-200', 'font-medium');
         activeBtn.classList.add('bg-white', 'text-[#0F172A]', 'shadow-sm', 'font-semibold');
       }
 
       if (tabId === 'minutes') {
+        updateMinuteCategoryUI();
         renderMinuteSidebar();
-      } else if (tabId === 'reports') {
-        renderWeekSelectDropdown();
-        renderWeeklyReports();
       } else if (tabId === 'todos') {
+        updateTodoCategoryUI();
         renderTodos();
       } else if (tabId === 'dashboard') {
         updateDashboardMetrics();
       }
     }
 
+    function setMinuteCategory(cat) {
+      currentMinuteCategory = cat;
+      updateMinuteCategoryUI();
+      // 同步顶部导航高亮
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.classList.remove('bg-white', 'text-[#0F172A]', 'shadow-sm', 'font-semibold');
+        btn.classList.add('text-slate-200', 'font-medium');
+      });
+      const navBtn = document.getElementById('nav-minutes-' + cat);
+      if (navBtn) {
+        navBtn.classList.remove('text-slate-200', 'font-medium');
+        navBtn.classList.add('bg-white', 'text-[#0F172A]', 'shadow-sm', 'font-semibold');
+      }
+      renderMinuteSidebar();
+    }
+
+    function setTodoCategory(cat) {
+      currentTodoCategory = cat;
+      updateTodoCategoryUI();
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.classList.remove('bg-white', 'text-[#0F172A]', 'shadow-sm', 'font-semibold');
+        btn.classList.add('text-slate-200', 'font-medium');
+      });
+      const navBtn = document.getElementById('nav-todos-' + cat);
+      if (navBtn) {
+        navBtn.classList.remove('text-slate-200', 'font-medium');
+        navBtn.classList.add('bg-white', 'text-[#0F172A]', 'shadow-sm', 'font-semibold');
+      }
+      renderTodos();
+    }
+
+    function updateMinuteCategoryUI() {
+      const isRegion = currentMinuteCategory === 'region';
+      const btnReg = document.getElementById('btn-min-cat-region');
+      const btnYef = document.getElementById('btn-min-cat-yefawei');
+      if (btnReg && btnYef) {
+        if (isRegion) {
+          btnReg.className = "px-3 py-1.5 rounded-md text-xs font-bold transition-all bg-white text-slate-900 shadow-xs flex items-center space-x-1.5";
+          btnYef.className = "px-3 py-1.5 rounded-md text-xs font-medium transition-all text-slate-600 hover:text-slate-900 flex items-center space-x-1.5";
+        } else {
+          btnYef.className = "px-3 py-1.5 rounded-md text-xs font-bold transition-all bg-white text-purple-900 shadow-xs flex items-center space-x-1.5";
+          btnReg.className = "px-3 py-1.5 rounded-md text-xs font-medium transition-all text-slate-600 hover:text-slate-900 flex items-center space-x-1.5";
+        }
+      }
+      const descEl = document.getElementById('min-category-desc');
+      if (descEl) descEl.innerText = categoryLabels[currentMinuteCategory]?.minuteDesc || "";
+      const headingEl = document.getElementById('min-sidebar-heading');
+      if (headingEl) headingEl.innerText = isRegion ? "📅 大区历史例会" : "📅 业发委工作纪要";
+    }
+
+    function updateTodoCategoryUI() {
+      const isRegion = currentTodoCategory === 'region';
+      const btnReg = document.getElementById('btn-todo-cat-region');
+      const btnYef = document.getElementById('btn-todo-cat-yefawei');
+      if (btnReg && btnYef) {
+        if (isRegion) {
+          btnReg.className = "px-3 py-1.5 rounded-md text-xs font-bold transition-all bg-white text-slate-900 shadow-xs flex items-center space-x-1.5";
+          btnYef.className = "px-3 py-1.5 rounded-md text-xs font-medium transition-all text-slate-600 hover:text-slate-900 flex items-center space-x-1.5";
+        } else {
+          btnYef.className = "px-3 py-1.5 rounded-md text-xs font-bold transition-all bg-white text-purple-900 shadow-xs flex items-center space-x-1.5";
+          btnReg.className = "px-3 py-1.5 rounded-md text-xs font-medium transition-all text-slate-600 hover:text-slate-900 flex items-center space-x-1.5";
+        }
+      }
+      const descEl = document.getElementById('todo-category-desc');
+      if (descEl) descEl.innerText = categoryLabels[currentTodoCategory]?.todoDesc || "";
+      updateTodoOwnerDropdown();
+    }
+
     // -------------------------------------------------------------
-    // 模块 1：例会看板 (Dashboard) 动态数据计算与联动渲染
+    // 模块 1：综合大盘 (Dashboard) 动态数据计算与联动渲染
     // -------------------------------------------------------------
     function updateDashboardMetrics() {
-      // 1. 动态更新最新会议纪要速览卡片
-      const latestM = appData.minutes && appData.minutes.length > 0 ? appData.minutes[0] : null;
-      const dateEl = document.getElementById('dash-latest-m-date');
-      const titleEl = document.getElementById('dash-latest-m-title');
-      const hostEl = document.getElementById('dash-latest-m-host');
-      const resContainer = document.getElementById('dash-latest-m-resolutions');
-      const todosCntEl = document.getElementById('dash-latest-m-todos-count');
+      ensureCategories(appData);
+      const minutes = appData.minutes || [];
+      const todos = appData.todos || [];
 
-      if (latestM) {
-        if (dateEl) dateEl.innerText = latestM.date;
-        if (titleEl) titleEl.innerText = latestM.title;
-        if (hostEl) hostEl.innerText = `主持人：${latestM.host} · 参会人员全勤`;
+      const regMinutes = minutes.filter(m => (m.category || 'region') === 'region');
+      const yefMinutes = minutes.filter(m => m.category === 'yefawei');
 
-        if (resContainer) {
-          const lines = latestM.content ? latestM.content.split(/\r?\n/).filter(l => l.trim().length > 0) : [];
-          if (lines.length > 0) {
-            const displayLines = lines.slice(0, 5);
-            resContainer.innerHTML = displayLines.map(l => `<div class="leading-relaxed">• ${l}</div>`).join('');
-          } else {
-            resContainer.innerHTML = '<div class="text-slate-400">暂无核心决议内容，点击下方可编辑录入。</div>';
-          }
+      const regTodos = todos.filter(t => (t.category || 'region') === 'region');
+      const yefTodos = todos.filter(t => t.category === 'yefawei');
+
+      // 大区待办指标
+      const regDone = regTodos.filter(t => t.status === "已完成").length;
+      const regProg = regTodos.filter(t => t.status === "进行中").length;
+      const regRate = regTodos.length ? Math.round((regDone / regTodos.length) * 100) : 0;
+
+      // 业发委待办指标
+      const yefDone = yefTodos.filter(t => t.status === "已完成").length;
+      const yefProg = yefTodos.filter(t => t.status === "进行中").length;
+      const yefRate = yefTodos.length ? Math.round((yefDone / yefTodos.length) * 100) : 0;
+
+      // 顶部指标卡渲染
+      const rMinEl = document.getElementById('dash-region-minutes-total');
+      const rTodEl = document.getElementById('dash-region-todos-total');
+      const rRateEl = document.getElementById('dash-region-rate');
+      const rDoneEl = document.getElementById('dash-region-done');
+      const rProgEl = document.getElementById('dash-region-prog');
+
+      if (rMinEl) rMinEl.innerText = regMinutes.length;
+      if (rTodEl) rTodEl.innerText = regTodos.length;
+      if (rRateEl) rRateEl.innerText = regRate + "%";
+      if (rDoneEl) rDoneEl.innerText = regDone;
+      if (rProgEl) rProgEl.innerText = regProg;
+
+      const yMinEl = document.getElementById('dash-yefawei-minutes-total');
+      const yTodEl = document.getElementById('dash-yefawei-todos-total');
+      const yRateEl = document.getElementById('dash-yefawei-rate');
+      const yDoneEl = document.getElementById('dash-yefawei-done');
+      const yProgEl = document.getElementById('dash-yefawei-prog');
+
+      if (yMinEl) yMinEl.innerText = yefMinutes.length;
+      if (yTodEl) yTodEl.innerText = yefTodos.length;
+      if (yRateEl) yRateEl.innerText = yefRate + "%";
+      if (yDoneEl) yDoneEl.innerText = yefDone;
+      if (yProgEl) yProgEl.innerText = yefProg;
+
+      // 大区板块最新纪要
+      const latestRegM = regMinutes[0];
+      const rDateEl = document.getElementById('dash-region-m-date');
+      const rTitleEl = document.getElementById('dash-region-m-title');
+      const rHostEl = document.getElementById('dash-region-m-host');
+      const rResEl = document.getElementById('dash-region-m-resolutions');
+      const rTodosCntEl = document.getElementById('dash-region-m-todos-count');
+
+      if (latestRegM) {
+        if (rDateEl) rDateEl.innerText = latestRegM.date;
+        if (rTitleEl) rTitleEl.innerText = latestRegM.title;
+        if (rHostEl) rHostEl.innerText = `主持人：${latestRegM.host} · 参会人员全勤`;
+        if (rResEl) {
+          const lines = latestRegM.content ? latestRegM.content.split(/\r?\n/).filter(l => l.trim().length > 0) : [];
+          rResEl.innerHTML = lines.slice(0, 4).map(l => `<div>• ${l}</div>`).join('') || '<div class="text-slate-400">暂无决议摘要</div>';
         }
-
-        if (todosCntEl) {
-          const tLines = latestM.todosText ? latestM.todosText.split(/\r?\n/).filter(Boolean) : [];
-          todosCntEl.innerText = `${tLines.length} 项`;
+        if (rTodosCntEl) {
+          const count = latestRegM.todosText ? latestRegM.todosText.split(/\r?\n/).filter(Boolean).length : 0;
+          rTodosCntEl.innerText = `${count} 项`;
         }
       } else {
-        if (dateEl) dateEl.innerText = "暂无归档";
-        if (titleEl) titleEl.innerText = "暂无会议纪要记录";
-        if (hostEl) hostEl.innerText = "";
-        if (resContainer) resContainer.innerHTML = '<div class="text-slate-400">暂无会议纪要记录，请在会议纪要库点击【+ 新建】。</div>';
-        if (todosCntEl) todosCntEl.innerText = "0 项";
+        if (rDateEl) rDateEl.innerText = "暂无";
+        if (rTitleEl) rTitleEl.innerText = "暂无大区例会记录";
+        if (rResEl) rResEl.innerHTML = '<div class="text-slate-400">点击查阅大区纪要可新建。</div>';
+        if (rTodosCntEl) rTodosCntEl.innerText = "0 项";
       }
 
-      // 2. 统计当月各分所月报提交状态与协调诉求
-      const currentWeekKey = appData.currentWeek || Object.keys(appData.reports)[0] || "2026-10";
-      const currentReports = appData.reports[currentWeekKey] || [];
-      
-      const submittedCount = currentReports.filter(r => r.work && r.work.trim()).length;
-      const submitRatioEl = document.getElementById('dash-report-submit-ratio');
-      const submitBadgeEl = document.getElementById('dash-report-submit-badge');
-      if (submitRatioEl) submitRatioEl.innerText = `${submittedCount} / 6 所`;
-      if (submitBadgeEl) {
-        if (submittedCount === 6) {
-          submitBadgeEl.className = 'text-xs text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded font-medium';
-          submitBadgeEl.innerText = '全员已提交';
-        } else if (submittedCount === 0) {
-          submitBadgeEl.className = 'text-xs text-slate-500 bg-slate-100 px-2 py-0.5 rounded font-medium';
-          submitBadgeEl.innerText = '待各所填报';
-        } else {
-          submitBadgeEl.className = 'text-xs text-blue-700 bg-blue-50 px-2 py-0.5 rounded font-medium';
-          submitBadgeEl.innerText = `已提交 ${submittedCount} 所`;
+      // 业发委板块最新纪要
+      const latestYefM = yefMinutes[0];
+      const yDateEl = document.getElementById('dash-yefawei-m-date');
+      const yTitleEl = document.getElementById('dash-yefawei-m-title');
+      const yHostEl = document.getElementById('dash-yefawei-m-host');
+      const yResEl = document.getElementById('dash-yefawei-m-resolutions');
+      const yTodosCntEl = document.getElementById('dash-yefawei-m-todos-count');
+
+      if (latestYefM) {
+        if (yDateEl) yDateEl.innerText = latestYefM.date;
+        if (yTitleEl) yTitleEl.innerText = latestYefM.title;
+        if (yHostEl) yHostEl.innerText = `主持人：${latestYefM.host} · 业发委秘书处：马梦然`;
+        if (yResEl) {
+          const lines = latestYefM.content ? latestYefM.content.split(/\r?\n/).filter(l => l.trim().length > 0) : [];
+          yResEl.innerHTML = lines.slice(0, 4).map(l => `<div>• ${l}</div>`).join('') || '<div class="text-slate-400">暂无决议摘要</div>';
         }
-      }
-      
-      let yazheCount = 0;
-      let hqCount = 0;
-      const branchStats = [];
-
-      currentReports.forEach(item => {
-        const hasYazhe = item.yazhe && item.yazhe.trim() !== "无" && item.yazhe.trim() !== "";
-        const hasHq = item.hq && item.hq.trim() !== "无" && item.hq.trim() !== "";
-        if (hasYazhe) yazheCount++;
-        if (hasHq) hqCount++;
-        branchStats.push({
-          branch: item.branch.replace("分所", ""),
-          yazhe: hasYazhe ? 1 : 0,
-          hq: hasHq ? 1 : 0
-        });
-      });
-
-      const yCountEl = document.getElementById('dash-yazhe-count');
-      const hCountEl = document.getElementById('dash-hq-count');
-      if (yCountEl) yCountEl.innerHTML = `${yazheCount} <span class="text-xs font-normal text-slate-500">项</span>`;
-      if (hCountEl) hCountEl.innerHTML = `${hqCount} <span class="text-xs font-normal text-slate-500">项</span>`;
-
-      // 渲染条形图
-      const barContainer = document.getElementById('dash-chart-bars');
-      if (barContainer) {
-        barContainer.innerHTML = branchStats.map(bs => {
-          const yHeight = bs.yazhe > 0 ? "70%" : "6px";
-          const hHeight = bs.hq > 0 ? "70%" : "6px";
-          const yColor = bs.yazhe > 0 ? "bg-amber-500" : "bg-slate-200";
-          const hColor = bs.hq > 0 ? "bg-blue-600" : "bg-slate-200";
-          return `
-            <div class="flex-1 flex flex-col items-center h-full justify-end group">
-              <div class="w-full flex items-end justify-center space-x-1 sm:space-x-1.5 h-24">
-                <div class="w-3.5 sm:w-5 ${yColor} rounded-t-sm relative transition-all" style="height: ${yHeight};" title="需亚哲协调: ${bs.yazhe}">
-                  <span class="absolute -top-4 left-1/2 -translate-x-1/2 text-[10px] font-bold ${bs.yazhe > 0 ? 'text-amber-700' : 'text-slate-300'}">${bs.yazhe}</span>
-                </div>
-                <div class="w-3.5 sm:w-5 ${hColor} rounded-t-sm relative transition-all" style="height: ${hHeight};" title="需总部协调: ${bs.hq}">
-                  <span class="absolute -top-4 left-1/2 -translate-x-1/2 text-[10px] font-bold ${bs.hq > 0 ? 'text-blue-700' : 'text-slate-300'}">${bs.hq}</span>
-                </div>
-              </div>
-              <span class="mt-2 text-[11px] font-bold text-slate-700">${bs.branch}</span>
-            </div>
-          `;
-        }).join('');
+        if (yTodosCntEl) {
+          const count = latestYefM.todosText ? latestYefM.todosText.split(/\r?\n/).filter(Boolean).length : 0;
+          yTodosCntEl.innerText = `${count} 项`;
+        }
+      } else {
+        if (yDateEl) yDateEl.innerText = "暂无";
+        if (yTitleEl) yTitleEl.innerText = "暂无业发委推进会记录";
+        if (yResEl) yResEl.innerHTML = '<div class="text-slate-400">点击查阅业发委纪要可录入。</div>';
+        if (yTodosCntEl) yTodosCntEl.innerText = "0 项";
       }
 
-      // 3. 待办统计与环形图计算
-      const totalTodos = appData.todos.length;
-      const doneCount = appData.todos.filter(t => t.status === "已完成").length;
-      const progCount = appData.todos.filter(t => t.status === "进行中").length;
-      const notyetCount = appData.todos.filter(t => t.status === "未开始").length;
+      // 全盘待办环形图
+      const totalTodos = todos.length;
+      const doneCount = todos.filter(t => t.status === "已完成").length;
+      const progCount = todos.filter(t => t.status === "进行中").length;
+      const notyetCount = todos.filter(t => t.status === "未开始").length;
 
       document.getElementById('dash-todo-total').innerText = totalTodos;
       document.getElementById('dash-cnt-done').innerText = `${doneCount}项`;
@@ -1479,292 +2005,81 @@
         const progPct = (progCount / totalTodos) * 100;
         const notyetPct = (notyetCount / totalTodos) * 100;
 
-        const elDone = document.getElementById('donut-done');
-        const elProg = document.getElementById('donut-progress');
-        const elNotyet = document.getElementById('donut-notyet');
+        const donutDone = document.getElementById('donut-done');
+        const donutProg = document.getElementById('donut-progress');
+        const donutNotyet = document.getElementById('donut-notyet');
 
-        if (elDone) elDone.setAttribute('stroke-dasharray', `${donePct}, 100`);
-        if (elProg) {
-          elProg.setAttribute('stroke-dasharray', `${progPct}, 100`);
-          elProg.setAttribute('stroke-dashoffset', `-${donePct}`);
+        if (donutDone) {
+          donutDone.setAttribute('stroke-dasharray', `${donePct}, 100`);
+          donutDone.setAttribute('stroke-dashoffset', '0');
         }
-        if (elNotyet) {
-          elNotyet.setAttribute('stroke-dasharray', `${notyetPct}, 100`);
-          elNotyet.setAttribute('stroke-dashoffset', `-${donePct + progPct}`);
+        if (donutProg) {
+          donutProg.setAttribute('stroke-dasharray', `${progPct}, 100`);
+          donutProg.setAttribute('stroke-dashoffset', `-${donePct}`);
+        }
+        if (donutNotyet) {
+          donutNotyet.setAttribute('stroke-dasharray', `${notyetPct}, 100`);
+          donutNotyet.setAttribute('stroke-dashoffset', `-${donePct + progPct}`);
         }
       }
     }
 
     // -------------------------------------------------------------
-    // 模块 2：分所周报填报 (添加新周次、删除周次、一键清空全部内容、即时保存)
+    // 模块 2：会议纪要库 (带双板块切换、侧边栏、智能导入、防重复提取)
     // -------------------------------------------------------------
-    function renderWeekSelectDropdown() {
-      migrateDataToMonthly();
-      const select = document.getElementById('report-week-select');
-      if (!select) return;
-
-      select.innerHTML = "";
-      // 最新月份排最前（降序）
-      const weekKeys = Object.keys(appData.reports).sort((a, b) => b.localeCompare(a));
-
-      weekKeys.forEach(w => {
-        const opt = document.createElement('option');
-        opt.value = w;
-        opt.innerText = (appData.weekLabels && appData.weekLabels[w]) ? appData.weekLabels[w] : `${w}月度`;
-        if (w === appData.currentWeek) opt.selected = true;
-        select.appendChild(opt);
-      });
-    }
-
-    function changeReportWeek(week) {
-      appData.currentWeek = week;
-      saveData();
-      renderWeeklyReports();
-      updateDashboardMetrics();
-    }
-
-    function renderWeeklyReports() {
-      const week = appData.currentWeek;
-      const container = document.getElementById('branch-reports-container');
-      if (!container) return;
-
-      const list = appData.reports[week] || [];
-      if (list.length === 0) {
-        container.innerHTML = `
-          <div class="bg-white p-8 rounded-xl border text-center text-slate-400">
-            该月份暂无填报卡片，点击上方【➕ 添加新月份】即可自动生成名单。
-          </div>
-        `;
-        return;
-      }
-
-      container.innerHTML = list.map((item, idx) => `
-        <div class="bg-white rounded-xl border border-slate-200 shadow-sm p-4 sm:p-5 space-y-4 hover:border-blue-200 transition-all">
-          <div class="flex flex-wrap items-center justify-between border-b border-slate-100 pb-3 gap-2">
-            <div class="flex items-center space-x-2">
-              <span class="text-xs font-bold px-2 py-0.5 bg-slate-100 text-slate-700 rounded">${item.region}</span>
-              <span class="text-sm font-bold text-slate-900">${item.branch}</span>
-              <span class="text-xs text-blue-700 font-semibold bg-blue-50 px-2 py-0.5 rounded border border-blue-100">${item.lead}</span>
-            </div>
-            
-            <!-- 操作按钮：保存修改 + 一键清空全部内容 -->
-            <div class="flex items-center space-x-2">
-              <button onclick="saveReportRow('${week}', ${idx})" class="text-xs px-3 py-1 bg-emerald-600 text-white rounded font-medium hover:bg-emerald-700 transition flex items-center shadow-xs">
-                💾 保存修改
-              </button>
-              <button onclick="clearReportRow('${week}', ${idx})" class="text-xs px-2.5 py-1 text-slate-600 bg-slate-100 hover:bg-rose-50 hover:text-rose-600 border border-slate-200 rounded font-medium transition flex items-center shadow-xs" title="一键清空该分所本月填报的全部4项内容">
-                🧹 一键清空
-              </button>
-            </div>
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-              <label class="block text-xs font-bold text-slate-700 mb-1">
-                1. 本月重点工作及进展 (量化成果/大部门建设/人才引进)：
-              </label>
-              <textarea id="rep-work-${idx}" onchange="autoSaveReportRow('${week}', ${idx})" rows="3" class="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-1 focus:ring-blue-500 text-slate-800 custom-scrollbar leading-relaxed" placeholder="请填写本月核心业务推进情况...">${item.work || ""}</textarea>
-            </div>
-
-            <div>
-              <label class="block text-xs font-bold text-slate-700 mb-1">
-                2. 下月核心工作计划 (下月重点抓什么)：
-              </label>
-              <textarea id="rep-plan-${idx}" onchange="autoSaveReportRow('${week}', ${idx})" rows="3" class="w-full text-xs p-2.5 border border-slate-200 rounded-lg focus:ring-1 focus:ring-blue-500 text-slate-800 custom-scrollbar leading-relaxed" placeholder="请填写下月关键工作计划...">${item.plan || ""}</textarea>
-            </div>
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2 border-t border-slate-100">
-            <div class="bg-purple-50/50 p-3 rounded-lg border border-purple-200">
-              <label class="block text-xs font-bold text-purple-900 mb-1">
-                🔴 3. 需要王亚哲老师协调的事 (具体诉求/出面定调，无则填“无”)：
-              </label>
-              <textarea id="rep-yazhe-${idx}" onchange="autoSaveReportRow('${week}', ${idx})" rows="2" class="w-full text-xs p-2 border border-purple-200 rounded bg-white text-slate-800 focus:ring-1 focus:ring-purple-500">${item.yazhe || "无"}</textarea>
-            </div>
-
-            <div class="bg-sky-50/50 p-3 rounded-lg border border-sky-200">
-              <label class="block text-xs font-bold text-sky-900 mb-1">
-                🔵 4. 需要总部协调的事 (需总部哪部门配合/审批/支持，无则填“无”)：
-              </label>
-              <textarea id="rep-hq-${idx}" onchange="autoSaveReportRow('${week}', ${idx})" rows="2" class="w-full text-xs p-2 border border-sky-200 rounded bg-white text-slate-800 focus:ring-1 focus:ring-sky-500">${item.hq || "无"}</textarea>
-            </div>
-          </div>
-        </div>
-      `).join("");
-    }
-
-    function autoSaveReportRow(week, idx) {
-      const work = document.getElementById(`rep-work-${idx}`).value.trim();
-      const plan = document.getElementById(`rep-plan-${idx}`).value.trim();
-      const yazhe = document.getElementById(`rep-yazhe-${idx}`).value.trim();
-      const hq = document.getElementById(`rep-hq-${idx}`).value.trim();
-
-      if (appData.reports[week] && appData.reports[week][idx]) {
-        appData.reports[week][idx].work = work;
-        appData.reports[week][idx].plan = plan;
-        appData.reports[week][idx].yazhe = yazhe || "无";
-        appData.reports[week][idx].hq = hq || "无";
-        saveData();
-        updateDashboardMetrics();
-      }
-    }
-
-    function saveReportRow(week, idx) {
-      autoSaveReportRow(week, idx);
-      showToast("✅ 月报已成功保存！");
-    }
-
-    // 一键清空该分所本周填报的全部内容
-    function clearReportRow(week, idx) {
-      const item = appData.reports[week] && appData.reports[week][idx];
-      if (!item) return;
-
-      const weekLabel = appData.weekLabels[week] || `第${week}周`;
-      if (confirm(`确定要一键清空【${item.branch}】在【${weekLabel}】的全部月报填报内容吗？`)) {
-        item.work = "";
-        item.plan = "";
-        item.yazhe = "无";
-        item.hq = "无";
-
-        const wEl = document.getElementById(`rep-work-${idx}`);
-        const pEl = document.getElementById(`rep-plan-${idx}`);
-        const yEl = document.getElementById(`rep-yazhe-${idx}`);
-        const hEl = document.getElementById(`rep-hq-${idx}`);
-        if (wEl) wEl.value = "";
-        if (pEl) pEl.value = "";
-        if (yEl) yEl.value = "无";
-        if (hEl) hEl.value = "无";
-
-        saveData();
-        updateDashboardMetrics();
-        showToast(`🧹 已一键清空【${item.branch}】月报内容！`);
-      }
-    }
-
-    // 添加新月份
-    function openAddWeekModal() {
-      const mAddWeek = document.getElementById('modal-add-week');
-      mAddWeek.classList.remove('hidden');
-      mAddWeek.classList.add('flex');
-      
-      const now = new Date();
-      const nextMonth = new Date(now.getFullYear(), now.getMonth() + 1, 1);
-      const y = nextMonth.getFullYear();
-      const m = String(nextMonth.getMonth() + 1).padStart(2, '0');
-      const ym = `${y}-${m}`;
-
-      const picker = document.getElementById('new-month-picker');
-      if (picker) picker.value = ym;
-      const labelInput = document.getElementById('new-week-label');
-      if (labelInput) labelInput.value = `${y}年${m}月度`;
-    }
-
-    function autoFillMonthLabel(val) {
-      if (!val) return;
-      const parts = val.split('-');
-      if (parts.length === 2) {
-        document.getElementById('new-week-label').value = `${parts[0]}年${parts[1]}月度`;
-      }
-    }
-
-    function closeAddWeekModal() {
-      const mAddWeek = document.getElementById('modal-add-week');
-      mAddWeek.classList.add('hidden');
-      mAddWeek.classList.remove('flex');
-    }
-
-    function confirmAddWeek() {
-      const picker = document.getElementById('new-month-picker');
-      const monthKey = (picker && picker.value.trim()) || document.getElementById('new-week-label').value.trim();
-      const monthLabel = document.getElementById('new-week-label').value.trim() || `${monthKey}月度`;
-
-      if (!monthKey) {
-        showToast("请选择月份或输入标识！", "warn");
-        return;
-      }
-      if (appData.reports[monthKey]) {
-        showToast(`【${monthLabel}】已经存在！无需重复添加。`, "warn");
-        return;
-      }
-
-      appData.reports[monthKey] = defaultBranchList.map(b => ({
-        ...b,
-        work: "",
-        plan: "",
-        yazhe: "无",
-        hq: "无"
-      }));
-      appData.weekLabels[monthKey] = monthLabel;
-      appData.currentWeek = monthKey;
-
-      saveData();
-      closeAddWeekModal();
-      renderWeekSelectDropdown();
-      renderWeeklyReports();
-      updateDashboardMetrics();
-      showToast(`✅ 已创建【${monthLabel}】，已排布6所空白卡片！`);
-    }
-
-    // 删除当前月份
-    function deleteCurrentWeek() {
-      const week = appData.currentWeek;
-      const label = appData.weekLabels[week] || `${week}月度`;
-
-      if (Object.keys(appData.reports).length <= 1) {
-        showToast("至少需保留一个填报周期，无法全部删除！", "warn");
-        return;
-      }
-
-      if (confirm(`确定要彻底删除【${label}】的填报数据吗？`)) {
-        delete appData.reports[week];
-        delete appData.weekLabels[week];
-
-        appData.currentWeek = Object.keys(appData.reports)[0];
-        saveData();
-        renderWeekSelectDropdown();
-        renderWeeklyReports();
-        updateDashboardMetrics();
-        showToast(`✅ 已删除【${label}】`);
-      }
-    }
-
-    // -------------------------------------------------------------
-    // 模块 3：周例会纪要库 (智能文本导入匹配、查看、编辑、删除)
-    // -------------------------------------------------------------
-    let currentSelectedMinuteId = "m-0918";
+    let currentSelectedMinuteId = null;
 
     function renderMinuteSidebar(keyword = "") {
+      ensureCategories(appData);
       const container = document.getElementById('minute-list-sidebar');
       const countEl = document.getElementById('minute-total-count');
       if (!container) return;
 
-      container.innerHTML = "";
-      let list = appData.minutes || [];
+      const allMinutes = appData.minutes || [];
+      const regCount = allMinutes.filter(m => (m.category || 'region') === 'region').length;
+      const yefCount = allMinutes.filter(m => m.category === 'yefawei').length;
+
+      const bReg = document.getElementById('badge-min-cnt-region');
+      const bYef = document.getElementById('badge-min-cnt-yefawei');
+      if (bReg) bReg.innerText = regCount;
+      if (bYef) bYef.innerText = yefCount;
+
+      let list = allMinutes.filter(m => (m.category || 'region') === currentMinuteCategory);
       if (keyword) {
-        list = list.filter(m => m.title.includes(keyword) || m.date.includes(keyword) || (m.content && m.content.includes(keyword)));
+        const kw = keyword.toLowerCase();
+        list = list.filter(m => (m.title && m.title.toLowerCase().includes(kw)) || (m.date && m.date.includes(kw)) || (m.content && m.content.toLowerCase().includes(kw)));
       }
 
-      if (countEl) countEl.innerText = appData.minutes.length;
+      if (countEl) countEl.innerText = list.length;
+      container.innerHTML = "";
 
       if (list.length === 0) {
-        container.innerHTML = `<div class="p-4 text-center text-slate-400 text-xs">无匹配的会议纪要</div>`;
+        const isReg = currentMinuteCategory === 'region';
+        container.innerHTML = `<div class="p-6 text-center text-slate-400 text-xs">暂无${isReg ? '大区例会' : '业发委推进会'}纪要</div>`;
       } else {
         list.forEach(m => {
           const isSelected = String(m.id) === String(currentSelectedMinuteId);
           const item = document.createElement('div');
           item.className = `p-3 rounded-lg cursor-pointer transition-all border ${
             isSelected 
-              ? 'bg-blue-50 border-blue-400 text-blue-950 shadow-xs' 
+              ? (currentMinuteCategory === 'yefawei' ? 'bg-purple-50 border-purple-400 text-purple-950 shadow-xs' : 'bg-blue-50 border-blue-400 text-blue-950 shadow-xs')
               : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-100'
           }`;
           item.onclick = () => selectMinute(m.id);
 
+          const catBadge = (m.category === 'yefawei')
+            ? `<span class="text-[9px] px-1 py-0.2 rounded bg-purple-100 text-purple-800 font-bold">业发委</span>`
+            : `<span class="text-[9px] px-1 py-0.2 rounded bg-blue-100 text-blue-800 font-bold">大区</span>`;
+
           item.innerHTML = `
             <div class="flex items-center justify-between mb-1">
-              <span class="text-xs font-bold ${isSelected ? 'text-[#1E3A8A]' : 'text-slate-800'}">
-                📅 ${m.date}
-              </span>
-              <span class="text-[10px] px-1.5 py-0.5 rounded ${isSelected ? 'bg-blue-200 text-blue-900 font-bold' : 'bg-slate-100 text-slate-500'}">
+              <div class="flex items-center space-x-1.5">
+                ${catBadge}
+                <span class="text-xs font-bold ${isSelected ? 'text-slate-900' : 'text-slate-800'}">
+                  📅 ${m.date}
+                </span>
+              </div>
+              <span class="text-[10px] px-1.5 py-0.5 rounded ${isSelected ? 'bg-white text-slate-800 font-bold shadow-2xs' : 'bg-slate-100 text-slate-500'}">
                 ${m.host}主持
               </span>
             </div>
@@ -1773,11 +2088,16 @@
             </div>
             <div class="text-[10px] text-slate-400 mt-1.5 flex items-center justify-between">
               <span>${m.time}</span>
-              <span>点击查阅 ➔</span>
+              <span class="font-semibold text-blue-600 hover:underline">查阅 ➔</span>
             </div>
           `;
           container.appendChild(item);
         });
+      }
+
+      const currentFilteredIds = list.map(m => String(m.id));
+      if (!currentSelectedMinuteId || !currentFilteredIds.includes(String(currentSelectedMinuteId))) {
+        currentSelectedMinuteId = list[0]?.id || null;
       }
 
       renderSelectedMinute();
@@ -1797,81 +2117,88 @@
       const container = document.getElementById('minute-content-display');
       if (!container) return;
 
-      const m = appData.minutes.find(item => String(item.id) === String(currentSelectedMinuteId)) || appData.minutes[0];
+      const m = (appData.minutes || []).find(item => String(item.id) === String(currentSelectedMinuteId));
       if (!m) {
         container.innerHTML = `
           <div class='text-center py-20 text-slate-400 space-y-3'>
             <div class="text-3xl">📝</div>
-            <div class="text-sm">暂无会议纪要记录，点击左侧【⚡ 智能导入】或【+ 新建】即可创建。</div>
+            <div class="text-sm">暂无选中的会议纪要记录，点击左侧【⚡ 智能导入】或【+ 新建】即可创建。</div>
           </div>
         `;
         return;
       }
 
       currentSelectedMinuteId = m.id;
+      const isYefawei = m.category === 'yefawei';
 
       container.innerHTML = `
         <!-- 纪要顶栏与操作按钮 -->
         <div class="border-b pb-4">
           <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
-            <span class="text-xs font-semibold px-2.5 py-1 bg-blue-100 text-blue-800 rounded-full">
-              📅 ${m.date} 例会归档
-            </span>
+            <div class="flex items-center space-x-2">
+              <span class="text-xs font-bold px-2.5 py-1 rounded-full ${isYefawei ? 'bg-purple-100 text-purple-800' : 'bg-blue-100 text-blue-800'}">
+                ${isYefawei ? '💼 业务发展委员会 (业发委)' : '🏛️ 中部与西南大区例会'}
+              </span>
+              <span class="text-xs font-semibold px-2.5 py-1 bg-slate-100 text-slate-700 rounded-full font-mono">
+                📅 ${m.date}
+              </span>
+            </div>
             <div class="flex space-x-2">
-              <button onclick="openEditMinuteModal('${m.id}')" class="text-xs px-3 py-1.5 bg-blue-50 text-blue-700 border border-blue-200 rounded-lg hover:bg-blue-100 transition font-medium flex items-center shadow-xs">
-                ✏️ 编辑本次纪要
+              <button onclick="openExtractTodosModal('${m.id}')" class="text-xs px-2.5 py-1.5 bg-emerald-700 text-white rounded-lg hover:bg-emerald-800 transition flex items-center font-bold shadow-xs" title="提取该篇纪要待办入库">
+                ⚡ 从本纪要一键提取待办
               </button>
-              <button onclick="copyMinuteToClipboard('${m.id}')" class="text-xs px-2.5 py-1.5 bg-slate-50 text-slate-700 border border-slate-200 rounded-lg hover:bg-slate-100 transition font-medium flex items-center">
-                📋 复制纪要全文
+              <button onclick="copyMinuteToClipboard('${m.id}')" class="text-xs px-2.5 py-1.5 border border-slate-300 rounded-lg hover:bg-slate-50 transition flex items-center font-medium">
+                📋 复制全文
               </button>
-              <button onclick="deleteMinute('${m.id}')" class="text-xs px-2.5 py-1.5 bg-rose-50 text-rose-700 border border-rose-200 rounded-lg hover:bg-rose-100 transition font-medium flex items-center">
-                🗑️ 删除纪要
+              <button onclick="openEditMinuteModal('${m.id}')" class="text-xs px-2.5 py-1.5 bg-blue-700 text-white rounded-lg hover:bg-blue-800 transition flex items-center font-medium shadow-xs">
+                ✏️ 编辑
               </button>
-              <button onclick="window.print()" class="text-xs px-2.5 py-1.5 border border-slate-300 rounded-lg hover:bg-slate-50 text-slate-600">
-                🖨️ 打印
+              <button onclick="deleteMinute('${m.id}')" class="text-xs px-2.5 py-1.5 text-rose-600 border border-rose-200 rounded-lg hover:bg-rose-50 transition flex items-center font-medium">
+                🗑️ 删除
               </button>
             </div>
           </div>
 
-          <h2 class="text-lg sm:text-xl font-bold text-slate-900">${m.title}</h2>
-          
-          <!-- 信息格：彻底去除记录人 -->
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 mt-4 text-xs bg-slate-50 p-3 rounded-lg border border-slate-200">
-            <div><span class="text-slate-400">会议时间：</span><span class="font-medium text-slate-800">${m.time}</span></div>
-            <div><span class="text-slate-400">主持人：</span><span class="font-bold text-blue-900">${m.host}</span></div>
-            <div><span class="text-slate-400">参会状态：</span><span class="font-semibold text-emerald-700">全员全勤</span></div>
-          </div>
-          <div class="mt-2 text-xs text-slate-600 bg-slate-50 px-3 py-2 rounded border border-slate-200">
-            <span class="text-slate-400 font-medium">参会人员：</span>${m.attendees}
+          <h2 class="text-lg sm:text-xl font-bold text-slate-900 mt-2">
+            ${m.title}
+          </h2>
+
+          <div class="flex flex-wrap gap-x-6 gap-y-1 text-xs text-slate-500 mt-2">
+            <span>⏰ 会议时间：<strong class="text-slate-800 font-mono">${m.time}</strong></span>
+            <span>🎙️ 主持人：<strong class="text-slate-800">${m.host}</strong></span>
           </div>
         </div>
 
-        <!-- 纪要正文内容 -->
-        <div class="bg-slate-50 border border-slate-200 rounded-xl p-5 space-y-3">
-          <div class="flex items-center justify-between">
-            <h4 class="text-sm font-bold text-slate-900 flex items-center">
-              <span class="w-2 h-4 bg-blue-700 rounded-sm mr-2"></span>
-              会议主要议题、讨论与决议备忘
-            </h4>
-            <span class="text-[11px] text-slate-400">支持在【编辑本次纪要】中自由扩充修改</span>
-          </div>
-          <div class="text-xs text-slate-800 leading-relaxed whitespace-pre-line bg-white p-4 rounded-lg border border-slate-200/80 font-sans">
-            ${m.content || "暂无记录"}
+        <!-- 参会人员卡片 -->
+        <div class="bg-slate-50 p-3.5 rounded-xl border border-slate-200 text-xs">
+          <span class="font-bold text-slate-700 block mb-1">👥 参会人员：</span>
+          <p class="text-slate-600 leading-relaxed">${m.attendees || "无记录"}</p>
+        </div>
+
+        <!-- 会议决议内容主体 -->
+        <div class="space-y-3">
+          <h3 class="text-sm font-bold text-slate-800 flex items-center">
+            <span class="w-2 h-2 ${isYefawei ? 'bg-purple-600' : 'bg-blue-600'} rounded-full mr-2"></span>
+            📌 会议主要议题与决议内容
+          </h3>
+          <div class="bg-white p-4 rounded-xl border border-slate-200 text-xs text-slate-700 leading-relaxed whitespace-pre-line font-sans">
+            ${m.content || "暂无详细决议备忘"}
           </div>
         </div>
 
-        <!-- 拆解待办事项卡片 (支持一键提取本次待办) -->
+        <!-- 督办待办清单 -->
         ${m.todosText ? `
-          <div class="bg-amber-50/70 border border-amber-200 rounded-xl p-5 space-y-3">
+          <div class="space-y-2 pt-2 border-t">
             <div class="flex items-center justify-between">
-              <h4 class="text-sm font-bold text-amber-900 flex items-center">
-                📌 本次会议督办待办清单
-              </h4>
-              <button onclick="openExtractTodosModal('${m.id}')" class="text-xs px-2.5 py-1 bg-amber-600 text-white rounded font-medium hover:bg-amber-700 transition flex items-center shadow-xs" title="将本次例会的待办防重提取入库到待办追踪表">
-                ⚡ 一键提取本次待办入库 ➔
+              <h3 class="text-sm font-bold text-slate-800 flex items-center">
+                <span class="w-2 h-2 bg-amber-500 rounded-full mr-2"></span>
+                🎯 本次会议督办待办清单 (共 ${m.todosText.split(/\r?\n/).filter(Boolean).length} 项)
+              </h3>
+              <button onclick="openExtractTodosModal('${m.id}')" class="text-xs text-emerald-800 hover:underline font-bold">
+                一键自动拆解入待办库 ➔
               </button>
             </div>
-            <div class="space-y-2">
+            <div class="bg-amber-50/60 p-4 rounded-xl border border-amber-200 space-y-2">
               ${m.todosText.split(/\r?\n/).filter(Boolean).map(t => {
                 const highlighted = t.replace(/(@[一-龥]+)/g, '<span class="bg-amber-200 text-amber-900 px-1.5 py-0.5 rounded font-bold text-[11px]">$1</span>');
                 return `<div class="text-xs text-slate-800 bg-white p-2.5 rounded border border-amber-200/70 shadow-2xs leading-relaxed">${highlighted}</div>`;
@@ -1882,12 +2209,12 @@
       `;
     }
 
-    // 打开编辑纪要弹窗 (彻底去除记录人)
+    // 打开编辑纪要弹窗
     function openEditMinuteModal(id) {
-      const m = appData.minutes.find(item => String(item.id) === String(id));
+      const m = (appData.minutes || []).find(item => String(item.id) === String(id));
       if (!m) return;
 
-      document.getElementById('modal-minute-title-label').innerText = "✏️ 编辑例会纪要";
+      document.getElementById('modal-minute-title-label').innerText = "✏️ 编辑会议纪要";
       document.getElementById('edit-minute-id').value = m.id;
       document.getElementById('m-form-title').value = m.title || "";
       document.getElementById('m-form-date').value = m.date || "";
@@ -1897,22 +2224,46 @@
       document.getElementById('m-form-content').value = m.content || "";
       document.getElementById('m-form-todos').value = m.todosText || "";
 
+      const cat = m.category || 'region';
+      const rReg = document.getElementById('m-cat-region');
+      const rYef = document.getElementById('m-cat-yefawei');
+      if (rReg && rYef) {
+        if (cat === 'yefawei') rYef.checked = true;
+        else rReg.checked = true;
+      }
+
       const mMin = document.getElementById('modal-minute'); mMin.classList.remove('hidden'); mMin.classList.add('flex');
     }
 
-    // 打开新增纪要弹窗 (手动)
+    // 打开新增纪要弹窗
     function openNewMinuteModal() {
-      document.getElementById('modal-minute-title-label').innerText = "➕ 登记新例会纪要";
+      document.getElementById('modal-minute-title-label').innerText = "➕ 登记新会议纪要";
       document.getElementById('edit-minute-id').value = "";
       document.getElementById('m-form-title').value = "";
       document.getElementById('m-form-date').valueAsDate = new Date();
       document.getElementById('m-form-time').value = "09:30 - 11:30";
       document.getElementById('m-form-host').value = "王亚哲";
-      document.getElementById('m-form-attendees').value = "王亚哲(区域执行主任/部长)、夏晓飞(武汉)、陈赛男(长沙)、朱敏(成都)、邱月(重庆)、杜易(昆明)、张晶(贵阳)、胡侨益(HRBP)、张歆妍(IP运营中心)";
+
+      const cat = currentMinuteCategory || 'region';
+      const rReg = document.getElementById('m-cat-region');
+      const rYef = document.getElementById('m-cat-yefawei');
+      if (rReg && rYef) {
+        if (cat === 'yefawei') rYef.checked = true;
+        else rReg.checked = true;
+      }
+      adaptMinuteFormAttendees(cat);
+
       document.getElementById('m-form-content').value = "";
       document.getElementById('m-form-todos').value = "";
 
       const mMin = document.getElementById('modal-minute'); mMin.classList.remove('hidden'); mMin.classList.add('flex');
+    }
+
+    function adaptMinuteFormAttendees(cat) {
+      const attEl = document.getElementById('m-form-attendees');
+      if (attEl) {
+        attEl.value = categoryLabels[cat]?.defaultAttendees || "";
+      }
     }
 
     function closeMinuteModal() {
@@ -1929,6 +2280,7 @@
       const attendees = document.getElementById('m-form-attendees').value.trim();
       const content = document.getElementById('m-form-content').value.trim();
       const todosText = document.getElementById('m-form-todos').value.trim();
+      const category = document.querySelector('input[name="minute-category"]:checked')?.value || currentMinuteCategory || 'region';
 
       if (!title || !date) {
         showToast("请填写会议名称与会议日期！", "warn");
@@ -1936,185 +2288,195 @@
       }
 
       if (id) {
-        const idx = appData.minutes.findIndex(item => String(item.id) === String(id));
+        const idx = (appData.minutes || []).findIndex(item => String(item.id) === String(id));
         if (idx !== -1) {
           appData.minutes[idx] = {
             ...appData.minutes[idx],
-            title: title,
-            date: date,
-            time: time,
-            host: host,
-            attendees: attendees,
-            content: content,
-            todosText: todosText
+            title, date, time, host, attendees, content, todosText, category
           };
           currentSelectedMinuteId = id;
+          showToast("✅ 会议纪要修改已保存！");
         }
       } else {
         const newId = "m-" + Date.now();
         appData.minutes.unshift({
           id: newId,
-          title: title,
-          date: date,
-          time: time,
-          host: host,
-          attendees: attendees,
-          content: content,
-          todosText: todosText
+          title, date, time, host, attendees, content, todosText, category
         });
         currentSelectedMinuteId = newId;
+        currentMinuteCategory = category;
+        showToast("✅ 新会议纪要已归档！");
       }
 
       saveData();
       closeMinuteModal();
+      updateMinuteCategoryUI();
       renderMinuteSidebar();
       updateDashboardMetrics();
-      showToast("✅ 会议纪要已成功保存并实时更新！");
     }
 
-    // 删除会议纪要
     function deleteMinute(id) {
-      const m = appData.minutes.find(item => String(item.id) === String(id));
-      if (!m) return;
-
-      if (confirm(`确定要彻底删除【${m.title}】的会议纪要吗？`)) {
-        appData.minutes = appData.minutes.filter(item => String(item.id) !== String(id));
-        if (appData.minutes.length > 0) {
-          currentSelectedMinuteId = appData.minutes[0].id;
-        } else {
-          currentSelectedMinuteId = null;
-        }
+      if (confirm("确定要删除这篇会议纪要吗？该操作不可撤销。")) {
+        appData.minutes = (appData.minutes || []).filter(item => String(item.id) !== String(id));
         saveData();
+        currentSelectedMinuteId = null;
         renderMinuteSidebar();
         updateDashboardMetrics();
-        showToast("✅ 该会议纪要已彻底删除！");
+        showToast("✅ 已成功删除该纪要");
       }
     }
 
-    // 复制纪要全文到剪贴板
     function copyMinuteToClipboard(id) {
-      const m = appData.minutes.find(item => String(item.id) === String(id));
+      const m = (appData.minutes || []).find(item => String(item.id) === String(id));
       if (!m) return;
 
-      const text = `${m.title}
+      const isYef = m.category === 'yefawei';
+      const textToCopy = `【${isYef ? '业发委纪要' : '大区纪要'}】${m.title}
 时间：${m.date} ${m.time}
 主持人：${m.host}
 参会人员：${m.attendees}
 
-【主要议题与决议】
+一、会议决议备忘：
 ${m.content}
 
-【重点待办清单】
+二、督办待办清单：
 ${m.todosText || '无'}`;
-      navigator.clipboard.writeText(text).then(() => {
-        showToast("📋 已复制纪要全文，可直接粘贴发至微信群/钉钉！");
+
+      navigator.clipboard.writeText(textToCopy).then(() => {
+        showToast("📋 会议纪要全文已复制到剪贴板！");
       }).catch(() => {
-        showToast("复制失败，请手动选中文本复制", "warn");
+        showToast("复制失败，请手动选取复制", "warn");
       });
     }
 
-    // -------------------------------------------------------------
-    // 智能粘贴全文自动匹配并创建新纪要
-    // -------------------------------------------------------------
+    // 智能导入模态框操作
     function openSmartImportMinuteModal() {
+      const mSmart = document.getElementById('modal-smart-import-minute');
+      mSmart.classList.remove('hidden');
+      mSmart.classList.add('flex');
+
+      const cat = currentMinuteCategory || 'region';
+      const rReg = document.getElementById('smart-cat-region');
+      const rYef = document.getElementById('smart-cat-yefawei');
+      if (rReg && rYef) {
+        if (cat === 'yefawei') rYef.checked = true;
+        else rReg.checked = true;
+      }
+
       document.getElementById('smart-import-raw-text').value = "";
       document.getElementById('smart-preview-title').value = "";
       document.getElementById('smart-preview-date').valueAsDate = new Date();
       document.getElementById('smart-preview-time').value = "09:30 - 11:30";
       document.getElementById('smart-preview-host').value = "王亚哲";
-      document.getElementById('smart-preview-attendees').value = "王亚哲(区域执行主任/部长)、夏晓飞(武汉)、陈赛男(长沙)、朱敏(成都)、邱月(重庆)、杜易(昆明)、张晶(贵阳)、胡侨益(HRBP)、张歆妍(IP运营中心)";
+      adaptSmartAttendeesDefault(cat);
       document.getElementById('smart-preview-content').value = "";
       document.getElementById('smart-preview-todos').value = "";
       document.getElementById('smart-preview-todos-count').innerText = "0 项待办";
       document.getElementById('smart-parse-status-badge').innerText = "等待输入文本";
-      const mSmart = document.getElementById('modal-smart-import-minute'); mSmart.classList.remove('hidden'); mSmart.classList.add('flex');
+      document.getElementById('smart-parse-status-badge').className = "text-[11px] text-slate-500 bg-slate-100 px-2 py-0.5 rounded font-medium";
+    }
+
+    function adaptSmartAttendeesDefault(cat) {
+      const attEl = document.getElementById('smart-preview-attendees');
+      if (attEl && (!attEl.value || attEl.value.includes("王亚哲"))) {
+        attEl.value = categoryLabels[cat]?.defaultAttendees || "";
+      }
     }
 
     function closeSmartImportMinuteModal() {
-      const mSmart = document.getElementById('modal-smart-import-minute'); mSmart.classList.add('hidden'); mSmart.classList.remove('flex');
+      const mSmart = document.getElementById('modal-smart-import-minute');
+      mSmart.classList.add('hidden');
+      mSmart.classList.remove('flex');
     }
 
+    let smartParseDebounceTimer = null;
     function handleSmartImportTextInput() {
-      triggerSmartParse();
+      if (smartParseDebounceTimer) clearTimeout(smartParseDebounceTimer);
+      smartParseDebounceTimer = setTimeout(triggerSmartParse, 300);
     }
 
     function triggerSmartParse() {
       const raw = document.getElementById('smart-import-raw-text').value;
-      if (!raw || !raw.trim()) {
+      if (!raw.trim()) {
         document.getElementById('smart-parse-status-badge').innerText = "等待输入文本";
+        document.getElementById('smart-parse-status-badge').className = "text-[11px] text-slate-500 bg-slate-100 px-2 py-0.5 rounded font-medium";
         return;
       }
 
       const parsed = parseRawMinuteText(raw);
-      if (parsed) {
-        document.getElementById('smart-preview-title').value = parsed.title;
-        document.getElementById('smart-preview-date').value = parsed.date;
-        document.getElementById('smart-preview-time').value = parsed.time;
-        document.getElementById('smart-preview-host').value = parsed.host;
-        document.getElementById('smart-preview-attendees').value = parsed.attendees;
-        document.getElementById('smart-preview-content').value = parsed.content;
-        document.getElementById('smart-preview-todos').value = parsed.todosText;
 
-        const count = parsed.todosText ? parsed.todosText.split(/\r?\n/).filter(Boolean).length : 0;
-        document.getElementById('smart-preview-todos-count').innerText = `${count} 项待办`;
-        document.getElementById('smart-parse-status-badge').innerText = "✅ 已自动完成识别匹配";
-        document.getElementById('smart-parse-status-badge').className = "text-[11px] text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded font-bold";
+      if (parsed.title) document.getElementById('smart-preview-title').value = parsed.title;
+      if (parsed.date) document.getElementById('smart-preview-date').value = parsed.date;
+      if (parsed.time) document.getElementById('smart-preview-time').value = parsed.time;
+      if (parsed.host) document.getElementById('smart-preview-host').value = parsed.host;
+      if (parsed.attendees) document.getElementById('smart-preview-attendees').value = parsed.attendees;
+      if (parsed.content) document.getElementById('smart-preview-content').value = parsed.content;
+      if (parsed.todosText) document.getElementById('smart-preview-todos').value = parsed.todosText;
+
+      const todosLines = parsed.todosText ? parsed.todosText.split(/\r?\n/).filter(Boolean) : [];
+      document.getElementById('smart-preview-todos-count').innerText = `${todosLines.length} 项待办`;
+
+      // 智能根据标题判断类别
+      const rReg = document.getElementById('smart-cat-region');
+      const rYef = document.getElementById('smart-cat-yefawei');
+      if (parsed.title.includes("业发委") || parsed.title.includes("双百计划") || raw.includes("马梦然")) {
+        if (rYef) rYef.checked = true;
       }
+
+      const badge = document.getElementById('smart-parse-status-badge');
+      badge.innerText = `已解析 ${todosLines.length} 项待办`;
+      badge.className = "text-[11px] text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded font-bold border border-emerald-200";
     }
 
-    function parseRawMinuteText(raw) {
-      if (!raw || !raw.trim()) return null;
-      const text = raw.trim();
-      const lines = text.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
-
+    function parseRawMinuteText(text) {
       let title = "";
       let date = "";
       let time = "09:30 - 11:30";
       let host = "王亚哲";
-      let attendees = "王亚哲(区域执行主任/部长)、夏晓飞(武汉)、陈赛男(长沙)、朱敏(成都)、邱月(重庆)、杜易(昆明)、张晶(贵阳)、胡侨益(HRBP)、张歆妍(IP运营中心)";
+      let attendees = categoryLabels[currentMinuteCategory]?.defaultAttendees || "";
       let content = "";
       let todosText = "";
 
-      const dateMatch = text.match(/(\d{4})[-/.年](\d{1,2})[-/.月](\d{1,2})日?/);
+      const lines = text.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
+      if (lines.length === 0) return { title, date, time, host, attendees, content, todosText };
+
+      for (let i = 0; i < Math.min(lines.length, 4); i++) {
+        const l = lines[i];
+        if (l.includes("会议纪要") || l.includes("例会") || l.includes("推进会") || l.includes("#") || l.includes("工作会议")) {
+          title = l.replace(/^#+/, '').trim();
+          break;
+        }
+      }
+      if (!title) title = lines[0];
+
+      const dateMatch = text.match(/(202\d[-年/.](?:0?[1-9]|1[0-2])[-月/.](?:0?[1-9]|[12]\d|3[01])日?)/);
       if (dateMatch) {
-        const y = dateMatch[1];
-        const m = dateMatch[2].padStart(2, '0');
-        const d = dateMatch[3].padStart(2, '0');
-        date = `${y}-${m}-${d}`;
-      } else {
+        let dStr = dateMatch[1].replace(/年|\/|\./g, '-').replace(/月/g, '-').replace(/日/g, '');
+        const parts = dStr.split('-');
+        if (parts.length === 3) {
+          const y = parts[0];
+          const m = parts[1].padStart(2, '0');
+          const d = parts[2].padStart(2, '0');
+          date = `${y}-${m}-${d}`;
+        }
+      }
+      if (!date) {
         date = new Date().toISOString().split('T')[0];
       }
 
-      const timeMatch = text.match(/(\d{1,2}:\d{2})\s*[-~至到—]\s*(\d{1,2}:\d{2})/);
-      if (timeMatch) {
-        time = `${timeMatch[1]} - ${timeMatch[2]}`;
-      }
+      const timeMatch = text.match(/(?:时间[：:]\s*)?(\d{1,2}:\d{2}\s*(?:-|至|~)\s*\d{1,2}:\d{2})/);
+      if (timeMatch) time = timeMatch[1].replace('至', '-').replace('~', '-').trim();
 
-      const hostMatch = text.match(/(?:主持人|主持|召集人)[：:\s]+([^\r\n,，。]+)/);
-      if (hostMatch) {
-        host = hostMatch[1].trim();
-      }
+      const hostMatch = text.match(/(?:主持[人]?[：:]\s*)([一-龥a-zA-Z0-9]+)/);
+      if (hostMatch) host = hostMatch[1].trim();
 
-      const attMatch = text.match(/(?:参会人员|参会人|出席人员|出席人|参会者|参会)[：:\s]+([^\r\n]+)/);
-      if (attMatch) {
-        attendees = attMatch[1].trim();
-      }
-
-      const titleLine = lines.find(l => l.includes("会议纪要") || l.startsWith("#") || l.includes("例会") || l.includes("大区"));
-      if (titleLine) {
-        title = titleLine.replace(/^[【\[]?/, "【").replace(/[】\]]?$/, "】");
-        if (!title.startsWith("【会议纪要】")) {
-          title = "【会议纪要】" + title.replace(/【|】/g, "");
-        }
-      } else {
-        title = `【会议纪要】${date} 例会`;
-      }
+      const attMatch = text.match(/(?:参会[人|人员]?[：:]\s*)([^\r\n]+)/);
+      if (attMatch) attendees = attMatch[1].trim();
 
       let todoStartIndex = -1;
       for (let i = 0; i < lines.length; i++) {
         const l = lines[i];
-        if (/^(?:[一二三四五六七八九十\d\.\、\s]*)(?:待办事项|待办清单|重点待办|会议待办|督办事项|督办待办|行动项|任务分工|任务清单)[：:\s]*$/i.test(l) ||
-            /(?:待办事项|重点待办|督办待办)[：:]/.test(l)) {
+        if (/(?:待办事项|待办清单|会议督办|行动清单|任务分工|重点待办)/.test(l)) {
           todoStartIndex = i;
           break;
         }
@@ -2152,6 +2514,7 @@ ${m.todosText || '无'}`;
       const content = document.getElementById('smart-preview-content').value.trim();
       const todosText = document.getElementById('smart-preview-todos').value.trim();
       const autoSyncTodos = document.getElementById('smart-auto-sync-todos-checkbox').checked;
+      const category = document.querySelector('input[name="smart-minute-category"]:checked')?.value || currentMinuteCategory || 'region';
 
       if (!title || !date) {
         showToast("请确认会议名称与日期！", "warn");
@@ -2161,25 +2524,18 @@ ${m.todosText || '无'}`;
       const newId = "m-" + Date.now();
       const newMinute = {
         id: newId,
-        title: title,
-        date: date,
-        time: time,
-        host: host,
-        attendees: attendees,
-        content: content,
-        todosText: todosText
+        title, date, time, host, attendees, content, todosText, category
       };
 
       appData.minutes.unshift(newMinute);
       currentSelectedMinuteId = newId;
+      currentMinuteCategory = category;
 
-      // 自动防重同步待办
-      let addedTodoCount = 0;
+      let addedTodosCount = 0;
       if (autoSyncTodos && todosText) {
-        const parsedItems = parseTodosFromText(todosText, date, title);
-        parsedItems.forEach((item, idx) => {
-          const duplicate = findDuplicateTodo(item.task, appData.todos);
-          if (!duplicate) {
+        const extracted = parseTodosFromText(todosText, date, title, category);
+        extracted.forEach((item, idx) => {
+          if (!findDuplicateTodo(item.task, appData.todos)) {
             appData.todos.unshift({
               id: Date.now() + idx,
               date: item.date,
@@ -2188,193 +2544,162 @@ ${m.todosText || '无'}`;
               task: item.task,
               deadline: item.deadline,
               status: "进行中",
-              note: "" // 纯净无填充
+              note: "",
+              category: category
             });
-            addedTodoCount++;
+            addedTodosCount++;
           }
         });
       }
 
       saveData();
       closeSmartImportMinuteModal();
+      updateMinuteCategoryUI();
       renderMinuteSidebar();
-      renderTodos();
       updateDashboardMetrics();
 
-      if (addedTodoCount > 0) {
-        showToast(`✅ 智能新建纪要成功！已自动排重新增 ${addedTodoCount} 条待办！`);
+      if (addedTodosCount > 0) {
+        showToast(`✅ 纪要归档成功，并自动同步 ${addedTodosCount} 项待办到【${categoryLabels[category].name}待办库】！`);
       } else {
-        showToast("✅ 智能新建纪要成功！已完成归档！");
+        showToast(`✅ 会议纪要已成功智能导入归档！`);
       }
     }
 
     // -------------------------------------------------------------
-    // 文本去重与清洗核心算法 (防重复检查)
+    // 待办查重与智能防重复算法
     // -------------------------------------------------------------
-    function normalizeTaskText(str) {
-      if (!str) return "";
-      return str
-        .replace(/^[一二三四五六七八九十\d\.\、\s\-\*]+/, '')
-        .replace(/@[一-龥]+/g, '')
-        .replace(/[，。；：！？\(\)（）\s\,\.\;\:\!\?\-]/g, '')
-        .toLowerCase();
+    function normalizeTaskText(text) {
+      if (!text) return "";
+      return text.replace(/@[一-龥a-zA-Z0-9]+/g, '')
+                 .replace(/^[一二三四五六七八九十\d\.\、\s\-\*]+/, '')
+                 .replace(/[，,。；;！!？?\s]/g, '')
+                 .toLowerCase();
     }
 
-    function findDuplicateTodo(itemTask, existingTodos) {
-      const normNew = normalizeTaskText(itemTask);
-      if (!normNew || normNew.length < 3) return null;
+    function findDuplicateTodo(newTaskText, existingTodos) {
+      const normNew = normalizeTaskText(newTaskText);
+      if (!normNew || normNew.length < 4) return false;
 
-      for (const t of existingTodos) {
+      return existingTodos.some(t => {
         const normExist = normalizeTaskText(t.task);
-        if (!normExist || normExist.length < 3) continue;
-
-        if (normNew === normExist) return t;
-
-        if (normNew.includes(normExist) || normExist.includes(normNew)) {
-          const minLen = Math.min(normNew.length, normExist.length);
-          const maxLen = Math.max(normNew.length, normExist.length);
-          if (minLen / maxLen > 0.5) return t;
-        }
-
-        let matchCount = 0;
-        for (let i = 0; i <= normNew.length - 3; i++) {
-          const gram = normNew.slice(i, i + 3);
-          if (normExist.includes(gram)) matchCount++;
-        }
-        const overlap = matchCount / Math.max(1, normNew.length - 2);
-        if (overlap > 0.65) return t;
-      }
-      return null;
+        if (!normExist) return false;
+        if (normNew === normExist) return true;
+        if (normNew.length >= 8 && normExist.includes(normNew)) return true;
+        if (normExist.length >= 8 && normNew.includes(normExist)) return true;
+        return false;
+      });
     }
 
     // -------------------------------------------------------------
-    // 从会议纪要库提取待办事项 (带自动防重复检查项)
+    // 模块 3：从会议纪要库提取待办事项 (带自动防重复检查项)
     // -------------------------------------------------------------
     let currentExtractedItems = [];
 
-    function openExtractTodosModal(targetMinuteId = "") {
-      const select = document.getElementById('extract-source-minute-select');
-      if (!select) return;
+    function openExtractTodosModal(defaultMinuteId = null) {
+      ensureCategories(appData);
+      const mExtract = document.getElementById('modal-extract-todos');
+      mExtract.classList.remove('hidden');
+      mExtract.classList.add('flex');
 
+      const select = document.getElementById('extract-source-minute-select');
       select.innerHTML = "";
+
+      const optAllCurrent = document.createElement('option');
+      optAllCurrent.value = "current_category_all";
+      optAllCurrent.innerText = `🌟 【全量提取】提取当前【${categoryLabels[currentTodoCategory].name}】全部会议待办`;
+      select.appendChild(optAllCurrent);
 
       const optAll = document.createElement('option');
       optAll.value = "all";
-      optAll.innerText = `【全部会议纪要】合并提取所有待办`;
+      optAll.innerText = `🌐 【全局全量】提取系统全部历史会议所有待办`;
       select.appendChild(optAll);
 
-      appData.minutes.forEach(m => {
-        const tLines = m.todosText ? m.todosText.split(/\r?\n/).filter(Boolean) : [];
+      (appData.minutes || []).forEach(m => {
         const opt = document.createElement('option');
         opt.value = m.id;
-        opt.innerText = `${m.date} | ${m.title} (${tLines.length}项待办)`;
+        const catTag = m.category === 'yefawei' ? '[业发委]' : '[大区]';
+        opt.innerText = `${catTag} ${m.date} - ${m.title.replace("【会议纪要】", "")}`;
         select.appendChild(opt);
       });
 
-      if (targetMinuteId && appData.minutes.some(m => String(m.id) === String(targetMinuteId))) {
-        select.value = targetMinuteId;
-      } else if (appData.minutes.length > 0) {
-        select.value = appData.minutes[0].id;
+      if (defaultMinuteId) {
+        select.value = defaultMinuteId;
       } else {
-        select.value = "all";
+        select.value = "current_category_all";
       }
 
       renderExtractTodosPreview();
-      const mExtract = document.getElementById('modal-extract-todos'); mExtract.classList.remove('hidden'); mExtract.classList.add('flex');
     }
 
     function closeExtractTodosModal() {
-      const mExtract = document.getElementById('modal-extract-todos'); mExtract.classList.add('hidden'); mExtract.classList.remove('flex');
+      const mExtract = document.getElementById('modal-extract-todos');
+      mExtract.classList.add('hidden');
+      mExtract.classList.remove('flex');
     }
 
-    // 渲染待提取事项的勾选预览列表 (带严谨防重检查)
     function renderExtractTodosPreview() {
-      const select = document.getElementById('extract-source-minute-select');
+      const selectValue = document.getElementById('extract-source-minute-select').value;
+      const autoFilterDup = document.getElementById('extract-auto-filter-duplicates').checked;
       const container = document.getElementById('extract-items-container');
-      const totalCountEl = document.getElementById('extract-total-count');
-      const newCountEl = document.getElementById('extract-new-count');
-      const badgeEl = document.getElementById('extract-duplicates-detected-badge');
-      const autoFilterDup = document.getElementById('extract-auto-filter-duplicates')?.checked ?? true;
-      if (!select || !container) return;
+      container.innerHTML = "";
 
-      const selectedVal = select.value;
-      let targetMinutes = [];
-
-      if (selectedVal === "all") {
-        targetMinutes = appData.minutes || [];
+      let sourceMinutes = [];
+      if (selectValue === "current_category_all") {
+        sourceMinutes = (appData.minutes || []).filter(m => (m.category || 'region') === currentTodoCategory);
+      } else if (selectValue === "all") {
+        sourceMinutes = appData.minutes || [];
       } else {
-        const found = appData.minutes.find(m => String(m.id) === String(selectedVal));
-        if (found) targetMinutes = [found];
+        const single = (appData.minutes || []).find(m => String(m.id) === String(selectValue));
+        if (single) sourceMinutes = [single];
       }
 
       currentExtractedItems = [];
-      targetMinutes.forEach(m => {
+      sourceMinutes.forEach(m => {
         if (m.todosText) {
-          const items = parseTodosFromText(m.todosText, m.date, m.title);
+          const items = parseTodosFromText(m.todosText, m.date, m.title, m.category || 'region');
           currentExtractedItems.push(...items);
         }
       });
 
-      if (totalCountEl) totalCountEl.innerText = currentExtractedItems.length;
-
-      if (currentExtractedItems.length === 0) {
-        container.innerHTML = `
-          <div class="p-8 text-center text-slate-400 text-xs">
-            该会议纪要中未检测到待办事项文本，请先在会议纪要中填写督办待办清单。
-          </div>
-        `;
-        document.getElementById('btn-confirm-extract').disabled = true;
-        if (newCountEl) newCountEl.innerText = "0";
-        if (badgeEl) badgeEl.innerText = "无待办事项";
-        return;
-      }
-
-      document.getElementById('btn-confirm-extract').disabled = false;
-
       let duplicateCount = 0;
       let newCount = 0;
 
-      container.innerHTML = currentExtractedItems.map((item, idx) => {
-        const duplicateMatch = findDuplicateTodo(item.task, appData.todos);
-        const isDuplicate = !!duplicateMatch;
+      if (currentExtractedItems.length === 0) {
+        container.innerHTML = `<div class="p-6 text-center text-slate-400 text-xs">所选会议纪要中未识别出待办事项</div>`;
+      } else {
+        currentExtractedItems.forEach((item, idx) => {
+          const isDup = findDuplicateTodo(item.task, appData.todos);
+          if (isDup) duplicateCount++;
+          else newCount++;
 
-        if (isDuplicate) {
-          duplicateCount++;
-        } else {
-          newCount++;
-        }
+          const isChecked = autoFilterDup ? !isDup : true;
+          const isYef = item.category === 'yefawei';
 
-        // 默认勾选逻辑：如果开启了自动防重，已重复的默认不勾选，全新的默认勾选
-        const defaultChecked = autoFilterDup ? !isDuplicate : true;
-
-        return `
-          <div class="p-2.5 flex items-start space-x-3 transition-colors ${isDuplicate ? 'bg-amber-50/40 border-l-2 border-l-amber-400' : 'bg-white hover:bg-slate-50'}">
-            <input type="checkbox" id="extract-chk-${idx}" data-duplicate="${isDuplicate ? '1' : '0'}" ${defaultChecked ? 'checked' : ''} class="mt-1 w-4 h-4 text-emerald-600 rounded focus:ring-emerald-500 cursor-pointer">
-            <div class="flex-1 space-y-1">
-              <div class="flex items-center justify-between">
-                <div class="flex items-center space-x-1.5">
-                  <span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-blue-100 text-blue-900 border border-blue-200">${item.owner}</span>
-                  <span class="px-1.5 py-0.5 rounded text-[10px] text-slate-600 bg-slate-100">${item.org}</span>
-                  <span class="text-[10px] font-mono text-rose-600 font-semibold">截止: ${item.deadline}</span>
-                </div>
-                <div>
-                  ${isDuplicate 
-                    ? `<span class="text-[10px] px-2 py-0.5 rounded bg-amber-100 text-amber-900 font-bold border border-amber-200">⚠️ 与已有待办重复 (${duplicateMatch.owner})</span>` 
-                    : '<span class="text-[10px] px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold border border-emerald-200">🟢 全新待办 (待入库)</span>'
-                  }
-                </div>
+          const row = document.createElement('div');
+          row.className = `p-2.5 flex items-start space-x-2 transition ${isDup ? 'bg-amber-50/50' : 'bg-white hover:bg-slate-50'}`;
+          row.innerHTML = `
+            <input type="checkbox" id="extract-chk-${idx}" data-duplicate="${isDup ? '1' : '0'}" ${isChecked ? 'checked' : ''} class="mt-0.5 rounded text-blue-600 focus:ring-blue-500 w-3.5 h-3.5 cursor-pointer">
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center space-x-2 mb-0.5">
+                <span class="text-[9px] px-1 py-0.2 rounded font-bold ${isYef ? 'bg-purple-100 text-purple-800' : 'bg-blue-100 text-blue-800'}">
+                  ${isYef ? '业发委' : '大区'}
+                </span>
+                <span class="font-bold text-slate-800">${item.owner}</span>
+                <span class="text-[10px] text-slate-400">(${item.org})</span>
+                <span class="text-[10px] text-rose-600 font-mono">截止: ${item.deadline}</span>
+                ${isDup ? '<span class="text-[9px] font-bold text-amber-700 bg-amber-100 px-1 rounded border border-amber-200">已存在待办库中 (排重)</span>' : '<span class="text-[9px] font-bold text-emerald-700 bg-emerald-100 px-1 rounded">可新增入库</span>'}
               </div>
-              <p class="text-xs font-medium leading-relaxed ${isDuplicate ? 'text-slate-600' : 'text-slate-900'}">${item.task}</p>
-              <div class="flex items-center justify-between text-[10px] text-slate-400">
-                <span>来源：${item.sourceTitle}</span>
-                ${isDuplicate ? `<span class="text-amber-700">库中已有事项：“${duplicateMatch.task.slice(0, 18)}...”</span>` : ''}
-              </div>
+              <div class="text-slate-700 text-xs leading-relaxed break-words">${item.task}</div>
+              <div class="text-[10px] text-slate-400 mt-0.5">来源：${item.sourceTitle}</div>
             </div>
-          </div>
-        `;
-      }).join('');
+          `;
+          container.appendChild(row);
+        });
+      }
 
-      if (newCountEl) newCountEl.innerText = newCount;
+      document.getElementById('extract-total-count').innerText = currentExtractedItems.length;
+      document.getElementById('extract-new-count').innerText = newCount;
+      const badgeEl = document.getElementById('extract-duplicates-detected-badge');
       if (badgeEl) {
         if (duplicateCount > 0) {
           badgeEl.innerText = `检测到 ${duplicateCount} 项已存在 (已自动排除)`;
@@ -2386,10 +2711,12 @@ ${m.todosText || '无'}`;
       }
     }
 
-    function parseTodosFromText(todosText, meetingDate, sourceTitle) {
+    function parseTodosFromText(todosText, meetingDate, sourceTitle, sourceCategory = null) {
       if (!todosText) return [];
       const lines = todosText.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
       const items = [];
+
+      const defaultCategory = sourceCategory || (sourceTitle && (sourceTitle.includes("业发委") || sourceTitle.includes("双百计划")) ? "yefawei" : "region");
 
       lines.forEach(line => {
         let cleanLine = line.replace(/^[一二三四五六七八九十\d\.\、\s\-\*]+/, '').trim();
@@ -2397,20 +2724,21 @@ ${m.todosText || '无'}`;
 
         const atMatches = line.match(/@([一-龥]+)/g);
         let owner = "王亚哲";
-        let org = "大区/总办";
+        let org = defaultCategory === 'yefawei' ? "业发委秘书处" : "大区/总办";
 
         if (atMatches && atMatches.length > 0) {
           const names = atMatches.map(m => m.replace('@', ''));
           owner = names.join('、');
           const first = names[0];
-          org = guessBranchByOwner(first);
+          org = guessBranchByOwner(first, defaultCategory);
         } else {
           const respMatch = line.match(/责任人[：:]\s*([一-龥]+)/);
           if (respMatch && respMatch[1]) {
             owner = respMatch[1];
-            org = guessBranchByOwner(owner);
-          } else if (cleanLine.includes("胡侨益")) { owner = "胡侨益"; org = "HRBP"; }
-          else if (cleanLine.includes("张歆妍")) { owner = "张歆妍"; org = "大区/IP运营中心"; }
+            org = guessBranchByOwner(owner, defaultCategory);
+          } else if (cleanLine.includes("马梦然")) { owner = "马梦然"; org = "业发委秘书处"; }
+          else if (cleanLine.includes("胡侨益")) { owner = "胡侨益"; org = "HRBP"; }
+          else if (cleanLine.includes("张歆妍")) { owner = "张歆妍"; org = defaultCategory === 'yefawei' ? "业发委" : "大区/IP运营中心"; }
           else if (cleanLine.includes("夏晓飞")) { owner = "夏晓飞"; org = "武汉分所"; }
           else if (cleanLine.includes("陈赛男")) { owner = "陈赛男"; org = "长沙分所"; }
           else if (cleanLine.includes("朱敏")) { owner = "朱敏"; org = "成都分所"; }
@@ -2423,7 +2751,7 @@ ${m.todosText || '无'}`;
           else if (cleanLine.includes("重庆")) { owner = "邱月"; org = "重庆分所"; }
           else if (cleanLine.includes("昆明")) { owner = "杜易"; org = "昆明分所"; }
           else if (cleanLine.includes("贵阳")) { owner = "张晶"; org = "贵阳分所"; }
-          else if (cleanLine.includes("全体")) { owner = "全体主任"; org = "大区各所"; }
+          else if (cleanLine.includes("全体")) { owner = "全体主任"; org = defaultCategory === 'yefawei' ? "业发委" : "大区各所"; }
         }
 
         let deadline = "";
@@ -2455,19 +2783,21 @@ ${m.todosText || '无'}`;
 
         items.push({
           date: meetingDate || new Date().toISOString().split('T')[0],
-          owner: owner,
-          org: org,
+          owner,
+          org,
           task: cleanLine,
-          deadline: deadline,
-          sourceTitle: sourceTitle || "月度例会"
+          deadline,
+          sourceTitle: sourceTitle || "工作例会",
+          category: defaultCategory
         });
       });
 
       return items;
     }
 
-    function guessBranchByOwner(name) {
-      if (!name) return "大区/总办";
+    function guessBranchByOwner(name, category = null) {
+      if (!name) return category === 'yefawei' ? "业发委秘书处" : "大区/总办";
+      if (name.includes("马梦然")) return "业发委秘书处";
       if (name.includes("夏晓飞")) return "武汉分所";
       if (name.includes("陈赛男")) return "长沙分所";
       if (name.includes("朱敏")) return "成都分所";
@@ -2475,9 +2805,9 @@ ${m.todosText || '无'}`;
       if (name.includes("杜易")) return "昆明分所";
       if (name.includes("张晶")) return "贵阳分所";
       if (name.includes("胡侨益")) return "HRBP";
-      if (name.includes("张歆妍")) return "大区/IP运营中心";
-      if (name.includes("全体")) return "大区各所";
-      return "大区/总办";
+      if (name.includes("张歆妍")) return category === 'yefawei' ? "业发委" : "大区/IP运营中心";
+      if (name.includes("全体")) return category === 'yefawei' ? "业发委各部门" : "大区各所";
+      return category === 'yefawei' ? "业发委秘书处" : "大区/总办";
     }
 
     function toggleAllExtractCheckboxes(checked) {
@@ -2486,7 +2816,6 @@ ${m.todosText || '无'}`;
         const el = document.getElementById(`extract-chk-${idx}`);
         if (el) {
           if (checked && autoFilterDup) {
-            // 只全选非重复项
             el.checked = el.getAttribute('data-duplicate') !== '1';
           } else {
             el.checked = checked;
@@ -2495,7 +2824,6 @@ ${m.todosText || '无'}`;
       });
     }
 
-    // 确认提取并新增所选待办 (带严格防重入库保障)
     function confirmExtractTodos() {
       const autoFilterDup = document.getElementById('extract-auto-filter-duplicates')?.checked ?? true;
       let count = 0;
@@ -2504,7 +2832,6 @@ ${m.todosText || '无'}`;
       currentExtractedItems.forEach((item, idx) => {
         const el = document.getElementById(`extract-chk-${idx}`);
         if (el && el.checked) {
-          // 如果勾选了防重，进行二次排重保护
           if (autoFilterDup && findDuplicateTodo(item.task, appData.todos)) {
             skippedCount++;
             return;
@@ -2518,36 +2845,29 @@ ${m.todosText || '无'}`;
             task: item.task,
             deadline: item.deadline,
             status: "进行中",
-            note: "" // 纯净空白，不再自动填充无用说明
+            note: "",
+            category: item.category || currentTodoCategory || "region"
           });
           count++;
         }
       });
-
-      if (count === 0) {
-        if (skippedCount > 0) {
-          showToast(`⚠️ 所选待办均已存在于待办库中，已为您自动拦截排重！`, "warn");
-        } else {
-          showToast("请至少勾选一项要导入的待办事项！", "warn");
-        }
-        return;
-      }
 
       saveData();
       closeExtractTodosModal();
       renderTodos();
       updateDashboardMetrics();
 
-      if (skippedCount > 0) {
-        showToast(`✅ 已提取入库 ${count} 条新待办 (自动排重跳过 ${skippedCount} 条重复项)`);
+      if (count > 0) {
+        showToast(`✅ 成功导入 ${count} 项新待办！`);
+      } else if (skippedCount > 0) {
+        showToast(`⚠️ 已自动过滤 ${skippedCount} 项重复事项，无新待办需要导入。`, "warn");
       } else {
-        showToast(`✅ 已成功提取并新增 ${count} 条待办事项！`);
+        showToast("未勾选任何可导入的事项！", "warn");
       }
-      switchTab('todos');
     }
 
     // -------------------------------------------------------------
-    // 模块 4：待办事项追踪 (行内修改、全字段弹窗编辑、纯净无自动填充)
+    // 模块 4：待办事项追踪 (支持双板块独立追踪、动态责任人、状态变更)
     // -------------------------------------------------------------
     let currentTodoStatusFilter = "all";
 
@@ -2569,22 +2889,60 @@ ${m.todosText || '无'}`;
       renderTodos();
     }
 
+    function updateTodoOwnerDropdown() {
+      const select = document.getElementById('todo-owner-filter');
+      if (!select) return;
+
+      const currentVal = select.value || "all";
+      select.innerHTML = "";
+
+      const options = categoryLabels[currentTodoCategory]?.owners || [
+        { value: "all", label: "全部责任人" },
+        { value: "王亚哲", label: "王亚哲" }
+      ];
+
+      options.forEach(opt => {
+        const el = document.createElement('option');
+        el.value = opt.value;
+        el.innerText = opt.label;
+        select.appendChild(el);
+      });
+
+      if (options.some(o => o.value === currentVal)) {
+        select.value = currentVal;
+      } else {
+        select.value = "all";
+      }
+    }
+
     function renderTodos() {
+      ensureCategories(appData);
       const tbody = document.getElementById('todos-table-body');
       const ownerFilter = document.getElementById('todo-owner-filter')?.value || "all";
       if (!tbody) return;
 
-      const allCount = appData.todos.length;
-      const progressCount = appData.todos.filter(t => t.status === "进行中").length;
-      const doneCount = appData.todos.filter(t => t.status === "已完成").length;
-      const notYetCount = appData.todos.filter(t => t.status === "未开始").length;
+      const allTodos = appData.todos || [];
+      const regCount = allTodos.filter(t => (t.category || 'region') === 'region').length;
+      const yefCount = allTodos.filter(t => t.category === 'yefawei').length;
+
+      const bReg = document.getElementById('badge-todo-cnt-region');
+      const bYef = document.getElementById('badge-todo-cnt-yefawei');
+      if (bReg) bReg.innerText = regCount;
+      if (bYef) bYef.innerText = yefCount;
+
+      const categoryTodos = allTodos.filter(t => (t.category || 'region') === currentTodoCategory);
+
+      const allCount = categoryTodos.length;
+      const progressCount = categoryTodos.filter(t => t.status === "进行中").length;
+      const doneCount = categoryTodos.filter(t => t.status === "已完成").length;
+      const notYetCount = categoryTodos.filter(t => t.status === "未开始").length;
 
       document.getElementById('cnt-all').innerText = allCount;
       document.getElementById('cnt-progress').innerText = progressCount;
       document.getElementById('cnt-done').innerText = doneCount;
       document.getElementById('cnt-notyet').innerText = notYetCount;
 
-      let list = appData.todos || [];
+      let list = categoryTodos;
       if (ownerFilter !== "all") {
         list = list.filter(t => t.owner.includes(ownerFilter));
       }
@@ -2593,7 +2951,8 @@ ${m.todosText || '无'}`;
       }
 
       if (list.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="8" class="p-8 text-center text-slate-400 text-xs">暂无匹配的待办事项</td></tr>`;
+        const isReg = currentTodoCategory === 'region';
+        tbody.innerHTML = `<tr><td colspan="8" class="p-8 text-center text-slate-400 text-xs">暂无匹配的【${isReg ? '中部与西南大区' : '业务发展委员会'}】待办事项</td></tr>`;
         return;
       }
 
@@ -2609,7 +2968,7 @@ ${m.todosText || '无'}`;
             ${t.task}
           </td>
           <td class="p-3 text-slate-500 text-[11px] whitespace-nowrap">
-            ${t.org || "大区"}
+            ${t.org || (t.category === 'yefawei' ? '业发委' : '大区')}
           </td>
           <td class="p-3 text-center text-rose-600 font-mono text-[11px] font-semibold whitespace-nowrap">
             ${t.deadline}
@@ -2626,12 +2985,10 @@ ${m.todosText || '无'}`;
             </select>
           </td>
           <td class="p-3">
-            <!-- 优化：禁止浏览器自动填充，无默认杂质填充，仅保存真实录入 -->
-            <input type="text" value="${t.note || ''}" onchange="updateTodoNote(${t.id}, this.value)" placeholder="点击填写进展..." autocomplete="off" spellcheck="false" class="w-full text-xs p-1.5 border border-slate-200 rounded hover:border-blue-300 focus:border-blue-500 bg-white text-slate-800 placeholder-slate-300">
+            <input type="text" value="${t.note || ''}" onchange="updateTodoNote(${t.id}, this.value)" placeholder="点击填写进展说明..." autocomplete="off" spellcheck="false" class="w-full text-xs p-1.5 border border-slate-200 rounded hover:border-blue-300 focus:border-blue-500 bg-white text-slate-800 placeholder-slate-300">
           </td>
           <td class="p-3 text-center whitespace-nowrap space-x-1">
-            <!-- 新增需求 2：已录入待办可点击编辑 -->
-            <button onclick="openEditTodoModal(${t.id})" class="text-blue-600 hover:text-blue-800 px-1.5 py-0.5 rounded text-xs font-bold hover:bg-blue-50" title="编辑该待办全部信息">✏️ 编辑</button>
+            <button onclick="openEditTodoModal(${t.id})" class="text-blue-600 hover:text-blue-800 px-1.5 py-0.5 rounded text-xs font-bold hover:bg-blue-50" title="编辑该待办信息">✏️ 编辑</button>
             <button onclick="deleteTodo(${t.id})" class="text-slate-400 hover:text-rose-600 p-1 text-xs" title="删除">🗑️</button>
           </td>
         </tr>
@@ -2639,9 +2996,8 @@ ${m.todosText || '无'}`;
     }
 
     function quickToggleTodo(id) {
-      const todo = appData.todos.find(t => t.id === id);
+      const todo = (appData.todos || []).find(t => t.id === id);
       if (todo) {
-        // 优化：彻底移除自动填充“已按期交付销项”的逻辑，保留用户自己的说明
         todo.status = todo.status === "已完成" ? "进行中" : "已完成";
         saveData();
         renderTodos();
@@ -2651,7 +3007,7 @@ ${m.todosText || '无'}`;
     }
 
     function updateTodoStatus(id, newStatus) {
-      const todo = appData.todos.find(t => t.id === id);
+      const todo = (appData.todos || []).find(t => t.id === id);
       if (todo) {
         todo.status = newStatus;
         saveData();
@@ -2662,7 +3018,7 @@ ${m.todosText || '无'}`;
     }
 
     function updateTodoNote(id, newNote) {
-      const todo = appData.todos.find(t => t.id === id);
+      const todo = (appData.todos || []).find(t => t.id === id);
       if (todo) {
         todo.note = newNote.trim();
         saveData();
@@ -2670,68 +3026,101 @@ ${m.todosText || '无'}`;
       }
     }
 
-    // 需求 2：打开编辑待办弹窗并预填所有数据
     function openEditTodoModal(id) {
-      const todo = appData.todos.find(t => t.id === id);
+      const todo = (appData.todos || []).find(t => t.id === id);
       if (!todo) return;
 
       document.getElementById('edit-todo-id').value = todo.id;
-      const ownerSel = document.getElementById('edit-todo-owner');
-      ownerSel.value = todo.owner;
-      if (!ownerSel.value && todo.owner) {
-        const opt = document.createElement('option');
-        opt.value = todo.owner;
-        opt.innerText = todo.owner;
-        opt.selected = true;
-        ownerSel.appendChild(opt);
-      }
-      document.getElementById('edit-todo-org').value = todo.org || guessBranchByOwner(todo.owner);
       document.getElementById('edit-todo-task').value = todo.task || "";
       document.getElementById('edit-todo-deadline').value = todo.deadline || "";
       document.getElementById('edit-todo-status').value = todo.status || "进行中";
       document.getElementById('edit-todo-note').value = todo.note || "";
+      document.getElementById('edit-todo-org').value = todo.org || (todo.category === 'yefawei' ? '业发委' : '大区');
 
-      const mEditTodo = document.getElementById('modal-edit-todo'); mEditTodo.classList.remove('hidden'); mEditTodo.classList.add('flex');
+      const cat = todo.category || 'region';
+      const rReg = document.getElementById('edit-todo-cat-region');
+      const rYef = document.getElementById('edit-todo-cat-yefawei');
+      if (rReg && rYef) {
+        if (cat === 'yefawei') rYef.checked = true;
+        else rReg.checked = true;
+      }
+
+      adaptEditTodoOwnerOptions(cat, todo.owner);
+
+      const mEditTodo = document.getElementById('modal-edit-todo');
+      mEditTodo.classList.remove('hidden');
+      mEditTodo.classList.add('flex');
+    }
+
+    function adaptEditTodoOwnerOptions(cat, currentOwner = null) {
+      const ownerSel = document.getElementById('edit-todo-owner');
+      if (!ownerSel) return;
+
+      const prevVal = currentOwner || ownerSel.value;
+      ownerSel.innerHTML = "";
+      const owners = categoryLabels[cat]?.owners.filter(o => o.value !== 'all') || [{ value: "王亚哲", label: "王亚哲" }];
+
+      owners.forEach(opt => {
+        const el = document.createElement('option');
+        el.value = opt.value;
+        el.innerText = opt.label;
+        ownerSel.appendChild(el);
+      });
+
+      if (prevVal) {
+        ownerSel.value = prevVal;
+        if (!ownerSel.value) {
+          const opt = document.createElement('option');
+          opt.value = prevVal;
+          opt.innerText = prevVal;
+          opt.selected = true;
+          ownerSel.appendChild(opt);
+        }
+      }
     }
 
     function closeEditTodoModal() {
-      const mEditTodo = document.getElementById('modal-edit-todo'); mEditTodo.classList.add('hidden'); mEditTodo.classList.remove('flex');
+      const mEditTodo = document.getElementById('modal-edit-todo');
+      mEditTodo.classList.add('hidden');
+      mEditTodo.classList.remove('flex');
     }
 
     function saveEditTodoForm() {
-      const id = parseInt(document.getElementById('edit-todo-id').value);
-      const todo = appData.todos.find(t => t.id === id);
-      if (!todo) return;
-
+      const id = parseInt(document.getElementById('edit-todo-id').value, 10);
       const owner = document.getElementById('edit-todo-owner').value;
-      const org = document.getElementById('edit-todo-org').value.trim() || "大区";
+      const org = document.getElementById('edit-todo-org').value.trim();
       const task = document.getElementById('edit-todo-task').value.trim();
       const deadline = document.getElementById('edit-todo-deadline').value;
       const status = document.getElementById('edit-todo-status').value;
       const note = document.getElementById('edit-todo-note').value.trim();
+      const category = document.querySelector('input[name="edit-todo-category"]:checked')?.value || currentTodoCategory || 'region';
 
       if (!task) {
-        showToast("待办事项内容不能为空！", "warn");
+        showToast("待办内容不能为空！", "warn");
         return;
       }
 
-      todo.owner = owner;
-      todo.org = org;
-      todo.task = task;
-      todo.deadline = deadline || "尽快完成";
-      todo.status = status;
-      todo.note = note;
+      const todo = (appData.todos || []).find(t => t.id === id);
+      if (todo) {
+        todo.owner = owner;
+        todo.org = org || (category === 'yefawei' ? '业发委' : '大区');
+        todo.task = task;
+        todo.deadline = deadline;
+        todo.status = status;
+        todo.note = note;
+        todo.category = category;
 
-      saveData();
-      closeEditTodoModal();
-      renderTodos();
-      updateDashboardMetrics();
-      showToast("✅ 待办事项已成功更新！");
+        saveData();
+        closeEditTodoModal();
+        renderTodos();
+        updateDashboardMetrics();
+        showToast("✅ 待办事项已更新保存！");
+      }
     }
 
     function deleteTodo(id) {
       if (confirm("确定要删除这条待办事项吗？")) {
-        appData.todos = appData.todos.filter(t => t.id !== id);
+        appData.todos = (appData.todos || []).filter(t => t.id !== id);
         saveData();
         renderTodos();
         updateDashboardMetrics();
@@ -2740,21 +3129,55 @@ ${m.todosText || '无'}`;
     }
 
     function openNewTodoModal() {
-      const mNewTodo = document.getElementById('modal-new-todo'); mNewTodo.classList.remove('hidden'); mNewTodo.classList.add('flex');
+      const mNewTodo = document.getElementById('modal-new-todo');
+      mNewTodo.classList.remove('hidden');
+      mNewTodo.classList.add('flex');
       document.getElementById('new-todo-deadline').valueAsDate = new Date();
-      const currentOwner = document.getElementById('new-todo-owner').value;
-      if (!document.getElementById('new-todo-org').value) {
-        document.getElementById('new-todo-org').value = guessBranchByOwner(currentOwner);
+      document.getElementById('new-todo-task').value = "";
+
+      const cat = currentTodoCategory || 'region';
+      const rReg = document.getElementById('new-todo-cat-region');
+      const rYef = document.getElementById('new-todo-cat-yefawei');
+      if (rReg && rYef) {
+        if (cat === 'yefawei') rYef.checked = true;
+        else rReg.checked = true;
+      }
+
+      adaptNewTodoOwnerOptions(cat);
+    }
+
+    function adaptNewTodoOwnerOptions(cat) {
+      const ownerSel = document.getElementById('new-todo-owner');
+      const orgInput = document.getElementById('new-todo-org');
+      if (!ownerSel) return;
+
+      ownerSel.innerHTML = "";
+      const owners = categoryLabels[cat]?.owners.filter(o => o.value !== 'all') || [{ value: "王亚哲", label: "王亚哲" }];
+
+      owners.forEach(opt => {
+        const el = document.createElement('option');
+        el.value = opt.value;
+        el.innerText = opt.label;
+        ownerSel.appendChild(el);
+      });
+
+      if (orgInput) {
+        orgInput.value = categoryLabels[cat]?.defaultOrg || (cat === 'yefawei' ? '业发委秘书处' : '大区/总办');
       }
     }
+
     function closeNewTodoModal() {
-      const mNewTodo = document.getElementById('modal-new-todo'); mNewTodo.classList.add('hidden'); mNewTodo.classList.remove('flex');
+      const mNewTodo = document.getElementById('modal-new-todo');
+      mNewTodo.classList.add('hidden');
+      mNewTodo.classList.remove('flex');
     }
+
     function saveNewTodo() {
       const owner = document.getElementById('new-todo-owner').value;
-      const org = document.getElementById('new-todo-org').value.trim() || "大区";
+      const org = document.getElementById('new-todo-org').value.trim() || (currentTodoCategory === 'yefawei' ? "业发委秘书处" : "大区/总办");
       const task = document.getElementById('new-todo-task').value.trim();
       const deadline = document.getElementById('new-todo-deadline').value;
+      const category = document.querySelector('input[name="new-todo-category"]:checked')?.value || currentTodoCategory || 'region';
 
       if (!task) {
         showToast("请填写具体的待办事项内容！", "warn");
@@ -2764,25 +3187,24 @@ ${m.todosText || '无'}`;
       appData.todos.unshift({
         id: Date.now(),
         date: new Date().toISOString().split("T")[0],
-        owner: owner,
-        org: org,
-        task: task,
+        owner,
+        org,
+        task,
         deadline: deadline || "尽快完成",
         status: "进行中",
-        note: "" // 纯净空白，不再自动填充
+        note: "",
+        category
       });
 
+      currentTodoCategory = category;
       saveData();
       closeNewTodoModal();
+      updateTodoCategoryUI();
       renderTodos();
       updateDashboardMetrics();
-      showToast("✅ 待办事项已成功添加！");
+      showToast(`✅ 新待办已加入【${categoryLabels[category].name}】！`);
     }
 
-    // 启动初始化
-    
-        // =============================================================
-    // 模块 6：云端多人协同与全自动保存同步引擎 (支持 GitHub 仓库直连 & 自定义 API)
     // =============================================================
     const CLOUD_URL_KEY = 'zhiheng_cloud_sync_url';
     const GITHUB_TOKEN_KEY = 'zhiheng_gh_token';
@@ -3003,9 +3425,9 @@ ${m.todosText || '无'}`;
         if (ghToken) {
           // 尝试读取或初始化 GitHub data.json
           const remote = await fetchGitHubData(ghToken, ghRepo);
-          if (remote && remote.reports) {
+          if (remote && (remote.minutes || remote.todos || remote.reports)) {
             appData = remote;
-            migrateDataToMonthly();
+            ensureCategories(appData);
             try { localStorage.setItem(STORAGE_KEY, JSON.stringify(appData)); } catch(e){}
             refreshCurrentTab();
           } else {
@@ -3133,10 +3555,10 @@ ${m.todosText || '无'}`;
         try {
           if (getGitHubToken()) {
             const remote = await fetchGitHubData(getGitHubToken());
-            if (remote && remote.reports && JSON.stringify(remote) !== JSON.stringify(appData)) {
+            if (remote && (remote.minutes || remote.todos || remote.reports) && JSON.stringify(remote) !== JSON.stringify(appData)) {
               console.log("检测到其他协作者改动，已自动静默同步");
               appData = remote;
-              migrateDataToMonthly();
+              ensureCategories(appData);
               try { localStorage.setItem(STORAGE_KEY, JSON.stringify(appData)); } catch(e){}
               refreshCurrentTab();
             }
@@ -3144,7 +3566,7 @@ ${m.todosText || '无'}`;
             const res = await fetch(getCloudUrl(), { cache: 'no-store' });
             if (res.ok) {
               const remote = await res.json();
-              if (remote && remote.reports && JSON.stringify(remote) !== JSON.stringify(appData)) {
+              if (remote && (remote.minutes || remote.todos || remote.reports) && JSON.stringify(remote) !== JSON.stringify(appData)) {
                 appData = remote;
                 try { localStorage.setItem(STORAGE_KEY, JSON.stringify(appData)); } catch(e){}
                 refreshCurrentTab();
@@ -3159,11 +3581,13 @@ ${m.todosText || '无'}`;
     function refreshCurrentTab() {
       const activeBtn = document.querySelector('.nav-btn.bg-white');
       if (activeBtn) {
-        const id = activeBtn.id.replace('nav-', '');
-        if (id === 'dashboard') updateDashboardMetrics();
-        else if (id === 'reports') { renderWeekSelectDropdown(); renderWeeklyReports(); }
-        else if (id === 'minutes') { renderMinuteSidebar(); }
-        else if (id === 'todos') { renderTodos(); }
+        const id = activeBtn.id;
+        if (id.includes('dashboard')) updateDashboardMetrics();
+        else if (id.includes('minutes')) {
+          renderMinuteSidebar();
+        } else if (id.includes('todos')) {
+          renderTodos();
+        }
       }
     }
 
@@ -3204,9 +3628,9 @@ ${m.todosText || '无'}`;
       try {
         if (ghToken) {
           const remote = await fetchGitHubData(ghToken);
-          if (remote && remote.reports) {
+          if (remote && (remote.minutes || remote.todos || remote.reports)) {
             appData = remote;
-            migrateDataToMonthly();
+            ensureCategories(appData);
             try { localStorage.setItem(STORAGE_KEY, JSON.stringify(appData)); } catch(e){}
             refreshCurrentTab();
           } else {
@@ -3218,7 +3642,7 @@ ${m.todosText || '无'}`;
           const res = await fetch(customUrl, { cache: 'no-store' });
           if (res.ok) {
             const remote = await res.json();
-            if (remote && remote.reports) {
+            if (remote && (remote.minutes || remote.todos || remote.reports)) {
               appData = remote;
               try { localStorage.setItem(STORAGE_KEY, JSON.stringify(appData)); } catch(e){}
               refreshCurrentTab();
@@ -3233,11 +3657,12 @@ ${m.todosText || '无'}`;
     }
 
     window.onload = function() {
-      migrateDataToMonthly();
-      renderWeekSelectDropdown();
+      ensureCategories(appData);
+      updateMinuteCategoryUI();
+      updateTodoCategoryUI();
       renderMinuteSidebar();
       renderTodos();
-      switchTab('dashboard'); // 默认展示例会看板
+      switchTab('dashboard'); // 默认展示综合大盘
       initCloudSync(); // 自动初始化云端同步
     };
   </script>
