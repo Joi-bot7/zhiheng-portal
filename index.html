@@ -712,76 +712,6 @@
       </div>
     </section>
   </main>
-      </div>
-    </section>
-
-    <!-- ========================================================================= -->
-    <!-- TAB 4: 📌 待办事项追踪 (支持防重复提取、已录入待办全量编辑、纯净无自动填充进展说明) -->
-    <!-- ========================================================================= -->
-    <section id="tab-todos" class="tab-pane hidden space-y-4">
-      <!-- 快捷状态筛选栏与顶部操作栏 -->
-      <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex flex-wrap items-center justify-between gap-3">
-        <div class="flex flex-wrap items-center gap-2">
-          <span class="text-xs font-bold text-slate-600">进展状态：</span>
-          <div class="flex items-center space-x-1" id="todo-status-tabs">
-            <button onclick="setTodoStatusFilter('all')" id="btn-st-all" class="px-2.5 py-1 rounded-md text-xs font-bold bg-blue-100 text-blue-900 border border-blue-200">全部 (<span id="cnt-all">0</span>)</button>
-            <button onclick="setTodoStatusFilter('进行中')" id="btn-st-progress" class="px-2.5 py-1 rounded-md text-xs font-medium bg-amber-50 text-amber-800 border border-amber-200 hover:bg-amber-100">🟡 进行中 (<span id="cnt-progress">0</span>)</button>
-            <button onclick="setTodoStatusFilter('已完成')" id="btn-st-done" class="px-2.5 py-1 rounded-md text-xs font-medium bg-emerald-50 text-emerald-800 border border-emerald-200 hover:bg-emerald-100">🟢 已完成 (<span id="cnt-done">0</span>)</button>
-            <button onclick="setTodoStatusFilter('未开始')" id="btn-st-notyet" class="px-2.5 py-1 rounded-md text-xs font-medium bg-rose-50 text-rose-800 border border-rose-200 hover:bg-rose-100">🔴 未开始 (<span id="cnt-notyet">0</span>)</button>
-          </div>
-
-          <span class="text-xs font-bold text-slate-600 ml-3">责任人：</span>
-          <select id="todo-owner-filter" onchange="renderTodos()" class="text-xs border border-slate-300 rounded px-2 py-1 bg-white focus:outline-none">
-            <option value="all">全部责任人</option>
-            <option value="王亚哲">王亚哲</option>
-            <option value="胡侨益">胡侨益 (HRBP)</option>
-            <option value="张歆妍">张歆妍 (IP运营中心)</option>
-            <option value="夏晓飞">夏晓飞 (武汉)</option>
-            <option value="陈赛男">陈赛男 (长沙)</option>
-            <option value="朱敏">朱敏 (成都)</option>
-            <option value="邱月">邱月 (重庆)</option>
-            <option value="杜易">杜易 (昆明)</option>
-            <option value="张晶">张晶 (贵阳)</option>
-            <option value="全体主任">全体主任</option>
-          </select>
-        </div>
-
-        <div class="flex items-center space-x-2">
-          <!-- 核心功能：防重复提取纪要待办 -->
-          <button onclick="openExtractTodosModal()" class="text-xs bg-emerald-700 hover:bg-emerald-800 text-white px-3 py-1.5 rounded-lg transition flex items-center font-medium shadow-xs" title="选择一篇或全部会议纪要，智能防重复提取待办事项入库">
-            ⚡ 从会议纪要提取待办
-          </button>
-          <button onclick="openNewTodoModal()" class="text-xs bg-[#0F172A] text-white px-3 py-1.5 rounded-lg hover:bg-blue-800 transition flex items-center font-medium shadow-xs">
-            + 手动添加待办
-          </button>
-        </div>
-      </div>
-
-      <!-- 待办任务表格卡片 -->
-      <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
-        <div class="overflow-x-auto">
-          <table class="w-full text-left border-collapse">
-            <thead>
-              <tr class="bg-slate-50 border-b border-slate-200 text-[11px] font-bold text-slate-600">
-                <th class="p-3 w-12 text-center text-slate-400 font-mono">序号</th>
-                <th class="p-3 w-28">责任人</th>
-                <th class="p-3">具体行动事项与交付目标</th>
-                <th class="p-3 w-24">所属组织</th>
-                <th class="p-3 w-28 text-center">要求截止时间</th>
-                <th class="p-3 w-32">当前进展状态</th>
-                <th class="p-3 w-64">最新进展说明 (无自动填充)</th>
-                <th class="p-3 w-24 text-center">操作</th>
-              </tr>
-            </thead>
-            <tbody id="todos-table-body" class="divide-y divide-slate-100 text-xs">
-              <!-- 由 JavaScript 动态渲染 -->
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-
-  </main>
 
   <!-- ========================================================================= -->
   <!-- 模态框合集 -->
@@ -912,7 +842,7 @@
         </div>
         <div>
           <label class="block font-medium text-slate-700 mb-1">参会人员：</label>
-          <input type="text" id="m-form-attendees" value="王亚哲(区域执行主任/部长)、夏晓飞(武汉)、陈赛男(长沙)、朱敏(成都)、邱月(重庆)、杜易(昆明)、张晶(贵阳)、胡侨益(HRBP)、张歆妍(IP运营中心)" class="w-full p-2 border rounded focus:ring-1 focus:ring-blue-500">
+          <input type="text" id="m-form-attendees" value="王亚哲、夏晓飞、陈赛男、朱敏、邱月、杜易、张晶、胡侨益、张歆妍" class="w-full p-2 border rounded focus:ring-1 focus:ring-blue-500">
         </div>
         <div>
           <label class="block font-medium text-slate-700 mb-1">会议主要议题与决议内容 (支持分段整理)：</label>
@@ -1237,12 +1167,12 @@
     <script>
     // 基础6家分所标准模板
     const defaultBranchList = [
-      { region: "中部大区", branch: "武汉分所", lead: "夏晓飞 (管委会副主任/执行主任)" },
-      { region: "中部大区", branch: "长沙分所", lead: "陈赛男 (执行主任)" },
-      { region: "西南大区", branch: "成都分所", lead: "朱敏 (执行主任)" },
-      { region: "西南大区", branch: "重庆分所", lead: "邱月 (管委会委员/执行主任)" },
-      { region: "西南大区", branch: "昆明分所", lead: "杜易 (执行主任)" },
-      { region: "西南大区", branch: "贵阳分所", lead: "张晶 (执行主任)" }
+      { region: "中部大区", branch: "武汉分所", lead: "夏晓飞" },
+      { region: "中部大区", branch: "长沙分所", lead: "陈赛男" },
+      { region: "西南大区", branch: "成都分所", lead: "朱敏" },
+      { region: "西南大区", branch: "重庆分所", lead: "邱月" },
+      { region: "西南大区", branch: "昆明分所", lead: "杜易" },
+      { region: "西南大区", branch: "贵阳分所", lead: "张晶" }
     ];
 
     const initialData = {
