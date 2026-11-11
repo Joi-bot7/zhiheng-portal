@@ -673,7 +673,7 @@
             <option value="邱月">邱月</option>
             <option value="杜易">杜易</option>
             <option value="张晶">张晶</option>
-            <option value="全体主任">全体主任</option>
+            <option value="所有人">所有人</option>
           </select>
         </div>
 
@@ -1064,7 +1064,7 @@
               <option value="邱月">邱月</option>
               <option value="杜易">杜易</option>
               <option value="张晶">张晶</option>
-              <option value="全体主任">全体主任</option>
+              <option value="所有人">所有人</option>
             </select>
           </div>
           <div>
@@ -1139,7 +1139,7 @@
               <option value="邱月">邱月</option>
               <option value="杜易">杜易</option>
               <option value="张晶">张晶</option>
-              <option value="全体主任">全体主任</option>
+              <option value="所有人">所有人</option>
             </select>
           </div>
           <div>
@@ -1364,7 +1364,7 @@
     {
       "id": 1792636987023,
       "date": "2026-10-21",
-      "owner": "全体主任",
+      "owner": "所有人",
       "org": "武汉分所",
       "task": "责任书签署：按既定节点推进大部门责任状签署并交马梦然，责任人：邱月、夏晓飞、杜易、朱敏，完成时间：见各所排期；",
       "deadline": "2026-10-31",
@@ -1452,7 +1452,7 @@
     {
       "id": 1791622306112,
       "date": "2026-09-18",
-      "owner": "全体主任",
+      "owner": "所有人",
       "org": "大区",
       "task": "人才顾问签约：各办公室执行主任，可以与人才引进顾问进行正式的合同确认，后面按照合同约定支付对应的人才引进激励费用。重点可以选择所内有影响力的律师、所外渠道人员等。9月底前各办公室需要同步各自人才顾问签约情况进度。@夏晓飞@张晶@朱敏@杜易@邱月",
       "deadline": "2026-09-28",
@@ -1474,7 +1474,7 @@
     {
       "id": 1791622306110,
       "date": "2026-09-18",
-      "owner": "全体主任",
+      "owner": "所有人",
       "org": "大区",
       "task": "调研降本方案: 各办公室调研当地写字楼租金行情，争取降低租金；贵阳需评估换址可能性，做三年计划。@夏晓飞@张晶@朱敏@杜易@邱月",
       "deadline": "2026-10-31",
@@ -1485,7 +1485,7 @@
     {
       "id": 1791622306109,
       "date": "2026-09-18",
-      "owner": "全体主任",
+      "owner": "所有人",
       "org": "大区",
       "task": "完成部门签约: 各执行主任在9月底前完成专业部门目标责任书确认，并组织签约仪式；若时间紧可延至国庆后一周。@夏晓飞@张晶@朱敏@杜易@邱月@马梦然",
       "deadline": "2026-09-28",
@@ -1715,7 +1715,7 @@
           { value: "邱月", label: "邱月" },
           { value: "杜易", label: "杜易" },
           { value: "张晶", label: "张晶" },
-          { value: "全体主任", label: "全体主任" }
+          { value: "所有人", label: "所有人" }
         ]
       },
       yefawei: {
@@ -1724,7 +1724,7 @@
         minuteDesc: "统筹全国专业部门建设、双百计划赋能、跨区业务分润与经营责任状",
         todoPill: "💼 业务发展委员会 (业发委)",
         todoDesc: "业发委重点督办：双百训战·大部门签约·产品研发·跨区协同备案",
-        defaultAttendees: "王亚哲、马梦然、张歆妍、胡侨益、钱福梅、胡琴、全体主任",
+        defaultAttendees: "王亚哲、马梦然、张歆妍、胡侨益、钱福梅、胡琴、所有人",
         defaultOrg: "业发委秘书处",
         owners: [
           { value: "all", label: "全部责任人" },
@@ -1734,7 +1734,7 @@
           { value: "胡侨益", label: "胡侨益" },
           { value: "钱福梅", label: "钱福梅" },
           { value: "胡琴", label: "胡琴" },
-          { value: "全体主任", label: "全体主任" }
+          { value: "所有人", label: "所有人" }
         ]
       }
     };
@@ -2782,7 +2782,7 @@ ${m.todosText || '无'}`;
           else if (cleanLine.includes("重庆")) { owner = "邱月"; org = "重庆分所"; }
           else if (cleanLine.includes("昆明")) { owner = "杜易"; org = "昆明分所"; }
           else if (cleanLine.includes("贵阳")) { owner = "张晶"; org = "贵阳分所"; }
-          else if (cleanLine.includes("全体")) { owner = "全体主任"; org = defaultCategory === 'yefawei' ? "业发委" : "大区各所"; }
+          else if ((cleanLine.includes("全体") || cleanLine.includes("所有人"))) { owner = "所有人"; org = defaultCategory === 'yefawei' ? "业发委" : "大区各所"; }
         }
 
         let deadline = "";
@@ -2839,7 +2839,7 @@ ${m.todosText || '无'}`;
       if (name.includes("张歆妍")) return category === 'yefawei' ? "业发委" : "大区/IP运营中心";
       if (name.includes("钱福梅")) return "业发委秘书处";
       if (name.includes("胡琴")) return "业发委秘书处";
-      if (name.includes("全体")) return category === 'yefawei' ? "业发委各部门" : "大区各所";
+      if ((name.includes("全体") || name.includes("所有人"))) return category === 'yefawei' ? "业发委各部门" : "大区各所";
       return category === 'yefawei' ? "业发委秘书处" : "大区/总办";
     }
 
@@ -2942,6 +2942,7 @@ ${m.todosText || '无'}`;
         .forEach(t => {
           if (t.owner && t.owner.trim()) {
             const raw = t.owner.trim().replace(/[\(（][^\)）]+[\)）]/g, '').trim();
+            if (raw === "全体主任") raw = "所有人";
             if (raw && !existingOwnerSet.has(raw) && raw !== 'all') {
               existingOwnerSet.add(raw);
               dynamicOwners.push({ value: raw, label: raw });
@@ -2992,7 +2993,11 @@ ${m.todosText || '无'}`;
 
       let list = categoryTodos;
       if (ownerFilter !== "all") {
-        list = list.filter(t => t.owner.includes(ownerFilter));
+        if (ownerFilter === "所有人") {
+          list = list.filter(t => (t.owner || '').includes("所有人") || (t.owner || '').includes("全体"));
+        } else {
+          list = list.filter(t => (t.owner || '').includes(ownerFilter));
+        }
       }
       if (currentTodoStatusFilter !== "all") {
         list = list.filter(t => t.status === currentTodoStatusFilter);
@@ -3010,7 +3015,7 @@ ${m.todosText || '无'}`;
             #${idx + 1}
           </td>
           <td class="p-3 font-bold text-slate-900 whitespace-nowrap">
-            ${(t.owner || '').replace(/[\(（][^\)）]+[\)）]/g, '').trim()}
+            ${((t.owner || '').replace(/[\(（][^\)）]+[\)）]/g, '').trim() === '全体主任' ? '所有人' : (t.owner || '').replace(/[\(（][^\)）]+[\)）]/g, '').trim())}
           </td>
           <td class="p-3 text-slate-800 font-medium leading-relaxed">
             ${t.task}
@@ -3116,6 +3121,7 @@ ${m.todosText || '无'}`;
         .forEach(t => {
           if (t.owner && t.owner.trim()) {
             const raw = t.owner.trim().replace(/[\(（][^\)）]+[\)）]/g, '').trim();
+            if (raw === "全体主任") raw = "所有人";
             if (raw && !existingSet.has(raw) && raw !== 'all') {
               existingSet.add(raw);
               list.push({ value: raw, label: raw });
@@ -3228,6 +3234,7 @@ ${m.todosText || '无'}`;
         .forEach(t => {
           if (t.owner && t.owner.trim()) {
             const raw = t.owner.trim().replace(/[\(（][^\)）]+[\)）]/g, '').trim();
+            if (raw === "全体主任") raw = "所有人";
             if (raw && !existingSet.has(raw) && raw !== 'all') {
               existingSet.add(raw);
               list.push({ value: raw, label: raw });
