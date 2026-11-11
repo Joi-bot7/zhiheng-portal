@@ -660,7 +660,20 @@
 
           <span class="text-xs font-bold text-slate-600 ml-3">责任人：</span>
           <select id="todo-owner-filter" onchange="renderTodos()" class="text-xs border border-slate-300 rounded px-2 py-1 bg-white focus:outline-none">
-            <!-- 动态根据当前分类适配责任人 -->
+            <option value="all">全部责任人</option>
+            <option value="王亚哲">王亚哲</option>
+            <option value="马梦然">马梦然</option>
+            <option value="张歆妍">张歆妍</option>
+            <option value="胡侨益">胡侨益</option>
+            <option value="钱福梅">钱福梅</option>
+            <option value="胡琴">胡琴</option>
+            <option value="夏晓飞">夏晓飞</option>
+            <option value="陈赛男">陈赛男</option>
+            <option value="朱敏">朱敏</option>
+            <option value="邱月">邱月</option>
+            <option value="杜易">杜易</option>
+            <option value="张晶">张晶</option>
+            <option value="全体主任">全体主任</option>
           </select>
         </div>
 
@@ -1110,14 +1123,17 @@
             <label class="block font-medium text-slate-700 mb-1">责任人：</label>
             <select id="edit-todo-owner" onchange="if(!document.getElementById('edit-todo-org').value || document.getElementById('edit-todo-org').value==='大区') document.getElementById('edit-todo-org').value = guessBranchByOwner(this.value)" class="w-full p-2 border rounded focus:ring-1 focus:ring-blue-500 font-bold">
               <option value="王亚哲">王亚哲</option>
-              <option value="胡侨益">胡侨益 (HRBP)</option>
-              <option value="张歆妍">张歆妍 (IP运营中心)</option>
-              <option value="夏晓飞">夏晓飞 (武汉)</option>
-              <option value="陈赛男">陈赛男 (长沙)</option>
-              <option value="朱敏">朱敏 (成都)</option>
-              <option value="邱月">邱月 (重庆)</option>
-              <option value="杜易">杜易 (昆明)</option>
-              <option value="张晶">张晶 (贵阳)</option>
+              <option value="马梦然">马梦然</option>
+              <option value="张歆妍">张歆妍</option>
+              <option value="胡侨益">胡侨益</option>
+              <option value="钱福梅">钱福梅</option>
+              <option value="胡琴">胡琴</option>
+              <option value="夏晓飞">夏晓飞</option>
+              <option value="陈赛男">陈赛男</option>
+              <option value="朱敏">朱敏</option>
+              <option value="邱月">邱月</option>
+              <option value="杜易">杜易</option>
+              <option value="张晶">张晶</option>
               <option value="全体主任">全体主任</option>
             </select>
           </div>
@@ -1182,14 +1198,17 @@
             <label class="block font-medium text-slate-700 mb-1">责任人：</label>
             <select id="new-todo-owner" onchange="document.getElementById('new-todo-org').value = guessBranchByOwner(this.value)" class="w-full p-2 border rounded focus:ring-1 focus:ring-blue-500 font-bold">
               <option value="王亚哲">王亚哲</option>
-              <option value="胡侨益">胡侨益 (HRBP)</option>
-              <option value="张歆妍">张歆妍 (IP运营中心)</option>
-              <option value="夏晓飞">夏晓飞 (武汉)</option>
-              <option value="陈赛男">陈赛男 (长沙)</option>
-              <option value="朱敏">朱敏 (成都)</option>
-              <option value="邱月">邱月 (重庆)</option>
-              <option value="杜易">杜易 (昆明)</option>
-              <option value="张晶">张晶 (贵阳)</option>
+              <option value="马梦然">马梦然</option>
+              <option value="张歆妍">张歆妍</option>
+              <option value="胡侨益">胡侨益</option>
+              <option value="钱福梅">钱福梅</option>
+              <option value="胡琴">胡琴</option>
+              <option value="夏晓飞">夏晓飞</option>
+              <option value="陈赛男">陈赛男</option>
+              <option value="朱敏">朱敏</option>
+              <option value="邱月">邱月</option>
+              <option value="杜易">杜易</option>
+              <option value="张晶">张晶</option>
               <option value="全体主任">全体主任</option>
             </select>
           </div>
@@ -1235,6 +1254,17 @@
   "currentWeek": "2026-10",
   "minutes": [
     {
+      "id": "m-1794379127584",
+      "title": "业发委例会",
+      "date": "2026-11-02",
+      "time": "14:00",
+      "host": "王亚哲",
+      "attendees": "王亚哲(业发委副主任/部长)、马梦然(业发委秘书处)、张歆妍(IP运营中心)、各分所主任及全国专业部门负责人",
+      "content": "本次周会主要围绕产品大赛报名推广、公众号改版饱和攻击、委员会成立仪式筹备、双百计划设计、内部市场立项、IP计划推进及报销流程等议题展开深入讨论，明确了各项工作的时间节点、责任主体和执行策略，强调以结果为导向、激发各方主动性。\n1. 产品大赛报名推广策略\n· 报名渠道与责任主体：讨论认为，仅依靠社群、海报、公众号及专委会通知难以保证参与度，必须抓住执行主任这一关键角色，要求其通知到各专委会负责人，并以律所为单位提交作品，形成强制要求。同时，全国专委会因尚未正式任命，缺乏推动力，需通过执行主任渠道落实。\n· 参与度保障措施：提出需将报名通知下发至执行主任，由其负责动员，并明确各专委会至少报送1-2个产品，律师个人也可自愿报名。强调若缺乏奖惩机制，则难以管理，需以执行主任为抓手形成竞争压力。\n· 启动会与线上参与：启动会线上线下同步直播，但关键在于让各律所主任重视，从而带动律师参与。\n2. 公众号改版与饱和攻击策略\n· 发刊词的必要性与风险：钱福梅提出邀请大咖撰写发刊词以官宣公众号转型升级，但雅泽总指出此方式周期长、不确定性高，可能延误推广，建议改为直接发布改版通知并集中资源进行饱和攻击。\n· 饱和攻击的具体做法：借鉴“请教一下”栏目的成功经验，集中一段时间邀请头部律所的一二把手亮相，利用其自带流量快速提升公众号曝光度，目标为人均阅读量超500。\n· 弹药储备与执行节奏：本周需完成内容策划、稿件储备等准备工作，下周开始密集发布，形成“万箭齐发”的效果。\n3. 委员会成立仪式筹备与履职计划\n· 时间节点与议程设计：全国委员会成立仪式定于12月12日，需倒排工期，确保当天议程顺利。雅泽总强调，不应仅举行挂牌仪式，而应让每位新任主任在大会上宣读履职计划，并当场签署目标责任书，以此激发其主动性。\n· 目标责任书签署：提前将履职计划模板发给主任，要求其填写年度目标，在成立大会上宣讲，会后由罗主任与其正式签署目标责任书。此举可避免后期被动推动，实现“让主任自己定目标、自己干”的效果。\n· 后续运营支持：成立后需提供运营手册，并通过培训或会议形式指导主任如何盘活专委会群、开展内部活动。\n4. 双百计划设计与发布\n· 核心目的与内容：双百计划旨在通过闭门会和增长训练营，促进高端业务合作，提升内部交易数据。核心是“解决问题+圈子”，配套提供法律产品设计、市场拓展等按需支持。\n· 发布方式：计划在委员会成立大会前通过公众号推文先行宣发，扩大覆盖面，然后在大会上由钱福梅进行详细讲解，并现场推送。\n· 优先级调整：钱福梅指示本周优先完成双百计划的设计和思维导图，制度类工作可暂缓。\n5. 内部市场建设与立项\n· 数据与SOP：已完成10月内部市场数据海报，计划会后同步至大群；本周需梳理月度内部市场统计SOP，明确数据来源、口径和计算方式。\n· 系统开发与立项汇报：企微大学律师统计系统开发需上会，本周需准备内部市场建设业务的项目汇报PPT，周四前完成初稿，周五汇报。同时需与朱熹确认律师档案填写进度，因系统与律师信息直接挂钩。\n· 技术支撑逻辑：立项汇报需清晰阐述业务思路、预期成果（如内部交易占比从18%提升至20%或25%）以及技术如何支撑业务场景，避免拍脑袋。\n6. IP计划推进与剪辑人员招聘\n· 报名与押金情况：重庆已有8人报名缴费，成都、武汉分别有7人报名，但武汉对3000元履约金存在误解，需进一步沟通。各办公室执行主任宣导口径不一致，需一对一沟通。\n· 剪辑人员缺口：现有剪辑人员不足，需再招聘1-2名，以支撑成都、重庆、武汉三地共20余名律师的视频制作。\n· 个人账号与数据目标：张歆妍已开始运营个人IP账号，并鼓励其他执行主任以律所运营管家身份出镜。雅泽总要求明确阶段性目标：5个城市50个账号起步，统计群活跃度、律师收益等数据，并打通人才引进链路，使项目成果可量化。\n7. 报销流程与中报账号开通\n· 中报账号解决方案：经胡侨益与财务沟通，可为业发委开设一个中报账号，由指定人员发起，钱福梅（已注册）可审批，审批链为钱福梅→齐新老师→柴主任和罗主任。\n· 账号归属：确定将中报账号开给马梦然，由胡侨益负责报送。\n· 报销流程限制：因财务费控系统即将上线，暂时无法为业发委单独设置报销流程，后续待系统上线后再调整。",
+      "todosText": "待办\n· 产品大赛报名: 完成产品大赛报名通知和流程PPT，通过执行主任渠道推动各专委会和律所提交作品。@钱福梅\n· 公众号饱和攻击: 策划公众号改版饱和攻击方案，本周储备弹药，下周密集发布，目标人均阅读量超500。@胡琴\n· 成立仪式筹备: 倒排工期，准备履职计划模板，确保12月12日成立仪式顺利，包括目标责任书签署。@马梦然\n· 双百计划设计: 本周优先完成双百计划的设计和思维导图，制度类工作暂缓。@钱福梅\n· 内部市场立项: 准备内部市场建设业务的项目汇报PPT，周四前完成初稿，周五汇报。@王亚哲\n· IP计划推进: 跟进IP计划报名，招聘1-2名剪辑人员，明确阶段性目标（5个城市50个账号）。@张歆妍\n· 中报账号开通: 协调为中报账号开给马梦然，由胡侨益负责报送。@胡侨益\n· 数据SOP梳理: 本周完成月度内部市场统计SOP，明确数据来源、口径和计算方式。@王亚哲\n· 律师档案确认: 与朱熹确认律师档案填写进度，因系统与律师信息直接挂钩。@王亚哲",
+      "category": "yefawei"
+    },
+    {
       "id": "m-1792636987016",
       "title": "#1021 西南&中部大区10月月度工作会议",
       "date": "2026-10-21",
@@ -1244,17 +1274,6 @@
       "content": "会议时间：2026年10月21日 14:00 - 15:30\n参会人员：王亚哲、朱敏、邱月、夏晓飞、杜易、张晶、陈赛男、张歆妍、胡侨益\n会议主旨：攻坚人才引进堵点、敲定大部门责任书签署节点、启动西南 IP 运营中心赋能\n一、人才引进：各所进度复盘与卡点对策\n1. 大盘现状：10月各所目标合计49人，当前实际转入仅5人（成都1、重庆2、贵阳1、武汉1、昆明0），约谈与转化效率普遍滞后。\n2. 分所核心卡点与解法：\n成都：引才岗位严重断档（2人离职、1人陪产，仅剩1人支撑）。对策：由胡侨益对接总部招聘资源，专项支持补人。\n重庆：高创收合伙人因房间费政策产生分歧。对策：灵活协商空间政策，加速重点团队谈判。\n昆明：线索匮乏且HR主管病休。对策：依托大区统一导出的法禅名单，加强电话触达。\n贵阳：线索管理混乱、优质资源断跟。对策：张晶主任安排人力复盘6至10月线索，向亚哲老师做专题汇报。\n武汉：新增人资专员排查200人名单，5至6人有意向，正重点攻坚20至30人的盈科合伙人大团队。\n二、大部门建设：目标责任书签订排期\n业发委将对部门长实施双百计划（每月交流加季度实战训战），各所须推进年度经营责任状（创收、专业品牌、引才）签署，签约节点明确如下：\n1. 10月底前完成：武汉、重庆、贵阳（贵阳刑事部门先定牵头人再扩充队伍）；\n2. 11月10日前完成：昆明；\n3. 11月15日左右完成：成都（召开全体部门主任大会现场签订2027年全年责任书）。\n三、IP 运营中心启动：实战营与50个伴飞名额\n张歆妍正式履新大区IP运营中心负责人，全面启动新媒体赋能以驱动人才引进：\n1. 启动模式：11月初举办两天一夜IP律师实战训练营，邀请行业知名导师授课，对试点所执业律师及拟加盟律师全免费开放。\n2. 首期赋能名额（大区共50人）：训后每家分所首批锁定10个深度伴飞名额，享受180天免费剪辑、方法论辅导及社群陪跑，实行进出动态增补。\n3. 分所协同需求：各主任在所内全力动员报名（重点挖掘有专业积累的律师），并协助当地直播间及会务资源调研。\n1. 线索支持：导出法禅系统律师名录并分发各分所，责任人：王亚哲，完成时间：本周内；\n2. 引才补人：对接总部招聘组专项支援成都所招引才专员，责任人：胡侨益，完成时间：10月23日前；\n3. 线索复盘：复盘贵阳6至10月引才线索流转断点并汇报，责任人：张晶，完成时间：10月25日前；\n4. 责任书签署：按既定节点推进大部门责任状签署并交马梦然，责任人：邱月、夏晓飞、杜易、朱敏，完成时间：见各所排期；\n5. IP方案出台：完成训练营及赋能手册定稿并制作宣发材料，责任人：张歆妍，完成时间：10月25日前；",
       "todosText": "1. 线索支持：导出法禅系统律师名录并分发各分所，责任人：王亚哲，完成时间：本周内；\n2. 引才补人：对接总部招聘组专项支援成都所招引才专员，责任人：胡侨益，完成时间：10月23日前；\n3. 线索复盘：复盘贵阳6至10月引才线索流转断点并汇报，责任人：张晶，完成时间：10月25日前；\n4. 责任书签署：按既定节点推进大部门责任状签署并交马梦然，责任人：邱月、夏晓飞、杜易、朱敏，完成时间：见各所排期；\n5. IP方案出台：完成训练营及赋能手册定稿并制作宣发材料，责任人：张歆妍，完成时间：10月25日前；\n6. 律师报名动员：各所启动律师参营动员并挖掘种子律师，责任人：各分所主任，完成时间：10月底前。 @所有人",
       "category": "region"
-    },
-    {
-      "id": "m-1792637000001",
-      "title": "【会议纪要】#1102 业务发展委员会(业发委)双百计划与专业部门责任状推进会",
-      "date": "2026-11-02",
-      "time": "14:30 - 16:00",
-      "host": "王亚哲",
-      "attendees": "王亚哲(业发委副主任/部长)、马梦然、各业务中心主任、各专业部门负责人",
-      "content": "会议主旨：推进各分所专业大部门年度经营目标责任书签署，部署双百计划实战训战与跨区业务联动。\n一、大部门建设与责任状签署进度排期\n1. 明确各分所专业部门目标责任书签署节点（武汉、重庆、贵阳10月底前完成，昆明11月10日前完成，成都11月15日前全员大会签订）。\n2. 马梦然负责收集各所签约协议文本并建立业发委备案库。\n二、双百计划赋能实施\n1. 业发委启动月度业务交流与季度实战训战，全国遴选首批骨干律师重点伴飞。\n2. 联合大区IP运营中心，做好产品研发与新媒体宣发融合。\n三、跨区业务协作与重大案源协同\n建立全国跨区分所重大业务联合投标与专家库调配机制。",
-      "todosText": "1. 汇总跟进各分所专业大部门经营责任状签约协议并归档 @马梦然 完成时间：11月10日前；\n2. 制定业发委“双百计划”首期训战方案与导师排期 @王亚哲 完成时间：11月15日前；\n3. 梳理跨区业务协同与分润备案申报指南 @业发委秘书处 完成时间：11月20日前；",
-      "category": "yefawei"
     },
     {
       "id": "m-1791622423211",
@@ -1281,35 +1300,112 @@
   ],
   "todos": [
     {
-      "id": 1792637000011,
+      "id": 1794379127594,
+      "date": "2026-11-02",
+      "owner": "王亚哲",
+      "org": "业发委秘书处",
+      "task": "· 律师档案确认: 与朱熹确认律师档案填写进度，因系统与律师信息直接挂钩。@王亚哲",
+      "deadline": "2026-11-12",
+      "status": "进行中",
+      "note": "",
+      "category": "yefawei"
+    },
+    {
+      "id": 1794379127593,
+      "date": "2026-11-02",
+      "owner": "王亚哲",
+      "org": "业发委秘书处",
+      "task": "· 数据SOP梳理: 本周完成月度内部市场统计SOP，明确数据来源、口径和计算方式。@王亚哲",
+      "deadline": "2026-11-12",
+      "status": "进行中",
+      "note": "",
+      "category": "yefawei"
+    },
+    {
+      "id": 1794379127592,
+      "date": "2026-11-02",
+      "owner": "胡侨益",
+      "org": "HRBP",
+      "task": "· 中报账号开通: 协调为中报账号开给马梦然，由胡侨益负责报送。@胡侨益",
+      "deadline": "2026-11-12",
+      "status": "进行中",
+      "note": "",
+      "category": "yefawei"
+    },
+    {
+      "id": 1794379127591,
+      "date": "2026-11-02",
+      "owner": "张歆妍",
+      "org": "业发委",
+      "task": "· IP计划推进: 跟进IP计划报名，招聘1-2名剪辑人员，明确阶段性目标（5个城市50个账号）。@张歆妍",
+      "deadline": "2026-11-12",
+      "status": "进行中",
+      "note": "",
+      "category": "yefawei"
+    },
+    {
+      "id": 1794379127590,
+      "date": "2026-11-02",
+      "owner": "王亚哲",
+      "org": "业发委秘书处",
+      "task": "· 内部市场立项: 准备内部市场建设业务的项目汇报PPT，周四前完成初稿，周五汇报。@王亚哲",
+      "deadline": "2026-11-12",
+      "status": "进行中",
+      "note": "",
+      "category": "yefawei"
+    },
+    {
+      "id": 1794379127589,
+      "date": "2026-11-02",
+      "owner": "钱福梅",
+      "org": "业发委秘书处",
+      "task": "· 双百计划设计: 本周优先完成双百计划的设计和思维导图，制度类工作暂缓。@钱福梅",
+      "deadline": "2026-11-12",
+      "status": "进行中",
+      "note": "",
+      "category": "yefawei"
+    },
+    {
+      "id": 1794379127588,
       "date": "2026-11-02",
       "owner": "马梦然",
       "org": "业发委秘书处",
-      "task": "汇总跟进各分所专业大部门经营责任状签约协议并归档",
-      "deadline": "2026-11-10",
+      "task": "· 成立仪式筹备: 倒排工期，准备履职计划模板，确保12月12日成立仪式顺利，包括目标责任书签署。@马梦然",
+      "deadline": "2026-11-12",
       "status": "进行中",
-      "note": "已收到武汉、重庆签约件，昆明正推进",
+      "note": "",
       "category": "yefawei"
     },
     {
-      "id": 1792637000012,
+      "id": 1794379127587,
+      "date": "2026-11-02",
+      "owner": "胡琴",
+      "org": "业发委秘书处",
+      "task": "· 公众号饱和攻击: 策划公众号改版饱和攻击方案，本周储备弹药，下周密集发布，目标人均阅读量超500。@胡琴",
+      "deadline": "2026-11-12",
+      "status": "进行中",
+      "note": "",
+      "category": "yefawei"
+    },
+    {
+      "id": 1794379127586,
+      "date": "2026-11-02",
+      "owner": "钱福梅",
+      "org": "业发委秘书处",
+      "task": "· 产品大赛报名: 完成产品大赛报名通知和流程PPT，通过执行主任渠道推动各专委会和律所提交作品。@钱福梅",
+      "deadline": "2026-11-12",
+      "status": "进行中",
+      "note": "",
+      "category": "yefawei"
+    },
+    {
+      "id": 1794379127585,
       "date": "2026-11-02",
       "owner": "王亚哲",
-      "org": "业发委",
-      "task": "制定业发委“双百计划”首期训战方案与导师排期",
-      "deadline": "2026-11-15",
+      "org": "业发委秘书处",
+      "task": "待办",
+      "deadline": "2026-11-12",
       "status": "进行中",
-      "note": "实战训战方案初稿已起草",
-      "category": "yefawei"
-    },
-    {
-      "id": 1792637000013,
-      "date": "2026-11-02",
-      "owner": "全体主任",
-      "org": "业发委",
-      "task": "梳理跨区业务协同与分润备案申报指南",
-      "deadline": "2026-11-20",
-      "status": "未开始",
       "note": "",
       "category": "yefawei"
     },
@@ -1676,19 +1772,19 @@
         minuteDesc: "管理中部2所与西南4所大区月度执行例会及沟通纪要",
         todoPill: "🏛️ 中部与西南大区待办",
         todoDesc: "大区重点督办：人才引进·专业部门责任状·场地降本·IP中心",
-        defaultAttendees: "王亚哲(区域执行主任/部长)、夏晓飞(武汉)、陈赛男(长沙)、朱敏(成都)、邱月(重庆)、杜易(昆明)、张晶(贵阳)、胡侨益(HRBP)、张歆妍(IP运营中心)",
+        defaultAttendees: "王亚哲、夏晓飞、陈赛男、朱敏、邱月、杜易、张晶、胡侨益、张歆妍",
         defaultOrg: "大区/总办",
         owners: [
           { value: "all", label: "全部责任人" },
           { value: "王亚哲", label: "王亚哲" },
-          { value: "胡侨益", label: "胡侨益 (HRBP)" },
-          { value: "张歆妍", label: "张歆妍 (IP运营中心)" },
-          { value: "夏晓飞", label: "夏晓飞 (武汉)" },
-          { value: "陈赛男", label: "陈赛男 (长沙)" },
-          { value: "朱敏", label: "朱敏 (成都)" },
-          { value: "邱月", label: "邱月 (重庆)" },
-          { value: "杜易", label: "杜易 (昆明)" },
-          { value: "张晶", label: "张晶 (贵阳)" },
+          { value: "胡侨益", label: "胡侨益" },
+          { value: "张歆妍", label: "张歆妍" },
+          { value: "夏晓飞", label: "夏晓飞" },
+          { value: "陈赛男", label: "陈赛男" },
+          { value: "朱敏", label: "朱敏" },
+          { value: "邱月", label: "邱月" },
+          { value: "杜易", label: "杜易" },
+          { value: "张晶", label: "张晶" },
           { value: "全体主任", label: "全体主任" }
         ]
       },
@@ -1698,14 +1794,17 @@
         minuteDesc: "统筹全国专业部门建设、双百计划赋能、跨区业务分润与经营责任状",
         todoPill: "💼 业务发展委员会 (业发委)",
         todoDesc: "业发委重点督办：双百训战·大部门签约·产品研发·跨区协同备案",
-        defaultAttendees: "王亚哲(业发委副主任/部长)、马梦然(业发委秘书处)、张歆妍(IP运营中心)、各分所主任及全国专业部门负责人",
+        defaultAttendees: "王亚哲、马梦然、张歆妍、胡侨益、钱福梅、胡琴、全体主任",
         defaultOrg: "业发委秘书处",
         owners: [
           { value: "all", label: "全部责任人" },
-          { value: "王亚哲", label: "王亚哲 (副主任/部长)" },
-          { value: "马梦然", label: "马梦然 (业发委秘书处)" },
-          { value: "张歆妍", label: "张歆妍 (IP运营中心)" },
-          { value: "全体主任", label: "全体主任 / 各部门主任" }
+          { value: "王亚哲", label: "王亚哲" },
+          { value: "马梦然", label: "马梦然" },
+          { value: "张歆妍", label: "张歆妍" },
+          { value: "胡侨益", label: "胡侨益" },
+          { value: "钱福梅", label: "钱福梅" },
+          { value: "胡琴", label: "胡琴" },
+          { value: "全体主任", label: "全体主任" }
         ]
       }
     };
@@ -2737,6 +2836,8 @@ ${m.todosText || '无'}`;
             owner = respMatch[1];
             org = guessBranchByOwner(owner, defaultCategory);
           } else if (cleanLine.includes("马梦然")) { owner = "马梦然"; org = "业发委秘书处"; }
+          else if (cleanLine.includes("钱福梅")) { owner = "钱福梅"; org = "业发委秘书处"; }
+          else if (cleanLine.includes("胡琴")) { owner = "胡琴"; org = "业发委秘书处"; }
           else if (cleanLine.includes("胡侨益")) { owner = "胡侨益"; org = "HRBP"; }
           else if (cleanLine.includes("张歆妍")) { owner = "张歆妍"; org = defaultCategory === 'yefawei' ? "业发委" : "大区/IP运营中心"; }
           else if (cleanLine.includes("夏晓飞")) { owner = "夏晓飞"; org = "武汉分所"; }
@@ -2806,6 +2907,8 @@ ${m.todosText || '无'}`;
       if (name.includes("张晶")) return "贵阳分所";
       if (name.includes("胡侨益")) return "HRBP";
       if (name.includes("张歆妍")) return category === 'yefawei' ? "业发委" : "大区/IP运营中心";
+      if (name.includes("钱福梅")) return "业发委秘书处";
+      if (name.includes("胡琴")) return "业发委秘书处";
       if (name.includes("全体")) return category === 'yefawei' ? "业发委各部门" : "大区各所";
       return category === 'yefawei' ? "业发委秘书处" : "大区/总办";
     }
@@ -2889,26 +2992,41 @@ ${m.todosText || '无'}`;
       renderTodos();
     }
 
-    function updateTodoOwnerDropdown() {
+        function updateTodoOwnerDropdown() {
       const select = document.getElementById('todo-owner-filter');
       if (!select) return;
 
       const currentVal = select.value || "all";
       select.innerHTML = "";
 
-      const options = categoryLabels[currentTodoCategory]?.owners || [
+      const baseOwners = categoryLabels[currentTodoCategory]?.owners || [
         { value: "all", label: "全部责任人" },
         { value: "王亚哲", label: "王亚哲" }
       ];
 
-      options.forEach(opt => {
+      const existingOwnerSet = new Set(baseOwners.map(o => o.value));
+      const dynamicOwners = [...baseOwners];
+
+      (appData.todos || [])
+        .filter(t => (t.category || 'region') === currentTodoCategory)
+        .forEach(t => {
+          if (t.owner && t.owner.trim()) {
+            const raw = t.owner.trim().replace(/[\(（][^\)）]+[\)）]/g, '').trim();
+            if (raw && !existingOwnerSet.has(raw) && raw !== 'all') {
+              existingOwnerSet.add(raw);
+              dynamicOwners.push({ value: raw, label: raw });
+            }
+          }
+        });
+
+      dynamicOwners.forEach(opt => {
         const el = document.createElement('option');
         el.value = opt.value;
-        el.innerText = opt.label;
+        el.innerText = opt.label.replace(/[\(（][^\)）]+[\)）]/g, '').trim();
         select.appendChild(el);
       });
 
-      if (options.some(o => o.value === currentVal)) {
+      if (dynamicOwners.some(o => o.value === currentVal)) {
         select.value = currentVal;
       } else {
         select.value = "all";
@@ -2962,7 +3080,7 @@ ${m.todosText || '无'}`;
             #${idx + 1}
           </td>
           <td class="p-3 font-bold text-slate-900 whitespace-nowrap">
-            ${t.owner}
+            ${(t.owner || '').replace(/[\(（][^\)）]+[\)）]/g, '').trim()}
           </td>
           <td class="p-3 text-slate-800 font-medium leading-relaxed">
             ${t.task}
@@ -3058,21 +3176,38 @@ ${m.todosText || '无'}`;
 
       const prevVal = currentOwner || ownerSel.value;
       ownerSel.innerHTML = "";
-      const owners = categoryLabels[cat]?.owners.filter(o => o.value !== 'all') || [{ value: "王亚哲", label: "王亚哲" }];
 
-      owners.forEach(opt => {
+      const baseOwners = categoryLabels[cat]?.owners.filter(o => o.value !== 'all') || [{ value: "王亚哲", label: "王亚哲" }];
+      const existingSet = new Set(baseOwners.map(o => o.value));
+      const list = [...baseOwners];
+
+      (appData.todos || [])
+        .filter(t => (t.category || 'region') === cat)
+        .forEach(t => {
+          if (t.owner && t.owner.trim()) {
+            const raw = t.owner.trim().replace(/[\(（][^\)）]+[\)）]/g, '').trim();
+            if (raw && !existingSet.has(raw) && raw !== 'all') {
+              existingSet.add(raw);
+              list.push({ value: raw, label: raw });
+            }
+          }
+        });
+
+      list.forEach(opt => {
         const el = document.createElement('option');
         el.value = opt.value;
-        el.innerText = opt.label;
+        el.innerText = opt.label.replace(/[\(（][^\)）]+[\)）]/g, '').trim();
         ownerSel.appendChild(el);
       });
 
       if (prevVal) {
-        ownerSel.value = prevVal;
-        if (!ownerSel.value) {
+        const cleanPrev = prevVal.replace(/[\(（][^\)）]+[\)）]/g, '').trim();
+        if (list.some(o => o.value === cleanPrev)) {
+          ownerSel.value = cleanPrev;
+        } else {
           const opt = document.createElement('option');
-          opt.value = prevVal;
-          opt.innerText = prevVal;
+          opt.value = cleanPrev;
+          opt.innerText = cleanPrev;
           opt.selected = true;
           ownerSel.appendChild(opt);
         }
@@ -3087,7 +3222,7 @@ ${m.todosText || '无'}`;
 
     function saveEditTodoForm() {
       const id = parseInt(document.getElementById('edit-todo-id').value, 10);
-      const owner = document.getElementById('edit-todo-owner').value;
+      const owner = document.getElementById('edit-todo-owner').value.replace(/[\(（][^\)）]+[\)）]/g, '').trim();
       const org = document.getElementById('edit-todo-org').value.trim();
       const task = document.getElementById('edit-todo-task').value.trim();
       const deadline = document.getElementById('edit-todo-deadline').value;
@@ -3151,15 +3286,37 @@ ${m.todosText || '无'}`;
       const orgInput = document.getElementById('new-todo-org');
       if (!ownerSel) return;
 
+      const prevVal = ownerSel.value;
       ownerSel.innerHTML = "";
-      const owners = categoryLabels[cat]?.owners.filter(o => o.value !== 'all') || [{ value: "王亚哲", label: "王亚哲" }];
 
-      owners.forEach(opt => {
+      const baseOwners = categoryLabels[cat]?.owners.filter(o => o.value !== 'all') || [{ value: "王亚哲", label: "王亚哲" }];
+      const existingSet = new Set(baseOwners.map(o => o.value));
+      const list = [...baseOwners];
+
+      (appData.todos || [])
+        .filter(t => (t.category || 'region') === cat)
+        .forEach(t => {
+          if (t.owner && t.owner.trim()) {
+            const raw = t.owner.trim().replace(/[\(（][^\)）]+[\)）]/g, '').trim();
+            if (raw && !existingSet.has(raw) && raw !== 'all') {
+              existingSet.add(raw);
+              list.push({ value: raw, label: raw });
+            }
+          }
+        });
+
+      list.forEach(opt => {
         const el = document.createElement('option');
         el.value = opt.value;
-        el.innerText = opt.label;
+        el.innerText = opt.label.replace(/[\(（][^\)）]+[\)）]/g, '').trim();
         ownerSel.appendChild(el);
       });
+
+      if (prevVal && list.some(o => o.value === prevVal)) {
+        ownerSel.value = prevVal;
+      } else if (list.length > 0) {
+        ownerSel.value = list[0].value;
+      }
 
       if (orgInput) {
         orgInput.value = categoryLabels[cat]?.defaultOrg || (cat === 'yefawei' ? '业发委秘书处' : '大区/总办');
@@ -3173,7 +3330,7 @@ ${m.todosText || '无'}`;
     }
 
     function saveNewTodo() {
-      const owner = document.getElementById('new-todo-owner').value;
+      const owner = document.getElementById('new-todo-owner').value.replace(/[\(（][^\)）]+[\)）]/g, '').trim();
       const org = document.getElementById('new-todo-org').value.trim() || (currentTodoCategory === 'yefawei' ? "业发委秘书处" : "大区/总办");
       const task = document.getElementById('new-todo-task').value.trim();
       const deadline = document.getElementById('new-todo-deadline').value;
